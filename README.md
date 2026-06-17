@@ -54,8 +54,8 @@ Required Cloudflare bindings and vars are in `wrangler.jsonc`.
 Production setup:
 
 1. Enable Cloudflare Email Sending for `americaspanelfab.com`.
-2. Create the R2 bucket `americas-panel-fab-leads`.
-3. Add the R2 binding named `LEAD_UPLOADS`.
+2. To enable plan uploads, create the R2 bucket `americas-panel-fab-leads`.
+3. Add a Pages R2 binding named `LEAD_UPLOADS` that points to that bucket.
 4. Set `CLOUDFLARE_ACCOUNT_ID`.
 5. Set the secret `EMAIL_API_TOKEN` with Email Sending permission.
 6. Set the secret `TURNSTILE_SECRET_KEY`.
@@ -63,6 +63,8 @@ Production setup:
 8. Confirm `SALES_FROM_EMAIL`, `SALES_FROM_NAME`, and `SALES_TO_EMAIL`.
 
 For local Pages Function testing, copy `.dev.vars.example` to `.dev.vars` and fill in real values. Do not commit `.dev.vars`.
+
+The site and quote form can deploy before R2 is created. The plan upload endpoint will return a configuration message until the `LEAD_UPLOADS` binding exists.
 
 ## Buying Tools
 
