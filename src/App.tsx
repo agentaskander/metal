@@ -1,9 +1,10 @@
-import type { FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import {
   ArrowRight,
   Award,
   Building2,
   CheckCircle2,
+  ClipboardList,
   Download,
   Factory,
   FileCheck2,
@@ -17,6 +18,7 @@ import {
   MapPin,
   Phone,
   Ruler,
+  SearchCheck,
   ShieldCheck,
   Sparkles,
   SunMedium,
@@ -26,11 +28,19 @@ import {
 
 type IconType = typeof Factory
 
+declare global {
+  interface Window {
+    turnstile?: {
+      reset: () => void
+    }
+  }
+}
+
 const navItems = [
   ['Products', '/products'],
   ['Services', '/services'],
   ['Finishes', '/finishes'],
-  ['Resources', '/resources'],
+  ['Selector', '/selector'],
   ['Markets', '/markets'],
   ['Super Panel', '/super-panel'],
   ['Contact', '/contact'],
@@ -110,9 +120,9 @@ const projectCategories = ['Commercial', 'Industrial', 'Municipal', 'Agricultura
 const contractorOutcomes = [
   ['Faster Lead Times', 'Quote response target within 24 hours for complete plan sets.'],
   ['Custom Fabrication', 'Panels, trims, flashings, edge metal, and accessories coordinated together.'],
-  ['Multi-State Service', 'California, Arizona, Texas, and Florida fulfillment strategy.'],
+  ['Multi-State Service', 'California, Arizona, Texas, and Florida fulfillment support.'],
   ['Commercial & Government Projects', 'Bid support, submittals, invoicing, and contract-ready documentation.'],
-  ['American Super Panel™ Systems', 'Memorable product family manufactured by America’s Panel Fab.'],
+  ['American Super Panel™ Systems', 'Flagship panel systems manufactured by America’s Panel Fab.'],
 ]
 const proofStats = [
   ['24-hour', 'quote response target'],
@@ -141,6 +151,38 @@ const resources = [
   ['Submittal packages', FileCheck2, 'Product data, finish selections, fastener notes, and project-specific details.'],
   ['Takeoff support', FileText, 'Plan review support for panel counts, flashing scope, and production sequencing.'],
 ]
+const downloadAssets = [
+  {
+    title: 'Quote Request Checklist',
+    copy: 'Everything estimating needs for a faster 24-hour quote response.',
+    href: '/downloads/quote-request-checklist.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Plan Upload Instructions',
+    copy: 'File naming, accepted document types, and package tips for clean review.',
+    href: '/downloads/plan-upload-instructions.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Submittal Package Guide',
+    copy: 'What to expect in a panel, finish, fastener, flashing, and warranty package.',
+    href: '/downloads/submittal-package-guide.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Finish Selection Guide',
+    copy: 'How to choose finish paths for heat, coastal, architectural, and campus work.',
+    href: '/downloads/finish-selection-guide.txt',
+    type: 'TXT',
+  },
+]
+const selectorOptions = {
+  assembly: ['Roof', 'Wall', 'Roof + Wall', 'Trim / Flashing'],
+  environment: ['Standard Commercial', 'Coastal / Wind', 'High Heat / Sun', 'Fire / Public Safety', 'Industrial Exposure'],
+  projectType: ['Commercial', 'Industrial', 'Government', 'Education', 'Warehouse', 'Agriculture', 'Multifamily'],
+  state: ['California', 'Arizona', 'Texas', 'Florida'],
+}
 const processSteps = [
   ['Upload plans', 'PDFs, drawings, and structural documents route to sales and estimating.'],
   ['Review scope', 'Panel type, footage, details, finish, warranty path, and schedule are confirmed.'],
@@ -164,6 +206,14 @@ const warehouseImage =
   'https://images.unsplash.com/photo-1669003750747-3f139e115bfb?auto=format&fit=crop&w=1400&q=88'
 const projectImages = [panelImage, warehouseImage, facilityImage, weldingImage]
 const maxUploadBytes = 100 * 1024 * 1024
+const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'
+
+type SubmitState = {
+  kind: 'idle' | 'submitting' | 'success' | 'error'
+  message: string
+}
+
+const idleSubmitState: SubmitState = { kind: 'idle', message: '' }
 
 function App() {
   const path = window.location.pathname.replace(/^\/+/, '')
@@ -186,10 +236,12 @@ function App() {
             <WhyMetal />
             <SuperPanel />
             <SuperPanelSeries />
+            <PanelSystemSelector />
             <Products />
             <Services />
             <FinishSystem />
             <BidResources />
+            <DownloadCenter />
             <Process />
             <Markets />
             <ServiceAreas />
@@ -243,8 +295,21 @@ function RoutedPage({ path }: { path: string }) {
     return (
       <>
         <PageHero title="Contractor & Bid Resources" copy="Panel profiles, submittal support, warranty path coordination, takeoff support, and plan-upload workflows." />
+        <PanelSystemSelector />
         <BidResources />
+        <DownloadCenter />
         <Process />
+        <Contact />
+      </>
+    )
+  }
+
+  if (path === 'selector') {
+    return (
+      <>
+        <PageHero title="Panel System Selector" copy="Choose a project type, state, exposure, and assembly to identify the strongest American Super Panel™ system path." />
+        <PanelSystemSelector />
+        <DownloadCenter />
         <Contact />
       </>
     )
@@ -326,10 +391,10 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
 function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="border-b border-slate-200 bg-[#0b1f33] px-5 py-2 text-sm font-bold text-white lg:px-8">
+      <div className="top-contact-bar border-b border-slate-200 bg-[#0b1f33] px-5 py-2 text-sm font-bold text-white lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-between">
           <span>Commercial metal panels • roll forming • custom fabrication</span>
-          <span className="flex flex-wrap justify-center gap-x-5 gap-y-1">
+          <span className="top-contact-links flex flex-wrap justify-center gap-x-5 gap-y-1">
             <a className="inline-flex items-center gap-2 hover:text-orange-200" href="tel:+15550193762">
               <Phone size={15} /> (555) 019-3762
             </a>
@@ -339,13 +404,13 @@ function Header() {
           </span>
         </div>
       </div>
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
-        <a href="/" className="flex min-w-0 items-center gap-3">
+      <div className="site-header-row mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
+        <a href="/" className="brand-lockup flex items-center gap-3">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded bg-[#0b1f33] text-white">
             <Factory size={24} />
           </span>
-          <span className="min-w-0">
-            <strong className="block truncate text-lg font-black tracking-normal text-[#0b1f33]">
+          <span>
+            <strong className="block whitespace-nowrap text-lg font-black tracking-normal text-[#0b1f33]">
               America’s Panel Fab
             </strong>
             <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 sm:block">
@@ -353,14 +418,14 @@ function Header() {
             </span>
           </span>
         </a>
-        <nav className="hidden items-center gap-5 text-sm font-semibold text-slate-700 lg:flex">
+        <nav className="main-nav hidden items-center gap-5 text-sm font-semibold text-slate-700 lg:flex">
           {navItems.map(([label, href]) => (
             <a key={href} href={href} className="transition hover:text-[#f97316]">
               {label}
             </a>
           ))}
         </nav>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="header-actions flex shrink-0 items-center gap-2">
           <a className="btn-secondary header-secondary-action" href="/resources">
             <Download size={18} />
             Resources
@@ -392,7 +457,7 @@ function Hero() {
           <p className="mb-5 inline-flex rounded border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-bold uppercase tracking-[0.16em] text-[#f97316]">
             Manufacturer • Fabricator • Government/Commercial Supplier
           </p>
-          <h1 className="text-5xl font-black leading-[1.02] tracking-normal text-[#0b1f33] sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl text-4xl font-black leading-[1.04] tracking-normal text-[#0b1f33] sm:text-5xl lg:text-6xl">
             Commercial Metal Roofing & Architectural Panel Fabrication
           </h1>
           <p className="mt-6 max-w-3xl text-xl leading-8 text-slate-700">
@@ -431,7 +496,7 @@ function ContractorOutcomes() {
       <SectionIntro
         eyebrow="Why Contractors Switch"
         title="Built around the buying problems metal contractors actually have."
-        copy="Majestic talks about products. America’s Panel Fab leads with faster quoting, plan uploads, bid support, government readiness, and multi-state fulfillment."
+        copy="America’s Panel Fab helps contractors move from drawings to quote-ready panel, flashing, finish, and fabrication packages with fewer delays."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
         {contractorOutcomes.map(([title, copy]) => (
@@ -519,7 +584,7 @@ function SuperPanel() {
           <SectionIntro
             eyebrow="Flagship Product Family"
             title="American Super Panel™"
-            copy="American Super Panel™ is the flagship panel system manufactured by America’s Panel Fab. It is a product family, not a separate company."
+            copy="American Super Panel™ systems give commercial buyers a clear way to specify standing seam roofing, exposed fastener panels, wall panels, and coordinated flashing packages."
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {['Built Strong. Built American.', 'Standing seam and exposed fastener options', 'Commercial, industrial, municipal, and education applications', 'Quote-ready packages for expansion markets'].map(
@@ -550,7 +615,7 @@ function SuperPanelSeries() {
     <section className="section bg-slate-50">
       <SectionIntro
         eyebrow="American Super Panel™ Systems"
-        title="A memorable product family, manufactured by America’s Panel Fab."
+        title="A clear panel system manufactured by America’s Panel Fab."
         copy="The product brand becomes easier to specify and remember by organizing panels around real regional and commercial buying needs."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
@@ -719,6 +784,185 @@ function FinishSystem() {
   )
 }
 
+function PanelSystemSelector() {
+  const [projectType, setProjectType] = useState(selectorOptions.projectType[0])
+  const [state, setState] = useState(selectorOptions.state[0])
+  const [environment, setEnvironment] = useState(selectorOptions.environment[0])
+  const [assembly, setAssembly] = useState(selectorOptions.assembly[0])
+  const recommendation = getPanelRecommendation({ assembly, environment, projectType, state })
+
+  return (
+    <section id="selector" className="section bg-white">
+      <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div>
+          <SectionIntro
+            eyebrow="Panel System Selector"
+            title="Turn project conditions into a recommended panel path."
+            copy="Help contractors, architects, and procurement teams narrow the right American Super Panel™ series before they request a quote."
+          />
+          <div className="mt-8 overflow-hidden rounded border border-slate-200 bg-white">
+            <img
+              src={warehouseImage}
+              alt="Commercial warehouse metal panel project"
+              className="h-64 w-full object-cover"
+            />
+          </div>
+        </div>
+        <div className="selector-panel">
+          <div className="grid gap-4 md:grid-cols-2">
+            <SelectorField label="Project Type" value={projectType} options={selectorOptions.projectType} onChange={setProjectType} />
+            <SelectorField label="Project State" value={state} options={selectorOptions.state} onChange={setState} />
+            <SelectorField label="Exposure / Priority" value={environment} options={selectorOptions.environment} onChange={setEnvironment} />
+            <SelectorField label="Assembly Scope" value={assembly} options={selectorOptions.assembly} onChange={setAssembly} />
+          </div>
+          <div className="mt-6 rounded bg-[#0b1f33] p-6 text-white">
+            <p className="eyebrow text-orange-200">Recommended System</p>
+            <h3 className="mt-3 text-3xl font-black">{recommendation.series}</h3>
+            <p className="mt-3 text-lg leading-8 text-slate-200">{recommendation.summary}</p>
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              {recommendation.reasons.map((reason) => (
+                <p key={reason} className="flex gap-3 rounded border border-white/15 bg-white/10 p-3 font-bold">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={19} />
+                  {reason}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {recommendation.package.map((item) => (
+              <article key={item} className="rounded border border-slate-200 bg-slate-50 p-4">
+                <SearchCheck className="text-[#f97316]" />
+                <p className="mt-3 font-black text-[#0b1f33]">{item}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a className="btn-primary" href="#quote">
+              Request This System <ArrowRight size={18} />
+            </a>
+            <a className="btn-secondary" href="/downloads/quote-request-checklist.txt" download>
+              <Download size={18} /> Quote Checklist
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SelectorField({
+  label,
+  onChange,
+  options,
+  value,
+}: {
+  label: string
+  onChange: (value: string) => void
+  options: string[]
+  value: string
+}) {
+  return (
+    <label className="selector-field">
+      <span>{label}</span>
+      <select value={value} onChange={(event) => onChange(event.target.value)}>
+        {options.map((option) => (
+          <option key={option}>{option}</option>
+        ))}
+      </select>
+    </label>
+  )
+}
+
+function DownloadCenter() {
+  return (
+    <section id="download-center" className="section bg-white">
+      <SectionIntro
+        eyebrow="Download Center"
+        title="Give estimating, design, and procurement teams the files they ask for first."
+        copy="These starter documents make the sales process easier before the first call and set clear expectations for quote requests, plan uploads, submittals, and finish selection."
+      />
+      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {downloadAssets.map((asset) => (
+          <a key={asset.href} className="download-card" href={asset.href} download>
+            <span className="flex h-11 w-11 items-center justify-center rounded bg-[#0b1f33] text-white">
+              <ClipboardList size={22} />
+            </span>
+            <span className="mt-5 block text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">
+              {asset.type} Download
+            </span>
+            <strong className="mt-2 block text-xl font-black text-[#0b1f33]">{asset.title}</strong>
+            <span className="mt-3 block leading-7 text-slate-600">{asset.copy}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function getPanelRecommendation({
+  assembly,
+  environment,
+  projectType,
+  state,
+}: {
+  assembly: string
+  environment: string
+  projectType: string
+  state: string
+}) {
+  if (state === 'Florida' || environment === 'Coastal / Wind') {
+    return {
+      package: ['Standing seam roof path', 'Coastal trim review', 'Wind-aware fastening notes'],
+      reasons: ['Florida and coastal exposure fit', 'Designed for wind and corrosion conversations', 'Pairs with uploaded plans for review'],
+      series: 'American Super Panel™ Coastal Series',
+      summary: 'Recommended for wind-aware commercial roofing and wall panel packages where coastal detailing and fastening review matter early.',
+    }
+  }
+
+  if (state === 'Arizona' || environment === 'High Heat / Sun') {
+    return {
+      package: ['Cool roof finish path', 'Standing seam or wall panel package', 'Heat exposure finish notes'],
+      reasons: ['Arizona and high-sun conditions fit', 'Supports reflective finish decisions', 'Good for warehouses and commercial shells'],
+      series: 'American Super Panel™ Desert Series',
+      summary: 'Recommended for high-sun projects that need durable finishes, heat-aware color choices, and clean commercial panel packages.',
+    }
+  }
+
+  if (state === 'California' || environment === 'Fire / Public Safety') {
+    return {
+      package: ['Fire-aware assembly review', 'Submittal package path', 'Public project documentation'],
+      reasons: ['California and public-safety requirements fit', 'Strong for schools and municipal work', 'Supports bid and submittal coordination'],
+      series: 'American Super Panel™ FireSafe Series',
+      summary: 'Recommended for public, education, commercial, and resilience-focused projects that need careful documentation and assembly review.',
+    }
+  }
+
+  if (state === 'Texas' || projectType === 'Industrial' || projectType === 'Warehouse' || environment === 'Industrial Exposure') {
+    return {
+      package: ['Long-run panel package', 'Exposed fastener or standing seam path', 'Flashing and accessory bundle'],
+      reasons: ['Texas-scale and industrial conditions fit', 'Good for large roof and wall scopes', 'Built around production and fulfillment efficiency'],
+      series: 'American Super Panel™ Industrial Series',
+      summary: 'Recommended for warehouse, logistics, manufacturing, and large-format commercial packages where speed and scale matter.',
+    }
+  }
+
+  if (assembly === 'Trim / Flashing') {
+    return {
+      package: ['Custom flashing package', 'Finish-matched trim set', 'Job-labeled bundle'],
+      reasons: ['Best fit for detail-heavy scopes', 'Supports contractor closeout needs', 'Pairs with wall or roof panel orders'],
+      series: 'American Super Panel™ Commercial Series',
+      summary: 'Recommended for coordinated commercial trim, flashing, and accessory packages tied to roof or wall panel work.',
+    }
+  }
+
+  return {
+    package: ['Standing seam or wall panel path', 'Finish selection support', 'Quote-ready takeoff review'],
+    reasons: ['Strong default commercial fit', 'Flexible for roof, wall, or combined scopes', 'Good for architects, contractors, and owners'],
+    series: 'American Super Panel™ Commercial Series',
+    summary: 'Recommended for most commercial, multifamily, education, and mixed-use projects that need a clean specification and quote path.',
+  }
+}
+
 function BidResources() {
   return (
     <section id="resources" className="section bg-slate-50">
@@ -825,7 +1069,7 @@ function ServiceAreas() {
       <SectionIntro
         eyebrow="Service Areas"
         title="Built for California, Arizona, Texas, and Florida expansion."
-        copy="Dedicated SEO landing pages support regional lead generation while the corporate brand stays unified under America’s Panel Fab."
+        copy="Regional service pages help contractors, owners, and public agencies quickly find metal roofing panels, wall panels, roll forming, and fabrication support in their state."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {states.map((state) => (
@@ -938,8 +1182,31 @@ function Contact() {
 }
 
 function QuoteForm() {
+  const [submitState, setSubmitState] = useState<SubmitState>(idleSubmitState)
+
+  async function handleQuoteSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setSubmitState({ kind: 'submitting', message: 'Sending quote request…' })
+
+    const form = event.currentTarget
+    const result = await submitLeadForm('/api/quote', new FormData(form))
+
+    if (result.ok) {
+      form.reset()
+      setSubmitState({
+        kind: 'success',
+        message: 'Quote request received. Sales will review the project details and follow up.',
+      })
+      window.turnstile?.reset()
+      return
+    }
+
+    setSubmitState({ kind: 'error', message: result.message })
+    window.turnstile?.reset()
+  }
+
   return (
-    <form id="quote" className="form-panel" action="/api/quote" method="post">
+    <form id="quote" className="form-panel" action="/api/quote" method="post" onSubmit={handleQuoteSubmit}>
       <h2 className="text-2xl font-black text-[#0b1f33]">Quick Quote Form</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
@@ -974,23 +1241,50 @@ function QuoteForm() {
         </label>
       </div>
       <TurnstileSlot />
-      <button className="btn-primary mt-5" type="submit">
-        Submit Quote Request
+      <FormStatus state={submitState} />
+      <button className="btn-primary mt-5" type="submit" disabled={submitState.kind === 'submitting'}>
+        {submitState.kind === 'submitting' ? 'Sending…' : 'Submit Quote Request'}
       </button>
     </form>
   )
 }
 
 function UploadForm() {
-  function handlePlanUpload(event: FormEvent<HTMLFormElement>) {
-    const files = Array.from(event.currentTarget.querySelectorAll('input[type="file"]'))
+  const [submitState, setSubmitState] = useState<SubmitState>(idleSubmitState)
+
+  async function handlePlanUpload(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const files = Array.from(form.querySelectorAll('input[type="file"]'))
       .flatMap((input) => Array.from((input as HTMLInputElement).files ?? []))
     const totalBytes = files.reduce((sum, file) => sum + file.size, 0)
 
     if (totalBytes > maxUploadBytes) {
-      event.preventDefault()
-      window.alert('Plan uploads must be 100MB or less.')
+      setSubmitState({ kind: 'error', message: 'Plan uploads must be 100MB or less.' })
+      return
     }
+
+    if (files.length === 0) {
+      setSubmitState({ kind: 'error', message: 'Upload at least one plan, drawing, or structural document.' })
+      return
+    }
+
+    setSubmitState({ kind: 'submitting', message: 'Uploading plans…' })
+    const result = await submitLeadForm('/api/upload-plans', new FormData(form))
+
+    if (result.ok) {
+      form.reset()
+      setSubmitState({
+        kind: 'success',
+        message: 'Plans uploaded. Sales will review the documents and follow up.',
+      })
+      window.turnstile?.reset()
+      return
+    }
+
+    setSubmitState({ kind: 'error', message: result.message })
+    window.turnstile?.reset()
   }
 
   return (
@@ -1003,13 +1297,23 @@ function UploadForm() {
       onSubmit={handlePlanUpload}
     >
       <h2 className="text-2xl font-black text-[#0b1f33]">Upload Plans</h2>
-      <div className="mt-5 grid gap-4">
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
+        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
+          <label key={field}>
+            <span>{field}</span>
+            <input
+              name={field.toLowerCase().replaceAll(' ', '_')}
+              type={field === 'Email' ? 'email' : field === 'Phone' ? 'tel' : 'text'}
+              required={field !== 'Company'}
+            />
+          </label>
+        ))}
         {[
           ['Plans PDF', 'plans_pdf', '.pdf'],
           ['Drawings', 'drawings', '.pdf,.dwg,.dxf,.png,.jpg'],
           ['Structural Documents', 'structural_documents', '.pdf,.doc,.docx'],
         ].map(([label, name, accept]) => (
-          <label key={name}>
+          <label key={name} className="md:col-span-2">
             <span>{label}</span>
             <input name={name} type="file" accept={accept} />
           </label>
@@ -1017,8 +1321,9 @@ function UploadForm() {
       </div>
       <p className="mt-4 text-sm font-semibold text-slate-500">Maximum combined upload: 100MB</p>
       <TurnstileSlot />
-      <button className="btn-primary mt-5" type="submit">
-        Route to Sales Inbox
+      <FormStatus state={submitState} />
+      <button className="btn-primary mt-5" type="submit" disabled={submitState.kind === 'submitting'}>
+        {submitState.kind === 'submitting' ? 'Uploading…' : 'Route to Sales Inbox'}
       </button>
     </form>
   )
@@ -1028,9 +1333,47 @@ function TurnstileSlot() {
   return (
     <div
       className="cf-turnstile mt-5 min-h-16 rounded border border-dashed border-slate-300 bg-slate-50"
-      data-sitekey="TURNSTILE_SITE_KEY"
+      data-sitekey={turnstileSiteKey}
     />
   )
+}
+
+function FormStatus({ state }: { state: SubmitState }) {
+  if (state.kind === 'idle') {
+    return null
+  }
+
+  return (
+    <p className={`form-status form-status-${state.kind}`} role="status">
+      {state.message}
+    </p>
+  )
+}
+
+async function submitLeadForm(url: string, formData: FormData) {
+  try {
+    const response = await fetch(url, {
+      body: formData,
+      method: 'POST',
+    })
+    const body = await response.json().catch(() => ({ message: '' }))
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        message: typeof body.message === 'string' && body.message
+          ? body.message
+          : 'The request could not be sent. Please call or email sales directly.',
+      }
+    }
+
+    return { ok: true, message: '' }
+  } catch {
+    return {
+      ok: false,
+      message: 'Lead capture is not available from this local preview. Deploy to Cloudflare Pages or use Wrangler Pages dev to test API routes.',
+    }
+  }
 }
 
 function StateLanding({ state }: { state: (typeof states)[number] }) {
@@ -1058,6 +1401,7 @@ function StateLanding({ state }: { state: (typeof states)[number] }) {
       <Services />
       <FinishSystem />
       <BidResources />
+      <DownloadCenter />
       <SuperPanel />
       <SuperPanelSeries />
       <Contact />
@@ -1096,7 +1440,7 @@ function Footer() {
           <p className="mt-2 text-slate-300">Precision Metal Panels, Roofing Systems & Custom Fabrication</p>
         </div>
         <div className="text-sm font-semibold text-slate-300">
-          American Super Panel™ is the flagship product family manufactured by America’s Panel Fab.
+          American Super Panel™ systems are manufactured by America’s Panel Fab.
         </div>
       </div>
     </footer>

@@ -1,0 +1,33 @@
+AMERICA'S PANEL FAB
+PLAN UPLOAD INSTRUCTIONS
+
+Accepted upload types:
+
+- PDF plans
+- Drawings
+- Structural documents
+- DWG or DXF exports
+- JPG or PNG site/reference images
+
+Maximum combined upload size: 100MB.
+
+Recommended file naming:
+
+ProjectName_State_SheetType_Date.pdf
+
+Examples:
+
+Warehouse-AZ_RoofPlan_2026-06-17.pdf
+School-CA_Elevations_2026-06-17.pdf
+Municipal-FL_Structural_2026-06-17.pdf
+
+Include:
+
+- Roof plans
+- Wall elevations
+- Details
+- Structural sheets
+- Finish/color requirements
+- Bid due date or desired completion date
+
+Do not upload sensitive owner financial information, payment data, or unrelated personal documents.

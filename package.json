@@ -4,7 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 8190 --strictPort",
+    "dev": "npm run dev:master",
+    "dev:master": "vite --host 127.0.0.1 --port 8190 --strictPort",
+    "dev:beta": "vite --host 127.0.0.1 --port 8192 --strictPort",
+    "dev:public": "vite --host 127.0.0.1 --port 8193 --strictPort",
+    "pages:master": "npm run build && npx wrangler pages dev ./dist --ip 127.0.0.1 --port 8190",
+    "pages:beta": "npm run build && npx wrangler pages dev ./dist --ip 127.0.0.1 --port 8192",
+    "pages:public": "npm run build && npx wrangler pages dev ./dist --ip 127.0.0.1 --port 8193",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

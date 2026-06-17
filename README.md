@@ -1,74 +1,73 @@
-# React + TypeScript + Vite
+# America’s Panel Fab Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Commercial website and lead-generation platform for America’s Panel Fab and the American Super Panel™ product line.
 
-Currently, two official plugins are available:
+## Port Registry
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Do not use default Vite ports.
 
-## React Compiler
+- `8190`: internal private master site. Do not overwrite with public-safe experiments.
+- `8192`: beta review site.
+- `8193`: public-safe copy.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Commands
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev:master
+npm run dev:beta
+npm run dev:public
+npm run pages:master
+npm run pages:beta
+npm run pages:public
+npm run build
+npm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`npm run dev` maps to `dev:master` intentionally.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Use `dev:*` for Vite UI work. Use `pages:*` when testing Cloudflare Pages Functions such as quote requests and plan uploads.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# metal
+## Cloudflare Pages
+
+- Framework: Vite
+- Build command: `npm run build`
+- Output directory: `dist`
+- Primary domain: `AmericasPanelFab.com`
+- Secondary product domain: `AmericanSuperPanel.com`
+
+SPA route fallback rules live in `public/_redirects`.
+
+Configure this host redirect in Cloudflare Redirect Rules:
+
+- `AmericanSuperPanel.com/*` -> `https://AmericasPanelFab.com/super-panel`
+- Preserve query string: enabled
+
+## Lead Capture
+
+Lead capture is implemented with Cloudflare Pages Functions:
+
+- `POST /api/quote`: validates Turnstile and sends a structured quote request email.
+- `POST /api/upload-plans`: validates Turnstile, stores uploaded plans in R2, and emails sales with the lead summary and R2 object keys.
+
+Required Cloudflare bindings and vars are in `wrangler.jsonc`.
+
+Production setup:
+
+1. Enable Cloudflare Email Sending for `americaspanelfab.com`.
+2. Create the R2 bucket `americas-panel-fab-leads`.
+3. Add the Email binding named `EMAIL`.
+4. Add the R2 binding named `LEAD_UPLOADS`.
+5. Set the secret `TURNSTILE_SECRET_KEY`.
+6. Set `VITE_TURNSTILE_SITE_KEY` in Pages build environment variables.
+7. Confirm `SALES_FROM_EMAIL`, `SALES_FROM_NAME`, and `SALES_TO_EMAIL`.
+
+For local Pages Function testing, copy `.dev.vars.example` to `.dev.vars` and fill in real values. Do not commit `.dev.vars`.
+
+## Buying Tools
+
+- `/selector`: interactive American Super Panel™ system selector.
+- `/resources`: contractor and bid resources.
+- `/downloads/quote-request-checklist.txt`
+- `/downloads/plan-upload-instructions.txt`
+- `/downloads/submittal-package-guide.txt`
+- `/downloads/finish-selection-guide.txt`

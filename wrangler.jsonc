@@ -1,0 +1,21 @@
+{
+  "name": "americas-panel-fab",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-06-17",
+  "send_email": [
+    {
+      "name": "EMAIL"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "LEAD_UPLOADS",
+      "bucket_name": "americas-panel-fab-leads"
+    }
+  ],
+  "vars": {
+    "SALES_FROM_EMAIL": "leads@americaspanelfab.com",
+    "SALES_FROM_NAME": "America’s Panel Fab Leads",
+    "SALES_TO_EMAIL": "sales@americaspanelfab.com"
+  }
+}
