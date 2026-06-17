@@ -55,11 +55,12 @@ Production setup:
 
 1. Enable Cloudflare Email Sending for `americaspanelfab.com`.
 2. Create the R2 bucket `americas-panel-fab-leads`.
-3. Add the Email binding named `EMAIL`.
-4. Add the R2 binding named `LEAD_UPLOADS`.
-5. Set the secret `TURNSTILE_SECRET_KEY`.
-6. Set `VITE_TURNSTILE_SITE_KEY` in Pages build environment variables.
-7. Confirm `SALES_FROM_EMAIL`, `SALES_FROM_NAME`, and `SALES_TO_EMAIL`.
+3. Add the R2 binding named `LEAD_UPLOADS`.
+4. Set `CLOUDFLARE_ACCOUNT_ID`.
+5. Set the secret `EMAIL_API_TOKEN` with Email Sending permission.
+6. Set the secret `TURNSTILE_SECRET_KEY`.
+7. Set `VITE_TURNSTILE_SITE_KEY` in Pages build environment variables.
+8. Confirm `SALES_FROM_EMAIL`, `SALES_FROM_NAME`, and `SALES_TO_EMAIL`.
 
 For local Pages Function testing, copy `.dev.vars.example` to `.dev.vars` and fill in real values. Do not commit `.dev.vars`.
 

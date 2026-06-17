@@ -1,19 +1,8 @@
-type EmailAddress = {
-  email: string
-  name?: string
-}
-
 type EmailMessage = {
-  from: EmailAddress
   html: string
   replyTo?: string
   subject: string
   text: string
-  to: string | string[]
-}
-
-export type EmailBinding = {
-  send: (message: EmailMessage) => Promise<unknown>
 }
 
 export type R2BucketBinding = {
@@ -30,7 +19,8 @@ export type R2BucketBinding = {
 }
 
 export type LeadEnv = {
-  EMAIL?: EmailBinding
+  CLOUDFLARE_ACCOUNT_ID?: string
+  EMAIL_API_TOKEN?: string
   LEAD_UPLOADS?: R2BucketBinding
   SALES_FROM_EMAIL?: string
   SALES_FROM_NAME?: string
@@ -103,18 +93,37 @@ export async function verifyTurnstile(formData: FormData, request: Request, env:
 }
 
 export async function sendSalesEmail(env: LeadEnv, message: Omit<EmailMessage, 'from' | 'to'>) {
-  if (!env.EMAIL || !env.SALES_TO_EMAIL || !env.SALES_FROM_EMAIL) {
+  if (!env.CLOUDFLARE_ACCOUNT_ID || !env.EMAIL_API_TOKEN || !env.SALES_TO_EMAIL || !env.SALES_FROM_EMAIL) {
     return { ok: false, message: 'Sales email delivery is not configured yet.' }
   }
 
-  await env.EMAIL.send({
-    ...message,
-    from: {
-      email: env.SALES_FROM_EMAIL,
-      name: env.SALES_FROM_NAME || 'America’s Panel Fab Leads',
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/email/sending/send`,
+    {
+      body: JSON.stringify({
+        from: {
+          address: env.SALES_FROM_EMAIL,
+          name: env.SALES_FROM_NAME || 'America’s Panel Fab Leads',
+        },
+        html: message.html,
+        reply_to: message.replyTo,
+        subject: message.subject,
+        text: message.text,
+        to: env.SALES_TO_EMAIL,
+      }),
+      headers: {
+        Authorization: `Bearer ${env.EMAIL_API_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
     },
-    to: env.SALES_TO_EMAIL,
-  })
+  )
+
+  if (!response.ok) {
+    const result = await response.json<{ errors?: Array<{ message?: string }> }>().catch(() => undefined)
+    const message = result?.errors?.[0]?.message || 'Sales email delivery failed.'
+    return { ok: false, message }
+  }
 
   return { ok: true, message: '' }
 }

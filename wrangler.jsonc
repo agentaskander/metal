@@ -2,11 +2,6 @@
   "name": "americas-panel-fab",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-06-17",
-  "send_email": [
-    {
-      "name": "EMAIL"
-    }
-  ],
   "r2_buckets": [
     {
       "binding": "LEAD_UPLOADS",
@@ -14,6 +9,7 @@
     }
   ],
   "vars": {
+    "CLOUDFLARE_ACCOUNT_ID": "REPLACE_WITH_ACCOUNT_ID",
     "SALES_FROM_EMAIL": "leads@americaspanelfab.com",
     "SALES_FROM_NAME": "America’s Panel Fab Leads",
     "SALES_TO_EMAIL": "sales@americaspanelfab.com"
