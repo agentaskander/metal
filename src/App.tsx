@@ -36,12 +36,12 @@ declare global {
 }
 
 const navItems = [
-  ['Industry Guides', '/resources'],
-  ['Manufacturing Tech', '/services'],
-  ['Panel Profiles', '/products'],
-  ['Markets', '/markets'],
-  ['Partner Network', '/about'],
-  ['Contact', '/contact'],
+  ['Home', '/'],
+  ['Manufacturing', '/#manufacturing'],
+  ['Products', '/products'],
+  ['Super Panel', '/super-panel'],
+  ['Gov / Commercial', '/#government-commercial'],
+  ['Investors / Partners', '/#investors-partners'],
 ]
 
 const products = [
@@ -230,7 +230,7 @@ const platformPillars = [
   ['Acquisition Platform', Building2, 'A structure that can support American Super Panel, future divisions, partner manufacturers, and regional roll-ups.'],
 ] satisfies [string, IconType, string][]
 const platformStructure = [
-  'American Super Panel operating business',
+  'American Super Panel flagship product family',
   'Future standing seam division',
   'Future trim and accessories division',
   'Future equipment and automation division',
@@ -391,7 +391,7 @@ function RoutedPage({ path }: { path: string }) {
 
   return (
     <>
-      <PageHero title="Americas Panel Fab" copy="Metal panel manufacturing education, roll forming technology, supplier ecosystems, and investor-ready industry platform strategy." />
+      <PageHero title="Americas Panel Fab" copy="Modern metal panel manufacturing, roll forming, commercial supply, product brands, supplier ecosystems, and investor-ready platform strategy." />
       <PlatformHome />
       <Contact />
     </>
@@ -430,20 +430,24 @@ function PlatformHome() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
         <div className="section relative">
           <div className="max-w-4xl">
-            <p className="eyebrow text-[#f97316]">Metal Panel Manufacturing Platform</p>
+            <p className="eyebrow text-[#f97316]">Company • Factory • Manufacturing Platform</p>
             <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
               Americas Panel Fab
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              An industry platform for metal panel manufacturing, roll forming technology,
-              construction materials education, factory automation, supplier partnerships,
-              and long-term expansion across the metal roofing ecosystem.
+              Americas Panel Fab is building a modern American metal panel manufacturing
+              platform for commercial, agricultural, residential, government, and industrial
+              customers.
+            </p>
+            <p className="mt-6 rounded border border-slate-200 bg-white p-4 text-base font-bold leading-7 text-[#0b1f33] shadow-sm">
+              American Super Panel is the flagship exposed-fastener roofing and siding panel
+              system manufactured by Americas Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="/resources">
                 Explore Industry Guides <ArrowRight size={18} />
               </a>
-              <a className="btn-secondary" href="#platform">
+              <a className="btn-secondary" href="#manufacturing">
                 View Platform Strategy
               </a>
               <a className="btn-secondary" href="#contact">
@@ -454,11 +458,11 @@ function PlatformHome() {
         </div>
       </section>
 
-      <section id="platform" className="section bg-slate-50">
+      <section id="manufacturing" className="section bg-slate-50">
         <SectionIntro
           eyebrow="Platform Role"
-          title="Education, partnerships, manufacturing intelligence, and expansion leverage."
-          copy="Americas Panel Fab is built to publish neutral industry content, map suppliers and installers, compare panel systems, study manufacturing technology, and route qualified opportunities to affiliated or partner operators where appropriate."
+          title="Manufacturing capability, product strategy, industry education, and expansion leverage."
+          copy="Americas Panel Fab is the company and manufacturing platform behind American Super Panel. The site can also publish neutral industry content, map suppliers and installers, compare panel systems, and route qualified opportunities where appropriate."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {platformPillars.map(([title, Icon, copy]) => (
@@ -476,8 +480,8 @@ function PlatformHome() {
           <div>
             <SectionIntro
               eyebrow="Dual-Brand Architecture"
-              title="Separate the operating company from the broader industry platform."
-              copy="American Super Panel can focus on selling panels now. Americas Panel Fab can build authority, SEO, partnerships, technology narrative, and investor context without forcing every idea onto the operating site."
+              title="Keep the company brand broad and the product brand focused."
+              copy="American Super Panel can focus on contractor-ready product sales and lead generation. Americas Panel Fab carries company, factory, government/commercial, investor, partner, and future acquisition credibility."
             />
             <p className="mt-6 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
               Disclosure: Americas Panel Fab publishes educational and industry content.
@@ -487,8 +491,8 @@ function PlatformHome() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              ['American Super Panel', 'Operating business focused on exposed-fastener panels, metal siding, trim, dealers, and contractor sales.'],
-              ['Americas Panel Fab', 'Industry platform focused on manufacturing education, roll forming, automation, partners, and acquisitions.'],
+              ['American Super Panel', 'Flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.'],
+              ['Americas Panel Fab', 'Company and manufacturing platform focused on fabrication, roll forming, product brands, partners, and acquisitions.'],
               ['Lead Network', 'Educational pages can recommend affiliated or partner providers when the fit is clear and disclosed.'],
               ['Investor Narrative', 'The platform can support multiple divisions, future acquisitions, and manufacturing software opportunities.'],
             ].map(([title, copy]) => (
@@ -501,14 +505,14 @@ function PlatformHome() {
         </div>
       </section>
 
-      <section className="section bg-slate-50">
+      <section id="government-commercial" className="section bg-slate-50">
         <SectionIntro
-          eyebrow="Content Engine"
-          title="SEO built around metal panel manufacturing, roll forming, and industry comparison pages."
-          copy="The site can publish profile comparisons, manufacturing technology explainers, supplier directories, installer resources, equipment reviews, and state-level industry pages."
+          eyebrow="Government / Commercial"
+          title="Credibility belongs on the company platform, not the product microsite."
+          copy="Americas Panel Fab can support commercial buyers, public-sector conversations, procurement research, partner reviews, and manufacturing capability reviews without making unverified certification or contracting claims."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {['Metal panel manufacturing guides', 'Roll forming technology', 'Western Rib vs standing seam education', 'Equipment and factory profiles', 'Supplier and installer directories', 'Partner and investor opportunities'].map((item) => (
+          {['Commercial metal panel manufacturing', 'Panel fabrication and roll forming', 'Government supplier research', 'Factory and capability profiles', 'Supplier and installer directories', 'Partner and investor opportunities'].map((item) => (
             <p key={item} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-bold text-slate-700">
               <SearchCheck className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
               {item}
@@ -517,7 +521,7 @@ function PlatformHome() {
         </div>
       </section>
 
-      <section className="section bg-white">
+      <section id="investors-partners" className="section bg-white">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <img
             src={facilityImage}
@@ -526,9 +530,9 @@ function PlatformHome() {
           />
           <div>
             <SectionIntro
-              eyebrow="Long-Term Structure"
+              eyebrow="Investors / Partners"
               title="A platform that can support divisions, partners, and future acquisitions."
-              copy="The operating site stays simple while the platform site carries the larger ecosystem vision."
+              copy="The American Super Panel microsite stays product-focused while Americas Panel Fab carries the larger ecosystem, partnership, and acquisition narrative."
             />
             <div className="mt-8 grid gap-3">
               {platformStructure.map((item) => (
@@ -634,7 +638,7 @@ function SuperPanel() {
             copy="American Super Panel™ systems give commercial buyers a clear way to specify standing seam roofing, exposed fastener panels, wall panels, and coordinated flashing packages."
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {['Built Strong. Built American.', 'Standing seam and exposed fastener options', 'Commercial, industrial, municipal, and education applications', 'Quote-ready packages for expansion markets'].map(
+            {['Flagship product family', 'Standing seam and exposed fastener options', 'Commercial, industrial, municipal, and education applications', 'Lead-ready packages for expansion markets'].map(
               (item) => (
                 <p key={item} className="flex gap-3 rounded border border-slate-200 p-4 font-semibold">
                   <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
@@ -698,7 +702,7 @@ function SuperPanelPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
         <div className="section relative">
           <div className="max-w-4xl">
-            <p className="eyebrow text-[#f97316]">Built Strong. Built American.</p>
+            <p className="eyebrow text-[#f97316]">Flagship Product Family</p>
             <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
               American Super Panel™
             </h1>
