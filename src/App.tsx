@@ -464,7 +464,7 @@ function Header() {
             </span>
           </span>
         </a>
-        <nav className="main-nav hidden items-center gap-5 text-sm font-semibold text-slate-700 lg:flex">
+        <nav className="main-nav hidden items-center gap-5 text-sm font-semibold text-slate-700 md:flex">
           {navItems.map(([label, href]) => (
             <a key={href} href={href} className="transition hover:text-[#f97316]">
               {label}
