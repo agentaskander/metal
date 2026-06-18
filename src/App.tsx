@@ -122,7 +122,7 @@ const contractorOutcomes = [
   ['Custom Fabrication', 'Panels, trims, flashings, edge metal, and accessories coordinated together.'],
   ['Multi-State Service', 'California, Arizona, Texas, and Florida fulfillment support.'],
   ['Commercial & Government Projects', 'Bid support, submittals, invoicing, and contract-ready documentation.'],
-  ['American Super Panel™ Systems', 'Flagship panel systems manufactured by America’s Panel Fab.'],
+  ['American Super Panel™ Systems', 'Flagship panel systems manufactured and sold under the American Super Panel brand.'],
 ]
 const superPanelSeries = [
   ['Commercial Series', 'Standing seam and wall panel systems for retail, office, education, and multifamily work.'],
@@ -183,7 +183,7 @@ const industrialRibSpecs = [
   ['Use', 'Roofing, siding, equipment buildings, warehouses, industrial facilities, and commercial wall panels'],
 ]
 const industrialRibProof = [
-  ['Manufacturer Direct', Factory, 'Panel packages are sold by America’s Panel Fab, the manufacturer behind American Super Panel™ systems.'],
+  ['Manufacturer Direct', Factory, 'Panel packages are sold by American Super Panel for contractors, owners, dealers, and regional building programs.'],
   ['7.2 Industrial Profile', Ruler, 'A high-rib exposed fastener profile positioned for commercial roofing, siding, and large wall coverage.'],
   ['Package Scope', ClipboardList, 'Panels, trim, flashings, closures, fasteners, and job labels organized as one quote package.'],
   ['Bid Support', FileCheck2, 'Submittal, finish, gauge, fastening, warranty, and project documentation reviewed before release.'],
@@ -288,7 +288,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'products') {
     return (
       <>
-        <PageHero title="Products" copy="American Super Panel™ systems, wall panels, trim, flashing, and accessories manufactured by America’s Panel Fab." />
+        <PageHero title="Products" copy="American Super Panel™ Industrial Rib systems, wall panels, trim, flashing, samples, and accessories for contractor sales." />
         <Products />
         <FinishSystem />
         <BidResources />
@@ -375,7 +375,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'about') {
     return (
       <>
-        <PageHero title="About America’s Panel Fab" copy="A manufacturing company built for precision metal panels, roofing systems, and custom fabrication." />
+        <PageHero title="About American Super Panel" copy="An operating metal panel company focused on Industrial Rib roofing, siding, trim packages, and contractor sales." />
         <About />
         <Contact />
       </>
@@ -385,7 +385,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'contact') {
     return (
       <>
-        <PageHero title="Contact" copy="Request pricing, upload plans, or start a commercial bid conversation with America’s Panel Fab." />
+        <PageHero title="Contact" copy="Request pricing, upload plans, contact sales, order panels, or start a dealer conversation with American Super Panel." />
         <Contact />
       </>
     )
@@ -393,7 +393,7 @@ function RoutedPage({ path }: { path: string }) {
 
   return (
     <>
-      <PageHero title="America’s Panel Fab" copy="Commercial metal roofing and architectural panel fabrication." />
+      <PageHero title="American Super Panel" copy="Industrial Rib metal roofing and siding panels." />
       <Hero />
       <Contact />
     </>
@@ -404,7 +404,7 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
   return (
     <section className="section border-b border-slate-200 bg-white">
       <div className="max-w-4xl">
-        <p className="eyebrow text-[#f97316]">America’s Panel Fab</p>
+        <p className="eyebrow text-[#f97316]">American Super Panel</p>
         <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33]">{title}</h1>
         <p className="mt-6 text-xl leading-8 text-slate-600">{copy}</p>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -425,13 +425,13 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="top-contact-bar border-b border-slate-200 bg-[#0b1f33] px-5 py-2 text-sm font-bold text-white lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-between">
-          <span>Commercial metal panels • roll forming • custom fabrication</span>
+          <span>Industrial Rib panels • metal roofing • metal siding • trim packages</span>
           <span className="top-contact-links flex flex-wrap justify-center gap-x-5 gap-y-1">
             <a className="inline-flex items-center gap-2 hover:text-orange-200" href="tel:+15550193762">
               <Phone size={15} /> (555) 019-3762
             </a>
-            <a className="inline-flex items-center gap-2 hover:text-orange-200" href="mailto:sales@americaspanelfab.com">
-              <Mail size={15} /> sales@americaspanelfab.com
+            <a className="inline-flex items-center gap-2 hover:text-orange-200" href="mailto:sales@americansuperpanel.com">
+              <Mail size={15} /> sales@americansuperpanel.com
             </a>
           </span>
         </div>
@@ -443,10 +443,10 @@ function Header() {
           </span>
           <span>
             <strong className="block whitespace-nowrap text-lg font-black tracking-normal text-[#0b1f33]">
-              America’s Panel Fab
+              American Super Panel
             </strong>
             <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 sm:block">
-              Precision Metal Panels
+              Industrial Rib Panels
             </span>
           </span>
         </a>
@@ -528,7 +528,7 @@ function ContractorOutcomes() {
       <SectionIntro
         eyebrow="Why Contractors Switch"
         title="Built around the buying problems metal contractors actually have."
-        copy="America’s Panel Fab helps contractors move from drawings to quote-ready panel, flashing, finish, and fabrication packages with fewer delays."
+        copy="American Super Panel helps contractors move from drawings to panel, flashing, finish, sample, dealer, and delivery decisions with fewer delays."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
         {contractorOutcomes.map(([title, copy]) => (
@@ -582,7 +582,7 @@ function SuperPanelSeries() {
     <section className="section bg-slate-50">
       <SectionIntro
         eyebrow="American Super Panel™ Systems"
-        title="A clear panel system manufactured by America’s Panel Fab."
+        title="A focused product family for roofing, siding, and contractor sales."
         copy="The product brand becomes easier to specify and remember by organizing panels around real regional and commercial buying needs."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
@@ -623,7 +623,7 @@ function SuperPanelPage() {
               American Super Panel™
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              American Super Panel™ is the flagship panel system manufactured by America’s Panel Fab
+              American Super Panel™ is a focused operating product family for commercial roofing, siding, trim, dealer, and contractor sales
               for commercial roofing, wall panel, industrial, municipal, and educational facility
               applications.
             </p>
@@ -643,7 +643,7 @@ function SuperPanelPage() {
         <SectionIntro
           eyebrow="Benefits"
           title="A flagship family for demanding commercial projects."
-          copy="The product architecture keeps America’s Panel Fab as the manufacturer while giving contractors and owners a memorable flagship system to specify and request."
+          copy="The product architecture gives contractors and owners a memorable panel family to specify, price, sample, order, and install."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {[
@@ -711,7 +711,7 @@ function IndustrialRibPage() {
             <p className="mt-6 text-xl leading-8 text-slate-700">
               A 7.2 profile metal roofing and siding panel for warehouses, industrial
               facilities, agricultural buildings, commercial wall panels, and large-format
-              exterior packages. Manufactured by America’s Panel Fab.
+              exterior packages. Sold by American Super Panel.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
@@ -897,7 +897,7 @@ function Products() {
       <SectionIntro
         eyebrow="Products"
         title="Panel systems and complete fabricated packages."
-        copy="America’s Panel Fab supplies roof panels, wall panels, trim, flashing, and accessories under one manufacturing roof."
+        copy="American Super Panel supplies roof panels, wall panels, trim, flashing, samples, and accessories for contractor and dealer sales."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {products.map((product) => (
@@ -1140,7 +1140,7 @@ function BidResources() {
       <SectionIntro
         eyebrow="Contractor & Bid Resources"
         title="More than panels: a cleaner path to submittals, warranties, and procurement."
-        copy="Commercial buyers need documentation as much as product. America’s Panel Fab is structured around quote-ready, submittal-ready, and contract-ready support."
+        copy="Commercial buyers need documentation as much as product. American Super Panel is structured around quote-ready, submittal-ready, and contractor-ready support."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {resources.map(([title, Icon, copy]) => (
@@ -1298,7 +1298,7 @@ function About() {
           <SectionIntro
             eyebrow="About"
             title="A manufacturing company built for serious metal panel work."
-            copy="America’s Panel Fab exists to give contractors, owners, and public agencies a dependable source for precision metal panels, roofing systems, and custom fabrication."
+            copy="American Super Panel exists to give contractors, owners, dealers, and public agencies a dependable source for Industrial Rib panels, metal siding, trim packages, and accessories."
           />
           <div className="mt-8 space-y-4 leading-8 text-slate-700">
             <p>
@@ -1330,8 +1330,8 @@ function Contact() {
             <a className="contact-link" href="tel:+15550193762">
               <Phone size={20} /> (555) 019-3762
             </a>
-            <a className="contact-link" href="mailto:sales@americaspanelfab.com">
-              <Mail size={20} /> sales@americaspanelfab.com
+            <a className="contact-link" href="mailto:sales@americansuperpanel.com">
+              <Mail size={20} /> sales@americansuperpanel.com
             </a>
             <p className="contact-link">
               <MapPin size={20} /> Multi-state service footprint
@@ -1339,7 +1339,7 @@ function Contact() {
           </div>
           <div className="mt-8 h-64 rounded border border-slate-200 bg-white p-4">
             <div className="flex h-full items-center justify-center rounded bg-slate-100 text-center font-bold text-slate-500">
-              America’s Panel Fab Service Footprint
+              American Super Panel Service Footprint
             </div>
           </div>
         </div>
@@ -1607,11 +1607,11 @@ function Footer() {
     <footer className="bg-[#0b1f33] px-5 py-10 text-white lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <strong className="text-xl font-black">America’s Panel Fab</strong>
-          <p className="mt-2 text-slate-300">Precision Metal Panels, Roofing Systems & Custom Fabrication</p>
+          <strong className="text-xl font-black">American Super Panel</strong>
+          <p className="mt-2 text-slate-300">Industrial Rib Roofing, Metal Siding, Trim & Accessories</p>
         </div>
         <div className="text-sm font-semibold text-slate-300">
-          American Super Panel™ systems are manufactured by America’s Panel Fab.
+          American Super Panel™ is the operating panel brand. Americas Panel Fab may publish affiliated industry and platform content.
         </div>
       </div>
     </footer>
