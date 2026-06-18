@@ -183,7 +183,7 @@ const industrialRibSpecs = [
   ['Use', 'Roofing, siding, equipment buildings, warehouses, industrial facilities, and commercial wall panels'],
 ]
 const industrialRibProof = [
-  ['Manufacturer Direct', Factory, 'Panel packages are sold by American Super Panel for contractors, owners, dealers, and regional building programs.'],
+  ['Manufactured by Americas Panel Fab', Factory, 'American Super Panel is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.'],
   ['7.2 Industrial Profile', Ruler, 'A high-rib exposed fastener profile positioned for commercial roofing, siding, and large wall coverage.'],
   ['Package Scope', ClipboardList, 'Panels, trim, flashings, closures, fasteners, and job labels organized as one quote package.'],
   ['Bid Support', FileCheck2, 'Submittal, finish, gauge, fastening, warranty, and project documentation reviewed before release.'],
@@ -375,7 +375,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'about') {
     return (
       <>
-        <PageHero title="About American Super Panel" copy="An operating metal panel company focused on Industrial Rib roofing, siding, trim packages, and contractor sales." />
+        <PageHero title="About American Super Panel" copy="A focused product and lead-generation brand for Industrial Rib roofing, siding, trim packages, dealer interest, and contractor sales." />
         <About />
         <Contact />
       </>
@@ -554,7 +554,7 @@ function SuperPanel() {
             copy="American Super Panel™ systems give commercial buyers a clear way to specify standing seam roofing, exposed fastener panels, wall panels, and coordinated flashing packages."
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {['Built Strong. Built American.', 'Standing seam and exposed fastener options', 'Commercial, industrial, municipal, and education applications', 'Quote-ready packages for expansion markets'].map(
+            {['Contractor-ready product family', 'Standing seam and exposed fastener options', 'Commercial, industrial, municipal, and education applications', 'Quote-ready packages for expansion markets'].map(
               (item) => (
                 <p key={item} className="flex gap-3 rounded border border-slate-200 p-4 font-semibold">
                   <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
@@ -618,12 +618,13 @@ function SuperPanelPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
         <div className="section relative">
           <div className="max-w-4xl">
-            <p className="eyebrow text-[#f97316]">Built Strong. Built American.</p>
+            <p className="eyebrow text-[#f97316]">Flagship Product Family</p>
             <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
               American Super Panel™
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              American Super Panel™ is a focused operating product family for commercial roofing, siding, trim, dealer, and contractor sales
+              American Super Panel™ is the flagship product family manufactured by Americas Panel Fab
+              for commercial roofing, siding, trim, dealer, and contractor sales
               for commercial roofing, wall panel, industrial, municipal, and educational facility
               applications.
             </p>
@@ -711,7 +712,7 @@ function IndustrialRibPage() {
             <p className="mt-6 text-xl leading-8 text-slate-700">
               A 7.2 profile metal roofing and siding panel for warehouses, industrial
               facilities, agricultural buildings, commercial wall panels, and large-format
-              exterior packages. Sold by American Super Panel.
+              exterior packages. Manufactured by Americas Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
@@ -722,6 +723,15 @@ function IndustrialRibPage() {
               </a>
               <a className="btn-secondary" href="#samples">
                 Request Samples
+              </a>
+              <a className="btn-secondary" href="#contact">
+                Contact Sales
+              </a>
+              <a className="btn-secondary" href="#quote">
+                Order Panels
+              </a>
+              <a className="btn-secondary" href="#quote">
+                Become Dealer
               </a>
               <a className="btn-secondary" href="/downloads/industrial-rib-product-data.txt" download>
                 <Download size={18} /> Product Data
@@ -1611,7 +1621,7 @@ function Footer() {
           <p className="mt-2 text-slate-300">Industrial Rib Roofing, Metal Siding, Trim & Accessories</p>
         </div>
         <div className="text-sm font-semibold text-slate-300">
-          American Super Panel™ is the operating panel brand. Americas Panel Fab may publish affiliated industry and platform content.
+          American Super Panel™ is a product brand of Americas Panel Fab. Americas Panel Fab may also work with affiliated suppliers, installers, and manufacturing partners.
         </div>
       </div>
     </footer>
