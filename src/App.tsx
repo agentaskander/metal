@@ -58,6 +58,7 @@ const products = [
     copy: 'Durable, economical panel packages for agricultural, warehouse, and industrial buildings.',
     points: ['Fast installation', 'Ribbed strength profile', 'Cost-efficient coverage'],
     spec: 'Warehouses • Ag • Industrial service buildings',
+    href: '/american-super-panel-industrial-rib',
   },
   {
     name: 'Wall Panels',
@@ -175,6 +176,47 @@ const downloadAssets = [
     copy: 'How to choose finish paths for heat, coastal, architectural, and campus work.',
     href: '/downloads/finish-selection-guide.txt',
     type: 'TXT',
+  },
+]
+const industrialRibSpecs = [
+  ['Product Family', 'American Super Panel™ Industrial Series'],
+  ['Panel Type', 'Exposed fastener roof and siding panel'],
+  ['Profile', 'Industrial Rib / 7.2-style profile'],
+  ['Rib Pitch', '7.2 in. nominal'],
+  ['Rib Height', '1.5 in. nominal'],
+  ['Gauge Path', '24 ga commercial path; 26 ga project-dependent'],
+  ['Substrate Path', 'G90 galvanized or Galvalume project path'],
+  ['Finish Path', 'SMP, PVDF, matte, cool-roof, and primer-ready options'],
+]
+const industrialRibProof = [
+  ['Equipment Plan', Factory, 'Two fixed roll-forming lines planned for repeatable panel production and package consistency.'],
+  ['Mobile Option', Gauge, 'Mobile fabrication remains a future path for long-run jobs and reduced shipping constraints.'],
+  ['Package Scope', ClipboardList, 'Panels, trim, flashings, closures, fasteners, and job labels organized as one quote package.'],
+  ['Bid Support', FileCheck2, 'Submittal, finish, gauge, fastening, warranty, and project documentation reviewed before release.'],
+] satisfies [string, IconType, string][]
+const industrialRibApplications = [
+  'Warehouses and logistics buildings',
+  'Industrial roof and wall packages',
+  'Agricultural and equipment buildings',
+  'Commercial re-skins and expansions',
+  'Municipal storage and service facilities',
+  'Large-format siding and liner panels',
+]
+const industrialRibDownloads = [
+  {
+    title: 'Industrial Rib Product Data',
+    copy: 'A starter product data sheet for profile, gauge, finish, and project review conversations.',
+    href: '/downloads/industrial-rib-product-data.txt',
+  },
+  {
+    title: 'Industrial Rib Flashing & Trim',
+    copy: 'Starter trim schedule for ridge, rake, eave, corner, jamb, base, and transition details.',
+    href: '/downloads/industrial-rib-flashing-trim.txt',
+  },
+  {
+    title: 'Industrial Rib Quote Checklist',
+    copy: 'The project facts estimating needs before issuing a commercial panel package quote.',
+    href: '/downloads/industrial-rib-quote-checklist.txt',
   },
 ]
 const selectorOptions = {
@@ -328,6 +370,10 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'super-panel') {
     return <SuperPanelPage />
+  }
+
+  if (path === 'american-super-panel-industrial-rib') {
+    return <IndustrialRibPage />
   }
 
   if (path === 'projects') {
@@ -725,6 +771,157 @@ function SuperPanelPage() {
   )
 }
 
+function IndustrialRibPage() {
+  return (
+    <>
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+        <img
+          src={warehouseImage}
+          alt="Industrial metal roof and siding application"
+          className="absolute right-0 top-0 h-full w-full object-cover opacity-20 lg:w-[52%] lg:opacity-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
+        <div className="section relative">
+          <div className="max-w-4xl">
+            <p className="eyebrow text-[#f97316]">Beta Product-Manufacturer Proof Page</p>
+            <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
+              American Super Panel™ Industrial Rib
+            </h1>
+            <p className="mt-6 text-xl leading-8 text-slate-700">
+              A 7.2-style exposed fastener roofing and siding panel path for warehouses,
+              industrial buildings, agricultural facilities, and large commercial wall packages.
+              Manufactured by America’s Panel Fab.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="btn-primary" href="#quote">
+                Request Quote <ArrowRight size={18} />
+              </a>
+              <a className="btn-secondary" href="#upload-plans">
+                <FileUp size={18} /> Upload Plans
+              </a>
+              <a className="btn-secondary" href="/downloads/industrial-rib-product-data.txt" download>
+                <Download size={18} /> Product Data
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+          <div>
+            <SectionIntro
+              eyebrow="Product Data"
+              title="A concrete panel profile buyers can quote, specify, and compare."
+              copy="This beta page turns American Super Panel™ from a broad product family into a specific industrial rib system with a clear manufacturing and quoting path."
+            />
+            <p className="mt-6 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
+              Final gauge, substrate, finish, fastening, and engineering requirements must be confirmed
+              during project review before public specification or release to production.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-xl">
+            <table className="product-proof-table">
+              <tbody>
+                {industrialRibSpecs.map(([label, value]) => (
+                  <tr key={label}>
+                    <th>{label}</th>
+                    <td>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Manufacturer Proof"
+          title="Show the CEO a business that looks ready to manufacture, quote, and support real jobs."
+          copy="The differentiator is not only the panel shape. It is the operating model around the product: equipment plan, quote intake, flashing packages, submittals, and multi-state fulfillment."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {industrialRibProof.map(([title, Icon, copy]) => (
+            <article key={title as string} className="card">
+              <Icon className="text-[#f97316]" />
+              <h2 className="mt-5 text-xl font-black text-[#0b1f33]">{title as string}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy as string}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <img
+            src={fabricationImage}
+            alt="Metal fabrication and panel manufacturing capability"
+            className="h-[430px] w-full rounded object-cover shadow-xl"
+          />
+          <div>
+            <SectionIntro
+              eyebrow="Applications"
+              title="Industrial rib panels for roof, siding, and large-format building envelopes."
+              copy="A focused product page helps contractors and procurement teams understand where this system fits before they send drawings."
+            />
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {industrialRibApplications.map((item) => (
+                <p key={item} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-semibold text-slate-700">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Download Center"
+          title="Give estimators a product packet before the first phone call."
+          copy="These beta documents make the page feel like a real manufacturer resource center while the final engineering, machine specs, and finish program are confirmed."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {industrialRibDownloads.map((asset) => (
+            <a key={asset.href} className="download-card" href={asset.href} download>
+              <span className="flex h-11 w-11 items-center justify-center rounded bg-[#0b1f33] text-white">
+                <FileText size={22} />
+              </span>
+              <span className="mt-5 block text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">
+                Beta TXT Download
+              </span>
+              <strong className="mt-2 block text-xl font-black text-[#0b1f33]">{asset.title}</strong>
+              <span className="mt-3 block leading-7 text-slate-600">{asset.copy}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="section bg-[#0b1f33] text-white">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <SectionIntro
+            dark
+            eyebrow="Quote Package"
+            title="Upload drawings and turn the product page into a buying workflow."
+            copy="Estimating can review square footage, roof or wall scope, gauge path, finish intent, trims, accessories, delivery state, and schedule from one intake."
+          />
+          <div className="grid gap-4 sm:grid-cols-3">
+            {['Panel takeoff', 'Trim schedule', 'Submittal path'].map((item) => (
+              <p key={item} className="rounded border border-white/15 bg-white/10 p-5 text-lg font-black">
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Contact />
+    </>
+  )
+}
+
 function Products() {
   return (
     <section id="products" className="section bg-slate-50">
@@ -749,6 +946,11 @@ function Products() {
                 </li>
               ))}
             </ul>
+            {'href' in product ? (
+              <a className="mt-6 inline-flex font-black text-[#0b1f33] hover:text-[#f97316]" href={product.href}>
+                View Industrial Rib proof page <ArrowRight className="ml-2" size={18} />
+              </a>
+            ) : null}
           </article>
         ))}
       </div>
