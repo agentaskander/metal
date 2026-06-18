@@ -22,7 +22,6 @@ import {
   ShieldCheck,
   Sparkles,
   SunMedium,
-  UploadCloud,
   Wind,
 } from 'lucide-react'
 
@@ -37,12 +36,11 @@ declare global {
 }
 
 const navItems = [
-  ['Products', '/products'],
-  ['Services', '/services'],
-  ['Finishes', '/finishes'],
-  ['Selector', '/selector'],
+  ['Industry Guides', '/resources'],
+  ['Manufacturing Tech', '/services'],
+  ['Panel Profiles', '/products'],
   ['Markets', '/markets'],
-  ['Super Panel', '/super-panel'],
+  ['Partner Network', '/about'],
   ['Contact', '/contact'],
 ]
 
@@ -123,13 +121,7 @@ const contractorOutcomes = [
   ['Custom Fabrication', 'Panels, trims, flashings, edge metal, and accessories coordinated together.'],
   ['Multi-State Service', 'California, Arizona, Texas, and Florida fulfillment support.'],
   ['Commercial & Government Projects', 'Bid support, submittals, invoicing, and contract-ready documentation.'],
-  ['American Super Panel™ Systems', 'Flagship panel systems manufactured by America’s Panel Fab.'],
-]
-const proofStats = [
-  ['24-hour', 'quote response target'],
-  ['100MB', 'plan upload workflow'],
-  ['Bid-ready', 'public work support'],
-  ['4-state', 'service footprint'],
+  ['American Super Panel™ Systems', 'Flagship panel systems manufactured by Americas Panel Fab.'],
 ]
 const superPanelSeries = [
   ['Commercial Series', 'Standing seam and wall panel systems for retail, office, education, and multifamily work.'],
@@ -154,8 +146,8 @@ const resources = [
 ]
 const downloadAssets = [
   {
-    title: 'Quote Request Checklist',
-    copy: 'Everything estimating needs for a faster 24-hour quote response.',
+    title: 'Industry Review Checklist',
+    copy: 'What researchers, partners, and operators should gather before comparing panel manufacturing opportunities.',
     href: '/downloads/quote-request-checklist.txt',
     type: 'TXT',
   },
@@ -231,9 +223,21 @@ const processSteps = [
   ['Fabricate package', 'Panels, trim, flashing, accessories, and labels are produced as one coordinated order.'],
   ['Support install', 'Contractors get detail support, sequencing help, and follow-through through closeout.'],
 ]
+const platformPillars = [
+  ['Industry Education', FileText, 'Guides for metal panel manufacturing, roll forming, profile selection, finishes, and installer decision-making.'],
+  ['Manufacturing Ecosystem', Factory, 'A long-term hub for manufacturers, suppliers, fabricators, installers, dealers, and factory partners.'],
+  ['Automation & AI', Gauge, 'Research and operating models for factory automation, AI-assisted estimating, panel workflows, and manufacturing software.'],
+  ['Acquisition Platform', Building2, 'A structure that can support American Super Panel, future divisions, partner manufacturers, and regional roll-ups.'],
+] satisfies [string, IconType, string][]
+const platformStructure = [
+  'American Super Panel operating business',
+  'Future standing seam division',
+  'Future trim and accessories division',
+  'Future equipment and automation division',
+  'Factory partner network',
+  'Industry marketplace and lead network',
+]
 
-const heroImage =
-  'https://images.unsplash.com/photo-1776653244534-69d59028af6c?auto=format&fit=crop&w=1800&q=88'
 const facilityImage =
   'https://images.unsplash.com/photo-1764835994645-3faa2c40f708?auto=format&fit=crop&w=1400&q=88'
 const panelImage =
@@ -270,27 +274,7 @@ function App() {
         ) : path ? (
           <RoutedPage path={path} />
         ) : (
-          <>
-            <Hero />
-            <ContractorOutcomes />
-            <ProofBand />
-            <ImageProofStrip />
-            <WhyMetal />
-            <SuperPanel />
-            <SuperPanelSeries />
-            <PanelSystemSelector />
-            <Products />
-            <Services />
-            <FinishSystem />
-            <BidResources />
-            <DownloadCenter />
-            <Process />
-            <Markets />
-            <ServiceAreas />
-            <Projects />
-            <About />
-            <Contact />
-          </>
+          <PlatformHome />
         )}
       </main>
       <Footer />
@@ -302,7 +286,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'products') {
     return (
       <>
-        <PageHero title="Products" copy="American Super Panel™ systems, wall panels, trim, flashing, and accessories manufactured by America’s Panel Fab." />
+        <PageHero title="Products" copy="American Super Panel™ systems, wall panels, trim, flashing, and accessories manufactured by Americas Panel Fab." />
         <Products />
         <FinishSystem />
         <BidResources />
@@ -389,7 +373,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'about') {
     return (
       <>
-        <PageHero title="About America’s Panel Fab" copy="A manufacturing company built for precision metal panels, roofing systems, and custom fabrication." />
+        <PageHero title="About Americas Panel Fab" copy="A manufacturing company built for precision metal panels, roofing systems, and custom fabrication." />
         <About />
         <Contact />
       </>
@@ -399,7 +383,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'contact') {
     return (
       <>
-        <PageHero title="Contact" copy="Request pricing, upload plans, or start a commercial bid conversation with America’s Panel Fab." />
+        <PageHero title="Contact" copy="Start a platform, partnership, supplier, installer, investor, or industry education conversation with Americas Panel Fab." />
         <Contact />
       </>
     )
@@ -407,8 +391,8 @@ function RoutedPage({ path }: { path: string }) {
 
   return (
     <>
-      <PageHero title="America’s Panel Fab" copy="Commercial metal roofing and architectural panel fabrication." />
-      <Hero />
+      <PageHero title="Americas Panel Fab" copy="Metal panel manufacturing education, roll forming technology, supplier ecosystems, and investor-ready industry platform strategy." />
+      <PlatformHome />
       <Contact />
     </>
   )
@@ -418,19 +402,148 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
   return (
     <section className="section border-b border-slate-200 bg-white">
       <div className="max-w-4xl">
-        <p className="eyebrow text-[#f97316]">America’s Panel Fab</p>
+        <p className="eyebrow text-[#f97316]">Americas Panel Fab</p>
         <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33]">{title}</h1>
         <p className="mt-6 text-xl leading-8 text-slate-600">{copy}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a className="btn-primary" href="#quote">
-            Request Quote
+          <a className="btn-primary" href="/resources">
+            Explore Guides
           </a>
-          <a className="btn-secondary" href="#upload-plans">
-            Upload Plans
+          <a className="btn-secondary" href="#contact">
+            Partner Inquiry
           </a>
         </div>
       </div>
     </section>
+  )
+}
+
+function PlatformHome() {
+  return (
+    <>
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+        <img
+          src={machineImage}
+          alt="Roll forming technology and metal panel manufacturing"
+          className="absolute right-0 top-0 h-full w-full object-cover opacity-18 lg:w-[54%] lg:opacity-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
+        <div className="section relative">
+          <div className="max-w-4xl">
+            <p className="eyebrow text-[#f97316]">Metal Panel Manufacturing Platform</p>
+            <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
+              Americas Panel Fab
+            </h1>
+            <p className="mt-6 text-xl leading-8 text-slate-700">
+              An industry platform for metal panel manufacturing, roll forming technology,
+              construction materials education, factory automation, supplier partnerships,
+              and long-term expansion across the metal roofing ecosystem.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="btn-primary" href="/resources">
+                Explore Industry Guides <ArrowRight size={18} />
+              </a>
+              <a className="btn-secondary" href="#platform">
+                View Platform Strategy
+              </a>
+              <a className="btn-secondary" href="#contact">
+                Partner / Investor Inquiry
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="platform" className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="Platform Role"
+          title="Education, partnerships, manufacturing intelligence, and expansion leverage."
+          copy="Americas Panel Fab is built to publish neutral industry content, map suppliers and installers, compare panel systems, study manufacturing technology, and route qualified opportunities to affiliated or partner operators where appropriate."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {platformPillars.map(([title, Icon, copy]) => (
+            <article key={title as string} className="card">
+              <Icon className="text-[#f97316]" />
+              <h2 className="mt-5 text-xl font-black text-[#0b1f33]">{title as string}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy as string}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <SectionIntro
+              eyebrow="Dual-Brand Architecture"
+              title="Separate the operating company from the broader industry platform."
+              copy="American Super Panel can focus on selling panels now. Americas Panel Fab can build authority, SEO, partnerships, technology narrative, and investor context without forcing every idea onto the operating site."
+            />
+            <p className="mt-6 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
+              Disclosure: Americas Panel Fab publishes educational and industry content.
+              Some featured manufacturers, suppliers, and service providers may be affiliated
+              partners, including American Super Panel.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ['American Super Panel', 'Operating business focused on exposed-fastener panels, metal siding, trim, dealers, and contractor sales.'],
+              ['Americas Panel Fab', 'Industry platform focused on manufacturing education, roll forming, automation, partners, and acquisitions.'],
+              ['Lead Network', 'Educational pages can recommend affiliated or partner providers when the fit is clear and disclosed.'],
+              ['Investor Narrative', 'The platform can support multiple divisions, future acquisitions, and manufacturing software opportunities.'],
+            ].map(([title, copy]) => (
+              <article key={title} className="card">
+                <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
+                <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="Content Engine"
+          title="SEO built around metal panel manufacturing, roll forming, and industry comparison pages."
+          copy="The site can publish profile comparisons, manufacturing technology explainers, supplier directories, installer resources, equipment reviews, and state-level industry pages."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {['Metal panel manufacturing guides', 'Roll forming technology', 'Western Rib vs standing seam education', 'Equipment and factory profiles', 'Supplier and installer directories', 'Partner and investor opportunities'].map((item) => (
+            <p key={item} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-bold text-slate-700">
+              <SearchCheck className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+              {item}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <img
+            src={facilityImage}
+            alt="Metal panel manufacturing ecosystem"
+            className="h-[420px] w-full rounded object-cover shadow-xl"
+          />
+          <div>
+            <SectionIntro
+              eyebrow="Long-Term Structure"
+              title="A platform that can support divisions, partners, and future acquisitions."
+              copy="The operating site stays simple while the platform site carries the larger ecosystem vision."
+            />
+            <div className="mt-8 grid gap-3">
+              {platformStructure.map((item) => (
+                <p key={item} className="flex gap-3 font-semibold text-slate-700">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Contact />
+    </>
   )
 }
 
@@ -439,7 +552,7 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="top-contact-bar border-b border-slate-200 bg-[#0b1f33] px-5 py-2 text-sm font-bold text-white lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-between">
-          <span>Commercial metal panels • roll forming • custom fabrication</span>
+          <span>Metal panel manufacturing • roll forming technology • industry platform</span>
           <span className="top-contact-links flex flex-wrap justify-center gap-x-5 gap-y-1">
             <a className="inline-flex items-center gap-2 hover:text-orange-200" href="tel:+15550193762">
               <Phone size={15} /> (555) 019-3762
@@ -457,10 +570,10 @@ function Header() {
           </span>
           <span>
             <strong className="block whitespace-nowrap text-lg font-black tracking-normal text-[#0b1f33]">
-              America’s Panel Fab
+              Americas Panel Fab
             </strong>
             <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 sm:block">
-              Precision Metal Panels
+              Industry Platform
             </span>
           </span>
         </a>
@@ -474,65 +587,18 @@ function Header() {
         <div className="header-actions flex shrink-0 items-center gap-2">
           <a className="btn-secondary header-secondary-action" href="/resources">
             <Download size={18} />
-            Resources
+            Guides
           </a>
-          <a className="btn-secondary header-secondary-action" href="#upload-plans">
-            <UploadCloud size={18} />
-            Upload Plans
+          <a className="btn-secondary header-secondary-action" href="/about">
+            <Building2 size={18} />
+            Platform
           </a>
-          <a className="btn-primary" href="#quote">
-            Request Quote
+          <a className="btn-primary" href="#contact">
+            Partner Inquiry
           </a>
         </div>
       </div>
     </header>
-  )
-}
-
-function Hero() {
-  return (
-    <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-      <img
-        src={heroImage}
-        alt="Commercial building with metal roofing panels"
-        className="absolute right-0 top-0 h-full w-full object-cover opacity-22 lg:w-[58%] lg:opacity-100"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
-      <div className="relative mx-auto grid min-h-[690px] max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <div className="max-w-4xl">
-          <p className="mb-5 inline-flex rounded border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-bold uppercase tracking-[0.16em] text-[#f97316]">
-            Manufacturer • Fabricator • Government/Commercial Supplier
-          </p>
-          <h1 className="max-w-4xl text-4xl font-black leading-[1.04] tracking-normal text-[#0b1f33] sm:text-5xl lg:text-6xl">
-            Commercial Metal Roofing & Architectural Panel Fabrication
-          </h1>
-          <p className="mt-6 max-w-3xl text-xl leading-8 text-slate-700">
-            Serving California, Arizona, Texas & Florida with standing seam roofing, wall panels,
-            flashing packages, roll forming, and custom fabrication.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary text-base" href="#quote">
-              Request Quote <ArrowRight size={18} />
-            </a>
-            <a className="btn-secondary text-base" href="#upload-plans">
-              <FileUp size={18} /> Upload Plans
-            </a>
-            <a className="btn-secondary text-base" href="/resources">
-              <Download size={18} /> View Resources
-            </a>
-          </div>
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
-            {['Get a quote in 24 hours', 'Upload plans directly', 'Commercial bid support'].map((item) => (
-              <p key={item} className="flex items-center gap-3 rounded border border-slate-200 bg-white p-4 font-black text-[#0b1f33] shadow-sm">
-                <CheckCircle2 className="shrink-0 text-[#f97316]" size={20} />
-                {item}
-              </p>
-            ))}
-          </div>
-        </div>
-        <div className="hidden lg:block" />
-      </div>
-    </section>
   )
 }
 
@@ -542,7 +608,7 @@ function ContractorOutcomes() {
       <SectionIntro
         eyebrow="Why Contractors Switch"
         title="Built around the buying problems metal contractors actually have."
-        copy="America’s Panel Fab helps contractors move from drawings to quote-ready panel, flashing, finish, and fabrication packages with fewer delays."
+        copy="Americas Panel Fab helps contractors move from drawings to quote-ready panel, flashing, finish, and fabrication packages with fewer delays."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
         {contractorOutcomes.map(([title, copy]) => (
@@ -551,71 +617,6 @@ function ContractorOutcomes() {
             <h3 className="mt-5 text-xl font-black text-[#0b1f33]">{title}</h3>
             <p className="mt-3 leading-7 text-slate-600">{copy}</p>
           </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function ImageProofStrip() {
-  const images = [
-    ['Real facility capacity', facilityImage],
-    ['Real fabrication work', fabricationImage],
-    ['Real metal roof systems', panelImage],
-    ['Real machine operation', machineImage],
-  ]
-
-  return (
-    <section className="bg-white px-5 pb-8 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
-        {images.map(([label, src]) => (
-          <figure key={label} className="overflow-hidden rounded border border-slate-200 bg-white">
-            <img src={src} alt={label} className="h-56 w-full object-cover" />
-            <figcaption className="p-4 text-sm font-black uppercase tracking-[0.12em] text-slate-600">
-              {label}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  )
-}
-function ProofBand() {
-  return (
-    <section className="bg-white px-5 py-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-3 md:grid-cols-4">
-        {proofStats.map(([value, label]) => (
-          <div key={value} className="rounded border border-slate-200 bg-slate-50 p-5">
-            <strong className="block text-3xl font-black text-[#0b1f33]">{value}</strong>
-            <span className="mt-1 block text-sm font-bold uppercase tracking-[0.12em] text-slate-500">
-              {label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function WhyMetal() {
-  return (
-    <section id="why-metal" className="section bg-slate-50">
-      <SectionIntro
-        eyebrow="Why Metal"
-        title="A durable envelope for high-value buildings."
-        copy="Metal roofing and architectural panels give commercial teams long service life, strong weather performance, efficient installation, and a refined building appearance."
-      />
-      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {[
-          ['Long service life', ShieldCheck],
-          ['Energy efficiency', SunMedium],
-          ['Wind resistance', Wind],
-          ['Fire resistance', Flame],
-        ].map(([label, Icon]) => (
-          <div key={label as string} className="feature-tile">
-            <Icon className="text-[#f97316]" />
-            <h3>{label as string}</h3>
-          </div>
         ))}
       </div>
     </section>
@@ -661,7 +662,7 @@ function SuperPanelSeries() {
     <section className="section bg-slate-50">
       <SectionIntro
         eyebrow="American Super Panel™ Systems"
-        title="A clear panel system manufactured by America’s Panel Fab."
+        title="A clear panel system manufactured by Americas Panel Fab."
         copy="The product brand becomes easier to specify and remember by organizing panels around real regional and commercial buying needs."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
@@ -702,13 +703,13 @@ function SuperPanelPage() {
               American Super Panel™
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              American Super Panel™ is the flagship panel system manufactured by America’s Panel Fab
+              American Super Panel™ is the flagship panel system manufactured by Americas Panel Fab
               for commercial roofing, wall panel, industrial, municipal, and educational facility
               applications.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="#quote">
-                Request Quote <ArrowRight size={18} />
+              <a className="btn-primary" href="#contact">
+                Partner Inquiry <ArrowRight size={18} />
               </a>
               <a className="btn-secondary" href="#projects">
                 Project Gallery
@@ -722,7 +723,7 @@ function SuperPanelPage() {
         <SectionIntro
           eyebrow="Benefits"
           title="A flagship family for demanding commercial projects."
-          copy="The product architecture keeps America’s Panel Fab as the manufacturer while giving contractors and owners a memorable flagship system to specify and request."
+          copy="The product architecture keeps Americas Panel Fab as the manufacturer while giving contractors and owners a memorable flagship system to specify and request."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {[
@@ -790,14 +791,14 @@ function IndustrialRibPage() {
             <p className="mt-6 text-xl leading-8 text-slate-700">
               A 7.2-style exposed fastener roofing and siding panel path for warehouses,
               industrial buildings, agricultural facilities, and large commercial wall packages.
-              Manufactured by America’s Panel Fab.
+              Manufactured by Americas Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="#quote">
-                Request Quote <ArrowRight size={18} />
+              <a className="btn-primary" href="#contact">
+                Discuss Platform Fit <ArrowRight size={18} />
               </a>
               <a className="btn-secondary" href="#upload-plans">
-                <FileUp size={18} /> Upload Plans
+                <FileUp size={18} /> Share Materials
               </a>
               <a className="btn-secondary" href="/downloads/industrial-rib-product-data.txt" download>
                 <Download size={18} /> Product Data
@@ -812,7 +813,7 @@ function IndustrialRibPage() {
           <div>
             <SectionIntro
               eyebrow="Product Data"
-              title="A concrete panel profile buyers can quote, specify, and compare."
+            title="A concrete panel profile the industry can study, compare, and contextualize."
               copy="This beta page turns American Super Panel™ from a broad product family into a specific industrial rib system with a clear manufacturing and quoting path."
             />
             <p className="mt-6 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
@@ -838,8 +839,8 @@ function IndustrialRibPage() {
       <section className="section bg-white">
         <SectionIntro
           eyebrow="Manufacturer Proof"
-          title="Show the CEO a business that looks ready to manufacture, quote, and support real jobs."
-          copy="The differentiator is not only the panel shape. It is the operating model around the product: equipment plan, quote intake, flashing packages, submittals, and multi-state fulfillment."
+          title="Show how an operating product fits inside a larger manufacturing platform."
+          copy="The differentiator is not only the panel shape. It is the operating model around the product: equipment plan, documentation, flashing packages, submittals, and multi-state fulfillment."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {industrialRibProof.map(([title, Icon, copy]) => (
@@ -903,7 +904,7 @@ function IndustrialRibPage() {
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <SectionIntro
             dark
-            eyebrow="Quote Package"
+            eyebrow="Operating Workflow"
             title="Upload drawings and turn the product page into a buying workflow."
             copy="Estimating can review square footage, roof or wall scope, gauge path, finish intent, trims, accessories, delivery state, and schedule from one intake."
           />
@@ -928,7 +929,7 @@ function Products() {
       <SectionIntro
         eyebrow="Products"
         title="Panel systems and complete fabricated packages."
-        copy="America’s Panel Fab supplies roof panels, wall panels, trim, flashing, and accessories under one manufacturing roof."
+        copy="Americas Panel Fab supplies roof panels, wall panels, trim, flashing, and accessories under one manufacturing roof."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {products.map((product) => (
@@ -1171,7 +1172,7 @@ function BidResources() {
       <SectionIntro
         eyebrow="Contractor & Bid Resources"
         title="More than panels: a cleaner path to submittals, warranties, and procurement."
-        copy="Commercial buyers need documentation as much as product. America’s Panel Fab is structured around quote-ready, submittal-ready, and contract-ready support."
+        copy="Commercial buyers need documentation as much as product. Americas Panel Fab is structured around quote-ready, submittal-ready, and contract-ready support."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {resources.map(([title, Icon, copy]) => (
@@ -1329,7 +1330,7 @@ function About() {
           <SectionIntro
             eyebrow="About"
             title="A manufacturing company built for serious metal panel work."
-            copy="America’s Panel Fab exists to give contractors, owners, and public agencies a dependable source for precision metal panels, roofing systems, and custom fabrication."
+            copy="Americas Panel Fab exists to give contractors, owners, and public agencies a dependable source for precision metal panels, roofing systems, and custom fabrication."
           />
           <div className="mt-8 space-y-4 leading-8 text-slate-700">
             <p>
@@ -1354,8 +1355,8 @@ function Contact() {
         <div>
           <SectionIntro
             eyebrow="Contact"
-            title="Request pricing, upload plans, or start a bid conversation."
-            copy="Send the project basics, drawings, and timeline so the sales team can prepare the right panel and fabrication path."
+            title="Start a partner, investor, supplier, or industry conversation."
+            copy="Use this site for platform conversations: manufacturing partnerships, supplier ecosystems, installer networks, investor interest, factory profiles, and educational collaboration."
           />
           <div className="mt-8 grid gap-4">
             <a className="contact-link" href="tel:+15550193762">
@@ -1365,12 +1366,12 @@ function Contact() {
               <Mail size={20} /> sales@americaspanelfab.com
             </a>
             <p className="contact-link">
-              <MapPin size={20} /> Multi-state service footprint
+              <MapPin size={20} /> California, Arizona, Texas, and Florida industry coverage
             </p>
           </div>
           <div className="mt-8 h-64 rounded border border-slate-200 bg-white p-4">
             <div className="flex h-full items-center justify-center rounded bg-slate-100 text-center font-bold text-slate-500">
-              America’s Panel Fab Service Footprint
+              Americas Panel Fab Industry Map
             </div>
           </div>
         </div>
@@ -1388,7 +1389,7 @@ function QuoteForm() {
 
   async function handleQuoteSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setSubmitState({ kind: 'submitting', message: 'Sending quote request…' })
+    setSubmitState({ kind: 'submitting', message: 'Sending inquiry…' })
 
     const form = event.currentTarget
     const result = await submitLeadForm('/api/quote', new FormData(form))
@@ -1397,7 +1398,7 @@ function QuoteForm() {
       form.reset()
       setSubmitState({
         kind: 'success',
-        message: 'Quote request received. Sales will review the project details and follow up.',
+        message: 'Inquiry received. The platform team will review the details and follow up.',
       })
       window.turnstile?.reset()
       return
@@ -1409,9 +1410,9 @@ function QuoteForm() {
 
   return (
     <form id="quote" className="form-panel" action="/api/quote" method="post" onSubmit={handleQuoteSubmit}>
-      <h2 className="text-2xl font-black text-[#0b1f33]">Quick Quote Form</h2>
+      <h2 className="text-2xl font-black text-[#0b1f33]">Platform Inquiry Form</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
+        {['Name', 'Company', 'Email', 'Phone', 'Organization Location', 'State'].map((field) => (
           <label key={field}>
             <span>{field}</span>
             <input
@@ -1422,30 +1423,31 @@ function QuoteForm() {
           </label>
         ))}
         <label>
-          <span>Estimated Square Footage</span>
-          <input name="estimated_square_footage" type="number" min="0" />
+          <span>Primary Interest</span>
+          <input name="primary_interest" type="text" placeholder="Investor, supplier, installer, manufacturer, software, media" />
         </label>
         <label>
-          <span>Panel Type</span>
+          <span>Conversation Type</span>
           <select name="panel_type" defaultValue="">
             <option value="" disabled>
-              Select panel type
+              Select conversation type
             </option>
-            <option>American Super Panel Standing Seam</option>
-            <option>American Super Panel Exposed Fastener</option>
-            <option>Wall Panels</option>
-            <option>Trim & Flashing</option>
+            <option>Partnership</option>
+            <option>Investor Interest</option>
+            <option>Supplier Directory</option>
+            <option>Factory Profile</option>
+            <option>Industry Research</option>
           </select>
         </label>
         <label className="md:col-span-2">
-          <span>Desired Completion Date</span>
-          <input name="desired_completion_date" type="date" />
+          <span>Notes</span>
+          <input name="desired_completion_date" type="text" placeholder="Tell us what you want to explore" />
         </label>
       </div>
       <TurnstileSlot />
       <FormStatus state={submitState} />
       <button className="btn-primary mt-5" type="submit" disabled={submitState.kind === 'submitting'}>
-        {submitState.kind === 'submitting' ? 'Sending…' : 'Submit Quote Request'}
+        {submitState.kind === 'submitting' ? 'Sending…' : 'Submit Platform Inquiry'}
       </button>
     </form>
   )
@@ -1468,18 +1470,18 @@ function UploadForm() {
     }
 
     if (files.length === 0) {
-      setSubmitState({ kind: 'error', message: 'Upload at least one plan, drawing, or structural document.' })
+      setSubmitState({ kind: 'error', message: 'Attach at least one overview, profile, document, or deck.' })
       return
     }
 
-    setSubmitState({ kind: 'submitting', message: 'Uploading plans…' })
+    setSubmitState({ kind: 'submitting', message: 'Uploading materials…' })
     const result = await submitLeadForm('/api/upload-plans', new FormData(form))
 
     if (result.ok) {
       form.reset()
       setSubmitState({
         kind: 'success',
-        message: 'Plans uploaded. Sales will review the documents and follow up.',
+        message: 'Materials uploaded. The platform team will review and follow up.',
       })
       window.turnstile?.reset()
       return
@@ -1498,9 +1500,9 @@ function UploadForm() {
       encType="multipart/form-data"
       onSubmit={handlePlanUpload}
     >
-      <h2 className="text-2xl font-black text-[#0b1f33]">Upload Plans</h2>
+      <h2 className="text-2xl font-black text-[#0b1f33]">Share Materials</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
+        {['Name', 'Company', 'Email', 'Phone', 'Organization Location', 'State'].map((field) => (
           <label key={field}>
             <span>{field}</span>
             <input
@@ -1511,9 +1513,9 @@ function UploadForm() {
           </label>
         ))}
         {[
-          ['Plans PDF', 'plans_pdf', '.pdf'],
-          ['Drawings', 'drawings', '.pdf,.dwg,.dxf,.png,.jpg'],
-          ['Structural Documents', 'structural_documents', '.pdf,.doc,.docx'],
+          ['Company Overview', 'plans_pdf', '.pdf'],
+          ['Photos / Profiles', 'drawings', '.pdf,.png,.jpg'],
+          ['Supporting Documents', 'structural_documents', '.pdf,.doc,.docx'],
         ].map(([label, name, accept]) => (
           <label key={name} className="md:col-span-2">
             <span>{label}</span>
@@ -1525,7 +1527,7 @@ function UploadForm() {
       <TurnstileSlot />
       <FormStatus state={submitState} />
       <button className="btn-primary mt-5" type="submit" disabled={submitState.kind === 'submitting'}>
-        {submitState.kind === 'submitting' ? 'Uploading…' : 'Route to Sales Inbox'}
+        {submitState.kind === 'submitting' ? 'Uploading…' : 'Send Materials'}
       </button>
     </form>
   )
@@ -1589,11 +1591,11 @@ function StateLanding({ state }: { state: (typeof states)[number] }) {
           </h1>
           <p className="mt-6 text-xl leading-8 text-slate-700">{state.copy}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary" href="#quote">
-              Request Quote
+            <a className="btn-primary" href="/resources">
+              Explore Regional Guides
             </a>
-            <a className="btn-secondary" href="#upload-plans">
-              Upload Plans
+            <a className="btn-secondary" href="#contact">
+              Partner Inquiry
             </a>
           </div>
         </div>
@@ -1638,11 +1640,11 @@ function Footer() {
     <footer className="bg-[#0b1f33] px-5 py-10 text-white lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <strong className="text-xl font-black">America’s Panel Fab</strong>
-          <p className="mt-2 text-slate-300">Precision Metal Panels, Roofing Systems & Custom Fabrication</p>
+          <strong className="text-xl font-black">Americas Panel Fab</strong>
+          <p className="mt-2 text-slate-300">Metal Panel Manufacturing, Roll Forming Technology & Industry Platform</p>
         </div>
         <div className="text-sm font-semibold text-slate-300">
-          American Super Panel™ systems are manufactured by America’s Panel Fab.
+          American Super Panel™ systems are manufactured by Americas Panel Fab.
         </div>
       </div>
     </footer>
