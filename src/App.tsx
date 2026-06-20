@@ -2302,8 +2302,8 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
             ) : null}
             {enhancement?.visuals?.length ? (
               <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
-                <p className="eyebrow text-[#f97316]">Visual Proof Points</p>
-                <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">What this page should show, not just say.</h2>
+                <p className="eyebrow text-[#f97316]">Project Evidence</p>
+                <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">Photos and details that help buyers evaluate the topic.</h2>
                 <div className="mt-5 grid gap-4 lg:grid-cols-3">
                   {enhancement.visuals.map((visual) => (
                     <figure key={visual.title} className="overflow-hidden rounded border border-slate-200 bg-slate-50">
@@ -3332,11 +3332,14 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <strong className="text-xl font-black">Americas Panel Fab</strong>
-          <p className="mt-2 text-slate-300">Metal Panel Manufacturing, Roll Forming Technology & Industry Platform</p>
+          <p className="mt-2 text-slate-300">Metal panel manufacturing, roll forming, fabrication, and industry resources.</p>
         </div>
-        <div className="text-sm font-semibold text-slate-300">
+        <a
+          className="text-sm font-semibold text-slate-300 underline decoration-white/30 underline-offset-4 hover:text-white"
+          href="https://www.americansuperpanel.com"
+        >
           American Super Panel™ systems are manufactured by Americas Panel Fab.
-        </div>
+        </a>
       </div>
     </footer>
   )
