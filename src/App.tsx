@@ -790,7 +790,7 @@ function IndustrialRibPage() {
             <SectionIntro
               eyebrow="Colors, Finishes & Samples"
               title="Metallic, primer-ready, painted, matte, and cool-roof finish paths."
-              copy="A strong product page needs more than a profile. Buyers need to understand finish intent, sample workflow, and whether the panel supports roof, siding, or interior applications."
+              copy="Choose finish paths for roof panels, siding panels, trim, flashing, and sample requests before larger orders are released."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
@@ -823,7 +823,7 @@ function IndustrialRibPage() {
         <SectionIntro
           eyebrow="Project Gallery"
           title="Industrial Rib belongs on real roofs, real siding packages, and real bid schedules."
-          copy="The public page uses strong industrial imagery and a specific product story so the panel feels ready to buy, not conceptual."
+          copy="Review common building applications for Industrial Rib roofing, siding, trim, and fabrication packages before sending plans for quote review."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {industrialRibGalleryImages.map(({ label, image }) => (
@@ -869,7 +869,7 @@ function IndustrialRibPage() {
         <SectionIntro
           eyebrow="Downloads & Install Support"
           title="Product data, flashing details, quote checklist, and upload workflow."
-          copy="Western States wins trust with product-specific resources. This public page counters with a direct manufacturer packet for estimators, contractors, and procurement teams."
+          copy="Give estimators, contractors, and purchasing teams a clear packet for panel type, finish path, trim scope, plan uploads, and quote review."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {industrialRibDownloads.map((asset) => (
@@ -1176,7 +1176,7 @@ function FinishSystem() {
           <SectionIntro
             eyebrow="Colors & Finishes"
             title="A finish system worthy of commercial specifications."
-            copy="Compete beyond a generic product list with finish paths that support architectural intent, energy goals, brand standards, and multi-building programs."
+            copy="Coordinate panel color, trim color, substrate, sheen, and sample requests for commercial, agricultural, industrial, and residential projects."
           />
           <a className="btn-secondary mt-8" href="#quote">
             Request Color Support
@@ -1409,7 +1409,7 @@ function BidResources() {
       <SectionIntro
         eyebrow="Contractor & Bid Resources"
         title="More than panels: a cleaner path to submittals, warranties, and procurement."
-        copy="Commercial buyers need documentation as much as product. American Super Panel is structured around quote-ready, submittal-ready, and contractor-ready support."
+        copy="Get product data, finish guidance, takeoff support, and upload instructions organized for quote review, submittals, and ordering."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {resources.map(([title, Icon, copy]) => (
@@ -1571,8 +1571,8 @@ function About() {
           />
           <div className="mt-8 space-y-4 leading-8 text-slate-700">
             <p>
-              The founder story centers on practical field knowledge: better packages, better details,
-              responsive production, and the discipline required to serve commercial work.
+              The company is built around practical field knowledge: better packages, better details,
+              responsive production, and disciplined support for commercial work.
             </p>
             <p>
               The mission is straightforward: manufacture strong American panel systems and support the
