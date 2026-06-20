@@ -100,29 +100,29 @@ const states = [
   {
     name: 'California',
     slug: 'california-metal-panels',
-    copy: 'California-first quote support for metal roofing panels, siding panels, Industrial Rib, PBR / R-Panel, AG panels, trim, and flashing packages.',
-    status: 'Primary launch market',
-    note: 'Best current fit for contractor quotes, plan uploads, commercial projects, agricultural buildings, shops, and owner-led panel packages.',
+    copy: 'California quote support for metal roofing panels, siding panels, Industrial Rib, PBR / R-Panel, AG panels, trim, and flashing packages.',
+    status: 'Priority quote support',
+    note: 'Best fit for contractor quotes, plan uploads, commercial projects, agricultural buildings, shops, and owner-led panel packages.',
   },
   {
     name: 'Arizona',
     slug: 'arizona-metal-panels',
     copy: 'Arizona metal panel inquiries can be reviewed by project while regional availability is confirmed.',
-    status: 'Project-review availability',
-    note: 'Use this page for future high-sun finish questions and project review. Do not assume local stock, delivery, or office coverage until sales confirms.',
+    status: 'Project review',
+    note: 'Arizona projects can be reviewed for high-sun finish questions, panel scope, and availability. Stock, delivery, and local support are confirmed by sales before quoting.',
   },
   {
     name: 'Texas',
     slug: 'texas-metal-panels',
-    copy: 'Texas is the next expansion target for warehouses, shops, agricultural buildings, equipment shelters, and contractor panel packages.',
-    status: 'Next expansion market',
-    note: 'Texas inquiries are useful for demand validation and larger project review. Sales should confirm availability, production path, and delivery before quoting.',
+    copy: 'Texas project inquiries are welcome for warehouses, shops, agricultural buildings, equipment shelters, and contractor panel packages.',
+    status: 'Project review',
+    note: 'Texas projects can be reviewed by scope. Sales confirms availability, production path, and delivery assumptions before quoting.',
   },
   {
     name: 'Florida',
     slug: 'florida-metal-panels',
     copy: 'Florida metal panel inquiries can be reviewed by project while coastal availability and requirements are confirmed.',
-    status: 'Project-review availability',
+    status: 'Project review',
     note: 'Coastal, wind, corrosion, code, and warranty questions require project-specific review before any quote or product recommendation.',
   },
 ]
@@ -284,7 +284,7 @@ const industrialRibApplications = [
   'Large-format siding and liner panels',
 ]
 const industrialRibBuyerChecklist = [
-  ['Project state', 'California is the primary launch market. Texas is next. Other states are reviewed by project.'],
+  ['Project state', 'Share the project state so sales can confirm availability, service path, delivery assumptions, and review timing before quoting.'],
   ['Roof or wall scope', 'Tell sales whether the quote is roof panels, siding panels, trim, flashing, or a full package.'],
   ['Approximate square footage', 'A rough roof or wall area helps sales triage the request before detailed takeoff review.'],
   ['Panel lengths or plans', 'Upload drawings, sketches, elevations, measurements, or roof plans if available.'],
@@ -402,7 +402,7 @@ const faqItems = [
   ['Can I request custom lengths?', 'Yes. Send your project information, desired panel lengths, and drawings or measurements so sales can review the request.'],
   ['Can contractors order in bulk?', 'Yes. Contractors can request panel, trim, flashing, and accessory packages for commercial, agricultural, industrial, and residential projects.'],
   ['Can I upload plans for quoting?', 'Yes. Use the upload form to send plans, drawings, structural documents, photos, and project notes for review.'],
-  ['What states do you serve?', 'California is the primary launch market. Texas is the next expansion target. Arizona and Florida inquiries can be reviewed by project, but local availability must be confirmed by sales.'],
+  ['What states do you serve?', 'California projects receive priority quote support. Projects in Texas, Arizona, Florida, and other states can be reviewed by scope, with availability and delivery confirmed by sales before quoting.'],
   ['Can you provide trim and flashing?', 'Yes. Trim and flashing can be reviewed with panel orders so the package is easier for crews to install.'],
 ]
 const maxUploadBytes = 100 * 1024 * 1024
@@ -1154,7 +1154,7 @@ function IndustrialRibPage() {
                 A roof should be the thing you never have to worry about.
               </p>
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {['California-first quoting', 'Panels + trim packages', 'Plans accepted for review'].map((item) => (
+                {['Priority quote support', 'Panels + trim packages', 'Plans accepted for review'].map((item) => (
                   <p key={item} className="rounded border border-slate-200 bg-slate-50 p-4 text-sm font-black text-[#0b1f33]">
                     {item}
                   </p>
@@ -1291,8 +1291,8 @@ function IndustrialRibPage() {
           <div>
             <SectionIntro
               eyebrow="Service Availability"
-              title="California panel quotes first. Texas project interest welcome."
-              copy="American Super Panel is focused first on California contractors, owners, shops, warehouses, agricultural buildings, and commercial panel packages. Texas projects can be reviewed as the next market develops; Arizona and Florida inquiries are reviewed by project."
+              title="Panel quote support where the service path is confirmed."
+              copy="American Super Panel supports California contractors, owners, shops, warehouses, agricultural buildings, and commercial panel packages with priority quote review. Projects in Texas, Arizona, Florida, and other states can be reviewed by scope, with availability and delivery confirmed before quoting."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="/california-metal-panels">
@@ -2474,7 +2474,7 @@ function getPanelRecommendation({
   if (projectType === 'Industrial' || projectType === 'Warehouse' || environment === 'Industrial Exposure' || state === 'Texas') {
     return {
       package: ['Industrial Rib panel path', 'PBR / R-Panel alternate', 'Trim and accessory bundle'],
-      reasons: ['Good for warehouses, shops, manufacturing, and logistics buildings', 'Supports larger roof and wall scopes', 'Texas inquiries can be reviewed as the next expansion market'],
+      reasons: ['Good for warehouses, shops, manufacturing, and logistics buildings', 'Supports larger roof and wall scopes', 'Project availability and delivery assumptions are confirmed before quoting'],
       series: 'Industrial Rib / PBR Panel Package',
       summary: 'Recommended for industrial, warehouse, shop, and large-format commercial projects that need practical exposed-fastener roof or wall panels.',
     }
@@ -2502,7 +2502,7 @@ function getPanelRecommendation({
     package: ['Industrial Rib or PBR panel path', 'Finish selection support', 'Quote-ready takeoff review'],
     reasons: ['Strong default for California contractor quotes', 'Flexible for roof, wall, or combined scopes', 'Good for commercial, shop, residential accessory, and multifamily support work'],
     series: 'California Contractor Panel Package',
-    summary: 'Recommended for California-first quote review when the buyer needs roof panels, siding panels, trim, flashing, colors, and plan upload support.',
+    summary: 'Recommended when the buyer needs roof panels, siding panels, trim, flashing, colors, and plan upload support with availability confirmed by sales.',
   }
 }
 
@@ -2614,8 +2614,8 @@ function ServiceAreas() {
     <section id="service-areas" className="section">
       <SectionIntro
         eyebrow="Service Areas"
-        title="California first. Texas next. Other states by project review."
-        copy="American Super Panel is focused on practical quote support where the service path is ready. California is the primary launch market, Texas is the next expansion target, and other states require sales confirmation."
+        title="Service availability confirmed before quoting."
+        copy="American Super Panel provides priority quote support for California projects. Projects in Texas, Arizona, Florida, and other states can be reviewed by scope, with sales confirming availability, production path, and delivery assumptions."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {states.map((state) => (
