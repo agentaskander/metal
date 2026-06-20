@@ -868,7 +868,7 @@ const guideEnhancements: Record<string, {
       'Fastening style changes the project conversation. Standing seam systems generally hide fasteners and carry a more architectural appearance path. Exposed-fastener profiles put fasteners through the panel face and are often chosen for practical budgets, speed, agricultural buildings, warehouses, and industrial scopes. Neither category is universally better. The right choice depends on drawings, budget, owner expectations, installer path, and documentation needs.',
       'Roof and wall use should not be blended casually. A ribbed panel might be discussed for both roof and wall conditions, but roof slope, drainage, penetrations, closures, side laps, wall openings, base trim, corners, and orientation create different detail questions. Buyers should identify whether the requested material is roof-only, wall-only, or a combined roof-and-wall package.',
       'Americas Panel Fab should use profile education to own the neutral research layer. Buyers who are still comparing systems need a manufacturer-level explanation of profile families and decision factors. Buyers who know they want exposed-fastener roofing or siding can move to American Super Panel for the product-focused quote path.',
-      'The practical opportunity is to make each profile page answer the hidden questions behind the search. A search for R-Panel may really mean: What is the coverage width? Can it be used for siding? What trim is needed? What gauge should I ask for? What finish path makes sense? How do I compare quotes? The site should answer those questions without overclaiming project-specific performance.',
+      'The practical opportunity is to answer the hidden questions behind the search. A search for R-Panel may really mean: What is the coverage width? Can it be used for siding? What trim is needed? What gauge should I ask for? What finish path makes sense? How do I compare quotes? Americas Panel Fab should answer those questions without overclaiming project-specific performance.',
     ],
     diagram: ['Building use and roof/wall scope', 'Profile family and fastening style', 'Coverage width, rib height, and side lap review', 'Gauge, substrate, finish, trim, and closures', 'Quote-ready product path'],
     comparison: [
@@ -2148,7 +2148,7 @@ const authorityPages = {
   capabilities: {
     eyebrow: 'Capabilities',
     title: 'Fabrication Capabilities for Panel Programs and Partners',
-    copy: 'Capabilities content belongs with the manufacturer because buyers, partners, and suppliers need to understand the company behind the product brand.',
+    copy: 'Americas Panel Fab gives buyers, partners, and suppliers a clear view of the manufacturing company behind the product brand.',
     image: facilityImage,
     imageAlt: 'Metal panel manufacturing production floor',
     points: [
@@ -2159,8 +2159,8 @@ const authorityPages = {
     ],
     sections: [
       ['Panel Programs', 'Americas Panel Fab supports product-family thinking: profile selection, finish coordination, trim scope, accessory paths, and quote-to-production handoff.'],
-      ['Commercial Readiness', 'The site presents the discipline expected by contractors, procurement teams, property owners, and institutional buyers without making unsupported legal or certification claims.'],
-      ['Partner Resource', 'Capabilities pages give suppliers, installers, manufacturers, and commercial partners a clear place to understand the company.'],
+      ['Commercial Readiness', 'Americas Panel Fab supports contractors, procurement teams, property owners, and institutional buyers with clear manufacturing, documentation, and project-readiness information.'],
+      ['Partner Resource', 'Suppliers, installers, manufacturers, and commercial partners can use these capability resources to understand where Americas Panel Fab fits in metal panel projects.'],
     ],
   },
   rollForming: {

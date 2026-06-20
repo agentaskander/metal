@@ -1,6 +1,6 @@
-# America’s Panel Fab Website
+# Americas Panel Fab Website
 
-Commercial website and lead-generation platform for America’s Panel Fab and the American Super Panel™ product line.
+Commercial website and lead-generation platform for Americas Panel Fab and the American Super Panel™ product line.
 
 ## Port Registry
 
@@ -64,7 +64,7 @@ Production setup:
 
 For local Pages Function testing, copy `.dev.vars.example` to `.dev.vars` and fill in real values. Do not commit `.dev.vars`.
 
-The site and quote form can deploy before R2 is created. The plan upload endpoint will return a configuration message until the `LEAD_UPLOADS` binding exists.
+The website and quote form can deploy before R2 is created. The plan upload endpoint will return a configuration message until the `LEAD_UPLOADS` binding exists.
 
 ## Buying Tools
 
