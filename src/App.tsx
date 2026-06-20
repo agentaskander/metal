@@ -25,6 +25,7 @@ import {
   UploadCloud,
   Wind,
 } from 'lucide-react'
+import { industrialRibGalleryImages, projectGalleryImages, siteImages } from './content/images'
 
 type IconType = typeof Factory
 
@@ -226,24 +227,34 @@ const processSteps = [
   ['Support install', 'Contractors get detail support, sequencing help, and follow-through through closeout.'],
 ]
 
-const facilityImage =
-  'https://images.unsplash.com/photo-1764835994645-3faa2c40f708?auto=format&fit=crop&w=1400&q=88'
-const panelImage =
-  'https://images.unsplash.com/photo-1770910452211-2e8fd91bc347?auto=format&fit=crop&w=1400&q=88'
-const fabricationImage =
-  'https://images.unsplash.com/photo-1764114235891-66ff86abaf87?auto=format&fit=crop&w=1400&q=88'
-const weldingImage =
-  'https://images.unsplash.com/photo-1738162837408-5fbf53f0b97a?auto=format&fit=crop&w=1400&q=88'
-const machineImage =
-  'https://images.unsplash.com/photo-1738162837330-9257f938463c?auto=format&fit=crop&w=1400&q=88'
-const warehouseImage =
-  'https://images.unsplash.com/photo-1669003750747-3f139e115bfb?auto=format&fit=crop&w=1400&q=88'
-const projectImages = [panelImage, warehouseImage, facilityImage, weldingImage]
-const industrialRibGallery = [
-  ['Industrial roofing', warehouseImage],
-  ['Ribbed metal panel profile', panelImage],
-  ['Factory fabrication', fabricationImage],
-  ['Roll forming support', machineImage],
+const homepagePhotoSections = [
+  {
+    eyebrow: 'Commercial Roofing Panels',
+    title: 'Commercial Roofing Panels',
+    copy: 'Ribbed metal roof and wall panels for warehouses, shops, industrial buildings, retail shells, and contractor bid packages.',
+    image: siteImages.warehouseRoof,
+  },
+  {
+    eyebrow: 'Quality Materials',
+    title: 'Built From Quality Materials',
+    copy: 'The site launches with stock coil imagery now, then swaps in real coil inventory photos as soon as the first material photos are ready.',
+    image: siteImages.steelCoils,
+    reverse: true,
+  },
+  {
+    eyebrow: 'Delivery Support',
+    title: 'Ready for Delivery',
+    copy: 'Panel, trim, flashing, and accessory packages are presented around the real buying question: can this supplier quote, package, and deliver?',
+    image: siteImages.truckLoading,
+  },
+  {
+    eyebrow: 'Upload Plans',
+    title: 'Upload Plans. Get a Quote.',
+    copy: 'Contractors can send roof plans, wall elevations, drawings, photos, and scope notes so sales can review the project cleanly.',
+    image: siteImages.contractorPlans,
+    reverse: true,
+    cta: true,
+  },
 ]
 const trustBarItems = ['Commercial', 'Industrial', 'Agricultural', 'Residential', 'American Made']
 const contractorPageSections = [
@@ -544,8 +555,8 @@ function SuperPanel() {
           </a>
         </div>
         <img
-          src={panelImage}
-          alt="Architectural metal panel surface"
+          src={siteImages.panelCloseup.src}
+          alt={siteImages.panelCloseup.alt}
           className="h-[420px] w-full rounded object-cover shadow-2xl"
         />
       </div>
@@ -558,8 +569,8 @@ function SuperPanelPage() {
     <>
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
         <img
-          src={panelImage}
-          alt="American Super Panel architectural metal panel surface"
+          src={siteImages.panelCloseup.src}
+          alt={siteImages.panelCloseup.alt}
           className="absolute right-0 top-0 h-full w-full object-cover opacity-18 lg:w-[50%] lg:opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
@@ -625,8 +636,8 @@ function SuperPanelPage() {
             </div>
           </div>
           <img
-            src={fabricationImage}
-            alt="Manufacturing support for American Super Panel"
+            src={siteImages.trimFabrication.src}
+            alt={siteImages.trimFabrication.alt}
             className="h-[430px] w-full rounded object-cover shadow-xl"
           />
         </div>
@@ -642,8 +653,8 @@ function IndustrialRibPage() {
     <>
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
         <img
-          src={warehouseImage}
-          alt="Industrial metal roof and siding application"
+          src={siteImages.heroRollFormer.src}
+          alt={siteImages.heroRollFormer.alt}
           className="absolute right-0 top-0 h-full w-full object-cover opacity-18 lg:w-[50%] lg:opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
@@ -683,6 +694,8 @@ function IndustrialRibPage() {
           </div>
         </div>
       </section>
+
+      <HomepagePhotoSections />
 
       <section className="section bg-white">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -761,9 +774,9 @@ function IndustrialRibPage() {
           copy="The public page uses strong industrial imagery and a specific product story so the panel feels ready to buy, not conceptual."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {industrialRibGallery.map(([label, src]) => (
+          {industrialRibGalleryImages.map(({ label, image }) => (
             <article key={label} className="overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
-              <img src={src} alt={`${label} for American Super Panel Industrial Rib`} className="h-56 w-full object-cover" />
+              <img src={image.src} alt={image.alt} className="h-56 w-full object-cover" />
               <div className="p-5">
                 <h2 className="text-lg font-black text-[#0b1f33]">{label}</h2>
                 <p className="mt-2 text-sm font-semibold text-slate-600">Roofing, siding, trim, and fabrication package support.</p>
@@ -776,8 +789,8 @@ function IndustrialRibPage() {
       <section className="section bg-slate-50">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <img
-            src={fabricationImage}
-            alt="Metal fabrication and panel manufacturing capability"
+            src={siteImages.trimFabrication.src}
+            alt={siteImages.trimFabrication.alt}
             className="h-[430px] w-full rounded object-cover shadow-xl"
           />
           <div>
@@ -874,6 +887,37 @@ function AmericanMadeSection() {
           ))}
         </div>
       </div>
+    </section>
+  )
+}
+
+function HomepagePhotoSections() {
+  return (
+    <section className="bg-white">
+      {homepagePhotoSections.map((section) => (
+        <div key={section.title} className="section border-b border-slate-200 last:border-b-0">
+          <div className={`grid gap-10 lg:grid-cols-2 lg:items-center ${section.reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+            <img
+              src={section.image.src}
+              alt={section.image.alt}
+              className="h-[360px] w-full rounded object-cover shadow-xl"
+            />
+            <div>
+              <SectionIntro eyebrow={section.eyebrow} title={section.title} copy={section.copy} />
+              {section.cta ? (
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a className="btn-primary" href="#quote">
+                    Request a Quote <ArrowRight size={18} />
+                  </a>
+                  <a className="btn-secondary" href="#upload-plans">
+                    <FileUp size={18} /> Upload Plans
+                  </a>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      ))}
     </section>
   )
 }
@@ -1061,8 +1105,8 @@ function PanelSystemSelector() {
           />
           <div className="mt-8 overflow-hidden rounded border border-slate-200 bg-white">
             <img
-              src={warehouseImage}
-              alt="Commercial warehouse metal panel project"
+              src={siteImages.warehouseRoof.src}
+              alt={siteImages.warehouseRoof.alt}
               className="h-64 w-full object-cover"
             />
           </div>
@@ -1358,8 +1402,8 @@ function Projects() {
         {projectCategories.map((category, index) => (
           <article key={category} className="overflow-hidden rounded border border-slate-200 bg-white">
             <img
-              src={projectImages[index]}
-              alt={`${category} metal panel project`}
+              src={projectGalleryImages[index].src}
+              alt={projectGalleryImages[index].alt}
               className="h-44 w-full object-cover"
             />
             <div className="p-5">
@@ -1378,8 +1422,8 @@ function About() {
     <section id="about" className="section">
       <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
         <img
-          src={facilityImage}
-          alt="Metal panel manufacturing production floor"
+          src={siteImages.facilityInterior.src}
+          alt={siteImages.facilityInterior.alt}
           className="h-[440px] w-full rounded object-cover shadow-xl"
         />
         <div>
