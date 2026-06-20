@@ -1523,10 +1523,10 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'resources') {
     return (
       <>
-        <PageHero title="Contractor & Bid Resources" copy="Panel profiles, submittal support, warranty path coordination, takeoff support, and plan-upload workflows." />
-        <PanelSystemSelector />
-        <BidResources />
+        <PageHero title="Manufacturing Resource Toolkit" copy="Public-safe worksheets, workflow tools, submittal guidance, finish planning, and quote-readiness resources from Americas Panel Fab." />
+        <AuthorityToolkit />
         <DownloadCenter />
+        <BidResources />
         <Process />
         <Contact />
       </>
@@ -2965,6 +2965,62 @@ function SelectorField({
   )
 }
 
+function AuthorityToolkit() {
+  const featuredDownloads = downloadAssets.filter((asset) =>
+    ['Roll Forming Workflow One-Pager', 'Trim Schedule Template', 'Finish Selection Worksheet'].includes(asset.title),
+  )
+
+  return (
+    <section className="section bg-white">
+      <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+        <div>
+          <SectionIntro
+            eyebrow="APF Authority Toolkit"
+            title="Planning documents buyers can use before they call a supplier."
+            copy="These resources make Americas Panel Fab useful before a product quote starts: they help contractors, owners, procurement teams, and partners organize drawings, details, finishes, and manufacturing questions."
+          />
+          <div className="mt-8 rounded border border-orange-200 bg-orange-50 p-5">
+            <p className="font-black text-[#0b1f33]">Public-safe resource rule</p>
+            <p className="mt-2 leading-7 text-slate-700">
+              APF resources explain process, preparation, and documentation. Product-specific
+              pricing, dimensions, engineering, code, warranty, and order details belong in
+              project review or on AmericanSuperPanel.com.
+            </p>
+          </div>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {featuredDownloads.map((asset) => (
+            <a key={asset.href} className="rounded border border-slate-200 bg-slate-50 p-5 shadow-sm hover:border-[#f97316]" href={asset.href} download>
+              <span className="flex h-11 w-11 items-center justify-center rounded bg-[#0b1f33] text-white">
+                <FileText size={22} />
+              </span>
+              <span className="mt-5 block text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">
+                New Toolkit Download
+              </span>
+              <strong className="mt-2 block text-xl font-black text-[#0b1f33]">{asset.title}</strong>
+              <span className="mt-3 block leading-7 text-slate-600">{asset.copy}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div className="mt-10 grid gap-4 md:grid-cols-4">
+        {[
+          ['Workflow Proof', 'Coil, profile, forming, bundling, and delivery planning are explained as a connected process.'],
+          ['Detail Proof', 'Trim and flashing templates show buyers what information makes fabrication conversations stronger.'],
+          ['Finish Proof', 'Color, sample, exposure, and trim coordination are treated as documentation decisions.'],
+          ['Review Proof', 'Guide pages include Resource Desk review language and public-safe project disclaimers.'],
+        ].map(([title, copy]) => (
+          <article key={title} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
+            <CheckCircle2 className="text-[#f97316]" />
+            <h2 className="mt-4 text-xl font-black text-[#0b1f33]">{title}</h2>
+            <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function DownloadCenter() {
   return (
     <section id="download-center" className="section bg-white">
@@ -2974,18 +3030,22 @@ function DownloadCenter() {
         copy="These public-safe worksheets help buyers organize drawings, finish decisions, trim scope, submittal expectations, and roll-forming workflow questions before a project conversation."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {downloadAssets.map((asset) => (
-          <a key={asset.href} className="download-card" href={asset.href} download>
+        {downloadAssets.map((asset) => {
+          const isToolkitAsset = ['Roll Forming Workflow One-Pager', 'Trim Schedule Template', 'Finish Selection Worksheet'].includes(asset.title)
+
+          return (
+          <a key={asset.href} className={`download-card ${isToolkitAsset ? 'border-[#f97316]' : ''}`} href={asset.href} download>
             <span className="flex h-11 w-11 items-center justify-center rounded bg-[#0b1f33] text-white">
               <ClipboardList size={22} />
             </span>
             <span className="mt-5 block text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">
-              {asset.type} Download
+              {isToolkitAsset ? 'New Toolkit Download' : `${asset.type} Download`}
             </span>
             <strong className="mt-2 block text-xl font-black text-[#0b1f33]">{asset.title}</strong>
             <span className="mt-3 block leading-7 text-slate-600">{asset.copy}</span>
           </a>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
