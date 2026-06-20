@@ -1175,14 +1175,19 @@ function IndustrialRibPage() {
 
 function AmericanMadeSection() {
   return (
-    <section className="section bg-white">
+    <section id="american-made" className="section scroll-mt-28 bg-white">
       <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <SectionIntro
             eyebrow="American Made"
-            title="Built Here. Delivered Faster."
-            copy="American Super Panel focuses on domestic production, contractor support, and responsive service for commercial, agricultural, industrial, and residential projects."
+            title="Domestic production focus. Faster answers for serious panel work."
+            copy="American Super Panel is built around domestic manufacturing support, regional material coordination, custom-length panel orders, and responsive contractor service for commercial, agricultural, industrial, and residential projects."
           />
+          <p className="mt-5 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
+            Material origin, coating system, substrate, finish, and availability should be confirmed
+            by project. The advantage is a shorter, clearer supply path with sales, estimating, and
+            fabrication support close to the work.
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="btn-primary" href="#quote">
               Request a Quote <ArrowRight size={18} />
@@ -1193,7 +1198,14 @@ function AmericanMadeSection() {
           </div>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          {['Custom-Length Panels', 'Contractor Support', 'Commercial Roofing Panels', 'Agricultural Panels', 'Trim & Flashing', 'Fast Communication'].map((item) => (
+          {[
+            'Custom-Length Panels',
+            'Regional Material Coordination',
+            'Less Supply-Chain Guesswork',
+            'Contractor Reorder Support',
+            'Trim & Flashing Packages',
+            'Fast Quote Communication',
+          ].map((item) => (
             <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
               <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
               {item}
