@@ -706,13 +706,201 @@ const glossaryEntries = glossaryGroups.flatMap((group) =>
 )
 
 const guideEnhancements: Record<string, {
+  checklist?: string[][]
   comparison: string[][]
+  deepDive?: string[][]
   diagram: string[]
   faq: string[][]
   fieldNote: string
   paragraphs: string[]
   reviewer: string
+  visuals?: { alt: string; caption: string; image: string; title: string }[]
 }> = {
+  'metal-panel-manufacturing-guide': {
+    paragraphs: [
+      'Metal panel manufacturing is often described as a machine process, but the real commercial value comes from the whole order system. A coil is not yet a roof. A roll former is not yet a project package. A panel profile is not yet a building envelope. Manufacturing authority begins when material, drawings, finish decisions, trim details, documentation, packaging, and delivery planning are managed as one connected workflow.',
+      'For contractors and owners, the manufacturing process should reduce uncertainty. The buyer wants to know whether the panel profile is correct, whether the finish is available, whether the trim scope has been understood, whether drawings were reviewed, whether quantities are organized, and whether the order will arrive in a way the field can use. The manufacturer’s job is not only to form metal. It is to turn project information into a complete, traceable, practical package.',
+      'A serious manufacturing workflow begins before production. The estimate should identify the building use, project state, roof or wall scope, approximate square footage, profile preference, gauge path, finish path, trim and flashing needs, openings, penetrations, delivery expectations, and any owner or submittal requirements. If those inputs are missing, the order can still be discussed, but the quote should clearly list assumptions and open questions.',
+      'Coil planning matters because material availability affects schedule, finish options, substitutions, and purchasing confidence. The same panel profile may be available in different gauges, substrates, and paint systems. A commercial buyer comparing quotes should not only ask for price. They should ask what coil, finish, gauge, profile, trim, and delivery assumptions were included. Otherwise two quotes may look comparable while describing different packages.',
+      'Roll forming is the central production step, but it depends on everything upstream and downstream. Tooling must match the profile. Lengths must match the takeoff. Cutoff and bundling should match the field sequence when possible. Labels should make sense to the receiving crew. Trim and flashing should be coordinated with the panel package so crews are not forced to solve missing details on site.',
+      'Documentation is where manufacturing credibility becomes visible to commercial buyers. Product data, finish information, substrate notes, quote assumptions, exclusions, trim schedules, color samples, and warranty-path conversations help project teams understand what is being supplied. This is especially important for commercial, industrial, education, multifamily, and public-facing projects where decisions may involve owners, contractors, architects, procurement teams, and installers.',
+      'Americas Panel Fab should use this page as the root of its authority system. Product-ready buyers can move to American Super Panel for exposed-fastener roofing and siding panels, but the Fab site should explain the wider manufacturing discipline: how materials move, how packages are organized, how buyers prepare better requests, and how factory thinking supports long-term growth across panel families, trim, accessories, partners, and future product lines.',
+    ],
+    diagram: ['Project information and drawings', 'Profile, gauge, substrate, and finish review', 'Panel, trim, flashing, and accessory scope', 'Production run, bundling, labels, and documentation', 'Delivery planning and field-ready handoff'],
+    comparison: [
+      ['Manufacturing layer', 'Weak signal', 'Authority signal'],
+      ['Quote intake', 'Price requested from vague square footage', 'Drawings, scope, profile, finish, trim, and delivery state captured'],
+      ['Material planning', 'Generic metal panel language', 'Gauge, substrate, finish family, color, and availability documented'],
+      ['Production', 'Panels treated as isolated line items', 'Lengths, bundles, labels, trim, and accessories coordinated'],
+      ['Documentation', 'Minimal product description', 'Product data, finish notes, assumptions, exclusions, and submittal path'],
+      ['Field handoff', 'Installer sorts out scope gaps', 'Package arrives with clearer organization and quote history'],
+    ],
+    faq: [
+      ['What makes metal panel manufacturing different from simple metal supply?', 'Manufacturing connects material, profile, finish, lengths, trim, documentation, packaging, and delivery into a project-ready package instead of only selling loose material.'],
+      ['What should a contractor send before requesting a metal panel quote?', 'Send drawings, roof or wall scope, approximate square footage, profile preference, finish or color needs, trim conditions, project state, delivery needs, and schedule target.'],
+      ['Why does Americas Panel Fab publish manufacturing education if American Super Panel sells panels?', 'Americas Panel Fab provides the company and manufacturing context. American Super Panel is the product-focused path for exposed-fastener panel quotes.'],
+      ['Can manufacturing content replace project-specific engineering or code review?', 'No. Public education helps buyers prepare better questions. Project-specific code, engineering, wind, fire, and warranty requirements need qualified review and manufacturer documentation.'],
+    ],
+    fieldNote: 'The manufacturer that wins trust usually explains the process before the buyer has to ask. Content should make the buyer feel the company understands drawings, material, fabrication, documentation, and delivery as one system.',
+    reviewer: 'Reviewed by the Americas Panel Fab Resource Desk for public manufacturing education. Project-specific engineering, code, warranty, or compliance requirements must be confirmed through qualified review.',
+    visuals: [
+      { title: 'Factory floor', caption: 'Show machinery, material flow, safe work zones, and the physical proof of manufacturing capability.', image: facilityImage, alt: 'Metal panel manufacturing factory floor' },
+      { title: 'Coil to panel workflow', caption: 'Use coil, roll-forming equipment, forming stations, cutoff, and bundle imagery to explain the production path.', image: machineImage, alt: 'Roll forming equipment turning coil into metal panels' },
+      { title: 'Jobsite package', caption: 'Use bundled panels, labels, trim, and delivery imagery to connect manufacturing to field readiness.', image: warehouseImage, alt: 'Commercial metal panel package ready for project delivery' },
+    ],
+    deepDive: [
+      ['Why the quote stage matters', 'Most production problems begin as quote-stage ambiguity. If drawings, profile preference, finish path, trim scope, delivery state, and schedule are not captured early, the manufacturer is forced to price assumptions instead of a real package. Strong quote intake protects both sides because it makes missing information visible before the order becomes urgent.'],
+      ['Why packaging is part of manufacturing', 'Panels are not useful simply because they are formed. They have to be counted, cut, protected, bundled, labeled, and delivered in a way the field can understand. A jobsite crew should not need to reverse-engineer the order from a pile of metal. Good manufacturing makes the field handoff easier.'],
+      ['Why documentation creates trust', 'Commercial buyers often need more than verbal confidence. They need product data, finish records, assumptions, exclusions, color references, and a review path that can be shared with owners, contractors, architects, and purchasing teams. Documentation turns a panel supplier into a more credible manufacturing partner.'],
+      ['Why the company and product brand both matter', 'Americas Panel Fab should carry the manufacturer story because it can support future product families, partners, fabrication services, and broader authority content. American Super Panel should stay memorable and product-focused for buyers who are ready to request exposed-fastener roofing and siding panels.'],
+    ],
+    checklist: [
+      ['Drawings', 'Roof plans, wall elevations, openings, slopes, photos, sketches, and relevant project documents.'],
+      ['Product path', 'Profile, gauge, substrate, finish family, color, roof/wall use, and any alternate product options.'],
+      ['Fabrication scope', 'Trim, flashing, closures, fasteners, transitions, penetrations, corner details, and labels.'],
+      ['Commercial record', 'Quote assumptions, exclusions, submittal needs, owner requirements, delivery state, and schedule target.'],
+    ],
+  },
+  'roll-forming-guide': {
+    paragraphs: [
+      'Roll forming is the process most people picture when they think about metal panel production: flat coil feeds through a machine and exits as a shaped roofing or siding panel. That picture is accurate, but incomplete. The important commercial question is how the roll-forming workflow supports profile consistency, length control, packaging, documentation, quote accuracy, and jobsite usefulness.',
+      'A roll former uses a series of forming stations to shape metal gradually. Each station bends the material a little more until the desired profile emerges. The tooling determines rib spacing, rib height, side lap, coverage width, and the overall profile identity. Because many panel names sound similar across suppliers, buyers should ask for the actual profile drawing and coverage width before assuming two panel quotes match.',
+      'The coil feeding process matters because the starting material carries the gauge, substrate, finish, and color assumptions for the order. If a buyer requests a color that is not available in the expected gauge or substrate, the project may need an alternate path. If the finish is not confirmed before production, the schedule and submittal process can become messy. Roll forming does not solve those issues by itself; the front-end order process must capture them.',
+      'Length planning is one of the biggest advantages of manufacturing coordination. Panels can be produced in custom lengths within equipment, handling, shipping, and project constraints. That does not mean every length is automatically practical. The manufacturer, contractor, and buyer should consider handling, jobsite storage, transportation, roof access, crew sequencing, and whether long panels create special needs.',
+      'Factory roll forming and mobile roll forming solve different problems. Factory production can support repeatability, packaging control, material staging, and coordination with trim or accessories. Mobile roll forming can be valuable for selected long-run jobs or logistics-sensitive projects when site conditions support it. The buyer should not treat mobile as a universal upgrade. It is a project-fit decision.',
+      'Quality conversations around roll forming should stay practical and public-safe. Buyers can ask about profile verification, bundle labels, material traceability, cutoff accuracy, finish protection, packaging, and documented assumptions. They should avoid assuming performance claims that have not been reviewed. Public education can explain the workflow while project-specific requirements remain tied to qualified review and manufacturer documentation.',
+      'For Americas Panel Fab, roll-forming authority should become a pillar because it ties together equipment investment, product family development, quote readiness, contractor support, and future manufacturing growth. The page should help a buyer understand why the company is not just reselling panels. It is building a manufacturing process around panel systems.',
+    ],
+    diagram: ['Coil selected by gauge, substrate, and finish', 'Decoiler feeds material into forming stations', 'Tooling shapes profile and side lap', 'Cutoff creates project lengths', 'Panels are bundled, labeled, and coordinated with trim'],
+    comparison: [
+      ['Roll-forming question', 'Why it matters', 'What to confirm'],
+      ['Profile drawing', 'Names vary by supplier', 'Rib height, rib spacing, side lap, coverage width'],
+      ['Length plan', 'Affects handling, delivery, and field sequencing', 'Panel lengths, bundle plan, jobsite constraints'],
+      ['Factory vs mobile', 'Different logistics and quality-control paths', 'Site access, project length, packaging, weather, schedule'],
+      ['Finish path', 'Color and substrate must match order assumptions', 'Gauge, substrate, finish family, samples, availability'],
+      ['Trim coordination', 'Panels alone do not close the project', 'Ridge, rake, eave, corners, jambs, closures, fasteners'],
+    ],
+    faq: [
+      ['What does a roll former do?', 'A roll former shapes flat metal coil through forming stations until it becomes a consistent roofing or siding panel profile.'],
+      ['Is mobile roll forming always better?', 'No. Mobile roll forming can help certain long-panel or logistics-sensitive jobs, but factory roll forming may be better for packaging, staging, repeatability, and coordinated orders.'],
+      ['Why should buyers confirm coverage width?', 'Coverage width determines how much area each installed panel covers and directly affects material quantities and quote comparisons.'],
+      ['What information improves a roll-forming quote?', 'Panel profile, lengths, finish, gauge, roof/wall use, drawings, trim scope, delivery state, and schedule target all improve the first conversation.'],
+    ],
+    fieldNote: 'Roll-forming content should show enough process knowledge to make the company credible without making unverified performance, capacity, certification, or compliance claims.',
+    reviewer: 'Reviewed by the Americas Panel Fab Resource Desk for public roll-forming education. Equipment capability, project limitations, and code requirements should be confirmed before production decisions.',
+    visuals: [
+      { title: 'Machine line', caption: 'A roll-forming line should visually prove that the company understands coil feed, forming stations, and cutoff workflow.', image: machineImage, alt: 'Metal panel roll-forming line' },
+      { title: 'Profile closeup', caption: 'Profile imagery helps buyers understand ribs, laps, coverage, and why drawings matter more than product nicknames.', image: panelImage, alt: 'Closeup of ribbed metal panel profile' },
+      { title: 'Commercial application', caption: 'Project imagery connects the machine process to the buildings contractors and owners actually care about.', image: warehouseImage, alt: 'Commercial building with metal panel roofing and siding' },
+    ],
+    deepDive: [
+      ['Tooling controls the product identity', 'A roll former is only as useful as the profile it is set up to make. Tooling controls the panel geometry that buyers later describe with names like R-Panel, PBR, AG panel, or standing seam. That is why profile drawings, coverage width, rib spacing, and side-lap details matter before anyone compares price.'],
+      ['Custom lengths still require judgment', 'Custom-length production can reduce waste and help a project fit the building, but longer panels are not automatically better. Handling, roof access, transportation, crew safety, jobsite storage, and weather exposure all shape what length plan is practical. A manufacturer should help buyers think through those tradeoffs before release.'],
+      ['Factory and mobile production serve different jobs', 'Factory roll forming can support controlled staging, packaging, labeling, and coordination with trim. Mobile roll forming may help selected long-panel projects when the site, weather, access, and order size make sense. The authority move is not to hype one model; it is to explain when each model fits.'],
+      ['Roll forming connects to the rest of the order', 'The machine creates the panel, but the order still needs trim, flashing, closures, fasteners, finish documentation, bundle labels, and delivery planning. Buyers who understand that broader workflow are less likely to compare two quotes only by panel name and price.'],
+      ['What to document before release', 'Before a roll-formed order moves into production, the buyer and manufacturer should agree on profile drawing, coverage width, finish, gauge, panel lengths, trim scope, closures, fasteners, bundle expectations, delivery contact, and open exclusions. That release record is what keeps a manufacturing conversation from becoming a memory contest later.'],
+    ],
+    checklist: [
+      ['Before quoting', 'Confirm profile, use, finish, gauge, approximate footage, project state, and drawings.'],
+      ['Before production', 'Confirm lengths, trim, closures, fasteners, labels, packaging, finish, and open assumptions.'],
+      ['Before delivery', 'Confirm bundle handling, jobsite access, receiving contact, schedule, and delivery constraints.'],
+    ],
+  },
+  'architectural-metal-fabrication-guide': {
+    paragraphs: [
+      'Architectural metal fabrication is where a panel package becomes a finished building detail. Panels cover broad areas, but fabrication handles the edges, corners, openings, transitions, fascia, soffit, cap conditions, and custom closeout pieces that decide whether the finished work looks intentional. This is why fabrication belongs at the center of the Americas Panel Fab authority story.',
+      'A buyer may begin with a roof or siding panel request, but the building rarely ends at the panel. Doors, windows, parapets, corners, roof edges, slope changes, penetrations, equipment curbs, base conditions, and material transitions all need attention. Each condition can require a formed part, a trim piece, a flashing approach, a closure, a fastener path, or a detail conversation.',
+      'The strongest fabrication process begins with information. Drawings, elevations, sketches, photos, dimensions, existing-condition notes, finish schedules, and color preferences help a fabricator understand what the project actually needs. Without that information, a quote can still proceed, but the assumptions should be clear and the buyer should expect follow-up questions.',
+      'Fabrication is also where visible quality shows up. A perfectly acceptable roof panel can still feel like a weak project if the fascia, corners, jambs, caps, or transitions look mismatched. Finish coordination matters because panel, trim, flashing, soffit, and accessory colors may be viewed together. If the trim finish is not reviewed early, the final building can feel patched together.',
+      'Commercial projects often require more documentation. Product data, trim schedules, finish samples, drawings, submittal notes, exclusions, alternates, and warranty-path conversations may all appear before material is released. Fabrication authority means explaining that process in plain language so buyers understand why detail review protects time, budget, and finished appearance.',
+      'Fabrication content should avoid pretending every project detail is solved by a generic web page. Water management, code, engineering, fastening, fire, wind, and warranty issues can require project-specific review. Public content can educate buyers about the categories and questions, while final details should be confirmed through qualified professionals and manufacturer documentation.',
+      'For Americas Panel Fab, architectural fabrication is a strategic bridge between product sales and company credibility. American Super Panel can sell practical exposed-fastener panels. The Fab site can explain the broader manufacturing and detail discipline that makes the company useful to contractors, owners, architects, and partners beyond a single product line.',
+    ],
+    diagram: ['Drawings, photos, dimensions, and field conditions', 'Edge, opening, corner, and transition review', 'Trim and flashing schedule', 'Finish, color, and accessory coordination', 'Fabricated package, labels, and field handoff'],
+    comparison: [
+      ['Fabrication area', 'Common detail', 'What to prepare'],
+      ['Roof perimeter', 'Ridge, rake, eave, drip edge, fascia', 'Slope, overhang, gutter path, edge condition'],
+      ['Wall openings', 'Jamb, head, sill, base trim', 'Opening sizes, elevations, orientation, photos'],
+      ['Transitions', 'Roof-to-wall, wall-to-wall, material changes', 'Drawings, water path, overlap expectations'],
+      ['Visible finishes', 'Trim, panels, soffit, fascia, accent pieces', 'Color samples, sheen, finish family, owner standards'],
+      ['Commercial paperwork', 'Submittals, exclusions, alternates', 'Product data, finish schedule, approval contacts'],
+    ],
+    faq: [
+      ['What is architectural metal fabrication?', 'It is the formed-metal work that creates trim, flashing, fascia, soffit, caps, corners, transitions, and custom details around roof and wall panels.'],
+      ['What should I send for custom fabrication review?', 'Send drawings, dimensions, photos, sketches, panel profile, finish or color needs, opening conditions, and any owner or submittal requirements.'],
+      ['Why does fabrication affect commercial credibility?', 'Commercial buyers need confidence that the manufacturer understands more than panel square footage. Details, documentation, finish coordination, and field readiness matter.'],
+      ['Can a website provide final flashing details?', 'No. Public guidance helps buyers prepare better information. Final project details should be reviewed against drawings, manufacturer guidance, and qualified professional requirements.'],
+    ],
+    fieldNote: 'The biggest fabrication mistake is treating trim as an afterthought. On serious projects, trim and flashing should be scoped before the panel order is released.',
+    reviewer: 'Reviewed by the Americas Panel Fab Resource Desk for public fabrication education. Final project details require project-specific review.',
+    visuals: [
+      { title: 'Fabrication equipment', caption: 'Show brakes, forming equipment, worktables, and fabricated parts to prove capability beyond broad panel production.', image: fabricationImage, alt: 'Architectural sheet metal fabrication equipment' },
+      { title: 'Trim detail closeup', caption: 'Closeups should show edges, ribs, folds, corners, and finish quality instead of generic construction imagery.', image: weldingImage, alt: 'Custom trim and flashing fabrication detail' },
+      { title: 'Finished building condition', caption: 'Use commercial roof and wall project imagery to show how details affect the finished structure.', image: warehouseImage, alt: 'Finished commercial building with metal roof and wall panels' },
+    ],
+    deepDive: [
+      ['Fabrication starts with conditions, not part names', 'A list of trim names is helpful, but it does not replace the building conditions. Ridge, rake, eave, jamb, base, cap, and corner pieces all change depending on dimensions, wall orientation, roof slope, openings, transitions, and what other materials are touching the panel system.'],
+      ['The visible edge is where trust is won', 'Owners notice corners, transitions, fascia, soffit, opening trim, and color changes because those details sit at eye level or outline the building. A project can use good panels and still feel cheap if fabricated details are mismatched, improvised, or poorly coordinated with the finish schedule.'],
+      ['Documentation makes custom work repeatable', 'Custom fabrication becomes more reliable when the assumptions are captured: dimensions, finish, material, bend direction, quantity, location, revision date, and what is excluded. That record helps estimators, fabricators, installers, and buyers stay aligned when a project changes.'],
+      ['The best fabrication content teaches preparation', 'A public guide should not pretend to engineer every flashing detail. It should teach buyers what to send, what to ask, what to confirm, and where professional review is required. That makes the page valuable without overstepping into unverified project-specific claims.'],
+      ['Why fabrication belongs in the first quote', 'If fabrication is delayed until after panels are priced, the project can discover missing edges, corners, openings, and transitions too late. Bringing fabricated details into the first quote helps the buyer compare complete packages instead of comparing panel square footage against another supplier’s panel-plus-trim scope.'],
+      ['How fabrication supports repeat customers', 'Contractors remember suppliers who make details easier. When fabricated parts arrive with clear dimensions, finish coordination, labels, and documented assumptions, crews spend less time asking what each piece is for. That repeatability becomes a relationship advantage because the manufacturer is helping the contractor protect schedule and field confidence.'],
+      ['What to photograph for fabrication review', 'Photos should capture corners, openings, roof edges, transitions, wall bases, gutters, existing material changes, and any unusual field conditions. Good photos do not replace drawings, but they help the fabrication conversation start with the real building instead of assumptions.'],
+    ],
+    checklist: [
+      ['Detail inputs', 'Drawings, elevations, dimensions, sketches, photos, opening schedules, and field notes.'],
+      ['Material inputs', 'Panel profile, finish family, color, gauge path, substrate, and visible trim areas.'],
+      ['Scope inputs', 'Ridge, rake, eave, corner, jamb, base, fascia, soffit, transitions, closures, and fasteners.'],
+      ['Approval inputs', 'Submittal contacts, owner standards, exclusions, alternates, and revision process.'],
+    ],
+  },
+  'metal-panel-profiles-guide': {
+    paragraphs: [
+      'Metal panel profile language can be deceptively simple. Names like standing seam, R-Panel, PBR Panel, AG Panel, Tuff Rib, wall panel, and liner panel sound clear until two suppliers use similar names for profiles with different coverage widths, rib spacing, side-lap details, or fastening assumptions. A serious buyer should treat the profile name as the starting point, not the final specification.',
+      'The profile affects appearance, coverage, fastening, trim compatibility, installer familiarity, documentation, and sometimes owner expectations. A clean architectural roof may point toward standing seam. A warehouse, agricultural building, shop, or industrial re-skin may point toward a ribbed exposed-fastener panel. A wall panel package may need a different orientation, trim logic, and opening review than the roof package on the same building.',
+      'Coverage width is one of the most important quote variables because it affects material quantities. If two panels have similar names but different installed coverage widths, the same square footage can require different counts, laps, and cost assumptions. Rib height and rib spacing also matter because they affect visual rhythm, profile identity, handling, stiffness conversation, and trim compatibility.',
+      'Fastening style changes the project conversation. Standing seam systems generally hide fasteners and carry a more architectural appearance path. Exposed-fastener profiles put fasteners through the panel face and are often chosen for practical budgets, speed, agricultural buildings, warehouses, and industrial scopes. Neither category is universally better. The right choice depends on drawings, budget, owner expectations, installer path, and documentation needs.',
+      'Roof and wall use should not be blended casually. A ribbed panel might be discussed for both roof and wall conditions, but roof slope, drainage, penetrations, closures, side laps, wall openings, base trim, corners, and orientation create different detail questions. Buyers should identify whether the requested material is roof-only, wall-only, or a combined roof-and-wall package.',
+      'Americas Panel Fab should use profile education to own the neutral research layer. Buyers who are still comparing systems need a manufacturer-level explanation of profile families and decision factors. Buyers who know they want exposed-fastener roofing or siding can move to American Super Panel for the product-focused quote path.',
+      'The authority opportunity is to make each profile page answer the hidden questions behind the keyword. A search for R-Panel may really mean: What is the coverage width? Can it be used for siding? What trim is needed? What gauge should I ask for? What finish path makes sense? How do I compare quotes? The site should answer those questions without overclaiming project-specific performance.',
+    ],
+    diagram: ['Building use and roof/wall scope', 'Profile family and fastening style', 'Coverage width, rib height, and side lap review', 'Gauge, substrate, finish, trim, and closures', 'Quote-ready product path'],
+    comparison: [
+      ['Profile family', 'Common reason buyers consider it', 'What to confirm'],
+      ['Standing seam', 'Concealed-fastener architectural roof appearance', 'Seam type, slope, clips, panel length, details'],
+      ['R-Panel / PBR', 'Practical roof and wall coverage for commercial, industrial, and agricultural buildings', 'Profile drawing, coverage width, side lap, fasteners, trim'],
+      ['AG / Tuff Rib', 'Shops, barns, storage, accessory buildings, practical siding', 'Gauge, finish, substrate, roof/wall use, closures'],
+      ['Wall panels', 'Commercial siding, re-skins, liners, accents', 'Orientation, openings, corners, base trim, color breaks'],
+      ['Trim profiles', 'Closeout and transition details', 'Dimensions, finish, angles, drawings, field conditions'],
+    ],
+    faq: [
+      ['Are R-Panel and PBR Panel always the same profile?', 'No. They may be used similarly in the market, but buyers should confirm the actual profile drawing, coverage width, rib spacing, and side-lap detail.'],
+      ['Can the same panel be used for roofing and siding?', 'Many exposed-fastener panels are discussed for both, but roof and wall use can change fastening, trim, closures, orientation, and project assumptions.'],
+      ['What is the most important profile detail for estimating?', 'Coverage width is critical because it affects panel quantities. Rib height, side lap, gauge, finish, and trim scope also matter.'],
+      ['Where should American Super Panel fit into profile research?', 'American Super Panel should receive product-ready exposed-fastener panel interest, while Americas Panel Fab explains the broader profile and manufacturing context.'],
+    ],
+    fieldNote: 'A profile name without a drawing is not enough. Use profile drawings, coverage width, and quote assumptions to avoid false comparisons.',
+    reviewer: 'Reviewed by the Americas Panel Fab Resource Desk for public profile education. Specific profile dimensions and requirements should be confirmed with product documentation.',
+    visuals: [
+      { title: 'Profile closeup', caption: 'Show rib spacing, side lap, and panel geometry clearly so buyers understand why drawings matter.', image: panelImage, alt: 'Ribbed metal panel profile detail' },
+      { title: 'Roof application', caption: 'Commercial roof imagery connects profile choices to budget, appearance, slope, and installation expectations.', image: warehouseImage, alt: 'Commercial roof panel profile application' },
+      { title: 'Factory context', caption: 'Manufacturing imagery reinforces that profiles come from tooling, coil, forming stations, and production workflow.', image: facilityImage, alt: 'Metal panel profile manufacturing context' },
+    ],
+    deepDive: [
+      ['Profile names are market language', 'Buyers search for names like R-Panel, PBR Panel, AG Panel, Tuff Rib, and standing seam because those names are familiar. The manufacturer still has to translate market language into actual drawings, coverage widths, side laps, fastening details, and quote assumptions.'],
+      ['Roof and wall profiles have different questions', 'A profile that appears on both roofs and walls may still need different trim, fasteners, closures, orientation, and review. Roof questions often involve slope, drainage, penetrations, and weather exposure. Wall questions often involve openings, corners, base trim, color breaks, and architectural appearance.'],
+      ['Coverage width affects every estimate', 'Installed coverage width determines how many panels a project needs. Two similar-looking profiles can create different material quantities if coverage differs. That is why profile drawings and takeoffs matter more than a short product nickname in a bid comparison.'],
+      ['Profiles connect SEO to real buying intent', 'A visitor researching profiles may not be ready to quote today, but they are showing commercial intent. If the page teaches them how to compare systems and then gives a clean path to American Super Panel when ready, the authority content supports revenue without sounding like a thin sales page.'],
+      ['How to avoid profile substitution confusion', 'Substitutions should be reviewed by profile drawing, coverage width, side lap, gauge, substrate, finish, fastener path, trim compatibility, and project use. A substitute may be acceptable, but it should never be accepted only because the profile name sounds close to the original request.'],
+      ['Why profile pages need photos and drawings', 'Text can explain profile families, but buyers also need visual confirmation. Profile closeups, roof photos, wall photos, and simple diagrams help people understand rib shape, lap direction, visible fastening, and trim conditions before they request pricing.'],
+      ['How profile choice affects trim', 'Changing profiles can change closures, trim dimensions, fastening assumptions, and side-lap conditions. That is why profile decisions should be coordinated with trim and flashing before the buyer treats the quote as final.'],
+    ],
+    checklist: [
+      ['Profile identity', 'Name, drawing, rib height, rib spacing, coverage width, and side-lap detail.'],
+      ['Project use', 'Roof, wall, roof-plus-wall, agricultural, commercial, industrial, or architectural application.'],
+      ['Package scope', 'Panel lengths, gauge, substrate, finish, trim, closures, fasteners, and delivery state.'],
+    ],
+  },
   'standing-seam-vs-r-panel': {
     paragraphs: [
       'Standing seam and R-Panel are not interchangeable product names. They represent different roof system strategies. Standing seam is usually selected when the owner, architect, or general contractor wants a cleaner roof plane, concealed fastening, longer-term appearance control, and a more architectural project narrative. R-Panel is usually selected when the buyer wants a practical exposed-fastener panel that can cover large commercial, warehouse, shop, agricultural, or utility buildings efficiently.',
@@ -830,7 +1018,12 @@ const guideEnhancements: Record<string, {
     paragraphs: [
       'Commercial metal roofing is a system decision that touches budget, schedule, documentation, owner expectations, contractor workflow, and long-term building use. The buyer is rarely choosing only a panel. They are choosing a package that may include standing seam or ribbed panels, trim, flashing, fasteners, closures, finish selections, submittals, delivery planning, and sometimes wall panels or accessory scopes. A stronger process starts by organizing those inputs before price is requested.',
       'The project type matters. A warehouse may prioritize large-format roof and wall coverage, schedule, and practical trim coordination. A school or municipal facility may require more documentation, review, and controlled language. A retail or multifamily project may put more weight on appearance, color coordination, and visible details. An agricultural or industrial building may need a straightforward panel package but still benefit from clear quote assumptions and delivery planning.',
-      'Americas Panel Fab uses commercial roofing education to connect manufacturing authority with buyer readiness. Public APF content should help owners, contractors, and partners understand the decision process. Product-ready buyers can continue to American Super Panel, where they can request panels, siding, trim, flashing, and plan review. That separation lets the company build authority while keeping the product path clear.',
+      'Commercial buyers also need a clearer separation between product decision and package decision. The product decision asks whether the project needs standing seam, exposed-fastener panels, wall panels, trim, flashing, accessories, or a mix. The package decision asks how those pieces are documented, bundled, delivered, coordinated, and reviewed before production. Many weak roofing conversations fail because they jump from product name to price without checking the package.',
+      'The first commercial roofing conversation should gather project use, drawings, roof scope, wall scope if included, approximate square footage, panel type preference, finish requirements, trim expectations, project state, schedule target, and any owner or submittal requirements. If a buyer cannot provide all of that yet, the quote can still start, but the missing details should become visible assumptions rather than invisible risk.',
+      'Commercial metal roofing authority is built by explaining tradeoffs. Standing seam may fit architectural or owner-occupied projects where concealed fastening and appearance matter. Exposed-fastener panels may fit warehouses, agricultural buildings, storage facilities, industrial buildings, and practical commercial work. Wall panels may carry the visual identity of the building. Trim and flashing may decide whether the package is installable. Finish selection may affect appearance, heat, exposure, and documentation.',
+      'A serious commercial roofing page should also help buyers compare suppliers. A strong supplier explains profile drawings, coverage width, gauge path, substrate, finish, trim scope, assumptions, exclusions, delivery state, and product documentation. A weak supplier only lists products. The buyer does not need jargon. They need enough clarity to avoid mismatched quotes and field surprises.',
+      'For Americas Panel Fab, this guide should carry the company-level voice: manufacturing-aware, commercial-capable, documentation-minded, and practical. Product-ready exposed-fastener buyers can continue to American Super Panel. Buyers still researching systems, fabrication, roll forming, trim, finishes, and manufacturing credibility should stay inside the Americas Panel Fab resource library.',
+      'Americas Panel Fab uses commercial roofing education to connect manufacturing authority with buyer readiness. Public company content should help owners, contractors, and partners understand the decision process. Product-ready buyers can continue to American Super Panel, where they can request panels, siding, trim, flashing, and plan review. That separation lets the company build authority while keeping the product path clear.',
     ],
     diagram: ['Project type and drawings', 'Panel, finish, trim, and documentation review', 'Quote assumptions and alternates', 'Approval, procurement, and production handoff', 'Delivery, closeout, and proof capture'],
     comparison: [
@@ -844,10 +1037,28 @@ const guideEnhancements: Record<string, {
     faq: [
       ['What should a commercial buyer send first?', 'Send drawings, building use, roof/wall scope, desired panel type, finish needs, trim requirements, project state, and schedule target.'],
       ['Should commercial buyers choose panel type before quoting?', 'A preference helps, but a manufacturer or product team may still review the project for profile, finish, trim, and documentation fit.'],
-      ['Why does APF link to American Super Panel?', 'Americas Panel Fab provides company and manufacturing context. American Super Panel is the product-focused path for exposed-fastener roofing, siding, trim, and quote requests.'],
+      ['Why does Americas Panel Fab link to American Super Panel?', 'Americas Panel Fab provides company and manufacturing context. American Super Panel is the product-focused path for exposed-fastener roofing, siding, trim, and quote requests.'],
     ],
-    fieldNote: 'Commercial metal roofing buyers usually need both education and action. APF should answer the research question; American Super Panel should handle product-ready quote intent.',
+    fieldNote: 'Commercial metal roofing buyers usually need both education and action. Americas Panel Fab should answer the research question; American Super Panel should handle product-ready quote intent.',
     reviewer: 'Reviewed for commercial buyer education. Contract, code, warranty, fire, wind, and engineering requirements should be reviewed through project-specific documentation and qualified advisors.',
+    visuals: [
+      { title: 'Commercial roof project', caption: 'Use roof and wall project photos to show scale, building type, and commercial relevance.', image: warehouseImage, alt: 'Commercial warehouse metal roofing panels' },
+      { title: 'Manufacturing support', caption: 'Facility and equipment imagery should connect the guide to a real manufacturing operation, not a generic roofing article.', image: facilityImage, alt: 'Metal panel manufacturing support for commercial roofing' },
+      { title: 'Fabricated details', caption: 'Trim, flashing, and edge details prove that the package extends beyond simple panel square footage.', image: fabricationImage, alt: 'Commercial metal roof trim and flashing fabrication' },
+    ],
+    deepDive: [
+      ['Commercial buyers compare risk, not only price', 'A lower panel price can lose value if trim is missing, finish assumptions are unclear, delivery is not planned, submittals are thin, or exclusions appear after approval. The strongest content helps buyers understand where hidden risk enters a commercial metal roofing package.'],
+      ['Different building types need different emphasis', 'A warehouse may value speed, broad coverage, and practical trim. A retail building may need cleaner visible details. A school or public-facing facility may require more documentation and review. Agricultural and industrial buildings may prioritize durable practical coverage and straightforward ordering.'],
+      ['The quote should show its assumptions', 'A commercial quote should make the basis of pricing visible: drawings used, panel profile, gauge, substrate, finish, trim, accessories, delivery state, exclusions, alternates, and open questions. That transparency helps buyers compare packages without guessing what each supplier included.'],
+      ['Authority content should reduce the first-call burden', 'When a buyer reads this guide before contacting the product site, they should know what to gather and why it matters. That improves the eventual sales conversation because the buyer arrives with drawings, scope, finish needs, project state, and a more realistic view of the package.'],
+      ['What separates a serious supplier', 'A serious commercial supplier can explain what is included, what is excluded, what still needs review, and what information could change price or schedule. That clarity matters because commercial roofing decisions often involve multiple people who need the same facts before approving a package.'],
+    ],
+    checklist: [
+      ['Project data', 'Building type, project state, roof or wall scope, drawings, approximate square footage, and schedule target.'],
+      ['Panel decision', 'Standing seam, exposed fastener, wall panel, mixed scope, profile drawing, coverage width, and gauge path.'],
+      ['Package scope', 'Trim, flashing, closures, fasteners, penetrations, openings, color, finish family, and delivery requirements.'],
+      ['Commercial review', 'Submittals, product data, finish samples, quote assumptions, exclusions, alternates, and approval path.'],
+    ],
   },
 }
 
@@ -2089,6 +2300,37 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
                 </div>
               </section>
             ) : null}
+            {enhancement?.visuals?.length ? (
+              <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <p className="eyebrow text-[#f97316]">Visual Proof Points</p>
+                <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">What this page should show, not just say.</h2>
+                <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                  {enhancement.visuals.map((visual) => (
+                    <figure key={visual.title} className="overflow-hidden rounded border border-slate-200 bg-slate-50">
+                      <img src={visual.image} alt={visual.alt} className="h-44 w-full object-cover" />
+                      <figcaption className="p-4">
+                        <h3 className="text-lg font-black text-[#0b1f33]">{visual.title}</h3>
+                        <p className="mt-2 leading-7 text-slate-600">{visual.caption}</p>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+            {enhancement?.deepDive?.length ? (
+              <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <p className="eyebrow text-[#f97316]">Deep Dive</p>
+                <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">How serious buyers should think about this topic.</h2>
+                <div className="mt-5 grid gap-5">
+                  {enhancement.deepDive.map(([title, copy]) => (
+                    <div key={title} className="rounded border border-slate-200 bg-slate-50 p-5">
+                      <h3 className="text-xl font-black text-[#0b1f33]">{title}</h3>
+                      <p className="mt-3 text-lg leading-8 text-slate-600">{copy}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
             {guide.sections.map(([title, copy]) => (
               <section key={title} className="rounded border border-slate-200 bg-white p-6 shadow-lg">
                 <h2 className="text-2xl font-black text-[#0b1f33]">{title}</h2>
@@ -2129,6 +2371,24 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
                     </table>
                   </div>
                 </section>
+
+                {enhancement.checklist?.length ? (
+                  <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                    <p className="eyebrow text-[#f97316]">Quote Readiness Checklist</p>
+                    <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">What to gather before the next conversation.</h2>
+                    <div className="mt-5 grid gap-4 md:grid-cols-2">
+                      {enhancement.checklist.map(([title, copy]) => (
+                        <div key={title} className="rounded border border-slate-200 bg-slate-50 p-5">
+                          <h3 className="flex items-center gap-3 text-lg font-black text-[#0b1f33]">
+                            <CheckCircle2 className="shrink-0 text-[#f97316]" size={20} />
+                            {title}
+                          </h3>
+                          <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
 
                 <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
                   <p className="eyebrow text-[#f97316]">FAQ</p>
