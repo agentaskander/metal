@@ -50,6 +50,9 @@ const managementNavItems = [
   ['Risk', '/internal-risk-register'],
   ['Financials', '/internal-financial-model'],
   ['Execution', '/internal-execution-board'],
+  ['Evidence', '/internal-evidence-library'],
+  ['Advisors', '/internal-advisor-questions'],
+  ['Manufacturing', '/internal-manufacturing-readiness'],
 ]
 
 const products = [
@@ -1479,6 +1482,170 @@ const internalExecutionBoard = [
     ],
   },
 ]
+const internalEvidenceLibrary = [
+  {
+    category: 'Business / Legal',
+    owner: 'Founder / legal',
+    purpose: 'Prove entity, ownership, IP, domain, partnership, and NDA boundaries before decisions or public claims.',
+    evidence: ['entity docs', 'domain ownership records', 'IP/equity drafts', 'NDA records', 'advisor notes', 'signed agreements'],
+    linked: ['/internal-risk-register', '/internal-business-plan', '/internal-advisor-questions'],
+  },
+  {
+    category: 'Financial Baselines',
+    owner: 'Finance',
+    purpose: 'Keep private targets, source assumptions, actuals, variances, COGS inputs, and runway evidence out of public bundles.',
+    evidence: ['private worksheets', 'bank/accounting exports', 'vendor cost quotes', 'margin approvals', 'monthly plan-vs-actual notes'],
+    linked: ['/internal-financial-model', '/internal-business-plan', '/internal-risk-register'],
+  },
+  {
+    category: 'Equipment / Manufacturing',
+    owner: 'Operations',
+    purpose: 'Validate machine capability, facility readiness, coil handling, production flow, safety, maintenance, and QA assumptions.',
+    evidence: ['vendor quotes', 'machine spec sheets', 'layout drawings', 'maintenance docs', 'training docs', 'acceptance checklist'],
+    linked: ['/internal-manufacturing-readiness', '/internal-gov-compliance', '/internal-execution-board'],
+  },
+  {
+    category: 'Compliance / Government',
+    owner: 'Compliance owner',
+    purpose: 'Support public-sector readiness, vendor registration, NAICS/PSC mapping, code review, bid/no-bid, and claim approvals.',
+    evidence: ['SAM/UEI notes', 'NAICS research', 'insurance certificates', 'bid packets', 'code references', 'claim approval records'],
+    linked: ['/internal-gov-compliance', '/internal-risk-register', '/internal-advisor-questions'],
+  },
+  {
+    category: 'Product Documentation',
+    owner: 'Estimating / marketing',
+    purpose: 'Control product packets, profile drawings, trim schedules, finish sheets, warranty language, and installation notes.',
+    evidence: ['product data sheets', 'profile drawings', 'finish/color sheets', 'trim guides', 'submittal templates', 'revision logs'],
+    linked: ['/internal-gov-compliance', '/internal-business-plan', '/internal-execution-board'],
+  },
+  {
+    category: 'Market / Competitor Proof',
+    owner: 'Marketing / sales',
+    purpose: 'Ground sales strategy, pricing, positioning, and SEO in observed market evidence instead of assumptions.',
+    evidence: ['competitor screenshots', 'pricing notes', 'contractor interview notes', 'dealer conversations', 'search result snapshots'],
+    linked: ['/internal-ontology', '/internal-financial-model', '/internal-execution-board'],
+  },
+  {
+    category: 'Real Photo / Operational Proof',
+    owner: 'Marketing / ops',
+    purpose: 'Replace stock photography with real machine, coil, production, loading, delivery, employee, warehouse, and project evidence.',
+    evidence: ['machine photos', 'coil photos', 'bundle photos', 'truck loading photos', 'project photos', 'photo release approvals'],
+    linked: ['/internal-risk-register', '/internal-business-plan', '/internal-control-panel'],
+  },
+]
+const internalEvidenceWorkflow = [
+  ['Capture', 'Add the source file, link, screenshot, note, or photo with owner and date.'],
+  ['Classify', 'Mark as public-safe, private, NDA, needs legal review, needs code review, or expired.'],
+  ['Link', 'Tie evidence to a claim, risk, task, quote, product packet, compliance topic, or financial metric.'],
+  ['Review', 'Assign reviewer and next review date for legal, code, insurance, finance, or owner approval.'],
+  ['Publish / Block', 'Allow public use only if evidence supports the claim and the route is approved.'],
+]
+const internalAdvisorQuestionGroups = [
+  {
+    advisor: 'Business / Partnership Lawyer',
+    objective: 'Protect domain, software, brand, equity, buyout, acquisition, data, and decision rights before the business scales.',
+    questions: [
+      'Who owns the domains, codebase, business plan system, agent workflows, data model, and future software?',
+      'How should equity, vesting, dilution, buyout, and acquisition rights be documented?',
+      'Can the software be licensed to the operating company while remaining separately owned?',
+      'What public claims, warranties, disclaimers, and terms need review before launch?',
+    ],
+  },
+  {
+    advisor: 'CPA / Finance Advisor',
+    objective: 'Convert V2 financial assumptions into a real accounting, margin, cash runway, and tax model.',
+    questions: [
+      'What chart of accounts best separates panel sales, trim, delivery, materials, labor, freight, scrap, and fixed costs?',
+      'How should inventory and coil purchases be accounted for?',
+      'What margin and tax assumptions should the monthly dashboard track?',
+      'What financing, reserve, or capitalization structure should be modeled?',
+    ],
+  },
+  {
+    advisor: 'Insurance Broker',
+    objective: 'Make sure commercial, manufacturing, delivery, employee, product, and public-sector risks are covered.',
+    questions: [
+      'What insurance is needed before manufacturing begins?',
+      'What limits do schools, municipalities, warehouses, and commercial contractors commonly require?',
+      'Do product liability, completed operations, auto/fleet, workers comp, umbrella, or bonding needs apply?',
+      'How should certificates, additional insured requests, and renewal dates be tracked?',
+    ],
+  },
+  {
+    advisor: 'Equipment Vendors',
+    objective: 'Validate machine capability, output assumptions, maintenance, training, tooling, and facility requirements.',
+    questions: [
+      'Which profiles, gauges, coil widths, substrates, and finishes are supported?',
+      'What are realistic throughput, scrap, changeover, operator, maintenance, and downtime assumptions?',
+      'What facility power, floor, forklift, coil handling, and safety requirements apply?',
+      'What acceptance testing and training should be required before payment completion?',
+    ],
+  },
+  {
+    advisor: 'Code / Engineering Advisor',
+    objective: 'Prevent unsupported roof, fire, wind, structural, warranty, or code-compliance claims.',
+    questions: [
+      'What product claims require testing, engineering, product approvals, or jurisdiction-specific review?',
+      'What should be included in submittal packages for commercial, school, municipal, warehouse, and agricultural work?',
+      'How should California fire/WUI and Florida/coastal wind projects be flagged?',
+      'Which language should be blocked from public pages without evidence?',
+    ],
+  },
+  {
+    advisor: 'Government Contracting Advisor',
+    objective: 'Understand whether and when UEI/SAM, NAICS/PSC, vendor portals, certifications, and bid workflows make sense.',
+    questions: [
+      'Should the entity obtain UEI only, full SAM registration, or wait until the contracting entity is finalized?',
+      'Which NAICS/PSC categories fit manufacturing, panel supply, roofing products, and related distribution?',
+      'Which state/local vendor portals matter for California, Texas, Arizona, and Florida?',
+      'What bid/no-bid, documentation, insurance, bonding, and compliance gates should be in the system?',
+    ],
+  },
+]
+const internalManufacturingReadiness = [
+  {
+    area: 'Facility',
+    status: 'Criteria needed',
+    objective: 'Confirm the building can support coil storage, roll forming, trim fabrication, staging, office, loading, safety, and future expansion.',
+    tasks: ['define square footage needs', 'map production flow', 'confirm power and floor requirements', 'check truck access', 'define storage zones', 'confirm lease restrictions'],
+    evidence: ['facility checklist', 'layout sketch', 'lease notes', 'photos', 'utility confirmation'],
+  },
+  {
+    area: 'Equipment',
+    status: 'Vendor validation',
+    objective: 'Compare fixed and mobile machines by profile support, gauge/substrate limits, throughput, training, maintenance, tooling, and acceptance testing.',
+    tasks: ['collect vendor quotes', 'compare machine specs', 'define acceptance test', 'document maintenance schedule', 'confirm parts/support', 'document operator training'],
+    evidence: ['vendor quotes', 'spec sheets', 'acceptance checklist', 'training plan', 'maintenance docs'],
+  },
+  {
+    area: 'Coil / Inventory',
+    status: 'Program design',
+    objective: 'Build the material program for coil suppliers, gauges, finishes, colors, reorder points, substitutions, handling, and cost tracking.',
+    tasks: ['identify suppliers', 'define starting colors/gauges', 'set reorder points', 'create coil lot fields', 'define substitution approvals', 'track material costs'],
+    evidence: ['supplier docs', 'coil spec sheets', 'finish chart', 'reorder model', 'substitution approval record'],
+  },
+  {
+    area: 'Production Workflow',
+    status: 'SOP draft',
+    objective: 'Convert approved orders into run sheets, labels, bundles, QA checks, and loading instructions without retyping.',
+    tasks: ['draft run sheet', 'define job labels', 'define bundle sequence', 'create QA checklist', 'define rework process', 'connect to order data'],
+    evidence: ['run sheet template', 'label template', 'QA checklist', 'bundle photos', 'workflow diagram'],
+  },
+  {
+    area: 'Safety / OSHA',
+    status: 'Advisor review',
+    objective: 'Create operator safety, guarding, LOTO, PPE, forklift/loading, incident, and corrective action workflows before production.',
+    tasks: ['machine guarding review', 'draft LOTO checklist', 'define PPE', 'document training', 'forklift/loading SOP', 'incident log'],
+    evidence: ['safety SOPs', 'training records', 'inspection records', 'incident/corrective action log'],
+  },
+  {
+    area: 'Delivery / Pickup',
+    status: 'Workflow design',
+    objective: 'Coordinate customer pickup, local delivery, contractor bulk orders, labels, damage checks, signatures, and delivery cost tracking.',
+    tasks: ['define pickup process', 'define truck loading checklist', 'create delivery release form', 'track freight/delivery costs', 'document damage policy'],
+    evidence: ['loading checklist', 'delivery photos', 'signed release', 'cost log', 'customer pickup record'],
+  },
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1742,6 +1909,18 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'internal-execution-board') {
     return <InternalExecutionBoardPage />
+  }
+
+  if (path === 'internal-evidence-library') {
+    return <InternalEvidenceLibraryPage />
+  }
+
+  if (path === 'internal-advisor-questions') {
+    return <InternalAdvisorQuestionsPage />
+  }
+
+  if (path === 'internal-manufacturing-readiness') {
+    return <InternalManufacturingReadinessPage />
   }
 
   if (path === 'internal-data-model') {
@@ -3320,6 +3499,231 @@ function InternalExecutionBoardPage() {
                     <p className="leading-7 text-slate-600">{evidence}</p>
                   </div>
                 ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalEvidenceLibraryPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Evidence Library • 8190 Only"
+        title="Proof Vault for Claims, Decisions & Execution"
+        copy="The private source-of-truth library for vendor quotes, machine specs, advisor notes, compliance sources, product packets, financial assumptions, competitor proof, and real photo evidence."
+        stats={[
+          [`${internalEvidenceLibrary.length}`, 'evidence categories'],
+          [`${internalEvidenceWorkflow.length}`, 'workflow steps'],
+          ['Private', 'default classification'],
+          ['Review', 'before public use'],
+        ]}
+      />
+      <InternalOntologySection
+        eyebrow="Evidence Rule"
+        title="No claim, quote assumption, or public proof without evidence."
+        copy="The Evidence Library is what makes the whole 8190 system serious: risks, financials, gov readiness, manufacturing readiness, and public copy all need source material."
+      >
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            ['/internal-risk-register', 'Risk', 'Evidence supports controls and mitigation.'],
+            ['/internal-gov-compliance', 'Compliance', 'Evidence supports registration, code, insurance, and claims.'],
+            ['/internal-financial-model', 'Financials', 'Evidence supports plan-vs-actual and margin assumptions.'],
+            ['/internal-manufacturing-readiness', 'Manufacturing', 'Evidence supports facility, equipment, safety, and QA readiness.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Connected Control</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Evidence Categories"
+        title="What the vault should track."
+        copy="Each category should later become records with source, owner, date, classification, linked claim/task/risk, review status, and expiration."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalEvidenceLibrary.map((category) => (
+            <article key={category.category} className="card">
+              <p className="eyebrow text-[#f97316]">Evidence Category</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{category.category}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{category.purpose}</p>
+              <p className="mt-4 font-black text-[#0b1f33]">Owner: {category.owner}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {category.evidence.map((item) => (
+                  <span key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">{item}</span>
+                ))}
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {category.linked.map((href) => (
+                  <a key={href} href={href} className="text-sm font-black text-[#0b1f33] hover:text-[#f97316]">{href.replace('/internal-', '')}</a>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Workflow"
+        title="How evidence moves from source to approved use."
+        copy="This should become a record lifecycle before any automated claim scanner or public-copy approval system is trusted."
+      >
+        <div className="grid gap-4">
+          {internalEvidenceWorkflow.map(([step, detail], index) => (
+            <article key={step} className="grid gap-4 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.12fr_0.22fr_0.66fr] md:items-center">
+              <p className="text-2xl font-black text-[#f97316]">{index + 1}</p>
+              <h2 className="text-xl font-black text-[#0b1f33]">{step}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalAdvisorQuestionsPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Advisor Questions • 8190 Only"
+        title="Questions for Advisors Before Scaling"
+        copy="A private question bank for the people who can reduce risk: lawyer, CPA, insurance broker, equipment vendors, code/engineering advisor, and government-contracting advisor."
+        stats={[
+          [`${internalAdvisorQuestionGroups.length}`, 'advisor groups'],
+          [`${internalAdvisorQuestionGroups.reduce((sum, group) => sum + group.questions.length, 0)}`, 'starter questions'],
+          ['Evidence', 'required'],
+          ['Owner', 'required later'],
+        ]}
+      />
+      <InternalOntologySection
+        eyebrow="Advisor Rule"
+        title="Turn uncertainty into written questions and evidence."
+        copy="Every major ambiguity should become an advisor question, and every answer should become evidence linked to a decision, task, claim, or risk."
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            ['/internal-evidence-library', 'Evidence Library', 'Store advisor answers and source documents.'],
+            ['/internal-risk-register', 'Risk Register', 'Tie answers to risk controls.'],
+            ['/internal-execution-board', 'Execution Board', 'Turn answers into next tasks.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Connected Control</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Question Bank"
+        title="Advisor questions by domain."
+        copy="This is not a substitute for advice. It is the meeting prep that makes advisor time useful and preserves the answer trail."
+      >
+        <div className="grid gap-5">
+          {internalAdvisorQuestionGroups.map((group) => (
+            <article key={group.advisor} className="card">
+              <p className="eyebrow text-[#f97316]">Advisor</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{group.advisor}</h2>
+              <p className="mt-3 text-lg leading-8 text-slate-600">{group.objective}</p>
+              <ol className="mt-6 grid gap-3">
+                {group.questions.map((question, index) => (
+                  <li key={question} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 leading-7 text-slate-700">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded border border-orange-200 bg-orange-50 text-sm font-black text-[#c2410c]">{index + 1}</span>
+                    {question}
+                  </li>
+                ))}
+              </ol>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalManufacturingReadinessPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Manufacturing Readiness • 8190 Only"
+        title="Facility, Equipment, Inventory, SOP & Safety Readiness"
+        copy="A private buildout plan for turning the business plan into physical operations: facility, equipment, coil inventory, production workflow, safety, QA, delivery, and evidence."
+        stats={[
+          [`${internalManufacturingReadiness.length}`, 'readiness tracks'],
+          ['SOP', 'needed'],
+          ['Evidence', 'required'],
+          ['Ops', 'owner-driven'],
+        ]}
+      />
+      <InternalOntologySection
+        eyebrow="Manufacturing Rule"
+        title="Do not buy or promise what the operation cannot support."
+        copy="The manufacturing readiness page protects the business from equipment mismatch, unsafe setup, weak QA, bad material assumptions, and operational handoff failures."
+      >
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            ['/internal-evidence-library', 'Evidence', 'Store vendor specs, photos, SOPs, and approvals.'],
+            ['/internal-risk-register', 'Risk', 'Track equipment, safety, cash, and handoff risks.'],
+            ['/internal-financial-model', 'Financials', 'Connect cost, output, scrap, and margin assumptions.'],
+            ['/internal-gov-compliance', 'Compliance', 'Connect OSHA, insurance, product docs, and claim review.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Connected Control</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Readiness Tracks"
+        title="What needs to be real before launch."
+        copy="Each track should later become tasks, checklists, evidence records, owner assignments, and review dates."
+      >
+        <div className="grid gap-5">
+          {internalManufacturingReadiness.map((track) => (
+            <article key={track.area} className="card">
+              <div className="grid gap-6 lg:grid-cols-[0.2fr_0.28fr_0.32fr_0.2fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Readiness Track</p>
+                  <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{track.area}</h2>
+                  <p className="mt-3 rounded border border-orange-200 bg-orange-50 px-3 py-2 font-black text-slate-800">{track.status}</p>
+                </div>
+                <p className="text-lg leading-8 text-slate-600">{track.objective}</p>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Tasks</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {track.tasks.map((task) => (
+                      <li key={task} className="flex gap-2 leading-7 text-slate-700">
+                        <CheckCircle2 className="mt-1 shrink-0 text-[#f97316]" size={16} />
+                        {task}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Evidence</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {track.evidence.map((item) => (
+                      <span key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">{item}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </article>
           ))}
