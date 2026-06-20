@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import {
   ArrowRight,
   Award,
+  BookOpen,
   Building2,
   CheckCircle2,
   ClipboardList,
@@ -367,18 +368,82 @@ const guidePages = [
     ctaHref: 'https://www.americansuperpanel.com/request-quote',
   },
 ]
-const glossaryTerms = [
-  ['Roll forming', 'A manufacturing process that shapes metal coil into consistent panel profiles through a series of forming stations.'],
-  ['Standing seam', 'A concealed-fastener metal roofing system with raised seams and a cleaner architectural appearance.'],
-  ['R-Panel', 'A practical ribbed exposed-fastener panel family used for roofing and siding on commercial, warehouse, shop, and agricultural buildings.'],
-  ['PBR Panel', 'A ribbed exposed-fastener panel term often used for roof and wall packages; profile details should be confirmed by manufacturer.'],
-  ['Gauge', 'A sheet metal thickness reference where lower numbers generally mean thicker metal.'],
-  ['PVDF', 'A premium finish path commonly discussed for long-life architectural metal panel projects.'],
-  ['SMP', 'A silicone-modified polyester finish path used across many economical and practical metal panel projects.'],
-  ['Trim', 'Formed pieces used at roof edges, corners, openings, transitions, and closeout details.'],
-  ['Flashing', 'Metal detailing used to direct water and protect transitions, edges, penetrations, and joints.'],
-  ['Submittal package', 'Project documentation that may include product data, finish information, fastener notes, drawings, and warranty-path materials.'],
-] satisfies [string, string][]
+const glossaryGroups = [
+  {
+    group: 'Manufacturing and Production',
+    intro: 'Terms that explain how coil, equipment, documentation, and production coordination become a finished metal panel package.',
+    terms: [
+      ['Roll forming', 'A manufacturing process that shapes metal coil into consistent panel profiles through a series of forming stations.'],
+      ['Coil', 'A rolled supply of flat metal used as the starting material for roofing panels, siding panels, trim, and flashing.'],
+      ['Decoiler', 'Equipment that holds and feeds metal coil into a roll-forming or fabrication line.'],
+      ['Forming stations', 'The sequential tooling stands that gradually shape flat coil into the final ribbed or standing seam profile.'],
+      ['Cut-to-length', 'A production approach where panels are made to specified project lengths instead of pulled only from standard stock sizes.'],
+      ['Production run', 'A scheduled manufacturing batch organized around profile, finish, gauge, length, order priority, and packaging needs.'],
+      ['Bundle label', 'A jobsite or delivery label that helps identify panel bundles by project, length, elevation, roof area, or order segment.'],
+      ['Mobile roll forming', 'A production model where roll-forming equipment can be brought closer to a project location for long panels or specialized logistics.'],
+    ],
+  },
+  {
+    group: 'Panel Profiles and Systems',
+    intro: 'Common product names, profile features, and system concepts used in roofing, siding, wall panel, and commercial building conversations.',
+    terms: [
+      ['Standing seam', 'A concealed-fastener metal roofing system with raised seams and a cleaner architectural appearance.'],
+      ['R-Panel', 'A practical ribbed exposed-fastener panel family used for roofing and siding on commercial, warehouse, shop, and agricultural buildings.'],
+      ['PBR Panel', 'A ribbed exposed-fastener panel term often used for roof and wall packages; profile details should be confirmed by manufacturer.'],
+      ['AG Panel / Tuff Rib', 'A ribbed exposed-fastener panel style commonly discussed for agricultural, shop, storage, and practical residential accessory buildings.'],
+      ['Wall panel', 'A metal panel used as exterior or interior siding; panel profile, orientation, substrate, fastening, and trim should be confirmed for the project.'],
+      ['Rib height', 'The vertical height of a panel rib, which affects appearance, stiffness, profile identity, and compatibility with details.'],
+      ['Coverage width', 'The net installed width a panel covers after side laps are accounted for, used for estimating material quantities.'],
+      ['Side lap', 'The overlapping edge condition where one panel joins the next panel along the panel run.'],
+    ],
+  },
+  {
+    group: 'Materials, Gauges, and Finishes',
+    intro: 'Material and finish language that helps buyers compare quotes, color paths, durability expectations, and submittal information.',
+    terms: [
+      ['Gauge', 'A sheet metal thickness reference where lower numbers generally mean thicker metal.'],
+      ['Substrate', 'The base metal and coating system beneath the paint finish, often discussed when comparing galvanized or aluminum-zinc coated steel paths.'],
+      ['Galvanized steel', 'Steel with a zinc coating used to support corrosion resistance before paint or finish considerations.'],
+      ['Galvalume', 'A commonly used aluminum-zinc coated steel substrate term; confirm the exact material specification with the supplier or manufacturer.'],
+      ['PVDF', 'A premium finish path commonly discussed for long-life architectural metal panel projects.'],
+      ['SMP', 'A silicone-modified polyester finish path used across many economical and practical metal panel projects.'],
+      ['Matte finish', 'A lower-sheen paint appearance often selected when buyers want a softer architectural look.'],
+      ['Cool roof color', 'A finish category discussed when reflectivity, heat gain, energy-code conversations, or owner requirements matter.'],
+      ['Color sample', 'A physical or approved digital reference used to confirm finish selection before final ordering or submittal approval.'],
+    ],
+  },
+  {
+    group: 'Trim, Flashing, and Accessories',
+    intro: 'The pieces around the panel that close edges, protect transitions, coordinate openings, and help a roof or wall package install cleanly.',
+    terms: [
+      ['Trim', 'Formed pieces used at roof edges, corners, openings, transitions, and closeout details.'],
+      ['Flashing', 'Metal detailing used to direct water and protect transitions, edges, penetrations, and joints.'],
+      ['Ridge cap', 'Trim used along the peak where two roof planes meet.'],
+      ['Rake trim', 'Trim used along sloped gable edges of a roof.'],
+      ['Eave trim', 'Trim used along the lower horizontal roof edge.'],
+      ['Jamb trim', 'Trim used around door, window, and framed opening conditions.'],
+      ['Closures', 'Foam or formed accessories used to close panel rib openings at ridge, eave, wall, or transition conditions.'],
+      ['Fasteners', 'Screws or related attachment hardware selected by panel type, substrate, exposure, and project details.'],
+      ['Sealant', 'Material used at selected joints, laps, penetrations, or trim conditions where project details require it.'],
+    ],
+  },
+  {
+    group: 'Commercial Documentation and Quoting',
+    intro: 'Terms that help contractors, owners, and procurement teams prepare cleaner quote requests, compare bids, and reduce missing information.',
+    terms: [
+      ['Submittal package', 'Project documentation that may include product data, finish information, fastener notes, drawings, and warranty-path materials.'],
+      ['Product data', 'Manufacturer or supplier information describing profile, material, finish, accessories, and product-use assumptions.'],
+      ['Finish schedule', 'A project list that identifies selected colors, coating systems, surfaces, and building areas.'],
+      ['Takeoff', 'The estimating process of measuring drawings or field information to identify panel quantities, lengths, trim pieces, and accessories.'],
+      ['Quote assumptions', 'The scope, exclusions, delivery notes, finish path, and project facts used to prepare pricing.'],
+      ['Exclusions', 'Items not included in a quote, such as installation, engineering, freight, accessories, or details outside the provided scope.'],
+      ['Alternate', 'A substitute product, profile, finish, or scope option offered for price, schedule, availability, or project-fit reasons.'],
+      ['Delivery state', 'The state or region where the project will receive material, used for logistics, service-area, and quote-routing conversations.'],
+    ],
+  },
+] satisfies { group: string; intro: string; terms: [string, string][] }[]
+
+const glossaryTerms = glossaryGroups.flatMap((group) => group.terms)
 
 const guideEnhancements: Record<string, {
   comparison: string[][]
@@ -1775,10 +1840,10 @@ function GuidesRelated({ currentSlug }: { currentSlug: string }) {
         title="Keep researching the manufacturing context."
         copy="Related guides connect profile selection, finish decisions, trim details, and commercial roofing considerations in one manufacturer resource center."
       />
-      <div className="mt-10 grid gap-5 md:grid-cols-3">
+      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {guidePages
           .filter((guide) => guide.slug !== currentSlug)
-          .slice(0, 3)
+          .slice(0, 6)
           .map((guide) => (
             <a key={guide.slug} className="card group block" href={`/${guide.slug}`}>
               <p className="eyebrow text-[#f97316]">{guide.category}</p>
@@ -1798,20 +1863,66 @@ function GlossaryPage() {
     <>
       <PageHero
         title="Metal Panel Glossary"
-        copy="Plain-English definitions for roll forming, metal roofing panels, finishes, trim, flashing, submittals, and manufacturing conversations."
+        copy="Plain-English metal roofing, siding, roll forming, trim, flashing, finish, and quoting terms for contractors, owners, architects, and commercial buyers."
       />
-      <section className="section bg-slate-50">
-        <div className="grid gap-5 md:grid-cols-2">
-          {glossaryTerms.map(([term, definition]) => (
-            <article key={term} className="card">
-              <p className="eyebrow text-[#f97316]">Defined Term</p>
-              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{term}</h2>
-              <p className="mt-3 text-lg leading-8 text-slate-600">{definition}</p>
+      <section className="section bg-white">
+        <div className="grid gap-5 md:grid-cols-3">
+          {[
+            ['Compare quotes with less guesswork', 'Use the same vocabulary across profiles, gauges, finishes, trim, accessories, and quote assumptions.'],
+            ['Prepare cleaner project information', 'Know which details matter before sending drawings, elevations, square footage, color needs, and delivery information.'],
+            ['Connect terms to deeper guides', 'Move from short definitions into practical guides on panels, finishes, trim packages, and commercial roofing decisions.'],
+          ].map(([title, copy]) => (
+            <article key={title} className="card">
+              <BookOpen className="text-[#f97316]" />
+              <h2 className="mt-5 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
             </article>
           ))}
         </div>
       </section>
-      <GuidesRelated currentSlug="" />
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="Reference Library"
+          title="A practical vocabulary for metal panel projects."
+          copy="These terms are grouped by how buyers actually make decisions: production, panel profiles, materials, trim details, and commercial quote documentation."
+        />
+        <div className="mt-10 grid gap-8">
+          {glossaryGroups.map((group) => (
+            <article key={group.group} className="rounded border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="eyebrow text-[#f97316]">Glossary Category</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{group.group}</h2>
+              <p className="mt-3 max-w-4xl text-lg leading-8 text-slate-600">{group.intro}</p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {group.terms.map(([term, definition]) => (
+                  <div key={term} className="rounded border border-slate-200 bg-slate-50 p-5">
+                    <h3 className="text-xl font-black text-[#0b1f33]">{term}</h3>
+                    <p className="mt-3 leading-7 text-slate-600">{definition}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Related Guides"
+          title="Use the glossary inside the deeper manufacturer guides."
+          copy="The glossary gives the vocabulary. The guides explain how the decisions connect across profile selection, finish paths, trim packages, and commercial roof planning."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {guidePages.map((guide) => (
+            <a key={guide.slug} className="card group block" href={`/${guide.slug}`}>
+              <p className="eyebrow text-[#f97316]">{guide.category}</p>
+              <h3 className="mt-3 text-xl font-black text-[#0b1f33]">{guide.title}</h3>
+              <p className="mt-3 leading-7 text-slate-600">{guide.description}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Read guide <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
     </>
   )
 }
