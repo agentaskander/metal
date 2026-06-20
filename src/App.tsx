@@ -43,6 +43,7 @@ const navItems = [
   ['Commercial', '/commercial'],
   ['Agricultural', '/agricultural'],
   ['Finishes', '/finishes'],
+  ['Quality', '/quality'],
   ['Contact', '/contact'],
 ]
 
@@ -134,6 +135,22 @@ const contractorOutcomes = [
   ['Custom-Length Panels', 'Request panel lengths and trim scope for commercial, agricultural, industrial, or residential work.'],
   ['Contractor Support', 'Get help organizing panel, trim, flashing, accessory, and project documentation needs.'],
   ['Fast Communication', 'Phone, email, and upload paths are visible so contractors can reach sales quickly.'],
+]
+const qualityChain = [
+  ['Craftsmanship', 'Clean work, clear details, and disciplined panel preparation.'],
+  ['Predictability', 'Reliable panel packages, clearer quote review, and fewer avoidable surprises.'],
+  ['Peace of Mind', 'A roof, wall, trim, and delivery path that customers do not have to worry about.'],
+]
+const aspQualityPrinciples = [
+  ['Correct fit', 'Panels, trim, flashing, and accessories should line up with the project information reviewed before release.'],
+  ['Reliable protection', 'Panel and finish recommendations should match the building use, exposure, and owner expectations.'],
+  ['Clear communication', 'Contractors should know what has been received, what still needs review, and what sales can quote.'],
+  ['Delivery confidence', 'Availability, samples, color paths, and delivery assumptions should be confirmed before promises are made.'],
+]
+const aspQualityQuotes = [
+  ['Reliability', 'Reliability is remembered long after price is forgotten.'],
+  ['Craftsmanship', 'Build it right.'],
+  ['Reputation', 'Quality creates reputation.'],
 ]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
@@ -505,6 +522,12 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
         'Commercial metal roofing and siding panels for warehouses, industrial buildings, retail, multifamily, schools, and municipal projects.',
       title: 'Commercial Metal Roofing Panels | American Super Panel',
     },
+    quality: {
+      canonicalPath: '/quality',
+      description:
+        'American Super Panel quality philosophy for contractor-ready metal roofing panels, reliable protection, custom lengths, trim, flashing, and quote support.',
+      title: 'Metal Panel Quality | American Super Panel',
+    },
     agricultural: {
       canonicalPath: '/agricultural',
       description:
@@ -674,6 +697,10 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'commercial') {
     return <CommercialPage />
+  }
+
+  if (path === 'quality') {
+    return <QualityPage />
   }
 
   if (path === 'industrial') {
@@ -901,6 +928,86 @@ function ContractorOutcomes() {
   )
 }
 
+function QualityChainCallout({ compact = false }: { compact?: boolean }) {
+  return (
+    <section className={`${compact ? '' : 'section'} bg-white`}>
+      <div className="rounded border border-orange-200 bg-orange-50 p-6 text-[#0b1f33]">
+        <p className="eyebrow text-[#c2410c]">Quality Model</p>
+        <h2 className="mt-3 text-3xl font-black leading-tight">
+          Craftsmanship -&gt; Predictability -&gt; Peace of Mind
+        </h2>
+        <p className="mt-4 max-w-4xl text-lg font-semibold leading-8 text-slate-700">
+          Employees create craftsmanship. Craftsmanship creates predictable manufacturing.
+          Predictable manufacturing creates customer peace of mind.
+        </p>
+        {!compact ? (
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {qualityChain.map(([title, copy]) => (
+              <article key={title} className="rounded border border-orange-200 bg-white p-4">
+                <h3 className="text-xl font-black">{title}</h3>
+                <p className="mt-2 leading-7 text-slate-700">{copy}</p>
+              </article>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  )
+}
+
+function QualityQuoteStrip() {
+  return (
+    <div className="grid gap-4 md:grid-cols-3">
+      {aspQualityQuotes.map(([theme, quote]) => (
+        <article key={theme} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+          <p className="eyebrow text-[#f97316]">{theme}</p>
+          <p className="mt-3 text-xl font-black leading-tight text-[#0b1f33]">{quote}</p>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+function QualityPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Quality"
+        title="Metal panel quality means peace of mind."
+        copy="Customers do not need a manufacturing lecture. They need roofing panels, siding panels, trim, samples, communication, and delivery support that do not create problems."
+      />
+      <QualityChainCallout />
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="What Quality Means Here"
+          title="Reliable panels. Reliable protection. Clearer project support."
+          copy="American Super Panel uses quality language in practical ways: correct fit, long service expectations, responsive sales support, and fewer surprises between quote review and project release."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {aspQualityPrinciples.map(([title, copy]) => (
+            <article key={title} className="card">
+              <ShieldCheck className="text-[#f97316]" />
+              <h2 className="mt-5 text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <SectionIntro
+            eyebrow="Manufacturing Culture"
+            title="Built with precision. Delivered with reliability."
+            copy="Quality shows up in the details contractors notice: cleaner quote inputs, coordinated trim, finish review, sample follow-up, and support when project facts change."
+          />
+          <QualityQuoteStrip />
+        </div>
+      </section>
+      <Contact />
+    </>
+  )
+}
+
 function SuperPanel() {
   return (
     <section id="super-panel" className="section">
@@ -987,6 +1094,7 @@ function SuperPanelPage() {
           ))}
         </div>
       </section>
+      <QualityChainCallout />
       <section className="section">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
@@ -1038,6 +1146,9 @@ function IndustrialRibPage() {
                 American Super Panel is a contractor-ready metal roofing and siding panel
                 system built for fast quotes, custom lengths, reliable supply, and regional
                 manufacturing support. Manufactured by Americas Panel Fab.
+              </p>
+              <p className="mt-5 max-w-3xl rounded border border-orange-200 bg-orange-50 p-4 text-base font-black leading-7 text-[#0b1f33]">
+                A roof should be the thing you never have to worry about.
               </p>
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 {['California-first quoting', 'Panels + trim packages', 'Plans accepted for review'].map((item) => (
@@ -1099,6 +1210,16 @@ function IndustrialRibPage() {
               </a>
             </article>
           ))}
+        </div>
+      </section>
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <SectionIntro
+            eyebrow="Quality"
+            title="Reliable panels. Reliable protection."
+            copy="Industrial Rib quality is practical: the right panel path, coordinated trim, finish review, clear quote notes, and responsive communication before material is released."
+          />
+          <QualityQuoteStrip />
         </div>
       </section>
 
@@ -2561,6 +2682,10 @@ function About() {
               The mission is straightforward: manufacture strong American panel systems and support the
               crews who install them across a growing multi-state footprint.
             </p>
+            <p className="rounded border border-orange-200 bg-orange-50 p-4 font-black leading-7 text-[#0b1f33]">
+              Quality means peace of mind: panels that fit the reviewed project, support that responds,
+              and details that do not leave the crew guessing.
+            </p>
           </div>
         </div>
       </div>
@@ -3004,6 +3129,7 @@ function Footer() {
           <p className="mt-2 text-slate-300">Industrial Rib Roofing, Metal Siding, Trim & Accessories</p>
         </div>
         <div className="max-w-xl text-sm font-semibold leading-6 text-slate-300 md:text-right">
+          <p className="mb-2 text-white">Built with precision. Delivered with reliability.</p>
           American Super Panel™ systems are manufactured by{' '}
           <a className="text-white underline decoration-orange-300 underline-offset-4 hover:text-orange-200" href="https://www.americaspanelfab.com">
             Americas Panel Fab
