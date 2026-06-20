@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 import {
   ArrowRight,
   Award,
@@ -44,6 +44,7 @@ const navItems = [
   ['Markets', '/markets'],
   ['Super Panel', '/super-panel'],
   ['Internal', '/internal-strategy'],
+  ['Ontology', '/internal-ontology'],
   ['Contact', '/contact'],
 ]
 
@@ -184,6 +185,180 @@ const internalStrategyBlocks = [
       'Do not chase beauty first. Beat competitors by looking bigger, clearer, more credible, easier to buy from, and more operationally real.',
     ],
   },
+]
+const internalOntologyDomains = [
+  {
+    domain: 'Brand Architecture',
+    entities: [
+      ['America’s Panel Fab', 'Parent company, manufacturer, contracting entity, invoice entity, commercial/government credibility layer.'],
+      ['AmericasPanelFab.com', 'Authority and company domain for manufacturing, roll forming, fabrication, partners, investors, guides, glossary, and trust.'],
+      ['American Super Panel', 'Flagship product family and revenue-focused operating brand for metal roofing and siding panel sales.'],
+      ['AmericanSuperPanel.com', 'Product microsite and immediate lead-generation domain for contractors, owners, dealers, quote requests, and plan uploads.'],
+      ['Disclosure relationship', 'Public rule: American Super Panel is a product brand manufactured by Americas Panel Fab. Never pretend independence.'],
+    ],
+  },
+  {
+    domain: 'Commercial Actors',
+    entities: [
+      ['Contractor', 'Primary ASP buyer; needs fast quotes, custom lengths, trim packages, plan upload, responsive sales, and job-ready documentation.'],
+      ['Building owner', 'Commercial, agricultural, warehouse, or residential buyer evaluating cost, durability, appearance, timeline, and supplier credibility.'],
+      ['Dealer', 'Future resale channel that needs pricing structure, territories, color/gauge program, order workflow, samples, and repeatable support.'],
+      ['Architect / specifier', 'APF authority audience; needs profiles, comparisons, finish guidance, submittal path, and confidence in manufacturer credibility.'],
+      ['Estimator', 'Operational user who converts drawings, square footage, panel type, trim scope, and notes into a quote package.'],
+      ['Procurement officer', 'Commercial/government-adjacent buyer focused on documentation, entity credibility, supplier risk, invoicing, and bid support.'],
+      ['Investor / partner', 'APF audience evaluating manufacturing opportunity, product-market fit, equipment strategy, software leverage, and expansion logic.'],
+    ],
+  },
+  {
+    domain: 'Product System',
+    entities: [
+      ['Industrial Rib', 'Flagship exposed-fastener product path inspired by Western Rib / Rezibond-style immediate market demand.'],
+      ['PBR / R-Panel', 'High-intent ASP SEO product type for commercial, warehouse, shop, industrial, and agricultural roof/wall projects.'],
+      ['AG / Tuff Rib', 'High-intent ASP SEO product type for barns, shops, storage, equipment shelters, farms, and ranches.'],
+      ['Standing Seam', 'APF education and future product family; concealed-fastener commercial/architectural roof system.'],
+      ['Wall Panels', 'Roof-adjacent product family for commercial shells, re-skins, warehouse walls, liner panels, soffits, and architectural use.'],
+      ['Trim & Flashing', 'Critical fabricated package: ridge, rake, eave, corner, jamb, base, transitions, caps, closures, and details.'],
+      ['Accessories', 'Fasteners, closures, sealants, touch-up, labels, samples, and package support that complete an order.'],
+      ['Finish Program', 'Color, substrate, SMP/PVDF/matte/cool roof path, sample process, trim matching, and warranty-path coordination.'],
+    ],
+  },
+  {
+    domain: 'Manufacturing Capability',
+    entities: [
+      ['Roll forming', 'Core process that converts coil into consistent panel profile and length. Public APF education topic and private operational workflow.'],
+      ['On-site roll forming', 'Future/mobile capability concept for long-run jobs, reduced shipping constraints, and jobsite production fit.'],
+      ['Custom fabrication', 'Trim, flashing, edge metal, transitions, corners, openings, and detail-specific sheet metal work.'],
+      ['Coil inventory', 'Steel coil purchasing, color/finish availability, gauge/substrate planning, reorder points, and visual proof asset.'],
+      ['Panel bundles', 'Finished panel packages labeled by job, length, sequence, color, profile, and delivery/pickup requirements.'],
+      ['Quality review', 'Internal checkpoint for profile, length, finish, count, trim scope, packaging, and release readiness.'],
+    ],
+  },
+  {
+    domain: 'Digital Lead Capture',
+    entities: [
+      ['Quote request', 'High-value conversion object with name, company, phone, email, state, square footage, project type, panel type, notes.'],
+      ['Plan upload', 'High-value conversion object with files, project state, estimated square footage, project type, notes, and max 100MB workflow.'],
+      ['Phone click', 'Analytics event and direct sales intent signal.'],
+      ['Email click', 'Analytics event and direct sales intent signal.'],
+      ['State page visit', 'Regional SEO and expansion intent signal.'],
+      ['Download event', 'Resource engagement signal for checklists, product data, submittal guides, and quote packets.'],
+    ],
+  },
+  {
+    domain: 'Future Software / ERP',
+    entities: [
+      ['Lead inbox', 'Central queue for quote requests, plan uploads, phone/email events, and assigned sales follow-up.'],
+      ['Takeoff assistant', 'Agentic workflow that extracts scope from drawings, asks clarifying questions, and prepares estimator-ready summaries.'],
+      ['Panel calculator', 'Tool for square footage, coverage width, waste, panel counts, trims, fasteners, and cost ranges.'],
+      ['Color visualizer', 'Buyer/dealer tool for color/finish comparison on roof, siding, trim, and project photos.'],
+      ['Dealer portal', 'Channel software for quotes, orders, territories, samples, pricing, documentation, and status tracking.'],
+      ['Contractor portal', 'Repeat-buyer workflow for saved projects, plan uploads, quote history, approvals, and reorder support.'],
+      ['Project tracker', 'Order lifecycle: submitted, reviewed, quoted, approved, scheduled, produced, bundled, shipped, delivered, closed.'],
+      ['Manufacturing scheduler', 'Internal production planning across machine, coil, profile, length, color, rush status, and delivery constraints.'],
+    ],
+  },
+]
+const internalOntologyRelations = [
+  ['Americas Panel Fab', 'manufactures', 'American Super Panel'],
+  ['AmericasPanelFab.com', 'educates and builds trust for', 'manufacturing, partners, guides, glossary, commercial credibility'],
+  ['AmericanSuperPanel.com', 'converts', 'contractor and owner product intent into quote and plan-upload leads'],
+  ['APF guide article', 'may refer buying intent to', 'ASP product page'],
+  ['ASP footer', 'discloses', 'Manufactured by Americas Panel Fab'],
+  ['Quote request', 'creates', 'lead record'],
+  ['Plan upload', 'creates', 'document review task'],
+  ['Lead record', 'routes to', 'sales inbox'],
+  ['Sales inbox', 'assigns to', 'estimator or sales owner'],
+  ['Estimator', 'produces', 'quote package'],
+  ['Quote package', 'can become', 'order package'],
+  ['Order package', 'requires', 'panel profile, lengths, finish, trim, accessories, delivery details'],
+  ['Coil inventory', 'constrains', 'finish availability and production schedule'],
+  ['Roll former', 'produces', 'panel bundles'],
+  ['Custom fabrication', 'produces', 'trim and flashing packages'],
+  ['Panel bundles', 'ship with', 'labels, counts, trim, and project documentation'],
+  ['Project photos', 'improve', 'public trust and SEO conversion'],
+  ['Dealer portal', 'extends', 'ASP repeat sales and regional channel reach'],
+  ['Manufacturing scheduler', 'extends', 'APF operating leverage and ERP value'],
+]
+const internalOntologyWorkflows = [
+  {
+    name: 'ASP Quote-to-Order Flow',
+    steps: [
+      'Visitor lands on ASP product/service/state page.',
+      'Visitor clicks Request Quote, Upload Plans, Call Sales, or Contact Sales.',
+      'Lead record captures project basics, source route, UTM, state, project type, and panel intent.',
+      'Sales triage checks completeness, urgency, state, file availability, and product fit.',
+      'Estimator reviews drawings, square footage, lengths, trim, finish, and delivery assumptions.',
+      'Quote package is prepared with exclusions, assumptions, alternates, and follow-up questions.',
+      'Approved quote becomes order package and production-ready task list.',
+    ],
+  },
+  {
+    name: 'APF Authority-to-ASP Referral Flow',
+    steps: [
+      'Visitor lands on APF guide, glossary, manufacturing, roll forming, or comparison page.',
+      'Content answers educational intent without sales pressure or internal strategy language.',
+      'When product intent appears, CTA points to relevant ASP product or quote page.',
+      'Referral preserves source context so ASP can measure which APF pages generate revenue intent.',
+      'APF keeps broad authority while ASP handles conversion and customer buying workflow.',
+    ],
+  },
+  {
+    name: 'Plan Upload Review Flow',
+    steps: [
+      'Customer uploads plans, drawings, structural documents, elevations, or sketches.',
+      'System stores metadata: file names, size, project state, project type, notes, submitter, timestamp.',
+      'Sales confirms receipt and assigns review.',
+      'Estimator extracts scope: roof/wall area, panel profile, lengths, penetrations, trim list, finish, deadlines.',
+      'Missing information triggers a clarification request before quote release.',
+      'Final review produces quote, submittal path, or declined/not-fit response.',
+    ],
+  },
+  {
+    name: 'Manufacturing Package Flow',
+    steps: [
+      'Approved order locks profile, gauge, substrate, finish, quantities, lengths, and trim scope.',
+      'Coil availability and machine schedule are checked.',
+      'Panel production and custom fabrication are scheduled.',
+      'Bundles are labeled by project, area, sequence, length, color, and count.',
+      'Quality review checks counts, length logic, finish, profile, and paperwork.',
+      'Delivery or pickup is coordinated and status is recorded.',
+    ],
+  },
+]
+const internalOntologyDataObjects = [
+  ['Lead', 'id, sourceDomain, sourceRoute, UTM, name, company, phone, email, state, projectType, panelType, sqFt, notes, status, owner'],
+  ['UploadedFile', 'id, leadId, fileName, mimeType, sizeBytes, storageKey, uploadedAt, reviewedAt, reviewStatus'],
+  ['Project', 'id, leadId, address, state, market, buildingUse, roofScope, wallScope, targetDate, status, assignedEstimator'],
+  ['PanelLineItem', 'profile, gauge, substrate, finish, color, coverageWidth, length, quantity, area, notes'],
+  ['TrimLineItem', 'trimType, finish, color, length, quantity, location, drawingReference, notes'],
+  ['Quote', 'id, projectId, version, assumptions, exclusions, alternates, subtotal, tax, freight, validUntil, status'],
+  ['Order', 'id, quoteId, purchaseOrder, paymentStatus, productionStatus, deliveryStatus, createdAt, closedAt'],
+  ['CoilLot', 'id, supplier, substrate, gauge, finish, color, width, weight, receivedAt, reservedFor, remaining'],
+  ['ProductionRun', 'id, machine, profile, coilLotId, projectId, lengths, quantity, scheduledAt, completedAt, operator, QAStatus'],
+  ['Partner', 'id, type, region, capabilities, status, relationshipOwner, notes, publicListingAllowed'],
+  ['ContentPage', 'domain, route, intent, targetKeyword, canonical, schemaType, publicSafe, owner, lastReviewedAt'],
+]
+const internalOntologySeoMap = [
+  ['APF', 'metal panel manufacturing', 'manufacturing, guides, glossary, roll forming, custom fabrication, capabilities'],
+  ['APF', 'roll forming services', 'roll-forming guide, manufacturing education, equipment/workflow content'],
+  ['APF', 'architectural metal fabrication', 'custom fabrication, trim/flashing education, capability pages'],
+  ['APF', 'standing seam vs R-Panel', 'comparison guide that can refer product-ready readers to ASP'],
+  ['ASP', 'metal roofing panels', 'home, products, PBR/R-panel, AG/Tuff Rib, state pages'],
+  ['ASP', 'PBR panel / R-panel', 'product page, FAQs, quote CTA, plan upload CTA'],
+  ['ASP', 'AG panel / Tuff Rib', 'agricultural product page, barns/shops/ranches content'],
+  ['ASP', 'trim and flashing', 'product page with quote CTA, upload CTA, details, photos'],
+  ['ASP', 'commercial metal roofing panels', 'commercial page, warehouse/industrial applications, quote workflow'],
+  ['ASP', 'state metal panels', 'California, Arizona, Texas, Florida service pages without claiming fake offices'],
+]
+const internalOntologyGovernance = [
+  '8190 is private master/internal. It may contain APF/ASP abbreviations, strategy, scores, NDA reminders, software plans, and acquisition thinking.',
+  '8192 APF beta/public authority site must not contain internal funnel language, abbreviations, NDA-derived facts, private financials, or staging notes.',
+  '8193 ASP public sales site must be product-focused, contractor-first, quote-first, and free of investor/ecosystem language.',
+  'No duplicate sibling app folders in /Users/askander/dev/apps. Domain worktrees live under /Users/askander/dev/apps/metal with -com folder naming.',
+  'Never publish machine count, machine output, staffing, warehouse size, investment, margins, break-even, sales projections, supplier pricing, or owner background unless explicitly cleared.',
+  'Every public route should have unique title, description, H1, intro copy, self-canonical, and appropriate schema.',
+  'Every stock image should map to a future real-photo replacement target.',
+  'Real machine, steel coil, bundle, truck loading, trim fabrication, warehouse, employee, and project photos outrank decorative design work.',
 ]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
@@ -427,6 +602,10 @@ function RoutedPage({ path }: { path: string }) {
     return <InternalStrategyPage />
   }
 
+  if (path === 'internal-ontology') {
+    return <InternalOntologyPage />
+  }
+
   if (path === 'projects') {
     return (
       <>
@@ -560,6 +739,9 @@ function InternalStrategyPage() {
               Public pages should say Americas Panel Fab and American Super Panel, not APF/ASP.
               Keep funnel, SEO separation, cannibalization, acquisition, NDA, and scoring language here.
             </p>
+            <a className="btn-primary mt-5" href="/internal-ontology">
+              Open Full Ontology <ArrowRight size={18} />
+            </a>
           </div>
         </div>
       </section>
@@ -615,6 +797,179 @@ function InternalStrategyPage() {
         </div>
       </section>
     </>
+  )
+}
+
+function InternalOntologyPage() {
+  return (
+    <>
+      <section className="section border-b border-slate-200 bg-[#0b1f33] text-white">
+        <div className="max-w-6xl">
+          <p className="eyebrow text-orange-200">Internal Master Ontology • 8190 Only</p>
+          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal lg:text-6xl">
+            Metal Panel Business Ontology
+          </h1>
+          <p className="mt-6 max-w-5xl text-xl leading-8 text-slate-200">
+            A private knowledge model for the APF / ASP brand system, product taxonomy,
+            lead capture, manufacturing workflows, SEO separation, partner network,
+            and future ERP/agentic software. This is operating architecture, not public copy.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-4">
+            {[
+              ['Brands', 'Company, product family, domains, disclosures'],
+              ['Demand', 'Contractors, owners, dealers, procurement'],
+              ['Operations', 'Quote, upload, takeoff, production, delivery'],
+              ['Software', 'ERP, portals, calculators, agents, trackers'],
+            ].map(([label, copy]) => (
+              <div key={label} className="rounded border border-white/15 bg-white/10 p-5">
+                <p className="text-xl font-black">{label}</p>
+                <p className="mt-2 leading-7 text-slate-200">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <InternalOntologySection
+        eyebrow="Entity Classes"
+        title="Core entities by domain."
+        copy="This is the noun layer: brands, buyers, products, manufacturing capabilities, lead objects, and future software modules."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalOntologyDomains.map((group) => (
+            <article key={group.domain} className="card">
+              <p className="eyebrow text-[#f97316]">Domain</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{group.domain}</h2>
+              <div className="mt-5 grid gap-3">
+                {group.entities.map(([entity, definition]) => (
+                  <div key={entity} className="rounded border border-slate-200 bg-slate-50 p-4">
+                    <p className="font-black text-[#0b1f33]">{entity}</p>
+                    <p className="mt-2 leading-7 text-slate-600">{definition}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Relationship Graph"
+        title="Subject -> predicate -> object relationships."
+        copy="These triples can later map to a real knowledge graph, CRM schema, analytics taxonomy, or operating database."
+      >
+        <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
+          <table className="product-proof-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Predicate</th>
+                <th>Object</th>
+              </tr>
+            </thead>
+            <tbody>
+              {internalOntologyRelations.map(([subject, predicate, object]) => (
+                <tr key={`${subject}-${predicate}-${object}`}>
+                  <th>{subject}</th>
+                  <td>{predicate}</td>
+                  <td>{object}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Workflows"
+        title="Process ontology from visitor to fulfilled order."
+        copy="The verb layer: actions, transitions, and handoffs that become software workflows."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalOntologyWorkflows.map((workflow) => (
+            <article key={workflow.name} className="card">
+              <p className="eyebrow text-[#f97316]">Workflow</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{workflow.name}</h2>
+              <ol className="mt-5 grid gap-3">
+                {workflow.steps.map((step, index) => (
+                  <li key={step} className="flex gap-3 leading-7 text-slate-700">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-[#0b1f33] text-sm font-black text-white">
+                      {index + 1}
+                    </span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Data Objects"
+        title="ERP and agentic software object model."
+        copy="These records can become tables, API resources, agent memory objects, CRM fields, or event payloads."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalOntologyDataObjects.map(([object, fields]) => (
+            <article key={object} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <h2 className="text-xl font-black text-[#0b1f33]">{object}</h2>
+              <p className="mt-3 font-mono text-sm leading-7 text-slate-600">{fields}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="SEO Ownership"
+        title="Keyword and route ownership map."
+        copy="This keeps APF authority content from competing with ASP product-conversion pages."
+      >
+        <div className="grid gap-4">
+          {internalOntologySeoMap.map(([domain, keyword, route]) => (
+            <article key={`${domain}-${keyword}`} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.2fr_0.32fr_0.48fr] md:items-center">
+              <p className="font-black text-[#f97316]">{domain}</p>
+              <p className="text-xl font-black text-[#0b1f33]">{keyword}</p>
+              <p className="leading-7 text-slate-600">{route}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Governance"
+        title="Publishing, repo, and NDA boundaries."
+        copy="The guardrail layer. This is what prevents private strategy from leaking back into public sites."
+      >
+        <div className="grid gap-3">
+          {internalOntologyGovernance.map((rule) => (
+            <p key={rule} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-semibold leading-7 text-slate-700 shadow">
+              <ShieldCheck className="mt-1 shrink-0 text-[#f97316]" size={20} />
+              {rule}
+            </p>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalOntologySection({
+  children,
+  copy,
+  eyebrow,
+  title,
+}: {
+  children: ReactNode
+  copy: string
+  eyebrow: string
+  title: string
+}) {
+  return (
+    <section className="section bg-slate-50 even:bg-white">
+      <SectionIntro eyebrow={eyebrow} title={title} copy={copy} />
+      <div className="mt-10">{children}</div>
+    </section>
   )
 }
 
