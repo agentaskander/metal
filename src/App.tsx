@@ -2131,7 +2131,7 @@ const authorityPages = {
   manufacturing: {
     eyebrow: 'Manufacturing',
     title: 'Metal Panel Manufacturing Built for Scale and Trust',
-    copy: 'Americas Panel Fab is the manufacturing company behind American Super Panel, with a focus on disciplined panel production, product system support, and partner-ready operating systems.',
+    copy: 'Americas Panel Fab is the manufacturing company behind American Super Panel, with a focus on panel production, fabrication support, documentation, and organized project handoff.',
     introTitle: 'How metal panel programs move from project information to finished packages.',
     introCopy: 'Manufacturing resources explain material flow, profile planning, trim coordination, documentation, packaging, and the review steps buyers should understand before a panel order is released.',
     image: machineImage,
@@ -2213,28 +2213,42 @@ const authorityPages = {
 function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof authorityPages] }) {
   return (
     <>
-      <PageHero title={page.title} copy={page.copy} />
-      <section className="section bg-white">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <img src={page.image} alt={page.imageAlt} className="h-[430px] w-full rounded object-cover shadow-xl" />
+      <section className="section border-b border-slate-200 bg-white">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <SectionIntro
-              eyebrow={page.eyebrow}
-              title={page.introTitle}
-              copy={page.introCopy}
-            />
-            <div className="mt-8 grid gap-3">
+            <p className="eyebrow text-[#f97316]">{page.eyebrow}</p>
+            <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33]">{page.title}</h1>
+            <p className="mt-6 text-xl leading-8 text-slate-600">{page.copy}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="btn-primary" href="/guides">
+                Explore Guides
+              </a>
+              <a className="btn-secondary" href="#contact">
+                Partner Inquiry
+              </a>
+            </div>
+          </div>
+          <img src={page.image} alt={page.imageAlt} className="h-[360px] w-full rounded object-cover shadow-xl" />
+        </div>
+      </section>
+      <section className="section bg-slate-50">
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <div>
+            <p className="eyebrow text-[#f97316]">{page.eyebrow} Overview</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight text-[#0b1f33]">{page.introTitle}</h2>
+            <p className="mt-4 text-lg leading-8 text-slate-600">{page.introCopy}</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
               {page.points.map((point) => (
-                <p key={point} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-bold text-[#0b1f33]">
+                <p key={point} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-bold text-[#0b1f33] shadow-sm">
                   <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
                   {point}
                 </p>
               ))}
-            </div>
           </div>
         </div>
       </section>
-      <section className="section bg-slate-50">
+      <section className="section bg-white">
         <div className="grid gap-5 md:grid-cols-3">
           {page.sections.map(([title, copy]) => (
             <article key={title} className="card">
