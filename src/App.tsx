@@ -491,8 +491,28 @@ function PageHero({ title, copy, eyebrow = 'American Super Panel' }: { title: st
         <p className="eyebrow text-[#f97316]">{eyebrow}</p>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-5xl">{title}</h1>
         <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600">{copy}</p>
+        <PageActionBar />
       </div>
     </section>
+  )
+}
+
+function PageActionBar() {
+  return (
+    <div className="mt-6 flex flex-wrap gap-3">
+      <a className="btn-primary" href="#quote">
+        Request Quote <ArrowRight size={18} />
+      </a>
+      <a className="btn-secondary" href="#upload-plans">
+        <UploadCloud size={18} /> Upload Plans
+      </a>
+      <a className="btn-secondary" href="#contact">
+        <Phone size={18} /> Call Sales
+      </a>
+      <a className="btn-secondary" href="/resources">
+        <Download size={18} /> Resources
+      </a>
+    </div>
   )
 }
 
