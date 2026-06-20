@@ -1186,6 +1186,22 @@ function RoutedPage({ path }: { path: string }) {
     return <InternalImplementationPage />
   }
 
+  if (path === 'internal-data-model') {
+    return <InternalDataModelPage />
+  }
+
+  if (path === 'internal-workflows') {
+    return <InternalWorkflowsPage />
+  }
+
+  if (path === 'internal-agents') {
+    return <InternalAgentsPage />
+  }
+
+  if (path === 'internal-events') {
+    return <InternalEventsPage />
+  }
+
   if (path === 'projects') {
     return (
       <>
@@ -1668,6 +1684,30 @@ function InternalImplementationPage() {
       </section>
 
       <InternalOntologySection
+        eyebrow="Implementation Deep Dives"
+        title="Split build model by implementation concern."
+        copy="Use the focused pages below when building schemas, workflow engines, event queues, and AI agents."
+      >
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            ['/internal-data-model', 'Data Model', 'Tables, fields, enums, permissions, and schema artifact.'],
+            ['/internal-workflows', 'Workflows', 'State machines, transitions, automation rules, and MVP order.'],
+            ['/internal-agents', 'Agents', 'Agent contracts, inputs, tools, outputs, escalation rules, and permissions.'],
+            ['/internal-events', 'Events', 'Event taxonomy, triggers, payload guidance, and automation handoff.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Build Page</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
         eyebrow="Build Artifacts"
         title="Generated internal files for implementation."
         copy="These repo files are the next handoff point for database migrations, workflow tickets, and agent implementation."
@@ -1851,6 +1891,384 @@ function InternalImplementationPage() {
         </div>
       </InternalOntologySection>
     </>
+  )
+}
+
+function InternalDataModelPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Data Model • 8190 Only"
+        title="Database Schema & Controlled Vocabulary"
+        copy="The buildable data layer for CRM, quote pipeline, plan uploads, inventory, production, events, and agent run history."
+        stats={[
+          [`${implementationTables.length}`, 'core tables'],
+          [`${implementationEnums.length}`, 'enum vocabularies'],
+          ['SQLite', 'validated schema draft'],
+          ['Private', 'cost and NDA fields guarded'],
+        ]}
+      />
+
+      <InternalOntologySection
+        eyebrow="Schema Artifact"
+        title="Database file."
+        copy="The SQL artifact is stored in the repo so it can become a migration source."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          <article className="card">
+            <p className="eyebrow text-[#f97316]">Artifact</p>
+            <h2 className="mt-3 font-mono text-2xl font-black text-[#0b1f33]">internal/schema.sql</h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              D1/SQLite schema draft with tables, constraints, indexes, state fields, and core relationship references.
+            </p>
+          </article>
+          <article className="card">
+            <p className="eyebrow text-[#f97316]">Next Build Step</p>
+            <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">Turn schema draft into migrations.</h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              Add migration numbering, seed data, stricter foreign keys, updated_at triggers, and test fixtures for lead-to-order flow.
+            </p>
+          </article>
+        </div>
+      </InternalOntologySection>
+
+      <DatabaseTablesSection />
+      <EnumsSection />
+      <PermissionsSection />
+    </>
+  )
+}
+
+function InternalWorkflowsPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Workflows • 8190 Only"
+        title="State Machines, Automation Rules & MVP Build Order"
+        copy="The process layer: how leads, quotes, orders, production runs, tasks, and handoffs move through the operating system."
+        stats={[
+          [`${implementationStateMachines.length}`, 'state machines'],
+          [`${implementationAutomationRules.length}`, 'automation rules'],
+          [`${implementationMvpBacklog.length}`, 'MVP phases'],
+          ['Human gates', 'pricing and claims guarded'],
+        ]}
+      />
+      <StateMachinesSection />
+      <AutomationRulesSection />
+      <MvpBuildOrderSection />
+    </>
+  )
+}
+
+function InternalAgentsPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Agents • 8190 Only"
+        title="AI Agent Contracts & Access Boundaries"
+        copy="The agent layer: scoped workers with missions, inputs, tools, outputs, escalation rules, permissions, and audit requirements."
+        stats={[
+          [`${implementationAgents.length}`, 'agent contracts'],
+          [`${implementationPermissions.length}`, 'permission roles'],
+          ['Approval', 'required for external/pricing outputs'],
+          ['Audit', 'agent_runs + events'],
+        ]}
+      />
+      <AgentsSection />
+      <PermissionsSection />
+      <InternalOntologySection
+        eyebrow="Agent Run Storage"
+        title="Every agent action should leave a trace."
+        copy="Use agent_runs plus events to reconstruct what the agent saw, did, recommended, and escalated."
+      >
+        <div className="grid gap-3">
+          {[
+            'Store input_payload and output_payload as JSON.',
+            'Capture trigger_event_id when an event starts the run.',
+            'Capture confidence_score when the model produces extraction, classification, or recommendation output.',
+            'Require escalation_reason for failed or escalated runs.',
+            'Do not allow agents to send external pricing or legal claims without human approval.',
+          ].map((rule) => (
+            <p key={rule} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-semibold leading-7 text-slate-700 shadow">
+              <ShieldCheck className="mt-1 shrink-0 text-[#f97316]" size={20} />
+              {rule}
+            </p>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalEventsPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Events • 8190 Only"
+        title="Event Taxonomy & Automation Triggers"
+        copy="The event layer: names, meanings, triggers, payloads, and consumers for timelines, queues, automations, and AI agents."
+        stats={[
+          [`${implementationEvents.length}`, 'event names'],
+          ['events', 'central audit table'],
+          ['tasks', 'human work queue'],
+          ['agent_runs', 'AI execution log'],
+        ]}
+      />
+      <EventsSection />
+      <InternalOntologySection
+        eyebrow="Event Payload Guidance"
+        title="Minimum payloads by event family."
+        copy="Events should be small, stable, and enough to let workers load the full entity when needed."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {[
+            ['lead.*', 'lead_id, source_domain, source_route, status, assigned_user_id, score, project_state, panel_intent'],
+            ['file.*', 'uploaded_file_id, lead_id, project_id, file_name, mime_type, size_bytes, review_status'],
+            ['quote.*', 'quote_id, project_id, version, status, total, valid_until, created_by_user_id'],
+            ['order.*', 'order_id, quote_id, payment_status, production_status, delivery_status, promised_date'],
+            ['production_run.*', 'production_run_id, order_id, machine_id, coil_lot_id, status, qa_status'],
+            ['agent.*', 'agent_run_id, agent_name, trigger_event_id, status, confidence_score, escalation_reason'],
+          ].map(([family, payload]) => (
+            <article key={family} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <h2 className="font-mono text-xl font-black text-[#0b1f33]">{family}</h2>
+              <p className="mt-3 font-mono text-sm leading-7 text-slate-600">{payload}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <AutomationRulesSection />
+    </>
+  )
+}
+
+function InternalPageHero({
+  copy,
+  eyebrow,
+  stats,
+  title,
+}: {
+  copy: string
+  eyebrow: string
+  stats: string[][]
+  title: string
+}) {
+  return (
+    <section className="section border-b border-slate-200 bg-white">
+      <div className="max-w-6xl">
+        <p className="eyebrow text-[#f97316]">{eyebrow}</p>
+        <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">{title}</h1>
+        <p className="mt-6 max-w-5xl text-xl leading-8 text-slate-600">{copy}</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-4">
+          {stats.map(([value, label]) => (
+            <div key={`${value}-${label}`} className="rounded border border-slate-200 bg-slate-50 p-5">
+              <p className="text-3xl font-black text-[#0b1f33]">{value}</p>
+              <p className="mt-2 font-semibold leading-7 text-slate-600">{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function DatabaseTablesSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="Database Schema"
+      title="Tables, purposes, fields, and relationship hints."
+      copy="This is enough to start a D1/Postgres/Supabase schema draft, but it still needs final field naming, migrations, constraints, and indexes."
+    >
+      <div className="grid gap-5">
+        {implementationTables.map((table) => (
+          <article key={table.table} className="card">
+            <p className="eyebrow text-[#f97316]">Table</p>
+            <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{table.table}</h2>
+            <p className="mt-3 text-lg leading-8 text-slate-600">{table.purpose}</p>
+            <div className="mt-6 overflow-hidden rounded border border-slate-200">
+              <table className="product-proof-table">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Rule</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {table.fields.map(([field, type, rule]) => (
+                    <tr key={`${table.table}-${field}`}>
+                      <th>{field}</th>
+                      <td>{type}</td>
+                      <td>{rule}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function EnumsSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="Controlled Vocabulary"
+      title="Enums that keep humans, forms, automations, and agents aligned."
+      copy="Enums prevent the same concept from becoming five spellings across forms, databases, dashboards, and agent prompts."
+    >
+      <div className="grid gap-4 md:grid-cols-2">
+        {implementationEnums.map(([name, values]) => (
+          <article key={name} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+            <h2 className="text-xl font-black text-[#0b1f33]">{name}</h2>
+            <p className="mt-3 font-mono text-sm leading-7 text-slate-600">{values}</p>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function StateMachinesSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="State Machines"
+      title="Allowed lifecycle states and transitions."
+      copy="Automation becomes safer when each object has known states and explicit transitions."
+    >
+      <div className="grid gap-5 lg:grid-cols-2">
+        {implementationStateMachines.map((machine) => (
+          <article key={machine.entity} className="card">
+            <p className="eyebrow text-[#f97316]">State Machine</p>
+            <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{machine.entity}</h2>
+            <p className="mt-4 font-mono text-sm leading-7 text-slate-600">{machine.states.join(' -> ')}</p>
+            <ul className="mt-5 grid gap-3">
+              {machine.transitions.map((transition) => (
+                <li key={transition} className="flex gap-3 leading-7 text-slate-700">
+                  <ArrowRight className="mt-1 shrink-0 text-[#f97316]" size={18} />
+                  <span>{transition}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function EventsSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="Event Taxonomy"
+      title="Events that drive automations, timelines, and AI agents."
+      copy="Events are the nervous system of the future ERP. They trigger tasks, notifications, agent runs, status changes, and audit logs."
+    >
+      <div className="grid gap-3">
+        {implementationEvents.map(([event, meaning]) => (
+          <article key={event} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.28fr_0.72fr] md:items-center">
+            <p className="font-mono text-sm font-black text-[#f97316]">{event}</p>
+            <p className="leading-7 text-slate-600">{meaning}</p>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function AutomationRulesSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="Automation Rules"
+      title="Business rules that can become code, queues, validations, and alerts."
+      copy="These are intentionally specific enough to become tickets or tests."
+    >
+      <div className="grid gap-4 md:grid-cols-2">
+        {implementationAutomationRules.map(([rule, detail]) => (
+          <article key={rule} className="card">
+            <p className="eyebrow text-[#f97316]">Rule</p>
+            <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{rule}</h2>
+            <p className="mt-3 leading-7 text-slate-600">{detail}</p>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function AgentsSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="AI Agents"
+      title="Agent roles, inputs, tools, outputs, and escalation rules."
+      copy="Each agent is scoped like a worker with permissions, not a vague chatbot."
+    >
+      <div className="grid gap-5">
+        {implementationAgents.map((agent) => (
+          <article key={agent.name} className="card">
+            <p className="eyebrow text-[#f97316]">Agent Contract</p>
+            <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{agent.name}</h2>
+            <p className="mt-3 text-lg leading-8 text-slate-600">{agent.mission}</p>
+            <div className="mt-6 grid gap-4 lg:grid-cols-4">
+              {[
+                ['Inputs', agent.inputs],
+                ['Tools', agent.tools],
+                ['Outputs', agent.outputs],
+                ['Escalation', [agent.escalation]],
+              ].map(([label, items]) => (
+                <div key={label as string} className="rounded border border-slate-200 bg-slate-50 p-5">
+                  <h3 className="text-lg font-black text-[#0b1f33]">{label as string}</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {(items as string[]).map((item) => (
+                      <li key={item} className="leading-7 text-slate-700">{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function PermissionsSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="Permissions"
+      title="Roles and access boundaries."
+      copy="Permissions matter early because private pricing, margins, NDA facts, and agent actions must not leak."
+    >
+      <div className="grid gap-4 md:grid-cols-2">
+        {implementationPermissions.map(([role, access]) => (
+          <article key={role} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+            <h2 className="font-mono text-lg font-black text-[#0b1f33]">{role}</h2>
+            <p className="mt-3 leading-7 text-slate-600">{access}</p>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
+  )
+}
+
+function MvpBuildOrderSection() {
+  return (
+    <InternalOntologySection
+      eyebrow="MVP Build Order"
+      title="Practical build sequence from lead capture to ERP."
+      copy="This prevents trying to build the whole operating system before the first reliable database and workflow loops exist."
+    >
+      <div className="grid gap-4">
+        {implementationMvpBacklog.map(([phase, detail]) => (
+          <article key={phase} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.18fr_0.82fr] md:items-center">
+            <h2 className="text-xl font-black text-[#0b1f33]">{phase}</h2>
+            <p className="leading-7 text-slate-600">{detail}</p>
+          </article>
+        ))}
+      </div>
+    </InternalOntologySection>
   )
 }
 
