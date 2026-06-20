@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import {
   ArrowRight,
   Award,
@@ -53,20 +53,21 @@ const products = [
     copy: 'Ribbed metal roofing and siding panels for commercial, warehouse, shop, and agricultural buildings.',
     points: ['Roofing and siding use', 'Bulk contractor orders', 'Trim and flashing support'],
     spec: 'Commercial • Industrial • Agricultural',
-    href: '/american-super-panel-industrial-rib',
+    href: '/pbr-panel',
   },
   {
     name: 'AG / Tuff Rib Panel',
     copy: 'Contractor-ready ribbed panels for barns, shops, storage buildings, equipment shelters, farms, and ranches.',
     points: ['Agricultural projects', 'Roof and wall packages', 'Responsive quote support'],
     spec: 'Barns • Shops • Storage • Ranches',
-    href: '/american-super-panel-industrial-rib',
+    href: '/ag-panel',
   },
   {
     name: 'Trim & Flashing',
     copy: 'Matching trim and flashing packages for roof edges, walls, corners, openings, transitions, and project closeout.',
     points: ['Ridge, rake, eave, and corners', 'Wall transitions', 'Job-labeled packages'],
     spec: 'Roof trim • Wall trim • Flashing',
+    href: '/trim-and-flashing',
   },
   {
     name: 'Accessories',
@@ -119,6 +120,7 @@ const states = [
 ]
 
 const projectCategories = ['Commercial', 'Industrial', 'Agricultural', 'Residential']
+const aspOrigin = 'https://www.americansuperpanel.com'
 const contractorOutcomes = [
   ['Request a Quote', 'Send panel type, project state, square footage, and timing so sales can respond with the right next step.'],
   ['Upload Plans', 'Share drawings, roof plans, wall elevations, and notes for cleaner takeoff review.'],
@@ -310,12 +312,174 @@ type SubmitState = {
 
 const idleSubmitState: SubmitState = { kind: 'idle', message: '' }
 
+type SeoConfig = {
+  canonicalPath: string
+  description: string
+  schema?: Record<string, unknown> | Record<string, unknown>[]
+  title: string
+}
+
+const baseBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'American Super Panel',
+  url: aspOrigin,
+  email: 'sales@americansuperpanel.com',
+  telephone: '+1-555-019-3762',
+  areaServed: ['California', 'Arizona', 'Texas', 'Florida'],
+  description:
+    'American Super Panel supplies contractor-ready metal roofing panels, siding panels, trim, flashing, and accessories.',
+}
+
+function productSchema(name: string, description: string, path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name,
+    brand: { '@type': 'Brand', name: 'American Super Panel' },
+    manufacturer: { '@type': 'Organization', name: 'Americas Panel Fab' },
+    category: 'Metal roofing panels',
+    description,
+    url: `${aspOrigin}${path}`,
+  }
+}
+
+function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoConfig {
+  if (statePage) {
+    return {
+      canonicalPath: `/${statePage.slug}`,
+      description: statePage.copy,
+      title: `${statePage.name} Metal Roofing Panels | American Super Panel`,
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: `${statePage.name} Metal Roofing Panels`,
+        url: `${aspOrigin}/${statePage.slug}`,
+        description: statePage.copy,
+      },
+    }
+  }
+
+  const routeSeo: Record<string, SeoConfig> = {
+    '': {
+      canonicalPath: '/',
+      description:
+        'American Super Panel supplies custom-length metal roofing panels, siding panels, trim, flashing, and contractor quote support.',
+      title: 'American Super Panel | Metal Roofing Panels Built for Contractors',
+      schema: baseBusinessSchema,
+    },
+    products: {
+      canonicalPath: '/products',
+      description:
+        'Shop American Super Panel metal roofing panels, siding panels, trim, flashing, and accessories for commercial and agricultural projects.',
+      title: 'Metal Roofing Panel Products | American Super Panel',
+    },
+    'pbr-panel': {
+      canonicalPath: '/pbr-panel',
+      description:
+        'PBR and R-Panel metal roofing and siding panels for commercial buildings, warehouses, shops, agricultural buildings, and contractor orders.',
+      title: 'PBR / R-Panel Metal Roofing Panels | American Super Panel',
+      schema: productSchema(
+        'PBR / R-Panel Metal Roofing and Siding Panels',
+        'Ribbed exposed-fastener metal panels for commercial, industrial, warehouse, shop, and agricultural buildings.',
+        '/pbr-panel',
+      ),
+    },
+    'ag-panel': {
+      canonicalPath: '/ag-panel',
+      description:
+        'AG and Tuff Rib metal panels for barns, shops, storage buildings, equipment shelters, ranches, farms, and rural building projects.',
+      title: 'AG / Tuff Rib Metal Panels | American Super Panel',
+      schema: productSchema(
+        'AG / Tuff Rib Metal Panels',
+        'Contractor-ready ribbed metal roofing and siding panels for agricultural and rural building projects.',
+        '/ag-panel',
+      ),
+    },
+    'trim-and-flashing': {
+      canonicalPath: '/trim-and-flashing',
+      description:
+        'Trim, flashing, closures, fastener coordination, and accessory support for American Super Panel metal roofing and siding packages.',
+      title: 'Metal Roofing Trim & Flashing | American Super Panel',
+      schema: productSchema(
+        'Metal Roofing Trim and Flashing',
+        'Finish-matched trim, flashing, and accessory packages for metal roofing and siding projects.',
+        '/trim-and-flashing',
+      ),
+    },
+    contractors: {
+      canonicalPath: '/contractors',
+      description:
+        'Contractor metal panel support for custom lengths, bulk orders, plan uploads, trim packages, and fast quote communication.',
+      title: 'Metal Panels Built for Contractors | American Super Panel',
+    },
+    commercial: {
+      canonicalPath: '/commercial',
+      description:
+        'Commercial metal roofing and siding panels for warehouses, industrial buildings, retail, multifamily, schools, and municipal projects.',
+      title: 'Commercial Metal Roofing Panels | American Super Panel',
+    },
+    agricultural: {
+      canonicalPath: '/agricultural',
+      description:
+        'Agricultural metal roofing and siding panels for barns, shops, storage buildings, equipment shelters, ranches, and farms.',
+      title: 'Agricultural Metal Panels | American Super Panel',
+    },
+    'request-quote': {
+      canonicalPath: '/request-quote',
+      description:
+        'Request a metal panel quote for roofing panels, siding panels, trim, flashing, and contractor packages from American Super Panel.',
+      title: 'Request a Metal Panel Quote | American Super Panel',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: 'Request a Metal Panel Quote',
+        url: `${aspOrigin}/request-quote`,
+        description: 'Quote request page for American Super Panel metal roofing panels, siding panels, trim, and flashing.',
+      },
+    },
+    'upload-plans': {
+      canonicalPath: '/upload-plans',
+      description:
+        'Upload project plans, roof drawings, wall elevations, structural documents, and notes for American Super Panel quote review.',
+      title: 'Upload Plans for Metal Panel Quote | American Super Panel',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'Upload Plans for Metal Panel Quote',
+        url: `${aspOrigin}/upload-plans`,
+        description: 'Plan upload page for American Super Panel roofing, siding, trim, and flashing quote review.',
+      },
+    },
+    'american-super-panel-industrial-rib': {
+      canonicalPath: '/american-super-panel-industrial-rib',
+      description:
+        'Industrial Rib metal roofing and siding panels with contractor-ready quote support, custom lengths, trim, flashing, and accessories.',
+      title: 'Industrial Rib Metal Roofing Panels | American Super Panel',
+      schema: productSchema(
+        'American Super Panel Industrial Rib',
+        'Industrial Rib metal roofing and siding panels for commercial, industrial, agricultural, and residential projects.',
+        '/american-super-panel-industrial-rib',
+      ),
+    },
+  }
+
+  return routeSeo[path] ?? {
+    canonicalPath: `/${path}`,
+    description:
+      'American Super Panel supplies metal roofing panels, siding panels, trim, flashing, and quote support for contractors.',
+    title: 'American Super Panel | Metal Roofing Panels',
+  }
+}
+
 function App() {
   const path = window.location.pathname.replace(/^\/+/, '')
   const statePage = states.find((state) => state.slug === path)
+  const seoConfig = getSeoConfig(path, statePage)
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
+      <SeoManager config={seoConfig} />
       <Header />
       <main>
         {statePage ? (
@@ -329,6 +493,45 @@ function App() {
       <Footer />
     </div>
   )
+}
+
+function SeoManager({ config }: { config: SeoConfig }) {
+  useEffect(() => {
+    document.title = config.title
+
+    const description = upsertHeadElement('meta', 'name', 'description') as HTMLMetaElement
+    description.content = config.description
+
+    const canonical = upsertHeadElement('link', 'rel', 'canonical') as HTMLLinkElement
+    canonical.href = `${aspOrigin}${config.canonicalPath}`
+
+    const existingSchema = document.head.querySelector('#route-schema')
+    existingSchema?.remove()
+
+    if (config.schema) {
+      const script = document.createElement('script')
+      script.id = 'route-schema'
+      script.type = 'application/ld+json'
+      script.text = JSON.stringify(Array.isArray(config.schema) ? { '@context': 'https://schema.org', '@graph': config.schema } : config.schema)
+      document.head.appendChild(script)
+    }
+  }, [config])
+
+  return null
+}
+
+function upsertHeadElement(tagName: 'meta' | 'link', attribute: string, value: string) {
+  const selector = `${tagName}[${attribute}="${value}"]`
+  const existing = document.head.querySelector(selector)
+
+  if (existing) {
+    return existing
+  }
+
+  const element = document.createElement(tagName)
+  element.setAttribute(attribute, value)
+  document.head.appendChild(element)
+  return element
 }
 
 function RoutedPage({ path }: { path: string }) {
@@ -365,6 +568,18 @@ function RoutedPage({ path }: { path: string }) {
         <Contact />
       </>
     )
+  }
+
+  if (path === 'pbr-panel') {
+    return <PanelProductPage product={panelProductPages.pbr} />
+  }
+
+  if (path === 'ag-panel') {
+    return <PanelProductPage product={panelProductPages.ag} />
+  }
+
+  if (path === 'trim-and-flashing') {
+    return <PanelProductPage product={panelProductPages.trim} />
   }
 
   if (path === 'contractors') {
@@ -473,6 +688,14 @@ function RoutedPage({ path }: { path: string }) {
         <Contact />
       </>
     )
+  }
+
+  if (path === 'request-quote') {
+    return <RequestQuotePage />
+  }
+
+  if (path === 'upload-plans') {
+    return <UploadPlansPage />
   }
 
   return (
@@ -1152,6 +1375,146 @@ function MarketApplicationDetails({ icon: Icon, targets }: { icon: IconType; tar
   )
 }
 
+const panelProductPages = {
+  pbr: {
+    eyebrow: 'PBR / R-Panel',
+    title: 'PBR / R-Panel Metal Roofing & Siding Panels',
+    copy: 'A practical exposed-fastener panel path for commercial buildings, warehouses, shops, industrial support buildings, and agricultural projects that need dependable roof and wall coverage.',
+    image: siteImages.panelCloseup,
+    specs: ['Roofing and siding applications', 'Commercial, industrial, agricultural, and shop buildings', 'Custom-length panel quote support', 'Matching trim, flashing, and accessories'],
+    applications: ['Warehouses', 'Industrial buildings', 'Retail shells', 'Equipment shops', 'Storage buildings', 'Agricultural buildings'],
+    quote: 'Send drawings, panel lengths, square footage, trim scope, and project state so sales can package the right panel, finish, and accessory path.',
+  },
+  ag: {
+    eyebrow: 'AG / Tuff Rib',
+    title: 'AG / Tuff Rib Metal Panels',
+    copy: 'A contractor-ready ribbed metal panel option for barns, shops, storage buildings, equipment shelters, ranch structures, and farm projects where straightforward ordering matters.',
+    image: siteImages.agBuilding,
+    specs: ['Roof and wall panel packages', 'Agricultural and rural building use', 'Custom lengths reviewed by project', 'Trim and flashing support for common details'],
+    applications: ['Barns', 'Shops', 'Storage buildings', 'Equipment shelters', 'Ranches', 'Farms'],
+    quote: 'Send the building size, roof or wall scope, color needs, trim list, and timing so the sales team can respond with the next step.',
+  },
+  trim: {
+    eyebrow: 'Trim & Flashing',
+    title: 'Metal Roofing Trim, Flashing & Accessories',
+    copy: 'Finish-matched trim and flashing support for roof edges, wall corners, openings, ridge conditions, transitions, and project closeout.',
+    image: siteImages.trimFabrication,
+    specs: ['Ridge, rake, eave, corner, jamb, base, and transition pieces', 'Roof and wall accessory coordination', 'Job-labeled package support', 'Color and finish coordination with panel orders'],
+    applications: ['Roof edges', 'Wall corners', 'Openings', 'Transitions', 'Closures and fasteners', 'Project closeout'],
+    quote: 'Upload plans, sketches, elevations, or trim notes so estimating can understand the details before the first sales call.',
+  },
+}
+
+function PanelProductPage({ product }: { product: (typeof panelProductPages)[keyof typeof panelProductPages] }) {
+  return (
+    <>
+      <PageHero eyebrow={product.eyebrow} title={product.title} copy={product.copy} />
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <img src={product.image.src} alt={product.image.alt} className="h-[430px] w-full rounded object-cover shadow-xl" />
+          </div>
+          <div>
+            <SectionIntro
+              eyebrow="Product Data"
+              title="Built for ordering, estimating, and field coordination."
+              copy={product.quote}
+            />
+            <div className="mt-8 grid gap-3">
+              {product.specs.map((spec) => (
+                <p key={spec} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-bold text-[#0b1f33]">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                  {spec}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="Applications"
+          title="Common project fits."
+          copy="Use the list below as a starting point for quote requests. Final panel, finish, trim, and accessory details should be reviewed against the actual project scope."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {product.applications.map((application) => (
+            <a key={application} className="card group block" href="#quote">
+              <Building2 className="mb-5 text-[#f97316]" />
+              <h3 className="text-xl font-black text-[#0b1f33]">{application}</h3>
+              <p className="mt-3 leading-7 text-slate-600">Request panel, trim, flashing, and accessory support for this project type.</p>
+              <span className="mt-5 inline-flex font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Start quote <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+      <BidResources />
+      <Contact />
+    </>
+  )
+}
+
+function RequestQuotePage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Request Quote"
+        title="Request a Metal Panel Quote"
+        copy="Send project basics, panel type, square footage, state, and timing so sales can review the right roof, siding, trim, flashing, and accessory path."
+      />
+      <section className="section bg-slate-50">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+          <div>
+            <SectionIntro
+              eyebrow="Quote Intake"
+              title="Better project data makes the first response stronger."
+              copy="Include panel type, roof or wall scope, trim needs, desired timing, delivery state, and any drawings you already have."
+            />
+            <div className="mt-8 grid gap-3">
+              {['Panel type and project state', 'Estimated square footage', 'Commercial, agricultural, industrial, or residential use', 'Trim, flashing, and accessory notes'].map((item) => (
+                <p key={item} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-bold text-[#0b1f33]">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+          <QuoteForm />
+        </div>
+      </section>
+    </>
+  )
+}
+
+function UploadPlansPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Upload Plans"
+        title="Upload Plans for Quote Review"
+        copy="Share roof plans, wall elevations, drawings, sketches, structural documents, and project notes so sales can understand the scope before the first call."
+      />
+      <section className="section bg-slate-50">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+          <div>
+            <SectionIntro
+              eyebrow="Plan Upload"
+              title="Send the drawings once. Keep the quote conversation cleaner."
+              copy="PDFs, drawings, elevations, and notes help identify panel lengths, trim conditions, flashing needs, project state, and review priorities."
+            />
+            <div className="mt-8 overflow-hidden rounded border border-slate-200 bg-white shadow-xl">
+              <img src={siteImages.contractorPlans.src} alt={siteImages.contractorPlans.alt} className="h-72 w-full object-cover" />
+            </div>
+          </div>
+          <UploadForm />
+        </div>
+      </section>
+    </>
+  )
+}
+
 function Products() {
   return (
     <section id="products" className="section bg-slate-50">
@@ -1178,7 +1541,7 @@ function Products() {
             </ul>
             {'href' in product ? (
               <a className="btn-primary mt-6" href={product.href}>
-                View Industrial Rib Product Page <ArrowRight size={18} />
+                View Product Page <ArrowRight size={18} />
               </a>
             ) : null}
           </article>
