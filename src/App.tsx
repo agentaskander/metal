@@ -1650,78 +1650,148 @@ function getColorStyleRecommendation(selection: ColorSelection): ColorRecommenda
   let style = 'Slate Gray'
   let alternate = 'Galvalume'
   let finishFamily = 'Neutral painted'
-  let why = 'A practical commercial color path that works across roof, siding, and trim conversations.'
+  let colorReason = 'A flexible commercial gray direction is a good starting point when the exact color is still open.'
 
-  if (priority.includes('Industrial') || direction.includes('Metallic')) {
-    style = priority.includes('Industrial') ? 'Rezibond-Style Primer-Ready' : 'Galvalume'
-    alternate = priority.includes('Industrial') ? 'Galvalume' : 'Galvanized'
-    finishFamily = priority.includes('Industrial') ? 'Primer-ready / metallic utility' : 'Metallic utility'
-    why = 'A metal-forward finish direction fits shops, warehouses, industrial siding, and utility panel packages.'
+  if (direction.includes('Metallic')) {
+    style = 'Galvalume'
+    alternate = 'Galvanized'
+    finishFamily = 'Metallic utility'
+    colorReason = 'A metal-forward finish direction fits shops, warehouses, industrial siding, and utility panel packages.'
   }
 
-  if (priority.includes('Cool roof') || direction.includes('White')) {
+  if (direction.includes('White')) {
     style = 'Polar White'
     alternate = 'Light Stone'
     finishFamily = 'Cool roof light'
-    why = 'A lighter finish direction is a better starting point when heat, reflectivity, or bright trim coordination matters.'
+    colorReason = 'A lighter finish direction is a better starting point when heat, reflectivity, or bright trim coordination matters.'
   }
 
-  if (priority.includes('matte') || direction.includes('Black')) {
+  if (direction.includes('Black')) {
     style = 'Matte Black'
     alternate = 'Charcoal'
     finishFamily = 'Matte architectural'
-    why = 'A low-glare dark direction fits modern siding, trim, fascia, accent panels, and visible commercial details.'
+    colorReason = 'A low-glare dark direction fits modern siding, trim, fascia, accent panels, and visible commercial details.'
   }
 
   if (direction === 'Gray') {
     style = 'Slate Gray'
     alternate = 'Charcoal'
     finishFamily = 'Neutral painted'
-    why = 'Gray is a flexible commercial direction for warehouses, shops, retail shells, and owner-standard buildings.'
+    colorReason = 'Gray is a flexible commercial direction for warehouses, shops, retail shells, and owner-standard buildings.'
   }
 
   if (direction.includes('Tan')) {
     style = 'Light Stone'
     alternate = 'Burnished Slate'
     finishFamily = 'Neutral / earth tone'
-    why = 'Earth-tone neutrals are practical for agricultural buildings, shops, storage buildings, and trim coordination.'
+    colorReason = 'Earth-tone neutrals are practical for agricultural buildings, shops, storage buildings, and trim coordination.'
   }
 
   if (direction.includes('Red')) {
     style = 'Rustic Red'
     alternate = 'Light Stone'
     finishFamily = 'Accent painted'
-    why = 'A red finish direction is common for agricultural, barn, ranch, and accent panel conversations.'
+    colorReason = 'A red finish direction is common for agricultural, barn, ranch, and accent panel conversations.'
   }
 
   if (direction === 'Green') {
     style = 'Forest Green'
     alternate = 'Galvalume'
     finishFamily = 'Accent painted'
-    why = 'Green is a recognizable rural and agricultural direction, especially when coordinated with neutral trim.'
+    colorReason = 'Green is a recognizable rural and agricultural direction, especially when coordinated with neutral trim.'
   }
 
   if (direction.includes('Copper')) {
     style = 'Copper Penny'
     alternate = 'Matte Black'
     finishFamily = 'Specialty accent'
-    why = 'Specialty metal-look colors work best as visible trim, fascia, soffit, or accent panel decisions.'
-  }
-
-  if ((priority.includes('Lowest') || priority.includes('Fast availability')) && (direction === 'Not sure' || direction === 'Metallic')) {
-    style = direction.includes('White') ? 'Polar White' : 'Galvalume'
-    alternate = direction.includes('White') ? 'Light Stone' : 'Light Stone'
-    finishFamily = direction.includes('White') ? 'Cool roof light' : 'Metallic utility'
-    why = 'A practical, common finish direction gives sales a cleaner place to start when cost or availability matters most.'
+    colorReason = 'Specialty metal-look colors work best as visible trim, fascia, soffit, or accent panel decisions.'
   }
 
   if (direction === 'Not sure') {
-    style = projectType === 'Agricultural' || projectType === 'Barn' ? 'Light Stone' : 'Slate Gray'
+    style = projectType === 'Agricultural' || projectType === 'Barn' ? 'Light Stone' : projectType === 'Warehouse' ? 'Galvalume' : 'Slate Gray'
     alternate = 'Galvalume'
     finishFamily = projectType === 'Agricultural' || projectType === 'Barn' ? 'Neutral painted' : 'Neutral commercial'
-    why = 'A neutral starting point helps sales recommend samples after reviewing the building type and application.'
+    colorReason = 'A neutral starting point helps sales recommend samples after reviewing the building type and application.'
   }
 
+  let projectReason = 'Commercial projects usually need a balanced path for owner approval, trim coordination, and quote speed.'
+  if (projectType === 'Warehouse') {
+    alternate = direction === 'Not sure' ? 'Slate Gray' : alternate
+    projectReason = 'Warehouse packages usually favor practical neutrals, fast sample review, and repeatable roof or wall coverage.'
+  }
+  if (projectType === 'Shop') {
+    alternate = alternate === style ? 'Galvalume' : alternate
+    projectReason = 'Shop projects often need durable, practical colors that coordinate roof, siding, trim, and doors.'
+  }
+  if (projectType === 'Barn' || projectType === 'Agricultural') {
+    if (direction === 'Not sure') {
+      style = 'Light Stone'
+      alternate = 'Rustic Red'
+    }
+    projectReason = 'Agricultural projects often need practical earth tones, barn colors, and easy trim coordination.'
+  }
+  if (projectType === 'Residential accessory' || projectType === 'Multifamily' || projectType === 'Retail') {
+    if (priority.includes('Modern') && direction === 'Not sure') {
+      style = 'Matte Black'
+      alternate = 'Charcoal'
+    }
+    projectReason = 'Visible residential, retail, and multifamily work usually benefits from cleaner architectural color coordination.'
+  }
+
+  let applicationReason = `${application} use affects the sample, trim match, sheen, and accessory conversation.`
+  if (application === 'Roof') {
+    applicationReason = 'Roof use puts more weight on heat, exposure, substrate, gauge, fasteners, and warranty path.'
+  }
+  if (application === 'Siding') {
+    applicationReason = 'Siding use puts more weight on appearance, sheen, oil-canning expectations, trim color, and wall transitions.'
+  }
+  if (application === 'Trim' || application === 'Flashing') {
+    applicationReason = 'Trim and flashing should coordinate with both the panel color and the edge, corner, opening, and transition details.'
+  }
+  if (application === 'Fascia / soffit' || application === 'Accent panels') {
+    if (direction === 'Not sure') {
+      style = 'Charcoal'
+      alternate = 'Copper Penny'
+    }
+    applicationReason = 'Visible accent areas can support darker, matte, or specialty colors better than broad roof coverage.'
+  }
+
+  let priorityReason = 'Sales should confirm current availability, samples, substrate, gauge, and trim match before release.'
+  if (priority.includes('Lowest')) {
+    finishFamily = direction.includes('White') ? 'Cool roof light / economical painted path' : 'Practical utility / economical painted path'
+    priorityReason = 'Cost priority means sales should quote practical available options first, with close alternates if the exact style is not ready.'
+  }
+  if (priority.includes('Fast availability')) {
+    finishFamily = direction.includes('Metallic') ? 'Metallic utility / availability-first path' : `${finishFamily} / availability-first path`
+    priorityReason = 'Availability priority means common samples and close alternates matter more than a perfect custom match.'
+  }
+  if (priority.includes('Cool roof')) {
+    finishFamily = 'Cool roof / heat-aware finish path'
+    priorityReason = 'Heat-aware projects should review light colors, reflectivity goals, substrate, and applicable project requirements.'
+  }
+  if (priority.includes('Modern matte')) {
+    finishFamily = 'Matte / low-glare architectural path'
+    priorityReason = 'Modern matte priority means sheen and visual appearance should be reviewed with physical samples.'
+  }
+  if (priority.includes('Match existing')) {
+    finishFamily = 'Color match / sample-review path'
+    priorityReason = 'Match-existing priority means photos and physical samples are more important than screen colors.'
+  }
+  if (priority.includes('Premium')) {
+    finishFamily = 'Premium commercial finish path'
+    priorityReason = 'Premium commercial work should review finish family, owner standards, documentation, and long-term appearance expectations.'
+  }
+  if (priority.includes('Industrial')) {
+    finishFamily = 'Primer-ready / industrial design path'
+    if (direction === 'Not sure' || direction.includes('Metallic')) {
+      style = 'Rezibond-Style Primer-Ready'
+      alternate = 'Galvalume'
+    }
+    priorityReason = 'Industrial design priority points toward primer-ready or metal-forward styles where availability and project fit are confirmed by sales.'
+  }
+
+  const why = [colorReason, projectReason, applicationReason, priorityReason].join(' ')
   const confirm = `Confirm current availability, substrate, gauge, sheen, trim match, and physical samples before release for ${application.toLowerCase()} use.`
   const summary = `${style} primary, ${alternate} alternate, ${finishFamily} finish path for ${projectType} ${application.toLowerCase()} work. ${confirm}`
 
@@ -1835,6 +1905,12 @@ function ColorStyleSelector({ compact = false }: { compact?: boolean }) {
               <div className="mt-3">
                 <ColorSwatch name={recommendation.alternate} size="small" />
               </div>
+            </div>
+            <div className="grid gap-2 rounded border border-slate-200 bg-white p-4 text-sm font-bold text-slate-600 sm:grid-cols-2">
+              <span>Color: {selection.direction}</span>
+              <span>Project: {selection.projectType}</span>
+              <span>Use: {selection.application}</span>
+              <span>Priority: {selection.priority}</span>
             </div>
             <p className="leading-7 text-slate-700">{recommendation.why}</p>
             <p className="rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
