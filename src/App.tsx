@@ -229,24 +229,24 @@ const processSteps = [
 
 const capabilityPhotoCards = [
   {
-    title: 'Roll-Forming Equipment',
-    copy: 'Panel manufacturing capability is the first trust signal contractors need to see before sending plans.',
-    image: siteImages.heroRollFormer,
-  },
-  {
-    title: 'Steel Coil Inventory',
-    copy: 'Coils, finishes, gauges, and trim scope are reviewed around the needs of each roof or wall package.',
-    image: siteImages.steelCoils,
-  },
-  {
-    title: 'Panel Profile Closeups',
-    copy: 'Ribbed metal panel profile images help buyers understand the product before quote review.',
-    image: siteImages.panelCloseup,
-  },
-  {
     title: 'Trim & Flashing Fabrication',
     copy: 'Panel orders become more useful when trim, flashing, closures, and accessories are planned together.',
     image: siteImages.trimFabrication,
+  },
+  {
+    title: 'Commercial Roof Applications',
+    copy: 'Ribbed metal roof and wall panels fit warehouses, shops, industrial buildings, and contractor bid packages.',
+    image: siteImages.warehouseRoof,
+  },
+  {
+    title: 'Agricultural Buildings',
+    copy: 'Barns, shops, ranch buildings, and storage structures need practical panel and trim packages.',
+    image: siteImages.agBuilding,
+  },
+  {
+    title: 'Delivery Planning',
+    copy: 'Panel bundles, trim, flashing, and accessories should be planned around staging and installation.',
+    image: siteImages.truckLoading,
   },
 ]
 const trustBarItems = [
@@ -695,10 +695,10 @@ function IndustrialRibPage() {
     <>
       <section className="overflow-hidden border-b border-slate-200 bg-white">
         <div className="section">
-          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
             <div>
               <p className="eyebrow text-[#f97316]">American Super Panel™</p>
-              <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
+              <h1 className="mt-4 max-w-4xl text-4xl font-black leading-[1.08] tracking-normal text-[#0b1f33] sm:text-5xl xl:text-[4rem]">
                 Metal Roofing Panels Built for Contractors
               </h1>
               <p className="mt-6 text-xl leading-8 text-slate-700">
@@ -721,9 +721,9 @@ function IndustrialRibPage() {
                   <Phone size={18} /> Call Sales
                 </a>
               </div>
-              <div className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+              <div className="mt-8 flex flex-wrap gap-2">
                 {trustBarItems.map(([label, href]) => (
-                  <a key={label} href={href} className="rounded border border-slate-200 bg-white p-4 text-center font-black text-[#0b1f33] shadow-sm transition hover:border-[#f97316] hover:text-[#c2410c]">
+                  <a key={label} href={href} className="rounded border border-slate-200 bg-white px-4 py-3 text-sm font-black text-[#0b1f33] shadow-sm transition hover:border-[#f97316] hover:text-[#c2410c]">
                     {label}
                   </a>
                 ))}
@@ -733,13 +733,8 @@ function IndustrialRibPage() {
               <img
                 src={siteImages.heroRollFormer.src}
                 alt={siteImages.heroRollFormer.alt}
-                className="h-[430px] w-full rounded object-cover"
+                className="h-[420px] w-full rounded object-cover"
               />
-              <div className="grid gap-3 pt-3 sm:grid-cols-3">
-                {[siteImages.steelCoils, siteImages.panelCloseup, siteImages.trimFabrication].map((image) => (
-                  <img key={image.key} src={image.src} alt={image.alt} className="h-28 w-full rounded object-cover" />
-                ))}
-              </div>
             </div>
           </div>
         </div>
