@@ -24,16 +24,26 @@ import {
 
 type IconType = typeof Factory
 
-const navItems = [
+const productNavItems = [
   ['Products', '/products'],
   ['Services', '/services'],
   ['Finishes', '/finishes'],
   ['Selector', '/selector'],
   ['Markets', '/markets'],
   ['Super Panel', '/super-panel'],
+]
+
+const internalKnowledgeNavItems = [
   ['Internal', '/internal-strategy'],
   ['Ontology', '/internal-ontology'],
   ['Build Model', '/internal-implementation'],
+  ['Data Model', '/internal-data-model'],
+  ['Workflows', '/internal-workflows'],
+  ['Agents', '/internal-agents'],
+  ['Events', '/internal-events'],
+]
+
+const managementNavItems = [
   ['Control Panel', '/internal-control-panel'],
   ['Business Plan', '/internal-business-plan'],
   ['Gov / Compliance', '/internal-gov-compliance'],
@@ -1803,36 +1813,47 @@ function Header() {
           <span className="text-[#f97316]">8190 private planning cockpit</span>
         </div>
       </div>
-      <div className="site-header-row mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
-        <a href="/" className="brand-lockup flex items-center gap-3">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-slate-200 bg-slate-50 text-[#0b1f33]">
-            <Factory size={24} />
-          </span>
-          <span>
-            <strong className="block whitespace-nowrap text-lg font-black tracking-normal text-[#0b1f33]">
-              America’s Panel Fab
-            </strong>
-            <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 sm:block">
-              Precision Metal Panels
+      <div className="site-header-row mx-auto max-w-7xl px-5 py-4 lg:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <a href="/" className="brand-lockup flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-slate-200 bg-slate-50 text-[#0b1f33]">
+              <Factory size={24} />
             </span>
-          </span>
-        </a>
-        <nav className="main-nav hidden items-center gap-5 text-sm font-semibold text-slate-700 md:flex">
-          {navItems.map(([label, href]) => (
-            <a key={href} href={href} className="transition hover:text-[#f97316]">
-              {label}
-            </a>
-          ))}
-        </nav>
-        <div className="header-actions flex shrink-0 items-center gap-2">
-          <a className="btn-secondary header-secondary-action" href="/internal-strategy">
-            <FileText size={18} />
-            Strategy
+            <span>
+              <strong className="block whitespace-nowrap text-lg font-black tracking-normal text-[#0b1f33]">
+                America’s Panel Fab
+              </strong>
+              <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 sm:block">
+                Precision Metal Panels
+              </span>
+            </span>
           </a>
-          <a className="btn-secondary header-secondary-action" href="/internal-ontology">
-            <SearchCheck size={18} />
-            Ontology
-          </a>
+          <nav className="product-nav flex flex-wrap items-center gap-2 text-sm font-black text-slate-700">
+            {productNavItems.map(([label, href]) => (
+              <a key={href} href={href} className="nav-pill nav-pill-product">
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        <div className="mt-4 grid gap-2">
+          <nav className="nav-row nav-row-knowledge" aria-label="Internal knowledge navigation">
+            <span className="nav-row-label">Knowledge</span>
+            {internalKnowledgeNavItems.map(([label, href]) => (
+              <a key={href} href={href} className="nav-pill">
+                {label}
+              </a>
+            ))}
+          </nav>
+          <nav className="nav-row nav-row-management" aria-label="Internal management navigation">
+            <span className="nav-row-label">Management</span>
+            {managementNavItems.map(([label, href]) => (
+              <a key={href} href={href} className="nav-pill nav-pill-management">
+                {label}
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
     </header>

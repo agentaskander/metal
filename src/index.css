@@ -301,53 +301,79 @@ select {
   flex: 0 0 auto;
 }
 
-.main-nav {
-  flex: 1 1 auto;
-  justify-content: center;
+.product-nav {
+  justify-content: flex-end;
 }
 
-.header-actions {
-  flex: 0 0 auto;
+.nav-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
-@media (max-width: 1320px) {
-  .site-header-row {
-    gap: 0.75rem;
-  }
-
-  .main-nav {
-    gap: 1rem;
-    font-size: 0.86rem;
-  }
-
-  .header-secondary-action {
-    display: none;
-  }
+.nav-row-label {
+  color: #64748b;
+  flex: 0 0 7.25rem;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-@media (max-width: 1120px) {
-  .top-contact-links a[href^="mailto"] {
-    display: none;
-  }
+.nav-pill {
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #334155;
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1;
+  min-height: 2.1rem;
+  padding: 0.55rem 0.7rem;
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+  white-space: nowrap;
+}
+
+.nav-pill:hover {
+  background: #fff;
+  border-color: #fed7aa;
+  color: #f97316;
+}
+
+.nav-pill-product {
+  background: #fff;
+}
+
+.nav-pill-management {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #0b1f33;
 }
 
 @media (max-width: 900px) {
-  .main-nav {
-    display: none;
+  .product-nav {
+    justify-content: flex-start;
+    width: 100%;
   }
 
-  .header-secondary-action {
-    display: none;
+  .nav-row-label {
+    flex-basis: 100%;
   }
 }
 
 @media (max-width: 560px) {
   .site-header-row {
-    gap: 0.75rem;
+    padding-bottom: 0.85rem;
+    padding-top: 0.85rem;
   }
 
-  .header-actions {
-    display: none;
+  .nav-pill {
+    font-size: 0.74rem;
+    min-height: 1.95rem;
+    padding: 0.5rem 0.62rem;
   }
 }
 
