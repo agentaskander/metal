@@ -249,7 +249,13 @@ const capabilityPhotoCards = [
     image: siteImages.trimFabrication,
   },
 ]
-const trustBarItems = ['Commercial', 'Industrial', 'Agricultural', 'Residential', 'American Made']
+const trustBarItems = [
+  ['Commercial', '/commercial'],
+  ['Industrial', '/industrial'],
+  ['Agricultural', '/agricultural'],
+  ['Residential', '/residential'],
+  ['American Made', '#american-made'],
+]
 const contractorPageSections = [
   ['Custom Lengths', 'Request panel lengths, colors, trim scope, and accessory needs for the project.'],
   ['Project Support', 'Send drawings, roof plans, wall elevations, photos, and project notes for quote review.'],
@@ -258,8 +264,34 @@ const contractorPageSections = [
   ['Upload Plans', 'Use the upload form to send PDFs, drawings, structural documents, photos, and scope notes.'],
   ['Request Quote', 'Give sales the project state, square footage, panel type, and contact details.'],
 ]
-const commercialTargets = ['Warehouses', 'Industrial Buildings', 'Retail', 'Multifamily', 'Schools', 'Municipal']
-const agriculturalTargets = ['Barns', 'Shops', 'Storage Buildings', 'Equipment Shelters', 'Ranches', 'Farms']
+const commercialTargets = [
+  ['Warehouses', 'warehouse-panel-packages', 'Large roof and siding scopes with panel, trim, flashing, and accessory review.'],
+  ['Industrial Buildings', 'industrial-building-panels', 'Ribbed metal panels for shop, logistics, production, and service buildings.'],
+  ['Retail', 'retail-metal-panels', 'Durable roof, wall, and trim packages for practical commercial shells.'],
+  ['Multifamily', 'multifamily-metal-panels', 'Repeatable panel and trim packages for garages, amenity buildings, and exterior scopes.'],
+  ['Schools', 'school-metal-roofing', 'Metal roofing and siding conversations for facility, maintenance, and expansion projects.'],
+  ['Municipal', 'municipal-metal-panels', 'Panel packages for storage, service, public works, and maintenance buildings.'],
+]
+const agriculturalTargets = [
+  ['Barns', 'barn-metal-roofing', 'Ribbed roof and siding panels for barns, outbuildings, and rural structures.'],
+  ['Shops', 'shop-metal-panels', 'Practical panel, trim, and flashing packages for farm shops and work buildings.'],
+  ['Storage Buildings', 'storage-building-panels', 'Roof and wall panels for hay, material, supply, and equipment storage.'],
+  ['Equipment Shelters', 'equipment-shelter-panels', 'Metal panels and trim for shelters, lean-tos, and covered equipment areas.'],
+  ['Ranches', 'ranch-metal-roofing', 'Durable roof and siding packages for ranch buildings and support structures.'],
+  ['Farms', 'farm-metal-panels', 'Panel packages for agricultural work where cost, coverage, and service matter.'],
+]
+const industrialTargets = [
+  ['Manufacturing Buildings', 'manufacturing-metal-panels', 'Ribbed metal roof and wall panels for manufacturing and service facilities.'],
+  ['Logistics Facilities', 'logistics-metal-roofing', 'Large-format roof, siding, trim, and accessory package conversations.'],
+  ['Workshops', 'workshop-metal-panels', 'Panel systems for shop roofs, wall panels, and utility buildings.'],
+  ['Maintenance Buildings', 'maintenance-building-panels', 'Metal panels and flashing for maintenance, storage, and operations buildings.'],
+]
+const residentialTargets = [
+  ['Garages', 'garage-metal-roofing', 'Ribbed metal roof and siding panels for detached garages and shop buildings.'],
+  ['ADUs & Outbuildings', 'adu-outbuilding-panels', 'Panel and trim packages for accessory buildings and rural residential projects.'],
+  ['Barndominiums', 'barndominium-metal-panels', 'Metal roofing and siding conversations for residential-style agricultural buildings.'],
+  ['Homeowner Projects', 'homeowner-metal-roofing', 'Support for owners who need a contractor-ready panel and trim package.'],
+]
 const faqItems = [
   ['What panel types do you offer?', 'American Super Panel focuses on ribbed metal roofing and siding panels, including Industrial Rib, PBR / R-Panel, AG / Tuff Rib style panels, trim, flashing, and accessories.'],
   ['Can I request custom lengths?', 'Yes. Send your project information, desired panel lengths, and drawings or measurements so sales can review the request.'],
@@ -326,7 +358,8 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'finishes') {
     return (
       <>
-        <PageHero title="Colors & Finishes" copy="Commercial metal panel finishes, architectural color paths, cool roof options, and custom color coordination." />
+        <PageHero eyebrow="Colors & Finishes" title="Metal Panel Colors, Finishes & Coil Options" copy="Commercial metal panel finishes, architectural color paths, cool roof options, and custom color coordination for roof, siding, trim, and flashing packages." />
+        <FinishSupport />
         <FinishSystem />
         <Products />
         <Contact />
@@ -342,8 +375,32 @@ function RoutedPage({ path }: { path: string }) {
     return <CommercialPage />
   }
 
+  if (path === 'industrial') {
+    return (
+      <MarketDetailPage
+        eyebrow="Industrial Panels"
+        title="Industrial Metal Roofing & Siding Panels"
+        copy="Ribbed panels, trim, flashing, and accessories for manufacturing buildings, logistics facilities, workshops, and maintenance buildings."
+        targets={industrialTargets}
+        icon={Factory}
+      />
+    )
+  }
+
   if (path === 'agricultural') {
     return <AgriculturalPage />
+  }
+
+  if (path === 'residential') {
+    return (
+      <MarketDetailPage
+        eyebrow="Residential Project Support"
+        title="Residential Metal Roofing & Siding Panels"
+        copy="Panel and trim support for garages, ADUs, outbuildings, barndominiums, and owner-led projects that need contractor-ready quoting."
+        targets={residentialTargets}
+        icon={Building2}
+      />
+    )
   }
 
   if (path === 'resources') {
@@ -427,21 +484,13 @@ function RoutedPage({ path }: { path: string }) {
   )
 }
 
-function PageHero({ title, copy }: { title: string; copy: string }) {
+function PageHero({ title, copy, eyebrow = 'American Super Panel' }: { title: string; copy: string; eyebrow?: string }) {
   return (
-    <section className="section border-b border-slate-200 bg-white">
-      <div className="max-w-4xl">
-        <p className="eyebrow text-[#f97316]">American Super Panel</p>
-        <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33]">{title}</h1>
-        <p className="mt-6 text-xl leading-8 text-slate-600">{copy}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a className="btn-primary" href="#quote">
-            Request Quote
-          </a>
-          <a className="btn-secondary" href="#upload-plans">
-            Upload Plans
-          </a>
-        </div>
+    <section className="border-b border-slate-200 bg-white px-5 py-10 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <p className="eyebrow text-[#f97316]">{eyebrow}</p>
+        <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-5xl">{title}</h1>
+        <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600">{copy}</p>
       </div>
     </section>
   )
@@ -673,10 +722,10 @@ function IndustrialRibPage() {
                 </a>
               </div>
               <div className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-                {trustBarItems.map((item) => (
-                  <p key={item} className="rounded border border-slate-200 bg-white p-4 text-center font-black text-[#0b1f33] shadow-sm">
-                    {item}
-                  </p>
+                {trustBarItems.map(([label, href]) => (
+                  <a key={label} href={href} className="rounded border border-slate-200 bg-white p-4 text-center font-black text-[#0b1f33] shadow-sm transition hover:border-[#f97316] hover:text-[#c2410c]">
+                    {label}
+                  </a>
                 ))}
               </div>
             </div>
@@ -975,6 +1024,7 @@ function CommercialPage() {
   return (
     <>
       <PageHero
+        eyebrow="Commercial Panels"
         title="Commercial Metal Roofing Panels"
         copy="Metal roofing panels, siding panels, trim, and flashing for warehouses, industrial buildings, retail, multifamily, schools, and municipal projects."
       />
@@ -985,14 +1035,15 @@ function CommercialPage() {
           copy="American Super Panel keeps commercial language practical: panel packages, trim support, quote review, and plan uploads."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {commercialTargets.map((item) => (
-            <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
+          {commercialTargets.map(([label, id]) => (
+            <a key={id} href={`#${id}`} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33] transition hover:border-[#f97316] hover:text-[#c2410c]">
               <Building2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
-              {item}
-            </p>
+              {label}
+            </a>
           ))}
         </div>
       </section>
+      <MarketApplicationDetails targets={commercialTargets} icon={Building2} />
       <Products />
       <Contact />
     </>
@@ -1003,6 +1054,7 @@ function AgriculturalPage() {
   return (
     <>
       <PageHero
+        eyebrow="Agricultural Panels"
         title="Agricultural Metal Roofing & Siding Panels"
         copy="Ribbed panels, trim, flashing, and accessories for barns, shops, storage buildings, equipment shelters, ranches, and farms."
       />
@@ -1013,17 +1065,75 @@ function AgriculturalPage() {
           copy="Send the project state, rough square footage, panel type, and drawings or photos so sales can review the package."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {agriculturalTargets.map((item) => (
-            <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
+          {agriculturalTargets.map(([label, id]) => (
+            <a key={id} href={`#${id}`} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33] transition hover:border-[#f97316] hover:text-[#c2410c]">
               <Factory className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
-              {item}
-            </p>
+              {label}
+            </a>
           ))}
         </div>
       </section>
+      <MarketApplicationDetails targets={agriculturalTargets} icon={Factory} />
       <Products />
       <Contact />
     </>
+  )
+}
+
+function MarketDetailPage({
+  copy,
+  eyebrow,
+  icon: Icon,
+  targets,
+  title,
+}: {
+  copy: string
+  eyebrow: string
+  icon: IconType
+  targets: string[][]
+  title: string
+}) {
+  return (
+    <>
+      <PageHero eyebrow={eyebrow} title={title} copy={copy} />
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Project Types"
+          title="Choose the project type and send the scope."
+          copy="Each path points to the information sales needs: panel type, trim scope, project state, square footage, and drawings or photos."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {targets.map(([label, id]) => (
+            <a key={id} href={`#${id}`} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33] transition hover:border-[#f97316] hover:text-[#c2410c]">
+              <Icon className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+              {label}
+            </a>
+          ))}
+        </div>
+      </section>
+      <MarketApplicationDetails targets={targets} icon={Icon} />
+      <Products />
+      <Contact />
+    </>
+  )
+}
+
+function MarketApplicationDetails({ icon: Icon, targets }: { icon: IconType; targets: string[][] }) {
+  return (
+    <section className="section bg-slate-50">
+      <div className="grid gap-5 md:grid-cols-2">
+        {targets.map(([label, id, copy]) => (
+          <article id={id} key={id} className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
+            <Icon className="text-[#f97316]" />
+            <h2 className="mt-4 text-2xl font-black text-[#0b1f33]">{label}</h2>
+            <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            <a className="mt-5 inline-flex font-black text-[#0b1f33] hover:text-[#c2410c]" href="#quote">
+              Start quote for {label}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -1085,6 +1195,34 @@ function FinishSystem() {
               <p className="mt-3 leading-7 text-slate-600">{copy}</p>
             </article>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function FinishSupport() {
+  return (
+    <section className="section bg-white">
+      <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <img src={siteImages.steelCoils.src} alt={siteImages.steelCoils.alt} className="h-64 w-full rounded object-cover shadow-xl" />
+          <img src={siteImages.panelCloseup.src} alt={siteImages.panelCloseup.alt} className="h-64 w-full rounded object-cover shadow-xl" />
+        </div>
+        <div>
+          <SectionIntro
+            eyebrow="Finish Selection"
+            title="Start with the building, then choose the finish path."
+            copy="Color and finish decisions should match the project use, exposure, roof or wall application, trim details, and owner standards."
+          />
+          <div className="mt-8 grid gap-3">
+            {['Steel coil and substrate review', 'Roof, siding, trim, and flashing color coordination', 'Cool-roof and low-glare finish conversations', 'Sample requests before larger orders'].map((item) => (
+              <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-bold text-[#0b1f33]">
+                <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                {item}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </section>
