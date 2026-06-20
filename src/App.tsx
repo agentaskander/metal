@@ -1119,6 +1119,12 @@ function IndustrialRibPage() {
                 <Download size={18} /> Color Style Guide
               </a>
             </div>
+            <div className="mt-6 rounded border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="font-black text-[#0b1f33]">Sample availability</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Colors shown are style references. Send the project use, state, finish family, and preferred color so sales can confirm samples, alternates, or follow-up availability.
+              </p>
+            </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {colorChart.slice(0, 9).map(([name, color, family, use, note]) => (
@@ -1131,14 +1137,6 @@ function IndustrialRibPage() {
               </article>
             ))}
           </div>
-        </div>
-        <div className="mt-8 rounded border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="font-black text-[#0b1f33]">Availability-first sample request</p>
-          <p className="mt-2 leading-7 text-slate-600">
-            Colors shown on screen are style references, not a promise of current stock.
-            Send the project use, state, profile, finish family, and preferred colors so sales can
-            recommend available samples and alternates before release.
-          </p>
         </div>
       </section>
 
@@ -2389,13 +2387,13 @@ function QuoteForm() {
       </div>
       {colorRecommendation ? (
         <div className="mt-4 rounded border border-orange-200 bg-orange-50 p-4">
-          <p className="text-sm font-black uppercase tracking-[0.12em] text-[#f97316]">Added to lead details</p>
+          <p className="text-sm font-black uppercase tracking-[0.12em] text-[#f97316]">Color preference saved</p>
           <p className="mt-2 font-bold leading-7 text-[#0b1f33]">
             {colorRecommendation.style} primary, {colorRecommendation.alternate} alternate
           </p>
           <p className="mt-1 text-sm leading-6 text-slate-700">{colorRecommendation.summary}</p>
           <p className="mt-2 text-sm font-bold leading-6 text-slate-700">
-            If the exact color is not ready for release, sales can save the request and follow up with samples, alternates, or availability updates.
+            If the exact color is not currently available, we can follow up with samples, close alternates, or availability updates.
           </p>
         </div>
       ) : null}
