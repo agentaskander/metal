@@ -39,6 +39,7 @@ const navItems = [
   ['Home', '/'],
   ['Manufacturing', '/manufacturing'],
   ['Capabilities', '/capabilities'],
+  ['Quality', '/quality'],
   ['Guides', '/guides'],
   ['Resources', '/resources'],
   ['Glossary', '/glossary'],
@@ -90,6 +91,23 @@ const services = [
   ['Contractor Support', ShieldCheck, 'Takeoff review, sequencing support, and production coordination.'],
   ['Design Assist', Building2, 'Early input for profiles, finishes, details, warranty path, and constructability.'],
 ] satisfies [string, IconType, string][]
+
+const qualityChain = [
+  ['Craftsmanship', 'Disciplined work at the detail level: clean inputs, careful handling, and respect for the next handoff.'],
+  ['Predictability', 'Repeatable manufacturing support, documentation, traceability, and reliable execution.'],
+  ['Peace of Mind', 'A stronger customer and partner experience because the supplier does what it says it will do.'],
+]
+const apfQualityPrinciples = [
+  ['Process control', 'Manufacturing conversations should be organized around repeatable steps, visible handoffs, and controlled release points.'],
+  ['Traceability', 'Project details, finish decisions, product paths, partner notes, and documentation should be easy to follow later.'],
+  ['Repeatability', 'A serious supplier builds systems so the next project benefits from what the last project taught.'],
+  ['Reliable execution', 'Partners and procurement teams should not have to chase basic information, status, or ownership.'],
+]
+const apfQualityQuotes = [
+  ['Precision', 'Precision is respect for the next person in the process.'],
+  ['Consistency', 'Consistency is the foundation of trust.'],
+  ['Improvement', 'Every process can be improved.'],
+]
 
 const markets = [
   ['Commercial', 'Retail centers, offices, and mixed-use buildings.'],
@@ -1287,6 +1305,17 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
         '/capabilities',
       ),
     },
+    quality: {
+      canonicalPath: '/quality',
+      description:
+        'Americas Panel Fab quality philosophy for predictable metal panel manufacturing, process control, traceability, repeatability, and reliable execution.',
+      title: 'Manufacturing Quality Philosophy | Americas Panel Fab',
+      schema: apfServiceSchema(
+        'Manufacturing Quality Philosophy',
+        'Quality philosophy for predictable metal panel manufacturing, process control, repeatability, traceability, and supplier reliability.',
+        '/quality',
+      ),
+    },
     guides: {
       canonicalPath: '/guides',
       description:
@@ -1485,6 +1514,10 @@ function RoutedPage({ path }: { path: string }) {
     return <AuthorityPage page={authorityPages.capabilities} />
   }
 
+  if (path === 'quality') {
+    return <QualityPage />
+  }
+
   if (path === 'roll-forming') {
     return <AuthorityPage page={authorityPages.rollForming} />
   }
@@ -1659,6 +1692,9 @@ function PlatformHome() {
               American Super Panel™ is the flagship exposed-fastener roofing and siding panel
               system manufactured by Americas Panel Fab.
             </p>
+            <p className="mt-4 rounded border border-orange-200 bg-orange-50 p-4 text-base font-black leading-7 text-[#0b1f33] shadow-sm">
+              The best supplier is the one you never have to think about.
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="/guides">
                 Explore Industry Guides <ArrowRight size={18} />
@@ -1673,6 +1709,7 @@ function PlatformHome() {
           </div>
         </div>
       </section>
+      <QualityChainCallout />
 
       <section id="manufacturing" className="section bg-slate-50">
         <SectionIntro
@@ -1748,7 +1785,7 @@ function PlatformHome() {
             <SectionIntro
               eyebrow="Partners"
               title="A manufacturing company that can support products, partners, and regional growth."
-              copy="Americas Panel Fab supports product programs, fabrication resources, supplier coordination, installer relationships, and regional manufacturing growth."
+              copy="Americas Panel Fab supports product programs, fabrication resources, supplier coordination, installer relationships, and regional manufacturing growth through repeatable, documented execution."
             />
             <div className="mt-8 grid gap-3">
               {platformStructure.map((item) => (
@@ -1762,6 +1799,87 @@ function PlatformHome() {
         </div>
       </section>
 
+      <Contact />
+    </>
+  )
+}
+
+function QualityChainCallout({ compact = false }: { compact?: boolean }) {
+  return (
+    <section className={`${compact ? '' : 'section'} bg-white`}>
+      <div className="rounded border border-orange-200 bg-orange-50 p-6 text-[#0b1f33]">
+        <p className="eyebrow text-[#c2410c]">Quality Model</p>
+        <h2 className="mt-3 text-3xl font-black leading-tight">
+          Craftsmanship -&gt; Predictability -&gt; Peace of Mind
+        </h2>
+        <p className="mt-4 max-w-4xl text-lg font-semibold leading-8 text-slate-700">
+          Employees create craftsmanship. Craftsmanship creates predictable manufacturing.
+          Predictable manufacturing creates customer peace of mind.
+        </p>
+        {!compact ? (
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {qualityChain.map(([title, copy]) => (
+              <article key={title} className="rounded border border-orange-200 bg-white p-4">
+                <h3 className="text-xl font-black">{title}</h3>
+                <p className="mt-2 leading-7 text-slate-700">{copy}</p>
+              </article>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  )
+}
+
+function QualityQuoteStrip() {
+  return (
+    <div className="grid gap-4 md:grid-cols-3">
+      {apfQualityQuotes.map(([theme, quote]) => (
+        <article key={theme} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+          <p className="eyebrow text-[#f97316]">{theme}</p>
+          <p className="mt-3 text-xl font-black leading-tight text-[#0b1f33]">{quote}</p>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+function QualityPage() {
+  return (
+    <>
+      <PageHero
+        title="Manufacturing Quality Built Around Predictability"
+        copy="Americas Panel Fab treats quality as the ability to execute reliably: clear process control, repeatable handoffs, traceable information, and supplier behavior that customers and partners can trust."
+        primaryHref="/manufacturing"
+        primaryLabel="View Manufacturing"
+      />
+      <QualityChainCallout />
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="Quality Means Predictability"
+          title="Reliable execution creates reliable partnerships."
+          copy="Procurement teams, fabricators, OEMs, distributors, and commercial buyers care about whether a supplier can communicate clearly, repeat the process, control documentation, and avoid preventable surprises."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {apfQualityPrinciples.map(([title, copy]) => (
+            <article key={title} className="card">
+              <ShieldCheck className="text-[#f97316]" />
+              <h2 className="mt-5 text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <SectionIntro
+            eyebrow="Manufacturing Culture"
+            title="Consistency builds trust."
+            copy="Quality language should show up in the way work is reviewed, documented, handed off, and improved. Excellence is a process, not an event."
+          />
+          <QualityQuoteStrip />
+        </div>
+      </section>
       <Contact />
     </>
   )
@@ -2237,6 +2355,9 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
             <p className="eyebrow text-[#f97316]">{page.eyebrow} Overview</p>
             <h2 className="mt-3 text-3xl font-black leading-tight text-[#0b1f33]">{page.introTitle}</h2>
             <p className="mt-4 text-lg leading-8 text-slate-600">{page.introCopy}</p>
+            <p className="mt-5 rounded border border-orange-200 bg-orange-50 p-4 font-black leading-7 text-[#0b1f33]">
+              Precision is respect for the next person in the process.
+            </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
               {page.points.map((point) => (
@@ -2257,6 +2378,16 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
               <p className="mt-3 leading-7 text-slate-600">{copy}</p>
             </article>
           ))}
+        </div>
+      </section>
+      <section className="section bg-slate-50">
+        <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <SectionIntro
+            eyebrow="Quality"
+            title="Predictable suppliers reduce project friction."
+            copy="Americas Panel Fab uses quality as an operating standard: better information, clearer handoffs, repeatable review, and reliable partner communication."
+          />
+          <QualityQuoteStrip />
         </div>
       </section>
       <section className="section bg-white">
@@ -3273,6 +3404,10 @@ function About() {
               The mission is straightforward: manufacture strong American panel systems and support the
               crews who install them across a growing multi-state footprint.
             </p>
+            <p className="rounded border border-orange-200 bg-orange-50 p-4 font-black leading-7 text-[#0b1f33]">
+              Quality means predictability: consistent process, traceable information,
+              clear ownership, and execution partners do not have to chase.
+            </p>
           </div>
         </div>
       </div>
@@ -3584,6 +3719,7 @@ function Footer() {
         <div>
           <strong className="text-xl font-black">Americas Panel Fab</strong>
           <p className="mt-2 text-slate-300">Metal panel manufacturing, roll forming, fabrication, and industry resources.</p>
+          <p className="mt-2 text-sm font-semibold text-slate-300">Reliable execution creates reliable partnerships.</p>
         </div>
         <a
           className="text-sm font-semibold text-slate-300 underline decoration-white/30 underline-offset-4 hover:text-white"
