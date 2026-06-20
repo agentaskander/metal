@@ -1708,7 +1708,7 @@ function getColorStyleRecommendation(selection: ColorSelection): ColorRecommenda
     why = 'Specialty metal-look colors work best as visible trim, fascia, soffit, or accent panel decisions.'
   }
 
-  if (priority.includes('Lowest') || priority.includes('Fast availability')) {
+  if ((priority.includes('Lowest') || priority.includes('Fast availability')) && (direction === 'Not sure' || direction === 'Metallic')) {
     style = direction.includes('White') ? 'Polar White' : 'Galvalume'
     alternate = direction.includes('White') ? 'Light Stone' : 'Light Stone'
     finishFamily = direction.includes('White') ? 'Cool roof light' : 'Metallic utility'
@@ -1780,10 +1780,10 @@ function ColorStyleSelector({ compact = false }: { compact?: boolean }) {
   }
 
   const groups: [keyof ColorSelection, string, string[]][] = [
+    ['direction', 'Color direction', colorSelectorOptions.direction],
     ['projectType', 'Project type', colorSelectorOptions.projectType],
     ['application', 'Panel use', colorSelectorOptions.application],
     ['priority', 'Top priority', colorSelectorOptions.priority],
-    ['direction', 'Color direction', colorSelectorOptions.direction],
   ]
 
   return (
@@ -1826,7 +1826,7 @@ function ColorStyleSelector({ compact = false }: { compact?: boolean }) {
             ))}
           </div>
         </div>
-        <aside className="rounded border border-slate-200 bg-slate-50 p-5">
+        <aside className={`rounded border border-slate-200 bg-slate-50 p-5 ${compact ? '' : 'lg:sticky lg:top-28'}`}>
           <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">Recommended style path</p>
           <div className="mt-4 grid gap-4">
             <ColorSwatch name={recommendation.style} />
@@ -1894,7 +1894,27 @@ function FinishSystem() {
           </div>
         </div>
       </div>
+      <div className="mt-10 rounded border border-slate-200 bg-slate-50 p-6">
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">How to read this page</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <p className="rounded border border-slate-200 bg-white p-4 leading-7 text-slate-700">
+            <strong className="block text-[#0b1f33]">Color style is the look.</strong>
+            Examples include Galvalume, Polar White, Slate Gray, Matte Black, Burnished Slate, Rustic Red, Forest Green, and Copper Penny.
+          </p>
+          <p className="rounded border border-slate-200 bg-white p-4 leading-7 text-slate-700">
+            <strong className="block text-[#0b1f33]">Finish family is the coating path.</strong>
+            Sales confirms the finish system, substrate, gauge, sheen, sample, trim match, and warranty path before release.
+          </p>
+        </div>
+      </div>
       <div className="mt-10 overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
+        <div className="border-b border-slate-200 bg-white p-5">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">Finish Family Guide</p>
+          <h3 className="mt-2 text-2xl font-black text-[#0b1f33]">Choose the finish system after the color direction.</h3>
+          <p className="mt-2 leading-7 text-slate-600">
+            These are not extra colors. They are specification paths used to review coating type, appearance, project exposure, sample needs, and documentation.
+          </p>
+        </div>
         <table className="product-proof-table">
           <tbody>
             <tr>
@@ -2351,6 +2371,7 @@ function Contact() {
 function QuoteForm() {
   const [submitState, setSubmitState] = useState<SubmitState>(idleSubmitState)
   const [colorRecommendation, setColorRecommendation] = useState<ColorRecommendation | null>(() => readStoredColorRecommendation())
+  const [requestType, setRequestType] = useState('Quote Request')
 
   useEffect(() => {
     function handleColorRecommendation(event: Event) {
@@ -2393,20 +2414,27 @@ function QuoteForm() {
       <input type="hidden" name="recommended_color_alternate" value={colorRecommendation?.alternate ?? ''} />
       <input type="hidden" name="recommended_finish_family" value={colorRecommendation?.finishFamily ?? ''} />
       <input type="hidden" name="color_recommendation" value={colorRecommendation?.summary ?? ''} />
+      <input type="hidden" name="request_type" value={requestType} />
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <label>
-          <span>Request Type</span>
-          <select name="request_type" defaultValue="">
-            <option value="" disabled>
-              Select request type
-            </option>
-            <option>Quote Request</option>
-            <option>Sample Request</option>
-            <option>Panel Order</option>
-            <option>Dealer Inquiry</option>
-            <option>Project Review</option>
-          </select>
-        </label>
+        <div className="md:col-span-2">
+          <span className="mb-2 block text-sm font-black text-slate-700">What do you need?</span>
+          <div className="flex flex-wrap gap-2">
+            {['Quote Request', 'Sample Request', 'Panel Order', 'Dealer Inquiry', 'Project Review'].map((option) => (
+              <button
+                key={option}
+                type="button"
+                className={`rounded border px-3 py-2 text-sm font-black transition ${
+                  requestType === option
+                    ? 'border-[#f97316] bg-[#fff7ed] text-[#0b1f33] shadow-sm'
+                    : 'border-slate-200 bg-white text-slate-700 hover:border-slate-400'
+                }`}
+                onClick={() => setRequestType(option)}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>
         {['Name', 'Company', 'Phone', 'Email', 'Project State'].map((field) => (
           <label key={field}>
             <span>{field}</span>
@@ -2448,73 +2476,71 @@ function QuoteForm() {
             <option>Trim & Flashing</option>
           </select>
         </label>
-        <details className="md:col-span-2 rounded border border-slate-200 bg-slate-50 p-4">
-          <summary className="cursor-pointer font-black text-[#0b1f33]">
-            Optional: color, finish & sample preferences
-          </summary>
-          <div className="mt-4 grid gap-5">
-            <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-              <ColorStyleSelector compact />
-              <div className="rounded border border-slate-200 bg-white p-5">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">How sales uses this</p>
-                <div className="mt-4 grid gap-3">
-                  <p className="rounded border border-slate-200 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
-                    <strong className="block text-[#0b1f33]">Color style</strong>
-                    The look you want: Galvalume, white, charcoal, matte black, earth tone, red, green, or specialty accent.
-                  </p>
-                  <p className="rounded border border-slate-200 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
-                    <strong className="block text-[#0b1f33]">Finish family</strong>
-                    The coating path to review: practical utility, cool roof, matte, premium commercial, primer-ready, or color match.
-                  </p>
-                </div>
-                {colorRecommendation ? (
-                  <div className="mt-4 rounded border border-orange-200 bg-orange-50 p-4">
-                    <p className="text-sm font-black uppercase tracking-[0.12em] text-[#f97316]">Color preference saved</p>
-                    <p className="mt-2 font-bold leading-7 text-[#0b1f33]">
-                      {colorRecommendation.style} primary, {colorRecommendation.alternate} alternate
-                    </p>
-                    <p className="mt-1 text-sm leading-6 text-slate-700">
-                      If the exact color is not currently available, we can follow up with samples, close alternates, or availability updates.
-                    </p>
-                  </div>
-                ) : null}
-              </div>
+        <div className="md:col-span-2 rounded border border-slate-200 bg-slate-50 p-4">
+          <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">Color & finish</p>
+              <h3 className="mt-2 text-xl font-black text-[#0b1f33]">Already chose a color direction?</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Color choices made on the finishes page are saved into this quote request automatically.
+              </p>
+              <a className="btn-secondary mt-4" href="/finishes#finishes">
+                View Color Styles <ArrowRight size={18} />
+              </a>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              <label>
-                <span>Color Style Needed</span>
-                <input name="color_style_needed" type="text" placeholder="Metallic, white, charcoal, matte black..." />
-              </label>
-              <label>
-                <span>Finish Priority</span>
-                <select name="finish_priority" defaultValue="">
-                  <option value="" disabled>
-                    Select finish priority
-                  </option>
-                  <option>Lowest practical cost</option>
-                  <option>Cool roof / heat-aware</option>
-                  <option>Matte / low-glare appearance</option>
-                  <option>Premium commercial appearance</option>
-                  <option>Primer-ready / industrial design</option>
-                  <option>Match existing building</option>
-                </select>
-              </label>
-              <label>
-                <span>Color Follow-Up</span>
-                <select name="color_follow_up" defaultValue="">
-                  <option value="" disabled>
-                    Select color follow-up
-                  </option>
-                  <option>Quote with closest available color</option>
-                  <option>Send samples before order</option>
-                  <option>Notify me when this color style is available</option>
-                  <option>Need to match an existing building</option>
-                  <option>Not sure yet</option>
-                </select>
-              </label>
+            <div className="rounded border border-slate-200 bg-white p-4">
+              {colorRecommendation ? (
+                <>
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#f97316]">Saved color preference</p>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    <ColorSwatch name={colorRecommendation.style} size="small" />
+                    <ColorSwatch name={colorRecommendation.alternate} size="small" />
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-slate-700">
+                    {colorRecommendation.finishFamily}. We can quote close available options now or follow up when requested samples are available.
+                  </p>
+                </>
+              ) : (
+                <p className="text-sm font-bold leading-6 text-slate-700">
+                  No color preference is required to submit. Sales can recommend samples after reviewing the project.
+                </p>
+              )}
             </div>
           </div>
-        </details>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            <label>
+              <span>Color Style Needed</span>
+              <input name="color_style_needed" type="text" placeholder="Metallic, white, charcoal, matte black..." />
+            </label>
+            <label>
+              <span>Finish Priority</span>
+              <select name="finish_priority" defaultValue="">
+                <option value="" disabled>
+                  Select finish priority
+                </option>
+                <option>Lowest practical cost</option>
+                <option>Cool roof / heat-aware</option>
+                <option>Matte / low-glare appearance</option>
+                <option>Premium commercial appearance</option>
+                <option>Primer-ready / industrial design</option>
+                <option>Match existing building</option>
+              </select>
+            </label>
+            <label>
+              <span>Color Follow-Up</span>
+              <select name="color_follow_up" defaultValue="">
+                <option value="" disabled>
+                  Select color follow-up
+                </option>
+                <option>Quote with closest available color</option>
+                <option>Send samples before order</option>
+                <option>Notify me when this color style is available</option>
+                <option>Need to match an existing building</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+          </div>
+        </div>
         <label className="md:col-span-2">
           <span>Notes</span>
           <input name="notes" type="text" placeholder="Panel lengths, trim needs, sample colors, alternates, timing, delivery state, or plan notes" />
