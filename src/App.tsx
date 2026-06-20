@@ -2145,12 +2145,43 @@ function FinishSystem() {
 }
 
 function FinishSupport() {
+  const featuredColors = colorChart.slice(0, 8)
+  const featuredFinishes = finishes.slice(0, 4)
+
   return (
     <section className="section bg-white">
       <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <img src={siteImages.steelCoils.src} alt={siteImages.steelCoils.alt} className="h-64 w-full rounded object-cover shadow-xl" />
-          <img src={siteImages.panelCloseup.src} alt={siteImages.panelCloseup.alt} className="h-64 w-full rounded object-cover shadow-xl" />
+        <div className="rounded border border-slate-200 bg-slate-50 p-5 shadow-xl">
+          <div className="rounded border border-slate-200 bg-white p-5">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">Color & Finish Summary</p>
+            <h2 className="mt-2 text-2xl font-black leading-tight text-[#0b1f33]">Choose the look. Confirm the finish path.</h2>
+            <p className="mt-3 text-sm font-semibold leading-6 text-slate-600">
+              Start with a color style, then confirm coating family, substrate, gauge, sample, and trim match before release.
+            </p>
+            <div className="mt-5 grid grid-cols-4 gap-2">
+              {featuredColors.map(([name, color]) => (
+                <span key={name} className="grid gap-1">
+                  <span className="h-14 rounded border border-slate-200" style={{ background: color }} />
+                  <span className="truncate text-xs font-black text-slate-600">{name}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {featuredFinishes.map(([name, color]) => (
+              <div key={name} className="rounded border border-slate-200 bg-white p-3">
+                <span className="mb-2 block h-8 rounded border border-slate-200" style={{ background: color }} />
+                <p className="text-sm font-black leading-tight text-[#0b1f33]">{name}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 grid gap-2 sm:grid-cols-3">
+            {['1. Color style', '2. Finish family', '3. Sample review'].map((step) => (
+              <p key={step} className="rounded border border-orange-200 bg-orange-50 px-3 py-2 text-center text-sm font-black text-[#0b1f33]">
+                {step}
+              </p>
+            ))}
+          </div>
         </div>
         <div>
           <SectionIntro
