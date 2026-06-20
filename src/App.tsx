@@ -149,10 +149,10 @@ const finishes = [
   ['Custom color match', '#f97316', 'Finish coordination for brand, campus, and architectural standards.'],
 ]
 const resources = [
-  ['Panel profiles', Ruler, 'Profile sheets for standing seam, exposed fastener, wall panels, trim, and accessories.'],
-  ['Warranty path', ShieldCheck, 'Weather-tightness and finish warranty coordination for qualifying assemblies.'],
-  ['Submittal packages', FileCheck2, 'Product data, finish selections, fastener notes, and project-specific details.'],
-  ['Takeoff support', FileText, 'Plan review support for panel counts, flashing scope, and production sequencing.'],
+  ['Panel profiles', Ruler, 'Profile sheets for standing seam, exposed fastener, wall panels, trim, and accessories.', '/metal-panel-profiles-guide'],
+  ['Warranty path', ShieldCheck, 'Weather-tightness and finish warranty coordination for qualifying assemblies.', '/metal-roofing-submittal-guide'],
+  ['Submittal packages', FileCheck2, 'Product data, finish selections, fastener notes, and project-specific details.', '/downloads/submittal-package-guide.txt'],
+  ['Takeoff support', FileText, 'Plan review support for panel counts, flashing scope, and production sequencing.', '/downloads/plan-upload-instructions.txt'],
 ]
 const downloadAssets = [
   {
@@ -177,6 +177,24 @@ const downloadAssets = [
     title: 'Finish Selection Guide',
     copy: 'How to choose finish paths for heat, coastal, architectural, and campus work.',
     href: '/downloads/finish-selection-guide.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Profile Comparison Guide',
+    copy: 'How to compare standing seam, exposed fastener, wall panels, trim, and accessories without relying on names alone.',
+    href: '/downloads/profile-comparison-guide.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Trim & Flashing Worksheet',
+    copy: 'A simple planning worksheet for ridge, rake, eave, corner, jamb, base, transition, and cap conditions.',
+    href: '/downloads/trim-flashing-worksheet.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Roll Forming Workflow One-Pager',
+    copy: 'A plain-English production path from coil and profile review through forming, bundling, and delivery planning.',
+    href: '/downloads/roll-forming-workflow-one-pager.txt',
     type: 'TXT',
   },
 ]
@@ -3064,12 +3082,15 @@ function BidResources() {
         copy="Commercial buyers need documentation as much as product. Americas Panel Fab is structured around quote-ready, submittal-ready, and contract-ready support."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {resources.map(([title, Icon, copy]) => (
-          <article key={title as string} className="card">
+        {resources.map(([title, Icon, copy, href]) => (
+          <a key={title as string} className="card hover:border-[#f97316]" href={href as string} download={(href as string).startsWith('/downloads/') || undefined}>
             <Icon className="text-[#f97316]" />
             <h3 className="mt-5 text-xl font-black text-[#0b1f33]">{title as string}</h3>
             <p className="mt-3 leading-7 text-slate-600">{copy as string}</p>
-          </article>
+            <span className="mt-5 inline-flex items-center font-black text-[#0b1f33]">
+              Open resource <ArrowRight className="ml-2" size={18} />
+            </span>
+          </a>
         ))}
       </div>
       <div className="mt-8 grid gap-4 rounded bg-[#0b1f33] p-6 text-white md:grid-cols-3">

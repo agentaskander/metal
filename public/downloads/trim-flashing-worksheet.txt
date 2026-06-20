@@ -1,0 +1,57 @@
+AMERICAS PANEL FAB
+TRIM & FLASHING WORKSHEET
+
+Use this worksheet to organize trim and flashing questions before requesting a
+metal roofing or siding package.
+
+Project basics:
+- Project name:
+- Project state:
+- Contact:
+- Roof scope:
+- Wall scope:
+- Panel profile:
+- Finish or color:
+
+Common trim conditions:
+
+Ridge
+- Length or quantity:
+- Venting or closure notes:
+- Finish:
+
+Rake / gable
+- Length or quantity:
+- Edge condition:
+- Closure notes:
+- Finish:
+
+Eave / drip edge
+- Length or quantity:
+- Gutter or no-gutter condition:
+- Fascia or substrate notes:
+- Finish:
+
+Outside corner
+- Length or quantity:
+- Wall panel orientation:
+- Finish:
+
+Openings
+- Door, window, framed opening, or other:
+- Head, jamb, sill, or closure notes:
+- Dimensions:
+- Finish:
+
+Base / transition / cap
+- Condition:
+- Adjacent material:
+- Length or quantity:
+- Finish:
+
+Review reminders:
+- Send drawings, elevations, photos, sketches, and dimensions when available.
+- Confirm whether trim is color-matched, contrasting, or project-specific.
+- Confirm closures, fasteners, sealants, and accessories separately.
+- Final water management, installation, code, warranty, and engineering details
+  require project-specific review.
