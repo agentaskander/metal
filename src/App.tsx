@@ -1983,33 +1983,30 @@ function FinishSystem() {
           </p>
         </div>
       </div>
-      <div className="mt-10 overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
-        <div className="border-b border-slate-200 bg-white p-5">
+      <div className="mt-10 rounded border border-slate-200 bg-white p-6 shadow-lg">
+        <div>
           <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">Finish Family Guide</p>
           <h3 className="mt-2 text-2xl font-black text-[#0b1f33]">Choose the finish system after the color direction.</h3>
           <p className="mt-2 leading-7 text-slate-600">
             These are not extra colors. They are specification paths used to review coating type, appearance, project exposure, sample needs, and documentation.
           </p>
         </div>
-        <table className="product-proof-table">
-          <tbody>
-            <tr>
-              <th>Finish family</th>
-              <th>Best fit</th>
-              <th>What to confirm</th>
-            </tr>
-            {finishes.map(([name, color, copy]) => (
-              <tr key={name}>
-                <td>
-                  <span className="mr-3 inline-block h-4 w-10 rounded border border-slate-200 align-middle" style={{ background: color }} />
-                  {name}
-                </td>
-                <td>{copy}</td>
-                <td>Project use, current availability, substrate, gauge, sample, trim match, and warranty path.</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {finishes.map(([name, color, copy]) => (
+            <article key={name} className="rounded border border-slate-200 bg-slate-50 p-5">
+              <span className="mb-4 block h-14 w-full rounded border border-slate-200" style={{ background: color }} />
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">Finish family</p>
+              <h4 className="mt-2 text-xl font-black text-[#0b1f33]">{name}</h4>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-6 rounded border border-orange-200 bg-orange-50 p-4">
+          <p className="font-black text-[#0b1f33]">What sales confirms before release</p>
+          <p className="mt-2 leading-7 text-slate-700">
+            Project use, current availability, substrate, gauge, sample, trim match, fastener path, exposure, and warranty coordination.
+          </p>
+        </div>
       </div>
     </section>
   )
