@@ -229,24 +229,24 @@ const processSteps = [
 
 const capabilityPhotoCards = [
   {
-    title: 'Commercial Roofing Panels',
-    copy: 'Ribbed metal roof and wall panels for warehouses, shops, industrial buildings, retail shells, and contractor bid packages.',
-    image: siteImages.warehouseRoof,
+    title: 'Roll-Forming Equipment',
+    copy: 'Panel manufacturing capability is the first trust signal contractors need to see before sending plans.',
+    image: siteImages.heroRollFormer,
   },
   {
-    title: 'Built From Quality Materials',
-    copy: 'Material selection, finishes, gauges, and trim scope are reviewed around the needs of each roof or wall package.',
+    title: 'Steel Coil Inventory',
+    copy: 'Coils, finishes, gauges, and trim scope are reviewed around the needs of each roof or wall package.',
     image: siteImages.steelCoils,
   },
   {
-    title: 'Ready for Delivery',
-    copy: 'Panel, trim, flashing, and accessory packages are organized so contractors can plan ordering, staging, and installation.',
-    image: siteImages.truckLoading,
+    title: 'Panel Profile Closeups',
+    copy: 'Ribbed metal panel profile images help buyers understand the product before quote review.',
+    image: siteImages.panelCloseup,
   },
   {
-    title: 'Upload Plans. Get a Quote.',
-    copy: 'Contractors can send roof plans, wall elevations, drawings, photos, and scope notes so sales can review the project cleanly.',
-    image: siteImages.contractorPlans,
+    title: 'Trim & Flashing Fabrication',
+    copy: 'Panel orders become more useful when trim, flashing, closures, and accessories are planned together.',
+    image: siteImages.trimFabrication,
   },
 ]
 const trustBarItems = ['Commercial', 'Industrial', 'Agricultural', 'Residential', 'American Made']
@@ -644,45 +644,53 @@ function SuperPanelPage() {
 function IndustrialRibPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-        <img
-          src={siteImages.warehouseRoof.src}
-          alt={siteImages.warehouseRoof.alt}
-          className="absolute right-0 top-0 h-full w-full object-cover opacity-18 lg:w-[50%] lg:opacity-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
-        <div className="section relative">
-          <div className="max-w-4xl">
-            <p className="eyebrow text-[#f97316]">American Super Panel™</p>
-            <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
-              Metal Roofing Panels Built for Contractors
-            </h1>
-            <p className="mt-6 text-xl leading-8 text-slate-700">
-              Custom-Length Metal Panels, Trim & Flashing for Commercial, Industrial,
-              Agricultural and Residential Projects.
-            </p>
-            <p className="mt-5 max-w-3xl text-base font-bold leading-7 text-slate-700">
-              American Super Panel is a contractor-ready metal roofing and siding panel
-              system built for fast quotes, custom lengths, reliable supply, and regional
-              manufacturing support. Manufactured by Americas Panel Fab.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="#quote">
-                Request a Quote <ArrowRight size={18} />
-              </a>
-              <a className="btn-secondary" href="#upload-plans">
-                <FileUp size={18} /> Upload Plans
-              </a>
-              <a className="btn-secondary" href="#contact">
-                <Phone size={18} /> Call Sales
-              </a>
+      <section className="overflow-hidden border-b border-slate-200 bg-white">
+        <div className="section">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div>
+              <p className="eyebrow text-[#f97316]">American Super Panel™</p>
+              <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
+                Metal Roofing Panels Built for Contractors
+              </h1>
+              <p className="mt-6 text-xl leading-8 text-slate-700">
+                Custom-Length Metal Panels, Trim & Flashing for Commercial, Industrial,
+                Agricultural and Residential Projects.
+              </p>
+              <p className="mt-5 max-w-3xl text-base font-bold leading-7 text-slate-700">
+                American Super Panel is a contractor-ready metal roofing and siding panel
+                system built for fast quotes, custom lengths, reliable supply, and regional
+                manufacturing support. Manufactured by Americas Panel Fab.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a className="btn-primary" href="#quote">
+                  Request a Quote <ArrowRight size={18} />
+                </a>
+                <a className="btn-secondary" href="#upload-plans">
+                  <FileUp size={18} /> Upload Plans
+                </a>
+                <a className="btn-secondary" href="#contact">
+                  <Phone size={18} /> Call Sales
+                </a>
+              </div>
+              <div className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+                {trustBarItems.map((item) => (
+                  <p key={item} className="rounded border border-slate-200 bg-white p-4 text-center font-black text-[#0b1f33] shadow-sm">
+                    {item}
+                  </p>
+                ))}
+              </div>
             </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-5">
-              {trustBarItems.map((item) => (
-                <p key={item} className="rounded border border-slate-200 bg-white p-4 text-center font-black text-[#0b1f33] shadow-sm">
-                  {item}
-                </p>
-              ))}
+            <div className="rounded border border-slate-200 bg-slate-50 p-3 shadow-2xl">
+              <img
+                src={siteImages.heroRollFormer.src}
+                alt={siteImages.heroRollFormer.alt}
+                className="h-[430px] w-full rounded object-cover"
+              />
+              <div className="grid gap-3 pt-3 sm:grid-cols-3">
+                {[siteImages.steelCoils, siteImages.panelCloseup, siteImages.trimFabrication].map((image) => (
+                  <img key={image.key} src={image.src} alt={image.alt} className="h-28 w-full rounded object-cover" />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -708,17 +716,24 @@ function IndustrialRibPage() {
               ))}
             </div>
           </div>
-          <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-xl">
-            <table className="product-proof-table">
-              <tbody>
-                {industrialRibSpecs.map(([label, value]) => (
-                  <tr key={label}>
-                    <th>{label}</th>
-                    <td>{value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[siteImages.steelCoils, siteImages.panelCloseup].map((image) => (
+                <img key={image.key} src={image.src} alt={image.alt} className="h-52 w-full rounded object-cover shadow-lg" />
+              ))}
+            </div>
+            <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-xl">
+              <table className="product-proof-table">
+                <tbody>
+                  {industrialRibSpecs.map(([label, value]) => (
+                    <tr key={label}>
+                      <th>{label}</th>
+                      <td>{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -889,8 +904,8 @@ function CapabilityPhotoStrip() {
     <section className="section bg-slate-50">
       <SectionIntro
         eyebrow="Manufacturing & Project Support"
-        title="Commercial panel packages need practical support from quote to delivery."
-        copy="Product specs, trim scope, finish path, materials, packaging, and plan review all work together when contractors are preparing an order."
+        title="Equipment, materials, panel profiles, and trim support in one package."
+        copy="Roll forming, coil inventory, ribbed profiles, and trim fabrication give contractors a clearer picture of the panel package before quote review."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {capabilityPhotoCards.map((section) => (
