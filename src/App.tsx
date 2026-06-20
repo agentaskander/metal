@@ -35,6 +35,7 @@ const navItems = [
   ['Ontology', '/internal-ontology'],
   ['Build Model', '/internal-implementation'],
   ['Control Panel', '/internal-control-panel'],
+  ['Business Plan', '/internal-business-plan'],
 ]
 
 const products = [
@@ -1108,6 +1109,100 @@ const internalControlEvents = [
   ['production_run.scheduled', 'Machine, coil, profile, and order are assigned.'],
   ['agent.escalated', 'Agent needs human review due confidence, claim, pricing, or ambiguity.'],
 ]
+const internalBusinessPlanSections = [
+  {
+    section: 'Executive Thesis',
+    v3: 'Build a metal panel manufacturing and supply business that starts with contractor-ready exposed-fastener roofing/siding panels, then expands into authority content, dealer workflows, production systems, and agent-assisted operations.',
+    decisions: ['Operating brand: American Super Panel for immediate sales', 'Company/platform: Americas Panel Fab for manufacturing authority', 'Private system: 8190 for plan execution, metrics, and agent control'],
+    missing: ['Final legal entity structure', 'Equity/partnership terms', 'Trademark/domain ownership confirmation', 'Insurance and risk structure'],
+  },
+  {
+    section: 'Market Strategy',
+    v3: 'Prioritize high-volume panel demand while protecting higher-margin commercial opportunities. Split product pages, state pages, contractor workflows, and authority content so sales and credibility reinforce each other without duplicate SEO.',
+    decisions: ['ASP targets product-intent buyers', 'APF targets manufacturing authority and partners', 'State expansion is service-area based until real locations exist'],
+    missing: ['Validated TAM/SAM/SOM by state', 'City/metro launch order', 'Competitor pricing snapshots', 'Dealer territory model'],
+  },
+  {
+    section: 'Products & Revenue',
+    v3: 'Start with exposed-fastener roof and siding panels plus trim, flashing, accessories, and bulk contractor orders. Use product packets and quote-ready forms to shorten time from inquiry to quote.',
+    decisions: ['Core revenue: panel sales by area/length/order package', 'Secondary revenue: trim, accessories, delivery, bulk/repeat orders', 'Future revenue: dealer portal, contractor portal, software-enabled workflow'],
+    missing: ['Final product spec sheets', 'Gauge/color/finish catalog', 'Accessory price logic', 'Warranty language review'],
+  },
+  {
+    section: 'Operations',
+    v3: 'Translate the facility, equipment, staffing, inventory, logistics, and production model into operating workflows instead of leaving it as a static plan. Every production assumption should become a field, queue, or review gate.',
+    decisions: ['Coil inventory is a strategic proof and margin lever', 'Roll forming, trim fabrication, staging, and loading must be visible in the control panel', 'Run sheets should come from approved order data'],
+    missing: ['Facility lease criteria', 'Equipment vendor comparison', 'SOPs by workstation', 'Safety program', 'QA checklist', 'maintenance schedule'],
+  },
+  {
+    section: 'Financial Model',
+    v3: 'Use the V2 numbers as confidential baseline assumptions, but track live performance through revenue, square footage, blended selling price, variable cost, gross margin, fixed cost, contribution margin, cash runway, and payback progress.',
+    decisions: ['Keep exact V2 financials out of compiled/public code', 'Track plan vs actual monthly', 'Separate public claims from internal projections'],
+    missing: ['Live bookkeeping integration', 'COGS source of truth', 'cash flow tracker', 'tax assumptions', 'financing/debt/equity structure'],
+  },
+  {
+    section: 'Government / Commercial Readiness',
+    v3: 'Treat government and institutional work as a readiness program, not a marketing claim. Build entity credibility, documentation discipline, bid process, compliance tracking, and approval gates before publishing strong claims.',
+    decisions: ['Public copy stays generic until qualifications are verified', '8190 tracks registrations and bid readiness privately', 'Agents cannot generate government claims without human review'],
+    missing: ['SAM.gov path if applicable', 'NAICS/PSC code review', 'bonding/insurance requirements', 'certifications, bid docs, submittal templates, compliance owner'],
+  },
+]
+const internalBusinessPlanExecutionMetrics = [
+  ['Revenue', 'Monthly sales revenue', 'Actual revenue / private V3 target', 'Connect accounting or manual monthly entry'],
+  ['Volume', 'Sq ft sold or produced', 'Actual sqft / target sqft', 'Track by product family, state, market, and channel'],
+  ['Blended price', 'Weighted average selling price', 'Revenue / sqft sold', 'Compare PBR/R-panel, AG/Tuff Rib, trim/accessory mix'],
+  ['Variable cost', 'Material, labor, electricity, packaging, freight allocation', 'Variable cost / sqft', 'Needs source-of-truth COGS records'],
+  ['Contribution margin', 'Revenue less variable costs', '(Revenue - variable cost) / sqft', 'Primary operating health metric'],
+  ['Gross margin %', 'Profitability before fixed overhead', '(Revenue - COGS) / revenue', 'Track by product, market, and customer type'],
+  ['Fixed cost coverage', 'Rent, labor, utilities, admin, software, insurance', 'Contribution margin / fixed cost', 'Shows break-even progress'],
+  ['Cash runway', 'Available cash divided by monthly burn', 'Cash / net burn', 'Needs bank/accounting integration later'],
+  ['Quote conversion', 'Won quotes divided by sent quotes', 'Won / sent', 'Connect quote pipeline to customer outcomes'],
+  ['Speed to quote', 'Time from complete intake to quote sent', 'Median hours', 'Critical ASP customer-experience advantage'],
+]
+const internalBusinessPlanGovReadiness = [
+  {
+    area: 'Entity & Registration',
+    needed: ['Final contracting entity', 'EIN and banking alignment', 'DUNS/UEI review', 'SAM.gov decision', 'W-9 and vendor packet'],
+    risk: 'Do not imply active government contracting status until registrations and bid eligibility are verified.',
+  },
+  {
+    area: 'Codes & Classifications',
+    needed: ['NAICS codes', 'PSC/product service codes', 'state/local vendor portals', 'public works requirements', 'prevailing wage triggers'],
+    risk: 'Wrong codes or public-works assumptions can waste bids or create compliance exposure.',
+  },
+  {
+    area: 'Insurance, Bonding & Credit',
+    needed: ['General liability', 'workers comp', 'auto/fleet', 'product liability review', 'bonding capacity if required', 'credit terms'],
+    risk: 'Commercial and public buyers may require documentation before purchase orders or vendor approval.',
+  },
+  {
+    area: 'Bid Documentation',
+    needed: ['Product data', 'submittal template', 'finish documentation', 'warranty language', 'lead-time caveats', 'exclusions/assumptions'],
+    risk: 'Unverified product or performance claims should be blocked by approval gates.',
+  },
+  {
+    area: 'Compliance Workflow',
+    needed: ['Bid/no-bid checklist', 'contract review owner', 'legal review trigger', 'document retention policy', 'change-order workflow'],
+    risk: 'Government-adjacent work needs disciplined records, not casual sales emails.',
+  },
+]
+const internalBusinessPlanGaps = [
+  ['Ownership & equity', 'Separate agreement for domain/software/IP ownership, equity, decision rights, buyout, dilution, and what happens if Fab acquires/merges Super.'],
+  ['Legal/IP protection', 'Trademark search, brand assignment, software ownership, data ownership, contractor/dealer terms, NDA-safe operating rules.'],
+  ['Manufacturing validation', 'Vendor quotes, machine specs, maintenance assumptions, throughput proof, material yield, staffing, safety, quality system.'],
+  ['Financial controls', 'Chart of accounts, COGS categories, margin dashboard, quote approvals, purchase order workflow, cash runway tracking.'],
+  ['Sales validation', 'Lead source tracking, quote conversion, price sensitivity by market, contractor interviews, dealer interest, reorder rate.'],
+  ['Supply chain', 'Coil suppliers, finish options, minimum orders, substitutions, reorder points, storage handling, freight/delivery economics.'],
+  ['Risk register', 'Startup delay, supplier cost changes, equipment downtime, installation complaints, warranty ambiguity, public-claim exposure, partner conflict.'],
+  ['Gov/commercial proof', 'Registrations, insurance, bonding, submittals, code references, bid calendar, public-sector eligibility, contract review.'],
+]
+const internalBusinessPlanMilestones = [
+  ['Phase 1', 'Proof of demand', 'ASP pages live, quote/upload workflows working, real phone/email, first contractor conversations, product packets drafted.'],
+  ['Phase 2', 'Operating readiness', 'Equipment/facility decision, supplier program, color/gauge catalog, SOP drafts, safety/QA checklist, bookkeeping setup.'],
+  ['Phase 3', 'Revenue system', 'Lead inbox, quote pipeline, margin tracker, plan review queue, CRM ownership, follow-up cadence, conversion dashboard.'],
+  ['Phase 4', 'Production launch', 'Coil inventory, machine setup, run sheets, labels, bundles, loading workflow, QA signoff, delivery/pickup process.'],
+  ['Phase 5', 'Scale channels', 'Dealer/contractor portal, service-area expansion, project gallery, APF authority content, partner/investor materials.'],
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1351,6 +1446,10 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'internal-control-panel') {
     return <InternalControlPanelPage />
+  }
+
+  if (path === 'internal-business-plan') {
+    return <InternalBusinessPlanPage />
   }
 
   if (path === 'internal-data-model') {
@@ -2298,6 +2397,188 @@ function InternalControlPanelPage() {
           ].map(([step, title, detail]) => (
             <article key={step} className="grid gap-4 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.1fr_0.25fr_0.65fr] md:items-center">
               <p className="text-3xl font-black text-[#f97316]">{step}</p>
+              <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalBusinessPlanPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Business Plan V3 • Strictly Confidential • 8190 Only"
+        title="Business Plan, Execution Scorecard & Readiness Gaps"
+        copy="A private V3 planning surface based on the confidential V2 PDF. Exact financial assumptions, machine output, private contacts, and NDA details stay in _doc and must never be copied to beta or public sites."
+        stats={[
+          [`${internalBusinessPlanSections.length}`, 'plan pillars'],
+          [`${internalBusinessPlanExecutionMetrics.length}`, 'execution metrics'],
+          [`${internalBusinessPlanGovReadiness.length}`, 'gov readiness tracks'],
+          ['Private', 'no public deployment'],
+        ]}
+      />
+
+      <InternalOntologySection
+        eyebrow="Confidentiality Boundary"
+        title="Do not let the business plan leak into APF beta or ASP public."
+        copy="The 8190 plan can discuss targets, margin logic, government readiness, ownership risk, and operating controls. Public sites should only contain verified customer-safe claims."
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            ['Keep private', 'Startup investment, machine output, staffing cost, margins, break-even, projections, owner/private contacts, supplier pricing, and partnership terms.'],
+            ['Public safe after review', 'Product categories, quote workflow, plan upload workflow, contractor support, manufacturing capability, service areas, and real proof assets.'],
+            ['Needs legal/business review', 'Government contracting claims, performance claims, warranty language, made-in-USA wording, certifications, and equity/IP ownership.'],
+          ].map(([title, copy]) => (
+            <article key={title} className="card">
+              <ShieldCheck className="text-[#f97316]" />
+              <h2 className="mt-4 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Business Plan V3"
+        title="Plan pillars translated into execution requirements."
+        copy="V2 is a financial and operating concept. V3 turns it into decisions, missing details, dashboards, and control-panel workflows."
+      >
+        <div className="grid gap-5">
+          {internalBusinessPlanSections.map((section) => (
+            <article key={section.section} className="card">
+              <div className="grid gap-6 lg:grid-cols-[0.24fr_0.34fr_0.2fr_0.22fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Plan Pillar</p>
+                  <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{section.section}</h2>
+                </div>
+                <p className="text-lg leading-8 text-slate-600">{section.v3}</p>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Decisions</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {section.decisions.map((decision) => (
+                      <li key={decision} className="leading-7 text-slate-700">{decision}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Still Needed</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {section.missing.map((item) => (
+                      <li key={item} className="flex gap-2 leading-7 text-slate-700">
+                        <ArrowRight className="mt-1 shrink-0 text-[#f97316]" size={16} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Execution Scorecard"
+        title="Track plan vs actual every month."
+        copy="This is the first version of the operating scorecard. Later it should connect to accounting, CRM, quoting, production, and inventory data."
+      >
+        <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
+          <table className="product-proof-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>What It Tracks</th>
+                <th>Formula</th>
+                <th>Build Requirement</th>
+              </tr>
+            </thead>
+            <tbody>
+              {internalBusinessPlanExecutionMetrics.map(([metric, tracks, formula, build]) => (
+                <tr key={metric}>
+                  <th>{metric}</th>
+                  <td>{tracks}</td>
+                  <td>{formula}</td>
+                  <td>{build}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-4">
+          {[
+            ['Month', 'YYYY-MM'],
+            ['Plan', 'private target'],
+            ['Actual', 'entered or imported'],
+            ['Variance', 'actual - plan'],
+          ].map(([label, value]) => (
+            <article key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
+              <p className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">{label}</p>
+              <p className="mt-2 text-2xl font-black text-[#0b1f33]">{value}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Government / Commercial Readiness"
+        title="What must be built before serious public-sector positioning."
+        copy="This is not public marketing copy. It is the private checklist for becoming credible enough to pursue institutional, municipal, school, and government-adjacent work."
+      >
+        <div className="grid gap-5">
+          {internalBusinessPlanGovReadiness.map((track) => (
+            <article key={track.area} className="card">
+              <div className="grid gap-5 lg:grid-cols-[0.25fr_0.45fr_0.3fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Readiness Track</p>
+                  <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{track.area}</h2>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Needed</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {track.needed.map((item) => (
+                      <span key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded border border-orange-200 bg-orange-50 p-4">
+                  <h3 className="text-lg font-black text-[#0b1f33]">Risk</h3>
+                  <p className="mt-2 leading-7 text-slate-700">{track.risk}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Plan Gaps"
+        title="Additional details needed to make V3 investable and executable."
+        copy="These are the missing pieces that should become owner tasks, advisor questions, legal questions, or dashboard modules."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalBusinessPlanGaps.map(([gap, detail]) => (
+            <article key={gap} className="card">
+              <p className="eyebrow text-[#f97316]">Gap</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{gap}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Milestones"
+        title="Turn the plan into an execution tracker."
+        copy="The Business Plan page should eventually store owner, due date, status, evidence, risk, and next action for each milestone."
+      >
+        <div className="grid gap-4">
+          {internalBusinessPlanMilestones.map(([phase, title, detail]) => (
+            <article key={phase} className="grid gap-4 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.12fr_0.25fr_0.63fr] md:items-center">
+              <p className="text-2xl font-black text-[#f97316]">{phase}</p>
               <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
               <p className="leading-7 text-slate-600">{detail}</p>
             </article>
