@@ -1,0 +1,67 @@
+Americas Panel Fab
+Trim Schedule Template
+
+Purpose:
+Use this template to organize trim and flashing conversations before quoting,
+submittal review, or production release. This is a planning worksheet, not a
+final engineered detail.
+
+Project:
+- Project name:
+- Project state:
+- Contact:
+- Roof scope:
+- Wall scope:
+- Panel profile:
+- Finish or color:
+
+Common trim conditions:
+
+1. Ridge
+- Quantity or length:
+- Roof slope:
+- Venting or closure notes:
+- Finish:
+- Drawing/detail reference:
+
+2. Rake / gable
+- Quantity or length:
+- Overhang or edge condition:
+- Closure notes:
+- Finish:
+- Drawing/detail reference:
+
+3. Eave / drip edge
+- Quantity or length:
+- Gutter or no-gutter condition:
+- Substrate or fascia notes:
+- Finish:
+- Drawing/detail reference:
+
+4. Outside corners
+- Quantity or length:
+- Wall panel orientation:
+- Opening or transition notes:
+- Finish:
+- Drawing/detail reference:
+
+5. Jamb / head / sill
+- Opening type:
+- Quantity:
+- Dimensions:
+- Finish:
+- Drawing/detail reference:
+
+6. Base / transition / cap
+- Condition:
+- Quantity or length:
+- Adjacent material:
+- Finish:
+- Drawing/detail reference:
+
+Review reminders:
+- Send drawings, elevations, photos, sketches, and dimensions when available.
+- Confirm whether trim is color-matched, contrasting, or project-specific.
+- Confirm closures, fasteners, sealants, and accessories separately.
+- Final water management, code, warranty, and installation details require
+  project-specific review.

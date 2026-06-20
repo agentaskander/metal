@@ -1,0 +1,45 @@
+Americas Panel Fab
+Roll Forming Workflow One-Pager
+
+Purpose:
+This public worksheet explains the typical information flow behind a metal panel
+roll-forming conversation. It is not engineering, installation, warranty, code,
+or project-specific production approval.
+
+1. Project intake
+- Project name and state
+- Contractor, owner, or buyer contact
+- Roof, wall, trim, or mixed scope
+- Drawings, photos, sketches, or approximate dimensions
+- Desired schedule or delivery window
+
+2. Product path review
+- Panel profile or profile family
+- Roof use, wall use, or combined use
+- Approximate square footage
+- Desired panel lengths, if known
+- Trim, flashing, closure, and accessory needs
+
+3. Material and finish review
+- Gauge preference, if known
+- Substrate path, if specified
+- Finish family or color preference
+- Sample, submittal, or owner approval needs
+- Any exposure notes such as coastal, high-sun, agricultural, or industrial use
+
+4. Roll-forming coordination
+- Profile drawing and coverage width should be confirmed before ordering
+- Panel lengths should be reviewed for handling, delivery, and jobsite access
+- Finish, gauge, substrate, and color assumptions should be visible in the quote
+- Trim and flashing should be coordinated with the panel package
+
+5. Package handoff
+- Panels counted and organized by project area when possible
+- Bundles labeled clearly for receiving and field use
+- Trim, flashing, fasteners, closures, and accessories reviewed as separate scope
+- Delivery contact, address, timing, and site constraints confirmed
+
+Public-safe note:
+Final project requirements, equipment limits, code requirements, wind/fire
+requirements, engineering review, warranty terms, and installation details must be
+confirmed through qualified review and manufacturer documentation.
