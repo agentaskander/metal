@@ -163,6 +163,34 @@ const colorSelectionSteps = [
   ['Confirm samples', 'Use physical samples before larger orders, owner approvals, or visible color breaks.'],
   ['Coordinate the package', 'Panel, trim, flashing, fasteners, closures, and touch-up should be reviewed together.'],
 ] as [string, string][]
+const colorSelectorOptions = {
+  projectType: ['Commercial', 'Warehouse', 'Shop', 'Barn', 'Agricultural', 'Residential accessory', 'Multifamily', 'Retail'],
+  application: ['Roof', 'Siding', 'Trim', 'Flashing', 'Fascia / soffit', 'Accent panels'],
+  priority: [
+    'Lowest practical cost',
+    'Fast availability',
+    'Cool roof / heat',
+    'Modern matte look',
+    'Match existing building',
+    'Premium commercial look',
+    'Industrial / Rezibond-style look',
+  ],
+  direction: ['Metallic', 'White / light', 'Gray', 'Black / charcoal', 'Tan / earth tone', 'Red / barn', 'Green', 'Copper / specialty', 'Not sure'],
+}
+type ColorSelection = {
+  application: string
+  direction: string
+  priority: string
+  projectType: string
+}
+type ColorRecommendation = {
+  alternate: string
+  confirm: string
+  finishFamily: string
+  style: string
+  summary: string
+  why: string
+}
 const resources = [
   ['Panel profiles', Ruler, 'Profile sheets for Industrial Rib, PBR / R-Panel, AG panels, trim, and accessories.', '/american-super-panel-industrial-rib'],
   ['Warranty path', ShieldCheck, 'Finish, substrate, fastening, and project documentation conversations for qualifying packages.', '/downloads/submittal-package-guide.txt'],
@@ -1615,6 +1643,213 @@ function Products() {
   )
 }
 
+function getColorData(name: string) {
+  return colorChart.find(([colorName]) => colorName === name) ?? colorChart[0]
+}
+
+function getColorStyleRecommendation(selection: ColorSelection): ColorRecommendation {
+  const { application, direction, priority, projectType } = selection
+  let style = 'Slate Gray'
+  let alternate = 'Galvalume'
+  let finishFamily = 'Neutral painted'
+  let why = 'A practical commercial color path that works across roof, siding, and trim conversations.'
+
+  if (priority.includes('Industrial') || direction.includes('Metallic')) {
+    style = priority.includes('Industrial') ? 'Rezibond-Style Primer-Ready' : 'Galvalume'
+    alternate = priority.includes('Industrial') ? 'Galvalume' : 'Galvanized'
+    finishFamily = priority.includes('Industrial') ? 'Primer-ready / metallic utility' : 'Metallic utility'
+    why = 'A metal-forward finish direction fits shops, warehouses, industrial siding, and utility panel packages.'
+  }
+
+  if (priority.includes('Cool roof') || direction.includes('White')) {
+    style = 'Polar White'
+    alternate = 'Light Stone'
+    finishFamily = 'Cool roof light'
+    why = 'A lighter finish direction is a better starting point when heat, reflectivity, or bright trim coordination matters.'
+  }
+
+  if (priority.includes('matte') || direction.includes('Black')) {
+    style = 'Matte Black'
+    alternate = 'Charcoal'
+    finishFamily = 'Matte architectural'
+    why = 'A low-glare dark direction fits modern siding, trim, fascia, accent panels, and visible commercial details.'
+  }
+
+  if (direction === 'Gray') {
+    style = 'Slate Gray'
+    alternate = 'Charcoal'
+    finishFamily = 'Neutral painted'
+    why = 'Gray is a flexible commercial direction for warehouses, shops, retail shells, and owner-standard buildings.'
+  }
+
+  if (direction.includes('Tan')) {
+    style = 'Light Stone'
+    alternate = 'Burnished Slate'
+    finishFamily = 'Neutral / earth tone'
+    why = 'Earth-tone neutrals are practical for agricultural buildings, shops, storage buildings, and trim coordination.'
+  }
+
+  if (direction.includes('Red')) {
+    style = 'Rustic Red'
+    alternate = 'Light Stone'
+    finishFamily = 'Accent painted'
+    why = 'A red finish direction is common for agricultural, barn, ranch, and accent panel conversations.'
+  }
+
+  if (direction === 'Green') {
+    style = 'Forest Green'
+    alternate = 'Galvalume'
+    finishFamily = 'Accent painted'
+    why = 'Green is a recognizable rural and agricultural direction, especially when coordinated with neutral trim.'
+  }
+
+  if (direction.includes('Copper')) {
+    style = 'Copper Penny'
+    alternate = 'Matte Black'
+    finishFamily = 'Specialty accent'
+    why = 'Specialty metal-look colors work best as visible trim, fascia, soffit, or accent panel decisions.'
+  }
+
+  if (priority.includes('Lowest') || priority.includes('Fast availability')) {
+    style = direction.includes('White') ? 'Polar White' : 'Galvalume'
+    alternate = direction.includes('White') ? 'Light Stone' : 'Light Stone'
+    finishFamily = direction.includes('White') ? 'Cool roof light' : 'Metallic utility'
+    why = 'A practical, common finish direction gives sales a cleaner place to start when cost or availability matters most.'
+  }
+
+  if (direction === 'Not sure') {
+    style = projectType === 'Agricultural' || projectType === 'Barn' ? 'Light Stone' : 'Slate Gray'
+    alternate = 'Galvalume'
+    finishFamily = projectType === 'Agricultural' || projectType === 'Barn' ? 'Neutral painted' : 'Neutral commercial'
+    why = 'A neutral starting point helps sales recommend samples after reviewing the building type and application.'
+  }
+
+  const confirm = `Confirm current availability, substrate, gauge, sheen, trim match, and physical samples before release for ${application.toLowerCase()} use.`
+  const summary = `${style} primary, ${alternate} alternate, ${finishFamily} finish path for ${projectType} ${application.toLowerCase()} work. ${confirm}`
+
+  return { alternate, confirm, finishFamily, style, summary, why }
+}
+
+function storeColorRecommendation(recommendation: ColorRecommendation, selection: ColorSelection) {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem('asp_color_recommendation', JSON.stringify({ recommendation, selection }))
+  window.dispatchEvent(new CustomEvent('asp-color-recommendation', { detail: { recommendation, selection } }))
+}
+
+function readStoredColorRecommendation(): ColorRecommendation | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const stored = window.localStorage.getItem('asp_color_recommendation')
+    if (!stored) return null
+    return (JSON.parse(stored) as { recommendation?: ColorRecommendation }).recommendation ?? null
+  } catch {
+    return null
+  }
+}
+
+function ColorSwatch({ name, size = 'large' }: { name: string; size?: 'large' | 'small' }) {
+  const [label, color, family, use] = getColorData(name)
+  return (
+    <span className="flex items-center gap-3">
+      <span
+        className={`${size === 'large' ? 'h-12 w-20' : 'h-8 w-12'} shrink-0 rounded border border-slate-200`}
+        style={{ background: color }}
+        aria-hidden="true"
+      />
+      <span>
+        <strong className="block text-[#0b1f33]">{label}</strong>
+        <span className="block text-sm font-semibold text-slate-500">{family} · {use}</span>
+      </span>
+    </span>
+  )
+}
+
+function ColorStyleSelector({ compact = false }: { compact?: boolean }) {
+  const [selection, setSelection] = useState<ColorSelection>({
+    application: colorSelectorOptions.application[0],
+    direction: colorSelectorOptions.direction[0],
+    priority: colorSelectorOptions.priority[0],
+    projectType: colorSelectorOptions.projectType[0],
+  })
+  const recommendation = getColorStyleRecommendation(selection)
+
+  useEffect(() => {
+    storeColorRecommendation(recommendation, selection)
+  }, [recommendation.summary, selection])
+
+  function updateSelection(key: keyof ColorSelection, value: string) {
+    setSelection((current) => ({ ...current, [key]: value }))
+  }
+
+  const groups: [keyof ColorSelection, string, string[]][] = [
+    ['projectType', 'Project type', colorSelectorOptions.projectType],
+    ['application', 'Panel use', colorSelectorOptions.application],
+    ['priority', 'Top priority', colorSelectorOptions.priority],
+    ['direction', 'Color direction', colorSelectorOptions.direction],
+  ]
+
+  return (
+    <div className={`rounded border border-slate-200 bg-white ${compact ? 'p-5' : 'p-6 shadow-lg'}`}>
+      <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#f97316]">Color Style Selector</p>
+          <h3 className={`${compact ? 'mt-2 text-xl' : 'mt-3 text-3xl'} font-black text-[#0b1f33]`}>
+            Narrow the finish direction before sales confirms availability.
+          </h3>
+          <p className="mt-3 leading-7 text-slate-600">
+            Tap the closest fit. The form will include the recommended color style, alternate, finish family, and sample-confirmation note so sales can quote now or follow up when a requested finish path becomes available.
+          </p>
+          <div className="mt-5 grid gap-5">
+            {groups.map(([key, label, options]) => (
+              <div key={key}>
+                <p className="mb-2 text-sm font-black uppercase tracking-[0.12em] text-slate-500">{label}</p>
+                <div className="flex flex-wrap gap-2">
+                  {options.map((option) => {
+                    const selected = selection[key] === option
+                    return (
+                      <button
+                        key={option}
+                        type="button"
+                        className={`rounded border px-3 py-2 text-sm font-black transition ${
+                          selected
+                            ? 'border-[#f97316] bg-[#fff7ed] text-[#0b1f33] shadow-sm'
+                            : 'border-slate-200 bg-white text-slate-700 hover:border-slate-400'
+                        }`}
+                        onClick={() => updateSelection(key, option)}
+                      >
+                        {option}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <aside className="rounded border border-slate-200 bg-slate-50 p-5">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">Recommended style path</p>
+          <div className="mt-4 grid gap-4">
+            <ColorSwatch name={recommendation.style} />
+            <div className="rounded border border-slate-200 bg-white p-4">
+              <p className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">Alternate to review</p>
+              <div className="mt-3">
+                <ColorSwatch name={recommendation.alternate} size="small" />
+              </div>
+            </div>
+            <p className="leading-7 text-slate-700">{recommendation.why}</p>
+            <p className="rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
+              {recommendation.confirm}
+            </p>
+            <a className="btn-primary w-fit" href="#quote" onClick={() => storeColorRecommendation(recommendation, selection)}>
+              Use This in Quote Request <ArrowRight size={18} />
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  )
+}
+
 function FinishSystem() {
   return (
     <section id="finishes" className="section">
@@ -1642,16 +1877,19 @@ function FinishSystem() {
             ))}
           </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {colorChart.map(([name, color, family, use, note]) => (
-            <article key={name} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
-              <span className="mb-4 block h-16 w-full rounded border border-slate-200" style={{ background: color }} />
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">{family}</p>
-              <h3 className="mt-2 text-xl font-black text-[#0b1f33]">{name}</h3>
-              <p className="mt-2 text-sm font-bold text-slate-500">{use}</p>
-              <p className="mt-3 leading-7 text-slate-600">{note}</p>
-            </article>
-          ))}
+        <div>
+          <ColorStyleSelector />
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {colorChart.map(([name, color, family, use, note]) => (
+              <article key={name} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
+                <span className="mb-4 block h-16 w-full rounded border border-slate-200" style={{ background: color }} />
+                <p className="text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">{family}</p>
+                <h3 className="mt-2 text-xl font-black text-[#0b1f33]">{name}</h3>
+                <p className="mt-2 text-sm font-bold text-slate-500">{use}</p>
+                <p className="mt-3 leading-7 text-slate-600">{note}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
       <div className="mt-10 overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
@@ -2110,6 +2348,17 @@ function Contact() {
 
 function QuoteForm() {
   const [submitState, setSubmitState] = useState<SubmitState>(idleSubmitState)
+  const [colorRecommendation, setColorRecommendation] = useState<ColorRecommendation | null>(() => readStoredColorRecommendation())
+
+  useEffect(() => {
+    function handleColorRecommendation(event: Event) {
+      const detail = (event as CustomEvent<{ recommendation?: ColorRecommendation }>).detail
+      setColorRecommendation(detail?.recommendation ?? readStoredColorRecommendation())
+    }
+
+    window.addEventListener('asp-color-recommendation', handleColorRecommendation)
+    return () => window.removeEventListener('asp-color-recommendation', handleColorRecommendation)
+  }, [])
 
   async function handleQuoteSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -2135,6 +2384,25 @@ function QuoteForm() {
   return (
     <form id="quote" className="form-panel" action="/api/quote" method="post" onSubmit={handleQuoteSubmit}>
       <h2 className="text-2xl font-black text-[#0b1f33]">Quick Quote Form</h2>
+      <div className="mt-5">
+        <ColorStyleSelector compact />
+      </div>
+      {colorRecommendation ? (
+        <div className="mt-4 rounded border border-orange-200 bg-orange-50 p-4">
+          <p className="text-sm font-black uppercase tracking-[0.12em] text-[#f97316]">Added to lead details</p>
+          <p className="mt-2 font-bold leading-7 text-[#0b1f33]">
+            {colorRecommendation.style} primary, {colorRecommendation.alternate} alternate
+          </p>
+          <p className="mt-1 text-sm leading-6 text-slate-700">{colorRecommendation.summary}</p>
+          <p className="mt-2 text-sm font-bold leading-6 text-slate-700">
+            If the exact color is not ready for release, sales can save the request and follow up with samples, alternates, or availability updates.
+          </p>
+        </div>
+      ) : null}
+      <input type="hidden" name="recommended_color_style" value={colorRecommendation?.style ?? ''} />
+      <input type="hidden" name="recommended_color_alternate" value={colorRecommendation?.alternate ?? ''} />
+      <input type="hidden" name="recommended_finish_family" value={colorRecommendation?.finishFamily ?? ''} />
+      <input type="hidden" name="color_recommendation" value={colorRecommendation?.summary ?? ''} />
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <label>
           <span>Request Type</span>
@@ -2193,6 +2461,19 @@ function QuoteForm() {
         <label>
           <span>Color Style Needed</span>
           <input name="color_style_needed" type="text" placeholder="Metallic, white, charcoal, matte black, earth tone..." />
+        </label>
+        <label>
+          <span>Color Follow-Up</span>
+          <select name="color_follow_up" defaultValue="">
+            <option value="" disabled>
+              Select color follow-up
+            </option>
+            <option>Quote with closest available color</option>
+            <option>Send samples before order</option>
+            <option>Notify me when this color style is available</option>
+            <option>Need to match an existing building</option>
+            <option>Not sure yet</option>
+          </select>
         </label>
         <label>
           <span>Finish Priority</span>
