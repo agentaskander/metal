@@ -934,7 +934,7 @@ function QualityChainCallout({ compact = false }: { compact?: boolean }) {
       <div className="rounded border border-orange-200 bg-orange-50 p-6 text-[#0b1f33]">
         <p className="eyebrow text-[#c2410c]">Quality Model</p>
         <h2 className="mt-3 text-3xl font-black leading-tight">
-          Craftsmanship -&gt; Predictability -&gt; Peace of Mind
+          From shop-floor care to customer confidence.
         </h2>
         <p className="mt-4 max-w-4xl text-lg font-semibold leading-8 text-slate-700">
           Employees create craftsmanship. Craftsmanship creates predictable manufacturing.
@@ -942,9 +942,12 @@ function QualityChainCallout({ compact = false }: { compact?: boolean }) {
         </p>
         {!compact ? (
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {qualityChain.map(([title, copy]) => (
+            {qualityChain.map(([title, copy], index) => (
               <article key={title} className="rounded border border-orange-200 bg-white p-4">
-                <h3 className="text-xl font-black">{title}</h3>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#f97316] text-sm font-black text-white">
+                  {index + 1}
+                </span>
+                <h3 className="mt-3 text-xl font-black">{title}</h3>
                 <p className="mt-2 leading-7 text-slate-700">{copy}</p>
               </article>
             ))}
