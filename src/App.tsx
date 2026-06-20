@@ -227,33 +227,26 @@ const processSteps = [
   ['Support install', 'Contractors get detail support, sequencing help, and follow-through through closeout.'],
 ]
 
-const homepagePhotoSections = [
+const capabilityPhotoCards = [
   {
-    eyebrow: 'Commercial Roofing Panels',
     title: 'Commercial Roofing Panels',
     copy: 'Ribbed metal roof and wall panels for warehouses, shops, industrial buildings, retail shells, and contractor bid packages.',
     image: siteImages.warehouseRoof,
   },
   {
-    eyebrow: 'Quality Materials',
     title: 'Built From Quality Materials',
-    copy: 'The site launches with stock coil imagery now, then swaps in real coil inventory photos as soon as the first material photos are ready.',
+    copy: 'Material selection, finishes, gauges, and trim scope are reviewed around the needs of each roof or wall package.',
     image: siteImages.steelCoils,
-    reverse: true,
   },
   {
-    eyebrow: 'Delivery Support',
     title: 'Ready for Delivery',
-    copy: 'Panel, trim, flashing, and accessory packages are presented around the real buying question: can this supplier quote, package, and deliver?',
+    copy: 'Panel, trim, flashing, and accessory packages are organized so contractors can plan ordering, staging, and installation.',
     image: siteImages.truckLoading,
   },
   {
-    eyebrow: 'Upload Plans',
     title: 'Upload Plans. Get a Quote.',
     copy: 'Contractors can send roof plans, wall elevations, drawings, photos, and scope notes so sales can review the project cleanly.',
     image: siteImages.contractorPlans,
-    reverse: true,
-    cta: true,
   },
 ]
 const trustBarItems = ['Commercial', 'Industrial', 'Agricultural', 'Residential', 'American Made']
@@ -653,8 +646,8 @@ function IndustrialRibPage() {
     <>
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
         <img
-          src={siteImages.heroRollFormer.src}
-          alt={siteImages.heroRollFormer.alt}
+          src={siteImages.warehouseRoof.src}
+          alt={siteImages.warehouseRoof.alt}
           className="absolute right-0 top-0 h-full w-full object-cover opacity-18 lg:w-[50%] lg:opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
@@ -695,8 +688,6 @@ function IndustrialRibPage() {
         </div>
       </section>
 
-      <HomepagePhotoSections />
-
       <section className="section bg-white">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
@@ -731,6 +722,8 @@ function IndustrialRibPage() {
           </div>
         </div>
       </section>
+
+      <CapabilityPhotoStrip />
 
       <section id="samples" className="section bg-slate-50">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
@@ -891,33 +884,29 @@ function AmericanMadeSection() {
   )
 }
 
-function HomepagePhotoSections() {
+function CapabilityPhotoStrip() {
   return (
-    <section className="bg-white">
-      {homepagePhotoSections.map((section) => (
-        <div key={section.title} className="section border-b border-slate-200 last:border-b-0">
-          <div className={`grid gap-10 lg:grid-cols-2 lg:items-center ${section.reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+    <section className="section bg-slate-50">
+      <SectionIntro
+        eyebrow="Manufacturing & Project Support"
+        title="Commercial panel packages need practical support from quote to delivery."
+        copy="Product specs, trim scope, finish path, materials, packaging, and plan review all work together when contractors are preparing an order."
+      />
+      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {capabilityPhotoCards.map((section) => (
+          <article key={section.title} className="overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
             <img
               src={section.image.src}
               alt={section.image.alt}
-              className="h-[360px] w-full rounded object-cover shadow-xl"
+              className="h-44 w-full object-cover"
             />
-            <div>
-              <SectionIntro eyebrow={section.eyebrow} title={section.title} copy={section.copy} />
-              {section.cta ? (
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a className="btn-primary" href="#quote">
-                    Request a Quote <ArrowRight size={18} />
-                  </a>
-                  <a className="btn-secondary" href="#upload-plans">
-                    <FileUp size={18} /> Upload Plans
-                  </a>
-                </div>
-              ) : null}
+            <div className="p-5">
+              <h2 className="text-lg font-black text-[#0b1f33]">{section.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{section.copy}</p>
             </div>
-          </div>
-        </div>
-      ))}
+          </article>
+        ))}
+      </div>
     </section>
   )
 }
