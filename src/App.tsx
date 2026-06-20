@@ -934,11 +934,11 @@ function QualityChainCallout({ compact = false }: { compact?: boolean }) {
       <div className="rounded border border-orange-200 bg-orange-50 p-6 text-[#0b1f33]">
         <p className="eyebrow text-[#c2410c]">Quality Model</p>
         <h2 className="mt-3 text-3xl font-black leading-tight">
-          From shop-floor care to customer confidence.
+          Built carefully so the job goes smoother.
         </h2>
         <p className="mt-4 max-w-4xl text-lg font-semibold leading-8 text-slate-700">
-          Employees create craftsmanship. Craftsmanship creates predictable manufacturing.
-          Predictable manufacturing creates customer peace of mind.
+          The right panel package should be easy to review, easy to quote, easier to install,
+          and supported by people who answer clearly when project details change.
         </p>
         {!compact ? (
           <div className="mt-6 grid gap-4 md:grid-cols-3">
@@ -977,14 +977,14 @@ function QualityPage() {
       <PageHero
         eyebrow="Quality"
         title="Metal panel quality means peace of mind."
-        copy="Customers do not need a manufacturing lecture. They need roofing panels, siding panels, trim, samples, communication, and delivery support that do not create problems."
+        copy="Roofing panels, siding panels, trim, samples, communication, and delivery support should help the project move forward instead of creating avoidable problems."
       />
       <QualityChainCallout />
       <section className="section bg-slate-50">
         <SectionIntro
           eyebrow="What Quality Means Here"
           title="Reliable panels. Reliable protection. Clearer project support."
-          copy="American Super Panel uses quality language in practical ways: correct fit, long service expectations, responsive sales support, and fewer surprises between quote review and project release."
+          copy="Quality shows up in practical ways: correct fit, finish guidance, responsive sales support, clear quote notes, and fewer surprises between review and project release."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {aspQualityPrinciples.map(([title, copy]) => (
@@ -2686,8 +2686,8 @@ function About() {
               crews who install them across a growing multi-state footprint.
             </p>
             <p className="rounded border border-orange-200 bg-orange-50 p-4 font-black leading-7 text-[#0b1f33]">
-              Quality means peace of mind: panels that fit the reviewed project, support that responds,
-              and details that do not leave the crew guessing.
+              Panels should fit the reviewed project, support should respond, and the details
+              should not leave the crew guessing.
             </p>
           </div>
         </div>
