@@ -380,6 +380,152 @@ const glossaryTerms = [
   ['Submittal package', 'Project documentation that may include product data, finish information, fastener notes, drawings, and warranty-path materials.'],
 ] satisfies [string, string][]
 
+const guideEnhancements: Record<string, {
+  comparison: string[][]
+  diagram: string[]
+  faq: string[][]
+  fieldNote: string
+  paragraphs: string[]
+  reviewer: string
+}> = {
+  'standing-seam-vs-r-panel': {
+    paragraphs: [
+      'Standing seam and R-Panel are not interchangeable product names. They represent different roof system strategies. Standing seam is usually selected when the owner, architect, or general contractor wants a cleaner roof plane, concealed fastening, longer-term appearance control, and a more architectural project narrative. R-Panel is usually selected when the buyer wants a practical exposed-fastener panel that can cover large commercial, warehouse, shop, agricultural, or utility buildings efficiently.',
+      'The best decision starts with the building use. A school, retail center, multifamily building, municipal facility, or owner-occupied commercial property may value appearance, concealed fastening, and a more refined roof line. A warehouse, equipment building, manufacturing shell, agricultural barn, or practical commercial re-skin may prioritize speed, cost control, simple trim coordination, and straightforward replacement or maintenance. Neither path is automatically better. The right path is the one that matches drawings, budget, slope, substrate, exposure, schedule, installer familiarity, and documentation needs.',
+      'Americas Panel Fab treats this as a manufacturing and project coordination question, not only a product comparison. The panel profile, finish, trim, flashing, fastener path, closures, penetrations, drainage, delivery state, and submittal expectations should be reviewed together. Contractors benefit when the decision is made before a quote request becomes a production package, because late changes from standing seam to exposed fastener, or from roof-only to roof-and-wall scope, can change material lists, trim requirements, sequencing, and expectations.',
+    ],
+    diagram: ['Project use and owner goals', 'Roof slope, substrate, exposure, and appearance review', 'Standing seam or R-Panel system path', 'Trim, flashing, finish, and fastener package', 'Quote, submittal, and production handoff'],
+    comparison: [
+      ['Decision factor', 'Standing seam', 'R-Panel / exposed fastener'],
+      ['Fastening', 'Concealed clips or seam details depending on system', 'Fasteners through the panel face'],
+      ['Common fit', 'Architectural, commercial, education, municipal, owner-occupied', 'Warehouse, industrial, agricultural, shop, utility, commercial re-skin'],
+      ['Appearance', 'Clean vertical lines and less visible fastening', 'Ribbed practical profile with visible fasteners'],
+      ['Budget conversation', 'Often higher material/detail/labor path', 'Often more economical and faster to quote'],
+      ['Review priority', 'Seam type, slope, clips, details, installer fit', 'Profile, fasteners, closures, trim, maintenance'],
+    ],
+    faq: [
+      ['Is standing seam always better than R-Panel?', 'No. Standing seam may be better for appearance-driven or concealed-fastener projects, while R-Panel may be better for practical commercial, warehouse, agricultural, and budget-sensitive work.'],
+      ['Can R-Panel be used on walls?', 'Many ribbed exposed-fastener profiles are used on both roofs and walls, but the actual profile, substrate, fastening, trim, and project conditions should be confirmed before ordering.'],
+      ['What should a buyer prepare before comparing systems?', 'Prepare drawings, slope, roof or wall scope, desired finish, delivery state, schedule, trim needs, penetrations, and any owner or submittal requirements.'],
+    ],
+    fieldNote: 'Do not choose the system from a profile name alone. A serious comparison includes drawings, building use, installer path, finish expectations, trim complexity, and the documentation the buyer must submit or approve.',
+    reviewer: 'Reviewed from a manufacturer-resource perspective for public-safe buyer education. Project-specific engineering, code, wind, fire, or warranty determinations require qualified review.',
+  },
+  'pbr-panel-vs-r-panel': {
+    paragraphs: [
+      'PBR Panel and R-Panel are often used in the same conversation because buyers are usually looking for a ribbed exposed-fastener panel for roofing or siding. The naming can be confusing because regional suppliers and manufacturers may use similar terms for profiles that are not exactly identical. A contractor should not assume two quotes are equivalent just because both mention PBR, R-Panel, commercial rib, or exposed-fastener panel.',
+      'The practical issue is profile confirmation. Coverage width, rib spacing, rib height, side-lap detail, fastener pattern, substrate, gauge, finish, closures, trim, and use as roof or wall panel all affect the package. For a warehouse or agricultural building, a small difference in coverage or trim assumptions can change quantities, labor, delivery planning, and quote comparison. For a commercial wall package, side-lap detail and trim coordination can be just as important as the panel square footage.',
+      'Americas Panel Fab positions this guide as a quote-readiness tool. The goal is to help contractors, owners, and buyers ask better questions before they send plans or approve a material package. American Super Panel can handle product-focused exposed-fastener quote traffic, while Americas Panel Fab provides the broader manufacturing context so buyers understand why drawings, trim scope, finish path, and project conditions matter.',
+    ],
+    diagram: ['Confirm building use', 'Confirm roof, wall, or combined scope', 'Match profile drawing and coverage width', 'Coordinate trim, closures, fasteners, and finish', 'Release quote-ready package'],
+    comparison: [
+      ['Item to verify', 'Why it matters', 'What to ask for'],
+      ['Profile drawing', 'Names vary by supplier and region', 'Rib spacing, rib height, coverage width, side-lap'],
+      ['Roof vs wall use', 'Fastening and trim assumptions may differ', 'Panel use, orientation, substrate, openings'],
+      ['Gauge/substrate', 'Affects cost, handling, expectations', 'Gauge, galvanized/Galvalume path, finish'],
+      ['Trim package', 'Can make or break install readiness', 'Ridge, rake, eave, corner, jamb, base, transitions'],
+      ['Quote basis', 'Prevents apples-to-oranges bids', 'Lengths, quantities, freight/delivery, exclusions'],
+    ],
+    faq: [
+      ['Are PBR Panel and R-Panel the same thing?', 'Sometimes they are used similarly, but buyers should confirm the manufacturer profile drawing instead of relying on the name alone.'],
+      ['What projects commonly use PBR or R-Panel style profiles?', 'Warehouses, shops, agricultural buildings, industrial buildings, utility structures, commercial re-skins, and roof/wall packages often use ribbed exposed-fastener panels.'],
+      ['What makes a PBR/R-Panel quote stronger?', 'Include drawings, roof or wall scope, desired lengths, trim conditions, finish, gauge path, delivery state, and project timing.'],
+    ],
+    fieldNote: 'The highest-value move is to compare profile drawings and quote assumptions before price. A lower bid can become expensive if trim, closures, finish, delivery, or side-lap details are missing.',
+    reviewer: 'Reviewed for contractor-facing manufacturing education. Final product profile, fastening, and installation requirements should come from the specific manufacturer documentation and project review.',
+  },
+  'metal-roofing-gauges': {
+    paragraphs: [
+      'Gauge is one of the first terms buyers hear in metal roofing, but it is rarely enough to make a good decision by itself. The number generally moves backward: lower gauge numbers usually mean thicker metal. That does not mean every project should automatically choose the thickest option. The panel profile, support spacing, roof or wall use, building type, finish, substrate, exposure, installer practices, and owner expectations all shape the right conversation.',
+      'A commercial buyer comparing 24 gauge, 26 gauge, and 29 gauge should ask what the gauge is being paired with. A thicker panel may be appropriate for certain commercial or architectural expectations, but the product system still needs the correct trim, fasteners, closures, and substrate. A budget agricultural or utility structure may use a different path than a school, warehouse, retail shell, or owner-occupied commercial building. The important thing is to make the comparison complete enough that the buyer is not choosing from a single number.',
+      'Americas Panel Fab uses gauge education to improve quote quality. When contractors send drawings, square footage, roof/wall scope, finish intent, and project conditions, the gauge conversation becomes practical instead of abstract. The quote can then identify assumptions, alternates, and questions before material is ordered. That reduces confusion later and helps the buyer understand how gauge fits into the whole metal panel package.',
+    ],
+    diagram: ['Building use', 'Panel profile', 'Gauge/substrate/finish path', 'Fasteners, trim, closures, and support conditions', 'Quote assumptions and approval'],
+    comparison: [
+      ['Gauge topic', 'Buyer risk', 'Better question'],
+      ['24 gauge', 'May be overspecified or costlier for simple projects', 'Is the building use or owner standard asking for a heavier path?'],
+      ['26 gauge', 'Common middle-ground conversations still need profile context', 'What profile, substrate, finish, and support conditions apply?'],
+      ['29 gauge', 'May fit economical projects but should be reviewed for use and expectations', 'Is this roof, wall, agricultural, accessory, or budget work?'],
+      ['Gauge alone', 'Can create false confidence', 'What system, trim, fastener, and documentation assumptions are included?'],
+    ],
+    faq: [
+      ['Is 24 gauge always better than 26 gauge?', 'Not automatically. It is thicker in common gauge language, but the correct choice depends on the system, building use, budget, and project requirements.'],
+      ['Does gauge define metal roof performance?', 'No. Gauge is only one factor. Profile, substrate, finish, fastening, support conditions, and installation details also matter.'],
+      ['Should gauge be listed in a quote request?', 'Yes. If known, include desired gauge, but also include drawings, panel type, finish, roof/wall scope, trim needs, and project location.'],
+    ],
+    fieldNote: 'Gauge should be part of a complete quote conversation, not a shortcut. Ask what the gauge is doing for the specific building and what assumptions are attached to it.',
+    reviewer: 'Reviewed for public buyer education. Project-specific performance, span, wind, fire, or code requirements should be reviewed by qualified professionals and manufacturer documentation.',
+  },
+  'metal-panel-finishes': {
+    paragraphs: [
+      'Finish selection is where metal panel decisions move from pure function into long-term appearance, exposure, owner standards, and documentation. Buyers often begin with a color, but the more useful conversation includes finish family, substrate, environment, reflectivity, trim coordination, sample approval, and warranty path. A color that looks right on a screen may not solve the actual project need if the building has coastal exposure, intense sun, industrial surroundings, campus standards, or architectural review.',
+      'SMP and PVDF-style finish paths are common terms in commercial metal panel conversations. A practical project may choose an economical finish path because budget and availability matter. A higher-visibility architectural project may need a premium color program or longer-term appearance expectations. Matte finishes, cool roof colors, specialty accents, and coordinated trim can all affect the final building impression. The key is to coordinate panels, flashing, trim, fascia, soffit, and accessories before the order is released.',
+      'Americas Panel Fab treats finishes as a documentation issue as much as a design issue. Finish assumptions should be captured in quotes, submittals, samples, product data, and purchase records. When a contractor has roof panels in one finish path and trim in another, the finished project can look mismatched. When color availability is not checked early, the schedule can move. A better process reviews finish, gauge, substrate, profile, trim, and delivery timing together.',
+    ],
+    diagram: ['Color and appearance goal', 'Exposure and building use review', 'Finish family and sample path', 'Panel/trim/flashing coordination', 'Submittal and order documentation'],
+    comparison: [
+      ['Finish path', 'Common conversation', 'Review point'],
+      ['SMP', 'Practical, economical, broad-use finish path', 'Budget, color availability, exposure expectations'],
+      ['PVDF-style', 'Premium architectural finish conversation', 'Owner standards, color retention expectations, project visibility'],
+      ['Matte colors', 'Modern low-glare appearance', 'Sample review, trim coordination, architectural intent'],
+      ['Cool roof colors', 'Heat and reflectivity discussion', 'Project climate, code/energy conversation, documentation'],
+      ['Specialty accents', 'Brand, fascia, soffit, or feature elements', 'Availability, lead time, matching, substitutions'],
+    ],
+    faq: [
+      ['Can I choose metal panel colors from a screen?', 'Use screens for early review only. Final selection should use samples or approved finish documentation whenever possible.'],
+      ['Should trim match the panel finish?', 'Often yes, but some projects intentionally use contrast. Either way, panel, trim, flashing, and accessory colors should be reviewed together.'],
+      ['When should finish be confirmed?', 'Before submittal approval or production release, especially for larger commercial, campus, multifamily, or owner-standard projects.'],
+    ],
+    fieldNote: 'Finish decisions affect appearance, schedule, documentation, and substitutions. Treat finish as part of the manufacturing package, not a last-minute color choice.',
+    reviewer: 'Reviewed for manufacturing-resource education. Warranty terms, color availability, and finish performance expectations should be confirmed through specific supplier and manufacturer documentation.',
+  },
+  'trim-and-flashing-guide': {
+    paragraphs: [
+      'Trim and flashing are where many metal panel projects become either installable packages or field problems. Panels cover the broad roof or wall area, but trim and flashing handle edges, corners, transitions, openings, penetrations, base conditions, roof-to-wall conditions, and closeout details. When those pieces are not planned early, crews can lose time, owners can see inconsistent details, and quotes can miss important scope.',
+      'A good trim package starts with the building, not a generic part list. Ridge, rake, eave, corner, jamb, base, transition, cap, fascia, and opening details should be reviewed against drawings or photos. A warehouse re-skin, agricultural building, retail shell, and multifamily accent wall may all use metal panels, but the trim logic can be very different. The manufacturing question is how to organize formed pieces so the installer receives a coherent package.',
+      'Americas Panel Fab publishes trim and flashing guidance because fabrication is part of the value of a serious metal panel supplier. The quote conversation should capture panel type, finish, color, dimensions, corner/opening conditions, roof/wall transitions, closures, fasteners, and labeling needs. For complex jobs, drawings and elevations help reduce guesswork. The best result is a package where panels, trim, flashing, closures, and labels are coordinated before production.',
+    ],
+    diagram: ['Drawings, photos, or field dimensions', 'Edge, corner, opening, and transition review', 'Trim schedule and finish coordination', 'Fabrication package and labels', 'Installer-ready closeout details'],
+    comparison: [
+      ['Detail type', 'Common pieces', 'What to confirm'],
+      ['Roof edges', 'Ridge, rake, eave, drip/edge conditions', 'Slope, overhang, gutters, substrate, ventilation needs'],
+      ['Wall edges', 'Corners, jambs, base trim, transitions', 'Opening sizes, orientation, wall panel layout'],
+      ['Transitions', 'Roof-to-wall, slope changes, material changes', 'Water path, overlap, closure, field condition'],
+      ['Accessories', 'Closures, fasteners, sealants, touch-up', 'Compatibility, color, quantity, location'],
+    ],
+    faq: [
+      ['Why is trim often missing from early quotes?', 'Buyers may start with panel square footage, but trim requires edges, openings, transitions, and conditions that are not always included in the first request.'],
+      ['What should be sent for a trim quote?', 'Send drawings, elevations, sketches, photos, dimensions, panel profile, finish, color, and any unusual openings or transitions.'],
+      ['Can trim and panels be ordered separately?', 'Sometimes, but coordinating them together usually improves finish consistency, labeling, sequencing, and installer readiness.'],
+    ],
+    fieldNote: 'Trim is a manufacturing coordination problem. If the project has many openings, corners, or transitions, the trim conversation should happen before panels are released.',
+    reviewer: 'Reviewed for fabrication education. Water management, code, warranty, and installation details should be confirmed through project-specific review and manufacturer guidance.',
+  },
+  'commercial-metal-roofing-guide': {
+    paragraphs: [
+      'Commercial metal roofing is a system decision that touches budget, schedule, documentation, owner expectations, contractor workflow, and long-term building use. The buyer is rarely choosing only a panel. They are choosing a package that may include standing seam or ribbed panels, trim, flashing, fasteners, closures, finish selections, submittals, delivery planning, and sometimes wall panels or accessory scopes. A stronger process starts by organizing those inputs before price is requested.',
+      'The project type matters. A warehouse may prioritize large-format roof and wall coverage, schedule, and practical trim coordination. A school or municipal facility may require more documentation, review, and controlled language. A retail or multifamily project may put more weight on appearance, color coordination, and visible details. An agricultural or industrial building may need a straightforward panel package but still benefit from clear quote assumptions and delivery planning.',
+      'Americas Panel Fab uses commercial roofing education to connect manufacturing authority with buyer readiness. Public APF content should help owners, contractors, and partners understand the decision process. Product-ready buyers can continue to American Super Panel, where they can request panels, siding, trim, flashing, and plan review. That separation lets the company build authority while keeping the product path clear.',
+    ],
+    diagram: ['Project type and drawings', 'Panel, finish, trim, and documentation review', 'Quote assumptions and alternates', 'Approval, procurement, and production handoff', 'Delivery, closeout, and proof capture'],
+    comparison: [
+      ['Buyer concern', 'What it affects', 'What to prepare'],
+      ['Panel system', 'Appearance, budget, installer path', 'Standing seam, exposed fastener, wall panel, or mixed scope'],
+      ['Documentation', 'Procurement, submittals, owner confidence', 'Product data, finish info, assumptions, exclusions'],
+      ['Schedule', 'Lead time, production, delivery, install sequence', 'Desired dates, phasing, delivery state, site constraints'],
+      ['Trim/flashings', 'Install readiness and closeout quality', 'Edges, openings, transitions, roof-to-wall details'],
+      ['Commercial risk', 'Cost, claims, expectations', 'Clear scope, review gates, change process'],
+    ],
+    faq: [
+      ['What should a commercial buyer send first?', 'Send drawings, building use, roof/wall scope, desired panel type, finish needs, trim requirements, project state, and schedule target.'],
+      ['Should commercial buyers choose panel type before quoting?', 'A preference helps, but a manufacturer or product team may still review the project for profile, finish, trim, and documentation fit.'],
+      ['Why does APF link to American Super Panel?', 'Americas Panel Fab provides company and manufacturing context. American Super Panel is the product-focused path for exposed-fastener roofing, siding, trim, and quote requests.'],
+    ],
+    fieldNote: 'Commercial metal roofing buyers usually need both education and action. APF should answer the research question; American Super Panel should handle product-ready quote intent.',
+    reviewer: 'Reviewed for commercial buyer education. Contract, code, warranty, fire, wind, and engineering requirements should be reviewed through project-specific documentation and qualified advisors.',
+  },
+}
+
 const projectImages = [panelImage, warehouseImage, facilityImage, weldingImage]
 const maxUploadBytes = 100 * 1024 * 1024
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'
@@ -422,7 +568,8 @@ function apfServiceSchema(name: string, description: string, path: string) {
 }
 
 function articleSchema(guide: (typeof guidePages)[number]) {
-  return {
+  const enhancement = guideEnhancements[guide.slug]
+  const article = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: guide.title,
@@ -431,6 +578,28 @@ function articleSchema(guide: (typeof guidePages)[number]) {
     publisher: { '@type': 'Organization', name: 'Americas Panel Fab' },
     mainEntityOfPage: `${apfOrigin}/${guide.slug}`,
     url: `${apfOrigin}/${guide.slug}`,
+  }
+
+  if (!enhancement?.faq.length) {
+    return article
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      article,
+      {
+        '@type': 'FAQPage',
+        mainEntity: enhancement.faq.map(([question, answer]) => ({
+          '@type': 'Question',
+          name: question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: answer,
+          },
+        })),
+      },
+    ],
   }
 }
 
@@ -1482,6 +1651,8 @@ function GuidesPage() {
 }
 
 function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
+  const enhancement = guideEnhancements[guide.slug]
+
   return (
     <>
       <PageHero title={guide.title} copy={guide.hero} />
@@ -1500,14 +1671,84 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
                 ))}
               </ul>
             </div>
+            {enhancement ? (
+              <div className="mt-6 rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <p className="eyebrow text-[#f97316]">Author / Review</p>
+                <h2 className="mt-3 text-xl font-black text-[#0b1f33]">Americas Panel Fab Resource Desk</h2>
+                <p className="mt-3 leading-7 text-slate-600">{enhancement.reviewer}</p>
+              </div>
+            ) : null}
           </div>
           <article className="grid gap-5">
+            {enhancement ? (
+              <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <p className="eyebrow text-[#f97316]">Pillar Overview</p>
+                <div className="mt-4 grid gap-4">
+                  {enhancement.paragraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 42)} className="text-lg leading-8 text-slate-600">{paragraph}</p>
+                  ))}
+                </div>
+                <div className="mt-6 rounded border border-orange-200 bg-orange-50 p-5">
+                  <p className="font-black text-[#0b1f33]">Field note</p>
+                  <p className="mt-2 leading-7 text-slate-700">{enhancement.fieldNote}</p>
+                </div>
+              </section>
+            ) : null}
             {guide.sections.map(([title, copy]) => (
               <section key={title} className="rounded border border-slate-200 bg-white p-6 shadow-lg">
                 <h2 className="text-2xl font-black text-[#0b1f33]">{title}</h2>
                 <p className="mt-3 text-lg leading-8 text-slate-600">{copy}</p>
               </section>
             ))}
+            {enhancement ? (
+              <>
+                <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                  <p className="eyebrow text-[#f97316]">Decision Flow</p>
+                  <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">How this decision should move through a project.</h2>
+                  <div className="mt-5 grid gap-3">
+                    {enhancement.diagram.map((step, index) => (
+                      <div key={step} className="grid gap-3 rounded border border-slate-200 bg-slate-50 p-4 sm:grid-cols-[3rem_1fr] sm:items-center">
+                        <span className="flex h-10 w-10 items-center justify-center rounded bg-[#0b1f33] text-sm font-black text-white">{index + 1}</span>
+                        <p className="font-black leading-7 text-[#0b1f33]">{step}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                  <p className="eyebrow text-[#f97316]">Comparison Table</p>
+                  <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">What to compare before making the call.</h2>
+                  <div className="mt-5 overflow-hidden rounded border border-slate-200">
+                    <table className="guide-table">
+                      <tbody>
+                        {enhancement.comparison.map((row, rowIndex) => (
+                          <tr key={row.join('-')}>
+                            {row.map((cell) => rowIndex === 0 ? (
+                              <th key={cell}>{cell}</th>
+                            ) : (
+                              <td key={cell}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                  <p className="eyebrow text-[#f97316]">FAQ</p>
+                  <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">Common questions before the first project conversation.</h2>
+                  <div className="mt-5 grid gap-4">
+                    {enhancement.faq.map(([question, answer]) => (
+                      <div key={question} className="rounded border border-slate-200 bg-slate-50 p-5">
+                        <h3 className="text-lg font-black text-[#0b1f33]">{question}</h3>
+                        <p className="mt-2 leading-7 text-slate-600">{answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </>
+            ) : null}
             <div className="rounded border border-slate-200 bg-[#0b1f33] p-6 text-white">
               <p className="eyebrow text-orange-200">Next Step</p>
               <h2 className="mt-3 text-2xl font-black">Ready to compare product options?</h2>
