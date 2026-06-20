@@ -106,7 +106,10 @@ const apfQualityPrinciples = [
 const apfQualityQuotes = [
   ['Precision', 'Precision is respect for the next person in the process.'],
   ['Consistency', 'Consistency is the foundation of trust.'],
+  ['Excellence', 'Excellence is a process, not an event.'],
+  ['Continuous Improvement', 'Continuous improvement is better than delayed perfection.'],
   ['Improvement', 'Every process can be improved.'],
+  ['Partnership', 'Reliable execution creates reliable partnerships.'],
 ]
 
 const markets = [
@@ -1813,8 +1816,8 @@ function QualityChainCallout({ compact = false }: { compact?: boolean }) {
           From shop-floor discipline to supplier confidence.
         </h2>
         <p className="mt-4 max-w-4xl text-lg font-semibold leading-8 text-slate-700">
-          Employees create craftsmanship. Craftsmanship creates predictable manufacturing.
-          Predictable manufacturing creates customer peace of mind.
+          Disciplined shop work, cleaner documentation, and reliable handoffs help partners
+          trust the supplier behind the panel system.
         </p>
         {!compact ? (
           <div className="mt-6 grid gap-4 md:grid-cols-3">
@@ -1878,7 +1881,7 @@ function QualityPage() {
           <SectionIntro
             eyebrow="Manufacturing Culture"
             title="Consistency builds trust."
-            copy="Quality language should show up in the way work is reviewed, documented, handed off, and improved. Excellence is a process, not an event."
+            copy="Quality shows up in how work is reviewed, documented, handed off, and improved. Reliable execution creates reliable partnerships."
           />
           <QualityQuoteStrip />
         </div>
