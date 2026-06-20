@@ -143,6 +143,26 @@ const finishes = [
   ['Cool roof whites & grays', '#e5e7eb', 'Reflective options for heat, energy, and code-aware projects.'],
   ['Custom color match', '#f97316', 'Finish coordination for brand, campus, and architectural standards.'],
 ]
+const colorChart = [
+  ['Galvalume', '#c8d0d7', 'Metallic utility', 'Roof, siding, trim', 'Practical metallic finish path for shops, warehouses, and agricultural packages.'],
+  ['Galvanized', '#aeb7c2', 'Metallic utility', 'Roof, siding, trim', 'Bright utility look for practical roof and wall panel conversations.'],
+  ['Rezibond-Style Primer-Ready', '#6f7885', 'Primer-ready', 'Roof, siding, interiors', 'Weathered zinc / gunmetal design intent; final primer-ready availability confirmed by quote.'],
+  ['Polar White', '#f4f5f0', 'Cool roof light', 'Roof, siding, trim', 'Clean light color path for heat-aware projects and commercial trim packages.'],
+  ['Light Stone', '#c8bca7', 'Neutral painted', 'Roof, siding, trim', 'Practical tan neutral for barns, shops, storage buildings, and commercial work.'],
+  ['Slate Gray', '#66717f', 'Neutral painted', 'Roof, siding, trim', 'Commercial gray path for warehouses, shops, and owner-standard projects.'],
+  ['Charcoal', '#303846', 'Dark painted', 'Roof, siding, trim', 'Modern dark gray for siding, trim, fascia, and commercial accents.'],
+  ['Matte Black', '#161a1f', 'Matte architectural', 'Siding, trim, accents', 'Low-glare dark finish path for modern shops, retail, and accent work.'],
+  ['Burnished Slate', '#665441', 'Earth tone', 'Roof, siding, trim', 'Common darker earth-tone path for agricultural, commercial, and storage buildings.'],
+  ['Rustic Red', '#8f2f27', 'Accent painted', 'Roof, siding, accents', 'Traditional agricultural and accent color path; sample review recommended.'],
+  ['Forest Green', '#244a34', 'Accent painted', 'Roof, siding, accents', 'Rural, agricultural, and owner-standard green color path.'],
+  ['Copper Penny', '#a2643d', 'Specialty accent', 'Trim, fascia, accents', 'Specialty metal-look accent path for visible architectural details.'],
+] as [string, string, string, string, string][]
+const colorSelectionSteps = [
+  ['Pick the panel use', 'Roof, wall, trim, flashing, fascia, soffit, or accessory scope.'],
+  ['Match the finish family', 'Metallic, primer-ready, SMP, PVDF-style, matte, cool roof, or specialty accent.'],
+  ['Confirm samples', 'Use physical samples before larger orders, owner approvals, or visible color breaks.'],
+  ['Coordinate the package', 'Panel, trim, flashing, fasteners, closures, and touch-up should be reviewed together.'],
+] as [string, string][]
 const resources = [
   ['Panel profiles', Ruler, 'Profile sheets for Industrial Rib, PBR / R-Panel, AG panels, trim, and accessories.', '/american-super-panel-industrial-rib'],
   ['Warranty path', ShieldCheck, 'Finish, substrate, fastening, and project documentation conversations for qualifying packages.', '/downloads/submittal-package-guide.txt'],
@@ -175,6 +195,12 @@ const downloadAssets = [
     type: 'TXT',
   },
   {
+    title: 'Color Chart & Sample Request',
+    copy: 'Named color paths, sample review notes, and finish coordination reminders for panel packages.',
+    href: '/downloads/color-chart-sample-request.txt',
+    type: 'TXT',
+  },
+  {
     title: 'Industrial Rib Product Data',
     copy: 'Profile, rib height, finish path, applications, and project-review notes for Industrial Rib packages.',
     href: '/downloads/industrial-rib-product-data.txt',
@@ -204,12 +230,6 @@ const industrialRibProof = [
   ['Package Scope', ClipboardList, 'Panels, trim, flashings, closures, fasteners, and job labels organized as one quote package.'],
   ['Bid Support', FileCheck2, 'Submittal, finish, gauge, fastening, warranty, and project documentation reviewed before release.'],
 ] satisfies [string, IconType, string][]
-const industrialRibFinishOptions = [
-  ['Rezibond-Style Primer-Ready', 'Weathered zinc / gunmetal design intent for architects and industrial interiors.'],
-  ['Galvanized & Galvalume', 'Bright metallic utility finish paths for practical roof and wall packages.'],
-  ['PVDF & SMP Colors', 'Commercial color systems for owner standards, campus work, and long-life exterior use.'],
-  ['Matte & Cool Roof Colors', 'Low-glare and reflective finish paths for modern commercial buildings.'],
-]
 const industrialRibApplications = [
   'Warehouses and logistics buildings',
   'Industrial roof and wall packages',
@@ -1051,8 +1071,8 @@ function IndustrialRibPage() {
           <div>
             <SectionIntro
               eyebrow="Colors, Finishes & Samples"
-              title="Metallic, primer-ready, painted, matte, and cool-roof finish paths."
-              copy="Choose finish paths for roof panels, siding panels, trim, flashing, and sample requests before larger orders are released."
+              title="Industrial Rib colors buyers can actually compare."
+              copy="Start with metallic, primer-ready, painted, matte, and cool-roof color paths, then request samples before larger orders or visible trim packages are released."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
@@ -1067,17 +1087,29 @@ function IndustrialRibPage() {
               <a className="btn-secondary" href="/downloads/finish-selection-guide.txt" download>
                 <Download size={18} /> Finish Guide
               </a>
+              <a className="btn-secondary" href="/downloads/color-chart-sample-request.txt" download>
+                <Download size={18} /> Color Chart
+              </a>
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {industrialRibFinishOptions.map(([title, copy]) => (
-              <article key={title} className="card">
-                <span className="mb-5 block h-10 w-full rounded border border-slate-200 bg-gradient-to-r from-slate-200 via-slate-400 to-slate-700" />
-                <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
-                <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {colorChart.slice(0, 9).map(([name, color, family, use, note]) => (
+              <article key={name} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
+                <span className="mb-4 block h-16 w-full rounded border border-slate-200" style={{ background: color }} />
+                <p className="text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">{family}</p>
+                <h2 className="mt-2 text-xl font-black text-[#0b1f33]">{name}</h2>
+                <p className="mt-2 text-sm font-bold text-slate-500">{use}</p>
+                <p className="mt-3 leading-7 text-slate-600">{note}</p>
               </article>
             ))}
           </div>
+        </div>
+        <div className="mt-8 rounded border border-slate-200 bg-white p-5 shadow-sm">
+          <p className="font-black text-[#0b1f33]">Sample request note</p>
+          <p className="mt-2 leading-7 text-slate-600">
+            Colors shown on screen are planning references. Request physical samples and confirm
+            current availability, substrate, gauge, coating system, and trim color before release.
+          </p>
         </div>
       </section>
 
@@ -1589,22 +1621,58 @@ function FinishSystem() {
         <div>
           <SectionIntro
             eyebrow="Colors & Finishes"
-            title="A finish system worthy of commercial specifications."
-            copy="Coordinate panel color, trim color, substrate, sheen, and sample requests for commercial, agricultural, industrial, and residential projects."
+            title="Real color paths for panels, trim, and flashing."
+            copy="Coordinate panel color, trim color, substrate, sheen, and sample requests before ordering commercial, agricultural, industrial, or residential metal panel packages."
           />
-          <a className="btn-secondary mt-8" href="#quote">
-            Request Color Support
-          </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a className="btn-primary" href="#quote">
+              Request Samples <ArrowRight size={18} />
+            </a>
+            <a className="btn-secondary" href="/downloads/color-chart-sample-request.txt" download>
+              <Download size={18} /> Color Chart
+            </a>
+          </div>
+          <div className="mt-8 grid gap-3">
+            {colorSelectionSteps.map(([title, copy]) => (
+              <p key={title} className="rounded border border-slate-200 bg-slate-50 p-4">
+                <strong className="block text-[#0b1f33]">{title}</strong>
+                <span className="mt-1 block leading-7 text-slate-600">{copy}</span>
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {finishes.map(([name, color, copy]) => (
-            <article key={name} className="card">
-              <span className="mb-5 block h-10 w-full rounded border border-slate-200" style={{ background: color }} />
-              <h3 className="text-xl font-black text-[#0b1f33]">{name}</h3>
-              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {colorChart.map(([name, color, family, use, note]) => (
+            <article key={name} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
+              <span className="mb-4 block h-16 w-full rounded border border-slate-200" style={{ background: color }} />
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">{family}</p>
+              <h3 className="mt-2 text-xl font-black text-[#0b1f33]">{name}</h3>
+              <p className="mt-2 text-sm font-bold text-slate-500">{use}</p>
+              <p className="mt-3 leading-7 text-slate-600">{note}</p>
             </article>
           ))}
         </div>
+      </div>
+      <div className="mt-10 overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
+        <table className="product-proof-table">
+          <tbody>
+            <tr>
+              <th>Finish family</th>
+              <th>Best fit</th>
+              <th>What to confirm</th>
+            </tr>
+            {finishes.map(([name, color, copy]) => (
+              <tr key={name}>
+                <td>
+                  <span className="mr-3 inline-block h-4 w-10 rounded border border-slate-200 align-middle" style={{ background: color }} />
+                  {name}
+                </td>
+                <td>{copy}</td>
+                <td>Current availability, substrate, gauge, sample, trim match, and warranty path.</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   )
@@ -2067,6 +2135,19 @@ function QuoteForm() {
     <form id="quote" className="form-panel" action="/api/quote" method="post" onSubmit={handleQuoteSubmit}>
       <h2 className="text-2xl font-black text-[#0b1f33]">Quick Quote Form</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
+        <label>
+          <span>Request Type</span>
+          <select name="request_type" defaultValue="">
+            <option value="" disabled>
+              Select request type
+            </option>
+            <option>Quote Request</option>
+            <option>Sample Request</option>
+            <option>Panel Order</option>
+            <option>Dealer Inquiry</option>
+            <option>Project Review</option>
+          </select>
+        </label>
         {['Name', 'Company', 'Phone', 'Email', 'Project State'].map((field) => (
           <label key={field}>
             <span>{field}</span>
@@ -2108,9 +2189,13 @@ function QuoteForm() {
             <option>Trim & Flashing</option>
           </select>
         </label>
+        <label>
+          <span>Color / Finish Interest</span>
+          <input name="color_finish_interest" type="text" placeholder="Galvalume, Rezibond-style, Charcoal, Polar White..." />
+        </label>
         <label className="md:col-span-2">
           <span>Notes</span>
-          <input name="notes" type="text" placeholder="Panel lengths, trim needs, timing, delivery state, or plan notes" />
+          <input name="notes" type="text" placeholder="Panel lengths, trim needs, sample colors, timing, delivery state, or plan notes" />
         </label>
       </div>
       <TurnstileSlot />
