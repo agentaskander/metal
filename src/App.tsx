@@ -380,9 +380,9 @@ const guidePages = [
       ['Manufacturing Flow', 'A panel order typically begins with project information, profile selection, gauge and finish assumptions, coil availability, length planning, trim needs, packaging, and delivery expectations. Each step affects the next one.'],
       ['Factory Discipline', 'Good manufacturing content should explain material flow, repeatable tooling, profile verification, documentation, labels, bundled panels, and how orders move from estimate to production.'],
       ['Buyer Value', 'Contractors and owners benefit when a manufacturer explains what information creates a better quote: drawings, roof or wall scope, panel profile, finish path, trim conditions, delivery state, and schedule.'],
-      ['Authority Role', 'Americas Panel Fab should own the manufacturing education layer while American Super Panel remains the product path for exposed-fastener panel quotes and contractor orders.'],
+      ['Manufacturer Role', 'Americas Panel Fab provides the manufacturing education layer while American Super Panel remains the product path for exposed-fastener panel quotes and contractor orders.'],
     ],
-    takeaways: ['Manufacturing authority requires process clarity.', 'Panel orders should connect product, trim, finish, packaging, and logistics.', 'Better quote inputs reduce avoidable project friction.'],
+    takeaways: ['Manufacturing credibility requires process clarity.', 'Panel orders should connect product, trim, finish, packaging, and logistics.', 'Better quote inputs reduce avoidable project friction.'],
     cta: 'View manufacturing capabilities',
     ctaHref: '/manufacturing',
   },
@@ -675,26 +675,32 @@ const glossaryTerms = glossaryGroups.flatMap((group) => group.terms)
 
 const topicalClusters = [
   {
-    name: 'Manufacturing Authority',
+    name: 'Manufacturing Guides',
     copy: 'Core pages that explain how Americas Panel Fab thinks about coil, roll forming, fabrication workflow, documentation, and manufacturing credibility.',
+    slug: 'metal-panel-manufacturing',
     slugs: ['metal-panel-manufacturing-guide', 'roll-forming-guide', 'architectural-metal-fabrication-guide', 'metal-roofing-submittal-guide'],
   },
   {
-    name: 'Panel Profiles and Product Decisions',
+    name: 'Panel Profile Guides',
     copy: 'Neutral comparison pages that help buyers understand profile names, roof and wall applications, and exposed-fastener versus concealed-fastener choices.',
+    slug: 'panel-profiles',
     slugs: ['metal-panel-profiles-guide', 'standing-seam-vs-r-panel', 'pbr-panel-vs-r-panel', 'exposed-fastener-metal-roofing-guide', 'metal-wall-panels-guide'],
   },
   {
-    name: 'Materials, Gauges, and Finishes',
+    name: 'Materials and Finish Guides',
     copy: 'Buyer education around gauge, substrate, paint systems, samples, finish schedules, and commercial color decisions.',
+    slug: 'materials-finishes',
     slugs: ['metal-roofing-gauges', '24-gauge-vs-26-gauge-metal-roofing', 'galvalume-vs-galvanized', 'metal-panel-finishes', 'pvdf-vs-smp-metal-panel-finishes'],
   },
   {
-    name: 'Trim, Flashing, and Quote Readiness',
+    name: 'Trim, Flashing, and Quote Guides',
     copy: 'Practical resources that turn research into complete project information for commercial roofing, siding, trim, flashing, and product quotes.',
+    slug: 'trim-flashing-quote-readiness',
     slugs: ['trim-and-flashing-guide', 'metal-roof-trim-types', 'commercial-metal-roofing-guide', 'commercial-metal-roofing-quote-checklist'],
   },
 ]
+
+const articleReviewedDate = '2026-06-20'
 
 const glossaryEntries = glossaryGroups.flatMap((group) =>
   group.terms.map(([term, definition]) => ({
@@ -718,7 +724,7 @@ const guideEnhancements: Record<string, {
 }> = {
   'metal-panel-manufacturing-guide': {
     paragraphs: [
-      'Metal panel manufacturing is often described as a machine process, but the real commercial value comes from the whole order system. A coil is not yet a roof. A roll former is not yet a project package. A panel profile is not yet a building envelope. Manufacturing authority begins when material, drawings, finish decisions, trim details, documentation, packaging, and delivery planning are managed as one connected workflow.',
+      'Metal panel manufacturing is often described as a machine process, but the real commercial value comes from the whole order system. A coil is not yet a roof. A roll former is not yet a project package. A panel profile is not yet a building envelope. Manufacturing credibility begins when material, drawings, finish decisions, trim details, documentation, packaging, and delivery planning are managed as one connected workflow.',
       'For contractors and owners, the manufacturing process should reduce uncertainty. The buyer wants to know whether the panel profile is correct, whether the finish is available, whether the trim scope has been understood, whether drawings were reviewed, whether quantities are organized, and whether the order will arrive in a way the field can use. The manufacturer’s job is not only to form metal. It is to turn project information into a complete, traceable, practical package.',
       'A serious manufacturing workflow begins before production. The estimate should identify the building use, project state, roof or wall scope, approximate square footage, profile preference, gauge path, finish path, trim and flashing needs, openings, penetrations, delivery expectations, and any owner or submittal requirements. If those inputs are missing, the order can still be discussed, but the quote should clearly list assumptions and open questions.',
       'Coil planning matters because material availability affects schedule, finish options, substitutions, and purchasing confidence. The same panel profile may be available in different gauges, substrates, and paint systems. A commercial buyer comparing quotes should not only ask for price. They should ask what coil, finish, gauge, profile, trim, and delivery assumptions were included. Otherwise two quotes may look comparable while describing different packages.',
@@ -728,7 +734,7 @@ const guideEnhancements: Record<string, {
     ],
     diagram: ['Project information and drawings', 'Profile, gauge, substrate, and finish review', 'Panel, trim, flashing, and accessory scope', 'Production run, bundling, labels, and documentation', 'Delivery planning and field-ready handoff'],
     comparison: [
-      ['Manufacturing layer', 'Weak signal', 'Authority signal'],
+      ['Manufacturing layer', 'Weak signal', 'Stronger buyer signal'],
       ['Quote intake', 'Price requested from vague square footage', 'Drawings, scope, profile, finish, trim, and delivery state captured'],
       ['Material planning', 'Generic metal panel language', 'Gauge, substrate, finish family, color, and availability documented'],
       ['Production', 'Panels treated as isolated line items', 'Lengths, bundles, labels, trim, and accessories coordinated'],
@@ -752,7 +758,7 @@ const guideEnhancements: Record<string, {
       ['Why the quote stage matters', 'Most production problems begin as quote-stage ambiguity. If drawings, profile preference, finish path, trim scope, delivery state, and schedule are not captured early, the manufacturer is forced to price assumptions instead of a real package. Strong quote intake protects both sides because it makes missing information visible before the order becomes urgent.'],
       ['Why packaging is part of manufacturing', 'Panels are not useful simply because they are formed. They have to be counted, cut, protected, bundled, labeled, and delivered in a way the field can understand. A jobsite crew should not need to reverse-engineer the order from a pile of metal. Good manufacturing makes the field handoff easier.'],
       ['Why documentation creates trust', 'Commercial buyers often need more than verbal confidence. They need product data, finish records, assumptions, exclusions, color references, and a review path that can be shared with owners, contractors, architects, and purchasing teams. Documentation turns a panel supplier into a more credible manufacturing partner.'],
-      ['Why the company and product brand both matter', 'Americas Panel Fab should carry the manufacturer story because it can support future product families, partners, fabrication services, and broader authority content. American Super Panel should stay memorable and product-focused for buyers who are ready to request exposed-fastener roofing and siding panels.'],
+      ['Why the company and product brand both matter', 'Americas Panel Fab should carry the manufacturer story because it can support future product families, partners, fabrication services, and broader education. American Super Panel should stay memorable and product-focused for buyers who are ready to request exposed-fastener roofing and siding panels.'],
     ],
     checklist: [
       ['Drawings', 'Roof plans, wall elevations, openings, slopes, photos, sketches, and relevant project documents.'],
@@ -769,7 +775,7 @@ const guideEnhancements: Record<string, {
       'Length planning is one of the biggest advantages of manufacturing coordination. Panels can be produced in custom lengths within equipment, handling, shipping, and project constraints. That does not mean every length is automatically practical. The manufacturer, contractor, and buyer should consider handling, jobsite storage, transportation, roof access, crew sequencing, and whether long panels create special needs.',
       'Factory roll forming and mobile roll forming solve different problems. Factory production can support repeatability, packaging control, material staging, and coordination with trim or accessories. Mobile roll forming can be valuable for selected long-run jobs or logistics-sensitive projects when site conditions support it. The buyer should not treat mobile as a universal upgrade. It is a project-fit decision.',
       'Quality conversations around roll forming should stay practical and public-safe. Buyers can ask about profile verification, bundle labels, material traceability, cutoff accuracy, finish protection, packaging, and documented assumptions. They should avoid assuming performance claims that have not been reviewed. Public education can explain the workflow while project-specific requirements remain tied to qualified review and manufacturer documentation.',
-      'For Americas Panel Fab, roll-forming authority should become a pillar because it ties together equipment investment, product family development, quote readiness, contractor support, and future manufacturing growth. The page should help a buyer understand why the company is not just reselling panels. It is building a manufacturing process around panel systems.',
+      'For Americas Panel Fab, roll-forming education should become a pillar because it ties together equipment investment, product family development, quote readiness, contractor support, and future manufacturing growth. The page should help a buyer understand why the company is not just reselling panels. It is building a manufacturing process around panel systems.',
     ],
     diagram: ['Coil selected by gauge, substrate, and finish', 'Decoiler feeds material into forming stations', 'Tooling shapes profile and side lap', 'Cutoff creates project lengths', 'Panels are bundled, labeled, and coordinated with trim'],
     comparison: [
@@ -796,7 +802,7 @@ const guideEnhancements: Record<string, {
     deepDive: [
       ['Tooling controls the product identity', 'A roll former is only as useful as the profile it is set up to make. Tooling controls the panel geometry that buyers later describe with names like R-Panel, PBR, AG panel, or standing seam. That is why profile drawings, coverage width, rib spacing, and side-lap details matter before anyone compares price.'],
       ['Custom lengths still require judgment', 'Custom-length production can reduce waste and help a project fit the building, but longer panels are not automatically better. Handling, roof access, transportation, crew safety, jobsite storage, and weather exposure all shape what length plan is practical. A manufacturer should help buyers think through those tradeoffs before release.'],
-      ['Factory and mobile production serve different jobs', 'Factory roll forming can support controlled staging, packaging, labeling, and coordination with trim. Mobile roll forming may help selected long-panel projects when the site, weather, access, and order size make sense. The authority move is not to hype one model; it is to explain when each model fits.'],
+      ['Factory and mobile production serve different jobs', 'Factory roll forming can support controlled staging, packaging, labeling, and coordination with trim. Mobile roll forming may help selected long-panel projects when the site, weather, access, and order size make sense. The practical move is not to hype one model; it is to explain when each model fits.'],
       ['Roll forming connects to the rest of the order', 'The machine creates the panel, but the order still needs trim, flashing, closures, fasteners, finish documentation, bundle labels, and delivery planning. Buyers who understand that broader workflow are less likely to compare two quotes only by panel name and price.'],
       ['What to document before release', 'Before a roll-formed order moves into production, the buyer and manufacturer should agree on profile drawing, coverage width, finish, gauge, panel lengths, trim scope, closures, fasteners, bundle expectations, delivery contact, and open exclusions. That release record is what keeps a manufacturing conversation from becoming a memory contest later.'],
     ],
@@ -812,7 +818,7 @@ const guideEnhancements: Record<string, {
       'A buyer may begin with a roof or siding panel request, but the building rarely ends at the panel. Doors, windows, parapets, corners, roof edges, slope changes, penetrations, equipment curbs, base conditions, and material transitions all need attention. Each condition can require a formed part, a trim piece, a flashing approach, a closure, a fastener path, or a detail conversation.',
       'The strongest fabrication process begins with information. Drawings, elevations, sketches, photos, dimensions, existing-condition notes, finish schedules, and color preferences help a fabricator understand what the project actually needs. Without that information, a quote can still proceed, but the assumptions should be clear and the buyer should expect follow-up questions.',
       'Fabrication is also where visible quality shows up. A perfectly acceptable roof panel can still feel like a weak project if the fascia, corners, jambs, caps, or transitions look mismatched. Finish coordination matters because panel, trim, flashing, soffit, and accessory colors may be viewed together. If the trim finish is not reviewed early, the final building can feel patched together.',
-      'Commercial projects often require more documentation. Product data, trim schedules, finish samples, drawings, submittal notes, exclusions, alternates, and warranty-path conversations may all appear before material is released. Fabrication authority means explaining that process in plain language so buyers understand why detail review protects time, budget, and finished appearance.',
+      'Commercial projects often require more documentation. Product data, trim schedules, finish samples, drawings, submittal notes, exclusions, alternates, and warranty-path conversations may all appear before material is released. Fabrication education means explaining that process in plain language so buyers understand why detail review protects time, budget, and finished appearance.',
       'Fabrication content should avoid pretending every project detail is solved by a generic web page. Water management, code, engineering, fastening, fire, wind, and warranty issues can require project-specific review. Public content can educate buyers about the categories and questions, while final details should be confirmed through qualified professionals and manufacturer documentation.',
       'For Americas Panel Fab, architectural fabrication is a strategic bridge between product sales and company credibility. American Super Panel can sell practical exposed-fastener panels. The Fab site can explain the broader manufacturing and detail discipline that makes the company useful to contractors, owners, architects, and partners beyond a single product line.',
     ],
@@ -862,7 +868,7 @@ const guideEnhancements: Record<string, {
       'Fastening style changes the project conversation. Standing seam systems generally hide fasteners and carry a more architectural appearance path. Exposed-fastener profiles put fasteners through the panel face and are often chosen for practical budgets, speed, agricultural buildings, warehouses, and industrial scopes. Neither category is universally better. The right choice depends on drawings, budget, owner expectations, installer path, and documentation needs.',
       'Roof and wall use should not be blended casually. A ribbed panel might be discussed for both roof and wall conditions, but roof slope, drainage, penetrations, closures, side laps, wall openings, base trim, corners, and orientation create different detail questions. Buyers should identify whether the requested material is roof-only, wall-only, or a combined roof-and-wall package.',
       'Americas Panel Fab should use profile education to own the neutral research layer. Buyers who are still comparing systems need a manufacturer-level explanation of profile families and decision factors. Buyers who know they want exposed-fastener roofing or siding can move to American Super Panel for the product-focused quote path.',
-      'The authority opportunity is to make each profile page answer the hidden questions behind the keyword. A search for R-Panel may really mean: What is the coverage width? Can it be used for siding? What trim is needed? What gauge should I ask for? What finish path makes sense? How do I compare quotes? The site should answer those questions without overclaiming project-specific performance.',
+      'The practical opportunity is to make each profile page answer the hidden questions behind the search. A search for R-Panel may really mean: What is the coverage width? Can it be used for siding? What trim is needed? What gauge should I ask for? What finish path makes sense? How do I compare quotes? The site should answer those questions without overclaiming project-specific performance.',
     ],
     diagram: ['Building use and roof/wall scope', 'Profile family and fastening style', 'Coverage width, rib height, and side lap review', 'Gauge, substrate, finish, trim, and closures', 'Quote-ready product path'],
     comparison: [
@@ -890,7 +896,7 @@ const guideEnhancements: Record<string, {
       ['Profile names are market language', 'Buyers search for names like R-Panel, PBR Panel, AG Panel, Tuff Rib, and standing seam because those names are familiar. The manufacturer still has to translate market language into actual drawings, coverage widths, side laps, fastening details, and quote assumptions.'],
       ['Roof and wall profiles have different questions', 'A profile that appears on both roofs and walls may still need different trim, fasteners, closures, orientation, and review. Roof questions often involve slope, drainage, penetrations, and weather exposure. Wall questions often involve openings, corners, base trim, color breaks, and architectural appearance.'],
       ['Coverage width affects every estimate', 'Installed coverage width determines how many panels a project needs. Two similar-looking profiles can create different material quantities if coverage differs. That is why profile drawings and takeoffs matter more than a short product nickname in a bid comparison.'],
-      ['Profiles connect SEO to real buying intent', 'A visitor researching profiles may not be ready to quote today, but they are showing commercial intent. If the page teaches them how to compare systems and then gives a clean path to American Super Panel when ready, the authority content supports revenue without sounding like a thin sales page.'],
+      ['Profiles connect research to real buying intent', 'A visitor researching profiles may not be ready to quote today, but they are showing commercial intent. If the page teaches them how to compare systems and then gives a clean path to American Super Panel when ready, the education supports revenue without sounding like a thin sales page.'],
       ['How to avoid profile substitution confusion', 'Substitutions should be reviewed by profile drawing, coverage width, side lap, gauge, substrate, finish, fastener path, trim compatibility, and project use. A substitute may be acceptable, but it should never be accepted only because the profile name sounds close to the original request.'],
       ['Why profile pages need photos and drawings', 'Text can explain profile families, but buyers also need visual confirmation. Profile closeups, roof photos, wall photos, and simple diagrams help people understand rib shape, lap direction, visible fastening, and trim conditions before they request pricing.'],
       ['How profile choice affects trim', 'Changing profiles can change closures, trim dimensions, fastening assumptions, and side-lap conditions. That is why profile decisions should be coordinated with trim and flashing before the buyer treats the quote as final.'],
@@ -1020,10 +1026,10 @@ const guideEnhancements: Record<string, {
       'The project type matters. A warehouse may prioritize large-format roof and wall coverage, schedule, and practical trim coordination. A school or municipal facility may require more documentation, review, and controlled language. A retail or multifamily project may put more weight on appearance, color coordination, and visible details. An agricultural or industrial building may need a straightforward panel package but still benefit from clear quote assumptions and delivery planning.',
       'Commercial buyers also need a clearer separation between product decision and package decision. The product decision asks whether the project needs standing seam, exposed-fastener panels, wall panels, trim, flashing, accessories, or a mix. The package decision asks how those pieces are documented, bundled, delivered, coordinated, and reviewed before production. Many weak roofing conversations fail because they jump from product name to price without checking the package.',
       'The first commercial roofing conversation should gather project use, drawings, roof scope, wall scope if included, approximate square footage, panel type preference, finish requirements, trim expectations, project state, schedule target, and any owner or submittal requirements. If a buyer cannot provide all of that yet, the quote can still start, but the missing details should become visible assumptions rather than invisible risk.',
-      'Commercial metal roofing authority is built by explaining tradeoffs. Standing seam may fit architectural or owner-occupied projects where concealed fastening and appearance matter. Exposed-fastener panels may fit warehouses, agricultural buildings, storage facilities, industrial buildings, and practical commercial work. Wall panels may carry the visual identity of the building. Trim and flashing may decide whether the package is installable. Finish selection may affect appearance, heat, exposure, and documentation.',
+      'Commercial metal roofing credibility is built by explaining tradeoffs. Standing seam may fit architectural or owner-occupied projects where concealed fastening and appearance matter. Exposed-fastener panels may fit warehouses, agricultural buildings, storage facilities, industrial buildings, and practical commercial work. Wall panels may carry the visual identity of the building. Trim and flashing may decide whether the package is installable. Finish selection may affect appearance, heat, exposure, and documentation.',
       'A serious commercial roofing page should also help buyers compare suppliers. A strong supplier explains profile drawings, coverage width, gauge path, substrate, finish, trim scope, assumptions, exclusions, delivery state, and product documentation. A weak supplier only lists products. The buyer does not need jargon. They need enough clarity to avoid mismatched quotes and field surprises.',
       'For Americas Panel Fab, this guide should carry the company-level voice: manufacturing-aware, commercial-capable, documentation-minded, and practical. Product-ready exposed-fastener buyers can continue to American Super Panel. Buyers still researching systems, fabrication, roll forming, trim, finishes, and manufacturing credibility should stay inside the Americas Panel Fab resource library.',
-      'Americas Panel Fab uses commercial roofing education to connect manufacturing authority with buyer readiness. Public company content should help owners, contractors, and partners understand the decision process. Product-ready buyers can continue to American Super Panel, where they can request panels, siding, trim, flashing, and plan review. That separation lets the company build authority while keeping the product path clear.',
+      'Americas Panel Fab uses commercial roofing education to connect manufacturing credibility with buyer readiness. Public company content should help owners, contractors, and partners understand the decision process. Product-ready buyers can continue to American Super Panel, where they can request panels, siding, trim, flashing, and plan review. That separation keeps the company story broad while keeping the product path clear.',
     ],
     diagram: ['Project type and drawings', 'Panel, finish, trim, and documentation review', 'Quote assumptions and alternates', 'Approval, procurement, and production handoff', 'Delivery, closeout, and proof capture'],
     comparison: [
@@ -1050,7 +1056,7 @@ const guideEnhancements: Record<string, {
       ['Commercial buyers compare risk, not only price', 'A lower panel price can lose value if trim is missing, finish assumptions are unclear, delivery is not planned, submittals are thin, or exclusions appear after approval. The strongest content helps buyers understand where hidden risk enters a commercial metal roofing package.'],
       ['Different building types need different emphasis', 'A warehouse may value speed, broad coverage, and practical trim. A retail building may need cleaner visible details. A school or public-facing facility may require more documentation and review. Agricultural and industrial buildings may prioritize durable practical coverage and straightforward ordering.'],
       ['The quote should show its assumptions', 'A commercial quote should make the basis of pricing visible: drawings used, panel profile, gauge, substrate, finish, trim, accessories, delivery state, exclusions, alternates, and open questions. That transparency helps buyers compare packages without guessing what each supplier included.'],
-      ['Authority content should reduce the first-call burden', 'When a buyer reads this guide before contacting the product site, they should know what to gather and why it matters. That improves the eventual sales conversation because the buyer arrives with drawings, scope, finish needs, project state, and a more realistic view of the package.'],
+      ['Good education should reduce the first-call burden', 'When a buyer reads this guide before contacting the product site, they should know what to gather and why it matters. That improves the eventual sales conversation because the buyer arrives with drawings, scope, finish needs, project state, and a more realistic view of the package.'],
       ['What separates a serious supplier', 'A serious commercial supplier can explain what is included, what is excluded, what still needs review, and what information could change price or schedule. That clarity matters because commercial roofing decisions often involve multiple people who need the same facts before approving a package.'],
     ],
     checklist: [
@@ -1123,27 +1129,50 @@ function glossaryTermSchema(entry: (typeof glossaryEntries)[number]) {
   }
 }
 
+function breadcrumbSchema(items: [string, string][]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map(([name, path], index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name,
+      item: `${apfOrigin}${path}`,
+    })),
+  }
+}
+
 function articleSchema(guide: (typeof guidePages)[number]) {
   const enhancement = guideEnhancements[guide.slug]
+  const cluster = topicalClusters.find((item) => item.slugs.includes(guide.slug))
   const article = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: guide.title,
     description: guide.description,
     author: { '@type': 'Organization', name: 'Americas Panel Fab' },
+    dateModified: articleReviewedDate,
+    datePublished: articleReviewedDate,
     publisher: { '@type': 'Organization', name: 'Americas Panel Fab' },
     mainEntityOfPage: `${apfOrigin}/${guide.slug}`,
     url: `${apfOrigin}/${guide.slug}`,
   }
+  const breadcrumbs = breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+    ...(cluster ? [[cluster.name, `/guides/${cluster.slug}`] as [string, string]] : []),
+    [guide.title, `/${guide.slug}`],
+  ])
 
   if (!enhancement?.faq.length) {
-    return article
+    return [article, breadcrumbs]
   }
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
       article,
+      breadcrumbs,
       {
         '@type': 'FAQPage',
         mainEntity: enhancement.faq.map(([question, answer]) => ({
@@ -1198,6 +1227,31 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
     }
   }
 
+  const clusterSlug = path.startsWith('guides/') ? path.replace('guides/', '') : ''
+  const clusterPage = topicalClusters.find((cluster) => cluster.slug === clusterSlug)
+
+  if (clusterPage) {
+    return {
+      canonicalPath: `/guides/${clusterPage.slug}`,
+      description: `${clusterPage.name} from Americas Panel Fab: ${clusterPage.copy}`,
+      title: `${clusterPage.name} | Americas Panel Fab Guides`,
+      schema: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: clusterPage.name,
+          url: `${apfOrigin}/guides/${clusterPage.slug}`,
+          description: clusterPage.copy,
+        },
+        breadcrumbSchema([
+          ['Home', '/'],
+          ['Guides', '/guides'],
+          [clusterPage.name, `/guides/${clusterPage.slug}`],
+        ]),
+      ],
+    }
+  }
+
   const routeSeo: Record<string, SeoConfig> = {
     '': {
       canonicalPath: '/',
@@ -1209,7 +1263,7 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
     manufacturing: {
       canonicalPath: '/manufacturing',
       description:
-        'Metal panel manufacturing authority, factory workflow, material planning, product-brand support, and regional manufacturing coordination from Americas Panel Fab.',
+        'Metal panel manufacturing, factory workflow, material planning, product-brand support, and regional manufacturing coordination from Americas Panel Fab.',
       title: 'Metal Panel Manufacturing | Americas Panel Fab',
       schema: apfServiceSchema(
         'Metal Panel Manufacturing',
@@ -1233,13 +1287,19 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
       description:
         'Metal panel manufacturing guides, comparison articles, buyer education, finish resources, trim guidance, and roll forming explainers from Americas Panel Fab.',
       title: 'Metal Panel Manufacturing Guides | Americas Panel Fab',
-      schema: {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: 'Metal Panel Manufacturing Guides',
-        url: `${apfOrigin}/guides`,
-        description: 'Educational guides for metal panel manufacturing, roll forming, product comparison, finishes, and commercial roofing decisions.',
-      },
+      schema: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Metal Panel Manufacturing Guides',
+          url: `${apfOrigin}/guides`,
+          description: 'Educational guides for metal panel manufacturing, roll forming, product comparison, finishes, and commercial roofing decisions.',
+        },
+        breadcrumbSchema([
+          ['Home', '/'],
+          ['Guides', '/guides'],
+        ]),
+      ],
     },
     glossary: {
       canonicalPath: '/glossary',
@@ -1272,7 +1332,7 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
     'custom-fabrication': {
       canonicalPath: '/custom-fabrication',
       description:
-        'Custom sheet metal fabrication authority for trim, flashing, edge metal, project details, and contractor manufacturing partner support.',
+        'Custom sheet metal fabrication guidance for trim, flashing, edge metal, project details, and contractor manufacturing partner support.',
       title: 'Custom Sheet Metal Fabrication | Americas Panel Fab',
       schema: apfServiceSchema(
         'Custom Sheet Metal Fabrication',
@@ -1310,7 +1370,7 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
   return routeSeo[path] ?? {
     canonicalPath: `/${path}`,
     description:
-      'Americas Panel Fab publishes authority content about metal panel manufacturing, roll forming, fabrication, and product-brand development.',
+      'Americas Panel Fab publishes practical content about metal panel manufacturing, roll forming, fabrication, and product-brand development.',
     title: 'Americas Panel Fab | Metal Panel Manufacturing',
   }
 }
@@ -1434,6 +1494,13 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'glossary') {
     return <GlossaryPage />
+  }
+
+  const clusterSlug = path.startsWith('guides/') ? path.replace('guides/', '') : ''
+  const clusterPage = topicalClusters.find((cluster) => cluster.slug === clusterSlug)
+
+  if (clusterPage) {
+    return <ClusterHubPage cluster={clusterPage} />
   }
 
   const glossarySlug = path.startsWith('glossary/') ? path.replace('glossary/', '') : ''
@@ -2099,7 +2166,7 @@ const authorityPages = {
   rollForming: {
     eyebrow: 'Roll Forming',
     title: 'Roll Forming Services, Education, and Profile Planning',
-    copy: 'Roll forming content should build manufacturing authority: how coil becomes panel, how profiles are selected, and how panel programs are organized for real projects.',
+    copy: 'Roll forming content should explain manufacturing credibility: how coil becomes panel, how profiles are selected, and how panel programs are organized for real projects.',
     image: warehouseImage,
     imageAlt: 'Commercial warehouse metal panel project',
     points: [
@@ -2191,9 +2258,75 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
   )
 }
 
+function Breadcrumbs({ items }: { items: [string, string][] }) {
+  return (
+    <nav aria-label="Breadcrumb" className="border-b border-slate-200 bg-slate-50 px-5 py-3 text-sm font-bold text-slate-600 lg:px-8">
+      <ol className="mx-auto flex max-w-7xl flex-wrap items-center gap-2">
+        {items.map(([label, href], index) => (
+          <li key={`${href}-${label}`} className="flex items-center gap-2">
+            {index > 0 ? <span className="text-slate-400">/</span> : null}
+            {index === items.length - 1 ? (
+              <span className="text-[#0b1f33]">{label}</span>
+            ) : (
+              <a href={href} className="hover:text-[#f97316]">{label}</a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+function ClusterHubPage({ cluster }: { cluster: (typeof topicalClusters)[number] }) {
+  const clusterGuides = cluster.slugs
+    .map((slug) => guidePages.find((guide) => guide.slug === slug))
+    .filter(Boolean) as (typeof guidePages)[number][]
+
+  return (
+    <>
+      <Breadcrumbs items={[['Home', '/'], ['Guides', '/guides'], [cluster.name, `/guides/${cluster.slug}`]]} />
+      <PageHero title={cluster.name} copy={cluster.copy} />
+      <section className="section bg-white">
+        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+          <aside className="rounded border border-slate-200 bg-slate-50 p-6">
+            <p className="eyebrow text-[#f97316]">Guide Path</p>
+            <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">Start here, then go deeper.</h2>
+            <p className="mt-4 leading-7 text-slate-600">
+              This guide path groups related topics so buyers, contractors, suppliers, and partners can move from broad research to a more specific project question.
+            </p>
+            <a className="mt-6 inline-flex items-center font-black text-[#0b1f33] hover:text-[#f97316]" href="/guides">
+              View all guides <ArrowRight className="ml-2" size={18} />
+            </a>
+          </aside>
+          <div className="grid gap-5 md:grid-cols-2">
+            {clusterGuides.map((guide) => (
+              <a key={guide.slug} href={`/${guide.slug}`} className="card group block">
+                <p className="eyebrow text-[#f97316]">{guide.category}</p>
+                <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{guide.title}</h2>
+                <p className="mt-3 leading-7 text-slate-600">{guide.description}</p>
+                <span className="mt-6 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                  Read guide <ArrowRight className="ml-2" size={18} />
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="How To Use This Path"
+          title="Build a better project conversation before requesting pricing."
+          copy="Use the guides in this path to clarify profile choices, material assumptions, fabrication details, documentation needs, and the information a manufacturer needs before quoting or production review."
+        />
+      </section>
+    </>
+  )
+}
+
 function GuidesPage() {
   return (
     <>
+      <Breadcrumbs items={[['Home', '/'], ['Guides', '/guides']]} />
       <PageHero
         title="Metal Panel Manufacturing Guides"
         copy="Educational guides for panel profiles, roll forming, finishes, trim, flashing, and commercial roofing decisions from the manufacturer behind American Super Panel."
@@ -2209,6 +2342,9 @@ function GuidesPage() {
             <article key={cluster.name} className="rounded border border-slate-200 bg-slate-50 p-6 shadow-sm">
               <h2 className="text-2xl font-black text-[#0b1f33]">{cluster.name}</h2>
               <p className="mt-3 leading-7 text-slate-600">{cluster.copy}</p>
+              <a href={`/guides/${cluster.slug}`} className="mt-5 inline-flex items-center font-black text-[#0b1f33] hover:text-[#f97316]">
+                Open guide path <ArrowRight className="ml-2" size={18} />
+              </a>
               <div className="mt-5 grid gap-3">
                 {cluster.slugs.map((slug) => {
                   const guide = guidePages.find((item) => item.slug === slug)
@@ -2258,14 +2394,45 @@ function GuidesPage() {
 
 function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
   const enhancement = guideEnhancements[guide.slug]
+  const cluster = topicalClusters.find((item) => item.slugs.includes(guide.slug))
+  const tocItems = [
+    ...(enhancement ? [['Pillar Overview', '#pillar-overview'], ['Project Evidence', '#project-evidence'], ['Deep Dive', '#deep-dive']] as [string, string][] : []),
+    ...guide.sections.map(([title]) => [title, `#${slugifyTerm(title)}`] as [string, string]),
+    ...(enhancement ? [['Decision Flow', '#decision-flow'], ['Comparison Table', '#comparison-table'], ['Quote Readiness Checklist', '#quote-readiness'], ['FAQ', '#faq']] as [string, string][] : []),
+  ]
 
   return (
     <>
+      <Breadcrumbs
+        items={[
+          ['Home', '/'],
+          ['Guides', '/guides'],
+          ...(cluster ? [[cluster.name, `/guides/${cluster.slug}`] as [string, string]] : []),
+          [guide.title, `/${guide.slug}`],
+        ]}
+      />
       <PageHero title={guide.title} copy={guide.hero} />
       <section className="section bg-white">
         <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
           <div>
             <img src={guide.image} alt={guide.imageAlt} className="h-[420px] w-full rounded object-cover shadow-xl" />
+            <div className="mt-6 rounded border border-slate-200 bg-white p-6 shadow-lg">
+              <p className="eyebrow text-[#f97316]">Article Review</p>
+              <p className="mt-3 text-lg font-black text-[#0b1f33]">Reviewed by Americas Panel Fab Resource Desk</p>
+              <p className="mt-2 leading-7 text-slate-600">Last reviewed: June 20, 2026</p>
+            </div>
+            {tocItems.length ? (
+              <nav aria-label="Table of contents" className="mt-6 rounded border border-slate-200 bg-slate-50 p-6 lg:sticky lg:top-28">
+                <p className="eyebrow text-[#f97316]">On This Page</p>
+                <div className="mt-4 grid gap-2">
+                  {tocItems.map(([label, href]) => (
+                    <a key={href} href={href} className="rounded border border-slate-200 bg-white px-4 py-3 text-sm font-black text-[#0b1f33] hover:border-[#f97316] hover:text-[#f97316]">
+                      {label}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+            ) : null}
             <div className="mt-6 rounded border border-slate-200 bg-slate-50 p-6">
               <p className="eyebrow text-[#f97316]">Key Takeaways</p>
               <ul className="mt-4 grid gap-3">
@@ -2287,7 +2454,7 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
           </div>
           <article className="grid gap-5">
             {enhancement ? (
-              <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+              <section id="pillar-overview" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                 <p className="eyebrow text-[#f97316]">Pillar Overview</p>
                 <div className="mt-4 grid gap-4">
                   {enhancement.paragraphs.map((paragraph) => (
@@ -2301,7 +2468,7 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
               </section>
             ) : null}
             {enhancement?.visuals?.length ? (
-              <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+              <section id="project-evidence" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                 <p className="eyebrow text-[#f97316]">Project Evidence</p>
                 <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">Photos and details that help buyers evaluate the topic.</h2>
                 <div className="mt-5 grid gap-4 lg:grid-cols-3">
@@ -2318,7 +2485,7 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
               </section>
             ) : null}
             {enhancement?.deepDive?.length ? (
-              <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+              <section id="deep-dive" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                 <p className="eyebrow text-[#f97316]">Deep Dive</p>
                 <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">How serious buyers should think about this topic.</h2>
                 <div className="mt-5 grid gap-5">
@@ -2332,14 +2499,14 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
               </section>
             ) : null}
             {guide.sections.map(([title, copy]) => (
-              <section key={title} className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+              <section id={slugifyTerm(title)} key={title} className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                 <h2 className="text-2xl font-black text-[#0b1f33]">{title}</h2>
                 <p className="mt-3 text-lg leading-8 text-slate-600">{copy}</p>
               </section>
             ))}
             {enhancement ? (
               <>
-                <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <section id="decision-flow" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                   <p className="eyebrow text-[#f97316]">Decision Flow</p>
                   <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">How this decision should move through a project.</h2>
                   <div className="mt-5 grid gap-3">
@@ -2352,7 +2519,7 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
                   </div>
                 </section>
 
-                <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <section id="comparison-table" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                   <p className="eyebrow text-[#f97316]">Comparison Table</p>
                   <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">What to compare before making the call.</h2>
                   <div className="mt-5 overflow-hidden rounded border border-slate-200">
@@ -2373,7 +2540,7 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
                 </section>
 
                 {enhancement.checklist?.length ? (
-                  <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                  <section id="quote-readiness" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                     <p className="eyebrow text-[#f97316]">Quote Readiness Checklist</p>
                     <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">What to gather before the next conversation.</h2>
                     <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -2390,7 +2557,7 @@ function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
                   </section>
                 ) : null}
 
-                <section className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <section id="faq" className="scroll-mt-28 rounded border border-slate-200 bg-white p-6 shadow-lg">
                   <p className="eyebrow text-[#f97316]">FAQ</p>
                   <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">Common questions before the first project conversation.</h2>
                   <div className="mt-5 grid gap-4">
@@ -2513,7 +2680,7 @@ function GlossaryTermPage({ entry }: { entry: (typeof glossaryEntries)[number] }
         <SectionIntro
           eyebrow="Related Guides"
           title={`Keep researching ${entry.name.toLowerCase()} in context.`}
-          copy="Short definitions are useful, but authority comes from connecting each term to profiles, materials, fabrication, submittals, and commercial buying decisions."
+          copy="Short definitions are useful, but the real value comes from connecting each term to profiles, materials, fabrication, submittals, and commercial buying decisions."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {guideFallback.map((guide) => (
