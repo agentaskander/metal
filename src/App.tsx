@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import {
   ArrowRight,
   Award,
@@ -37,11 +37,11 @@ declare global {
 
 const navItems = [
   ['Home', '/'],
-  ['Manufacturing', '/#manufacturing'],
+  ['Manufacturing', '/manufacturing'],
+  ['Capabilities', '/capabilities'],
   ['Products', '/products'],
   ['Super Panel', '/super-panel'],
-  ['Gov / Commercial', '/#government-commercial'],
-  ['Investors / Partners', '/#investors-partners'],
+  ['Partners', '/#investors-partners'],
 ]
 
 const products = [
@@ -116,6 +116,7 @@ const states = [
 ]
 
 const projectCategories = ['Commercial', 'Industrial', 'Municipal', 'Agricultural']
+const apfOrigin = 'https://www.americaspanelfab.com'
 const contractorOutcomes = [
   ['Faster Lead Times', 'Quote response target within 24 hours for complete plan sets.'],
   ['Custom Fabrication', 'Panels, trims, flashings, edge metal, and accessories coordinated together.'],
@@ -261,12 +262,147 @@ type SubmitState = {
 
 const idleSubmitState: SubmitState = { kind: 'idle', message: '' }
 
+type SeoConfig = {
+  canonicalPath: string
+  description: string
+  schema?: Record<string, unknown> | Record<string, unknown>[]
+  title: string
+}
+
+const apfOrganizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Americas Panel Fab',
+  url: apfOrigin,
+  email: 'sales@americaspanelfab.com',
+  telephone: '+1-555-019-3762',
+  description:
+    'Americas Panel Fab is a metal panel manufacturing and fabrication platform focused on roll forming, panel fabrication, and contractor manufacturing support.',
+}
+
+function apfServiceSchema(name: string, description: string, path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name,
+    provider: { '@type': 'Organization', name: 'Americas Panel Fab' },
+    areaServed: ['California', 'Arizona', 'Texas', 'Florida'],
+    description,
+    url: `${apfOrigin}${path}`,
+  }
+}
+
+function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoConfig {
+  if (statePage) {
+    return {
+      canonicalPath: `/${statePage.slug}`,
+      description: statePage.copy,
+      title: `${statePage.name} Metal Panel Fabrication | Americas Panel Fab`,
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: `${statePage.name} Metal Panel Fabrication`,
+        url: `${apfOrigin}/${statePage.slug}`,
+        description: statePage.copy,
+      },
+    }
+  }
+
+  const routeSeo: Record<string, SeoConfig> = {
+    '': {
+      canonicalPath: '/',
+      description:
+        'Americas Panel Fab is building a modern metal panel manufacturing platform for roll forming, panel fabrication, commercial supply, and partner growth.',
+      title: 'Americas Panel Fab | Metal Panel Manufacturing Platform',
+      schema: apfOrganizationSchema,
+    },
+    manufacturing: {
+      canonicalPath: '/manufacturing',
+      description:
+        'Metal panel manufacturing authority, factory workflow, material planning, product-brand support, and regional manufacturing coordination from Americas Panel Fab.',
+      title: 'Metal Panel Manufacturing | Americas Panel Fab',
+      schema: apfServiceSchema(
+        'Metal Panel Manufacturing',
+        'Factory workflow, material planning, panel production coordination, and manufacturing support for metal panel programs.',
+        '/manufacturing',
+      ),
+    },
+    capabilities: {
+      canonicalPath: '/capabilities',
+      description:
+        'Americas Panel Fab capabilities include roll forming, custom fabrication, trim and flashing packages, product support, and partner-ready operations.',
+      title: 'Metal Panel Fabrication Capabilities | Americas Panel Fab',
+      schema: apfServiceSchema(
+        'Metal Panel Fabrication Capabilities',
+        'Roll forming, custom fabrication, trim, flashing, product support, and partner-ready metal panel operations.',
+        '/capabilities',
+      ),
+    },
+    'roll-forming': {
+      canonicalPath: '/roll-forming',
+      description:
+        'Roll forming services, panel profile planning, coil-to-panel workflows, and manufacturing education from Americas Panel Fab.',
+      title: 'Roll Forming Services & Education | Americas Panel Fab',
+      schema: apfServiceSchema(
+        'Roll Forming Services',
+        'Roll forming workflow support, panel profile planning, and manufacturing education for metal panel programs.',
+        '/roll-forming',
+      ),
+    },
+    'custom-fabrication': {
+      canonicalPath: '/custom-fabrication',
+      description:
+        'Custom sheet metal fabrication authority for trim, flashing, edge metal, project details, and contractor manufacturing partner support.',
+      title: 'Custom Sheet Metal Fabrication | Americas Panel Fab',
+      schema: apfServiceSchema(
+        'Custom Sheet Metal Fabrication',
+        'Custom trim, flashing, edge metal, and fabrication package support for metal panel projects.',
+        '/custom-fabrication',
+      ),
+    },
+    products: {
+      canonicalPath: '/products',
+      description:
+        'Product families manufactured or supported by Americas Panel Fab, including American Super Panel, wall panels, trim, flashing, and accessories.',
+      title: 'Metal Panel Product Families | Americas Panel Fab',
+    },
+    'super-panel': {
+      canonicalPath: '/super-panel',
+      description:
+        'American Super Panel is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.',
+      title: 'American Super Panel Flagship Product | Americas Panel Fab',
+    },
+    about: {
+      canonicalPath: '/about',
+      description:
+        'Learn about Americas Panel Fab, its manufacturing platform strategy, product-brand structure, and metal panel industry mission.',
+      title: 'About Americas Panel Fab',
+      schema: apfOrganizationSchema,
+    },
+    contact: {
+      canonicalPath: '/contact',
+      description:
+        'Contact Americas Panel Fab for manufacturing partnerships, supplier discussions, industry collaboration, investor interest, and platform inquiries.',
+      title: 'Contact Americas Panel Fab',
+    },
+  }
+
+  return routeSeo[path] ?? {
+    canonicalPath: `/${path}`,
+    description:
+      'Americas Panel Fab publishes authority content about metal panel manufacturing, roll forming, fabrication, and product-brand development.',
+    title: 'Americas Panel Fab | Metal Panel Manufacturing',
+  }
+}
+
 function App() {
   const path = window.location.pathname.replace(/^\/+/, '')
   const statePage = states.find((state) => state.slug === path)
+  const seoConfig = getSeoConfig(path, statePage)
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
+      <SeoManager config={seoConfig} />
       <Header />
       <main>
         {statePage ? (
@@ -280,6 +416,45 @@ function App() {
       <Footer />
     </div>
   )
+}
+
+function SeoManager({ config }: { config: SeoConfig }) {
+  useEffect(() => {
+    document.title = config.title
+
+    const description = upsertHeadElement('meta', 'name', 'description') as HTMLMetaElement
+    description.content = config.description
+
+    const canonical = upsertHeadElement('link', 'rel', 'canonical') as HTMLLinkElement
+    canonical.href = `${apfOrigin}${config.canonicalPath}`
+
+    const existingSchema = document.head.querySelector('#route-schema')
+    existingSchema?.remove()
+
+    if (config.schema) {
+      const script = document.createElement('script')
+      script.id = 'route-schema'
+      script.type = 'application/ld+json'
+      script.text = JSON.stringify(Array.isArray(config.schema) ? { '@context': 'https://schema.org', '@graph': config.schema } : config.schema)
+      document.head.appendChild(script)
+    }
+  }, [config])
+
+  return null
+}
+
+function upsertHeadElement(tagName: 'meta' | 'link', attribute: string, value: string) {
+  const selector = `${tagName}[${attribute}="${value}"]`
+  const existing = document.head.querySelector(selector)
+
+  if (existing) {
+    return existing
+  }
+
+  const element = document.createElement(tagName)
+  element.setAttribute(attribute, value)
+  document.head.appendChild(element)
+  return element
 }
 
 function RoutedPage({ path }: { path: string }) {
@@ -315,6 +490,22 @@ function RoutedPage({ path }: { path: string }) {
         <Contact />
       </>
     )
+  }
+
+  if (path === 'manufacturing') {
+    return <AuthorityPage page={authorityPages.manufacturing} />
+  }
+
+  if (path === 'capabilities') {
+    return <AuthorityPage page={authorityPages.capabilities} />
+  }
+
+  if (path === 'roll-forming') {
+    return <AuthorityPage page={authorityPages.rollForming} />
+  }
+
+  if (path === 'custom-fabrication') {
+    return <AuthorityPage page={authorityPages.customFabrication} />
   }
 
   if (path === 'resources') {
@@ -922,6 +1113,138 @@ function IndustrialRibPage() {
         </div>
       </section>
 
+      <Contact />
+    </>
+  )
+}
+
+const authorityPages = {
+  manufacturing: {
+    eyebrow: 'Manufacturing',
+    title: 'Metal Panel Manufacturing Built for Scale and Trust',
+    copy: 'Americas Panel Fab is the company and manufacturing platform behind American Super Panel, with a focus on disciplined panel production, product-brand support, and partner-ready operating systems.',
+    image: machineImage,
+    imageAlt: 'Roll forming technology and metal panel manufacturing',
+    points: [
+      'Factory workflow and panel package planning',
+      'Product-brand support for American Super Panel',
+      'Commercial, agricultural, industrial, and residential market awareness',
+      'Supplier, installer, and partner coordination',
+    ],
+    sections: [
+      ['Manufacturing Foundation', 'The Fab site should explain how the company thinks about production, material flow, documentation, quality conversations, and contractor support without overclaiming private machine capacity or unverified certifications.'],
+      ['Product Brand Relationship', 'American Super Panel is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab. The product site handles active quote traffic; Fab carries the company story.'],
+      ['Expansion Logic', 'The platform can support future product lines, factory partners, dealer programs, trim and accessories, standing seam systems, and manufacturing software over time.'],
+    ],
+  },
+  capabilities: {
+    eyebrow: 'Capabilities',
+    title: 'Fabrication Capabilities for Panel Programs and Partners',
+    copy: 'Capabilities content belongs on Fab because buyers, partners, and future acquisitions need to understand the company behind the product brand.',
+    image: facilityImage,
+    imageAlt: 'Metal panel manufacturing production floor',
+    points: [
+      'Panel product family support',
+      'Trim, flashing, and accessory package planning',
+      'Commercial documentation and submittal mindset',
+      'Partner-ready manufacturing conversations',
+    ],
+    sections: [
+      ['Panel Programs', 'Fab supports product-family thinking: profile selection, finish coordination, trim scope, accessory paths, and quote-to-production handoff.'],
+      ['Commercial Readiness', 'The site presents the discipline expected by contractors, procurement teams, property owners, and institutional buyers without making unsupported legal or certification claims.'],
+      ['Partner Surface', 'Capabilities pages give suppliers, installers, manufacturers, and investors a neutral place to understand where the company is going.'],
+    ],
+  },
+  rollForming: {
+    eyebrow: 'Roll Forming',
+    title: 'Roll Forming Services, Education, and Profile Planning',
+    copy: 'Roll forming content should build manufacturing authority: how coil becomes panel, how profiles are selected, and how panel programs are organized for real projects.',
+    image: warehouseImage,
+    imageAlt: 'Commercial warehouse metal panel project',
+    points: [
+      'Coil-to-panel workflow education',
+      'Profile comparison and product selection guidance',
+      'Factory and future mobile production concepts',
+      'Contractor and dealer support workflows',
+    ],
+    sections: [
+      ['Profile Strategy', 'Fab can publish neutral guides comparing exposed-fastener panels, standing seam systems, wall panels, and trim packages while sending product-ready demand to American Super Panel.'],
+      ['Workflow Education', 'Roll forming pages explain material, profile, length, finish, packaging, and job coordination in plain commercial language.'],
+      ['Future Growth', 'This authority page can later support factory profiles, equipment reviews, dealer education, and production workflow software.'],
+    ],
+  },
+  customFabrication: {
+    eyebrow: 'Custom Fabrication',
+    title: 'Custom Sheet Metal Fabrication for Roof and Wall Details',
+    copy: 'Custom fabrication authority belongs on Fab: trim, flashing, edge metal, transitions, corners, openings, and project-specific detail support.',
+    image: fabricationImage,
+    imageAlt: 'Custom sheet metal fabrication',
+    points: [
+      'Trim and flashing package planning',
+      'Roof edge, wall corner, opening, and transition detail support',
+      'Finish and color coordination',
+      'Project documentation and partner handoff',
+    ],
+    sections: [
+      ['Detail Discipline', 'Strong panel projects depend on the pieces around the panel: flashings, closures, corners, transitions, and closeout details.'],
+      ['Contractor Partner Mindset', 'Fab content should help contractors understand how to organize drawings, dimensions, finish needs, and detail notes before production conversations.'],
+      ['Authority Without Overclaiming', 'This page should stay useful and credible while private specifications, staffing, output, and financial details remain offline.'],
+    ],
+  },
+}
+
+function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof authorityPages] }) {
+  return (
+    <>
+      <PageHero title={page.title} copy={page.copy} />
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <img src={page.image} alt={page.imageAlt} className="h-[430px] w-full rounded object-cover shadow-xl" />
+          <div>
+            <SectionIntro
+              eyebrow={page.eyebrow}
+              title="Company-level credibility, not duplicate product sales copy."
+              copy="These pages make Americas Panel Fab the manufacturer and authority layer while American Super Panel remains the focused sales funnel for roofing and siding panels."
+            />
+            <div className="mt-8 grid gap-3">
+              {page.points.map((point) => (
+                <p key={point} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-bold text-[#0b1f33]">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                  {point}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section bg-slate-50">
+        <div className="grid gap-5 md:grid-cols-3">
+          {page.sections.map(([title, copy]) => (
+            <article key={title} className="card">
+              <Factory className="text-[#f97316]" />
+              <h2 className="mt-5 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section bg-white">
+        <div className="rounded border border-slate-200 bg-[#0b1f33] p-8 text-white">
+          <p className="eyebrow text-orange-200">Flagship Product Relationship</p>
+          <h2 className="mt-3 text-3xl font-black">American Super Panel is manufactured by Americas Panel Fab.</h2>
+          <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-200">
+            Contractors and dealers looking for exposed-fastener roofing and siding panels should use the focused American Super Panel product site. Partners, suppliers, investors, and industry collaborators can use Fab for company-level conversations.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a className="btn-primary" href="https://www.americansuperpanel.com/">
+              View American Super Panel <ArrowRight size={18} />
+            </a>
+            <a className="btn-secondary bg-white text-[#0b1f33]" href="#contact">
+              Partner Inquiry
+            </a>
+          </div>
+        </div>
+      </section>
       <Contact />
     </>
   )
