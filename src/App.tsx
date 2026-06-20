@@ -2132,6 +2132,8 @@ const authorityPages = {
     eyebrow: 'Manufacturing',
     title: 'Metal Panel Manufacturing Built for Scale and Trust',
     copy: 'Americas Panel Fab is the manufacturing company behind American Super Panel, with a focus on disciplined panel production, product system support, and partner-ready operating systems.',
+    introTitle: 'How metal panel programs move from project information to finished packages.',
+    introCopy: 'Manufacturing resources explain material flow, profile planning, trim coordination, documentation, packaging, and the review steps buyers should understand before a panel order is released.',
     image: machineImage,
     imageAlt: 'Roll forming technology and metal panel manufacturing',
     points: [
@@ -2150,6 +2152,8 @@ const authorityPages = {
     eyebrow: 'Capabilities',
     title: 'Fabrication Capabilities for Panel Programs and Partners',
     copy: 'Americas Panel Fab gives buyers, partners, and suppliers a clear view of the manufacturing company behind American Super Panel.',
+    introTitle: 'What buyers, suppliers, installers, and partners can review with Americas Panel Fab.',
+    introCopy: 'Capabilities pages organize the practical support areas around panel programs: trim and flashing, fabrication details, documentation, partner coordination, and project-readiness conversations.',
     image: facilityImage,
     imageAlt: 'Metal panel manufacturing production floor',
     points: [
@@ -2168,6 +2172,8 @@ const authorityPages = {
     eyebrow: 'Roll Forming',
     title: 'Roll Forming Services, Education, and Profile Planning',
     copy: 'Roll forming resources explain manufacturing credibility: how coil becomes panel, how profiles are selected, and how panel programs are organized for real projects.',
+    introTitle: 'Roll forming guidance for profile, length, material, and package planning.',
+    introCopy: 'This resource explains how coil, tooling, profile selection, panel length, finish path, packaging, and job coordination shape a metal panel order.',
     image: warehouseImage,
     imageAlt: 'Commercial warehouse metal panel project',
     points: [
@@ -2186,6 +2192,8 @@ const authorityPages = {
     eyebrow: 'Custom Fabrication',
     title: 'Custom Sheet Metal Fabrication for Roof and Wall Details',
     copy: 'Custom fabrication expertise belongs with the manufacturer: trim, flashing, edge metal, transitions, corners, openings, and project-specific detail support.',
+    introTitle: 'Fabrication guidance for the details that make panel projects usable.',
+    introCopy: 'Custom fabrication resources help buyers prepare drawings, dimensions, photos, finish needs, opening conditions, transitions, and trim details for review.',
     image: fabricationImage,
     imageAlt: 'Custom sheet metal fabrication',
     points: [
@@ -2212,8 +2220,8 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
           <div>
             <SectionIntro
               eyebrow={page.eyebrow}
-              title="Manufacturer credibility for serious panel work."
-              copy="Learn how Americas Panel Fab supports panel programs, fabrication details, documentation, and product system growth while American Super Panel serves contractors and buyers looking for a clear roofing and siding panel system."
+              title={page.introTitle}
+              copy={page.introCopy}
             />
             <div className="mt-8 grid gap-3">
               {page.points.map((point) => (
