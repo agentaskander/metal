@@ -542,7 +542,7 @@ function Header() {
             <UploadCloud size={18} />
             Upload Plans
           </a>
-          <a className="btn-primary" href="#quote">
+          <a className="btn-primary header-quote-action" href="#quote">
             Request Quote
           </a>
         </div>
