@@ -37,6 +37,9 @@ const navItems = [
   ['Control Panel', '/internal-control-panel'],
   ['Business Plan', '/internal-business-plan'],
   ['Gov / Compliance', '/internal-gov-compliance'],
+  ['Risk', '/internal-risk-register'],
+  ['Financials', '/internal-financial-model'],
+  ['Execution', '/internal-execution-board'],
 ]
 
 const products = [
@@ -1311,6 +1314,161 @@ const internalComplianceAgentRules = [
   ['Safety Agent', 'May generate checklist reminders, but cannot certify OSHA compliance.'],
   ['Claim Scanner Agent', 'Must block or escalate words like certified, approved, rated, compliant, engineered, fire-safe, wind-rated, government-ready unless evidence exists.'],
 ]
+const internalRiskRegister = [
+  {
+    risk: 'NDA / private plan leakage',
+    category: 'Confidentiality',
+    severity: 'Critical',
+    owner: 'Owner admin',
+    trigger: 'Private numbers, owner contacts, projections, machine output, supplier pricing, or internal strategy appear in public code or public pages.',
+    controls: ['Keep _doc untracked', 'Scan public folders before push', 'Use public-safe copy rules', 'Require review before APF/ASP publish'],
+    next: 'Add automated public-copy scanner to build pipeline.',
+  },
+  {
+    risk: 'Equity, IP, and domain ambiguity',
+    category: 'Partnership',
+    severity: 'Critical',
+    owner: 'Founder / legal',
+    trigger: 'No written agreement for domains, software, data, brand assets, equity, buyout, or acquisition path.',
+    controls: ['Separate equity agreement', 'IP assignment/license terms', 'domain ownership ledger', 'software ownership clause'],
+    next: 'Create advisor question list and draft agreement checklist.',
+  },
+  {
+    risk: 'Equipment delay or capability mismatch',
+    category: 'Manufacturing',
+    severity: 'High',
+    owner: 'Operations',
+    trigger: 'Machine vendor specs, lead time, maintenance, profile capability, coil handling, or facility assumptions do not match launch plan.',
+    controls: ['Vendor quote comparison', 'machine acceptance checklist', 'facility readiness checklist', 'maintenance plan'],
+    next: 'Build manufacturing readiness route with vendor/spec tracker.',
+  },
+  {
+    risk: 'Margin compression',
+    category: 'Finance',
+    severity: 'High',
+    owner: 'Finance / estimating',
+    trigger: 'Raw material cost, freight, labor, scrap, underpriced quotes, rush orders, or delivery cost reduces contribution margin.',
+    controls: ['Quote approval gate', 'COGS categories', 'margin dashboard', 'supplier price review'],
+    next: 'Connect quote model to plan-vs-actual margin metrics.',
+  },
+  {
+    risk: 'Government/compliance overclaim',
+    category: 'Gov / compliance',
+    severity: 'High',
+    owner: 'Compliance owner',
+    trigger: 'Public pages or sales material imply government-ready, certified, code-compliant, fire-rated, wind-rated, or engineered status without evidence.',
+    controls: ['Claim approval records', 'agent escalation rules', 'advisor review', 'document version control'],
+    next: 'Add claim approval workflow and evidence library.',
+  },
+  {
+    risk: 'Cash runway pressure',
+    category: 'Finance',
+    severity: 'High',
+    owner: 'Finance',
+    trigger: 'Operating reserve, receivables timing, inventory buys, debt service, or delayed sales reduce runway below threshold.',
+    controls: ['Monthly cash tracker', 'purchase approval', 'receivables aging', 'scenario model'],
+    next: 'Add runway and payback tracker to financial dashboard.',
+  },
+  {
+    risk: 'Weak proof assets',
+    category: 'Marketing / sales',
+    severity: 'Medium',
+    owner: 'Marketing / ops',
+    trigger: 'Site relies on stock photos and lacks real machine, coil, production, delivery, and project proof.',
+    controls: ['Photo shot list', 'proof asset tracker', 'replacement priority', 'route mapping'],
+    next: 'Add evidence library and proof tracker records.',
+  },
+  {
+    risk: 'Operational handoff failure',
+    category: 'Workflow',
+    severity: 'High',
+    owner: 'Sales / production',
+    trigger: 'Lead data, plan review, quote assumptions, order details, coil availability, or run sheets are retyped or lost between teams.',
+    controls: ['One-source data fields', 'state machines', 'event log', 'approval gates'],
+    next: 'Turn execution board tasks into D1-backed task records.',
+  },
+]
+const internalFinancialScorecards = [
+  {
+    group: 'Revenue Engine',
+    metrics: [
+      ['Monthly revenue', 'Total booked or collected sales by month', 'accounting + CRM', 'Plan vs actual'],
+      ['Sq ft sold', 'Panel volume sold by product family and state', 'quotes/orders', 'Target pacing'],
+      ['Blended selling price', 'Revenue divided by sold sq ft', 'quote/order line items', 'Pricing pressure'],
+      ['Quote conversion', 'Won quotes divided by sent quotes', 'quote pipeline', 'Sales quality'],
+      ['Speed to quote', 'Median time from complete intake to quote sent', 'lead/quote timestamps', 'Customer experience'],
+    ],
+  },
+  {
+    group: 'Margin Engine',
+    metrics: [
+      ['Material cost / sqft', 'Coil and material cost per sold/produced sq ft', 'inventory + purchasing', 'COGS accuracy'],
+      ['Variable cost / sqft', 'Material, labor, power, packaging, freight allocation', 'COGS model', 'Contribution margin'],
+      ['Contribution margin / sqft', 'Selling price less variable cost', 'financial model', 'Break-even driver'],
+      ['Gross margin %', 'Gross profit divided by revenue', 'accounting', 'Profitability'],
+      ['Scrap / waste rate', 'Wasted material divided by material consumed', 'production runs', 'Operational efficiency'],
+    ],
+  },
+  {
+    group: 'Cash / Scale',
+    metrics: [
+      ['Fixed cost coverage', 'Contribution margin divided by monthly fixed cost', 'financial model', 'Break-even health'],
+      ['Cash runway', 'Cash divided by monthly net burn', 'bank/accounting', 'Survival window'],
+      ['Inventory turns', 'Material consumed vs inventory held', 'coil lots', 'Cash tied in coil'],
+      ['Receivables aging', 'Outstanding invoices by age', 'accounting', 'Cash collection'],
+      ['Payback progress', 'Cumulative profit vs initial investment baseline', 'private model', 'Investor/owner view'],
+    ],
+  },
+]
+const internalFinancialBuildSteps = [
+  ['Data entry first', 'Create manual monthly input for plan, actual, variance, owner note, and source evidence before integrating accounting.'],
+  ['Protect private baselines', 'Keep exact V2 targets in private financial worksheets or protected database records, not public bundles.'],
+  ['Connect quote pipeline', 'Pull sent/won/lost quote counts, value, product mix, speed to quote, and lost reasons.'],
+  ['Connect production', 'Track sq ft produced, coil consumed, scrap, labor allocation, machine downtime, and QA rework.'],
+  ['Connect accounting', 'Later import revenue, COGS, fixed costs, receivables, cash balance, and tax categories.'],
+]
+const internalExecutionBoard = [
+  {
+    lane: 'Protect the Deal',
+    tasks: [
+      ['Draft equity/IP agreement checklist', 'Founder / legal', 'Open', 'Domains, software, data, brand, equity, buyout, acquisition path'],
+      ['Create NDA-safe publishing rule set', 'Owner admin', 'In progress', 'Prevent private plan language from entering APF/ASP'],
+      ['Build advisor question list', 'Founder', 'Open', 'Legal, CPA, insurance, gov-contracting, equipment vendor, code/engineering'],
+    ],
+  },
+  {
+    lane: 'Validate Revenue',
+    tasks: [
+      ['Interview contractor buyers', 'Sales', 'Open', 'Panel type, quote speed, price sensitivity, delivery expectations, repeat orders'],
+      ['Complete product packets', 'Marketing / estimating', 'Open', 'PBR/R-panel, AG/Tuff Rib, Industrial Rib, trim/flashing, finishes'],
+      ['Set quote conversion targets', 'Sales / finance', 'Open', 'Track sent, won, lost, lost reason, and speed to quote'],
+    ],
+  },
+  {
+    lane: 'Operational Readiness',
+    tasks: [
+      ['Build facility readiness checklist', 'Operations', 'Open', 'Coil storage, production flow, staging, office, loading, safety'],
+      ['Build equipment comparison tracker', 'Operations', 'Open', 'Vendor, profile support, lead time, maintenance, training, acceptance'],
+      ['Draft production SOPs', 'Operations', 'Open', 'Run sheet, QA, labels, bundles, pickup/delivery, maintenance'],
+    ],
+  },
+  {
+    lane: 'Financial Control',
+    tasks: [
+      ['Build private financial worksheet', 'Finance', 'Open', 'Plan target, actual, variance, assumptions, source evidence'],
+      ['Define COGS categories', 'Finance / estimating', 'Open', 'Coil, labor, power, packaging, freight, scrap, rush costs'],
+      ['Create margin approval gate', 'Estimator / owner', 'Open', 'No unusual quote leaves without margin review'],
+    ],
+  },
+  {
+    lane: 'Gov / Compliance',
+    tasks: [
+      ['Decide UEI/SAM path', 'Compliance owner', 'Open', 'Registration decision after legal entity and banking are clear'],
+      ['Create NAICS/PSC shortlist', 'Compliance owner', 'Open', 'Manufacturing, panels, distribution, related bid categories'],
+      ['Build claim approval library', 'Compliance owner', 'Open', 'Performance, code, fire, wind, warranty, government language'],
+    ],
+  },
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1562,6 +1720,18 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'internal-gov-compliance') {
     return <InternalGovCompliancePage />
+  }
+
+  if (path === 'internal-risk-register') {
+    return <InternalRiskRegisterPage />
+  }
+
+  if (path === 'internal-financial-model') {
+    return <InternalFinancialModelPage />
+  }
+
+  if (path === 'internal-execution-board') {
+    return <InternalExecutionBoardPage />
   }
 
   if (path === 'internal-data-model') {
@@ -2387,6 +2557,17 @@ function InternalControlPanelPage() {
             </article>
           ))}
         </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a className="btn-primary" href="/internal-execution-board">
+            Open Execution Board <ArrowRight size={18} />
+          </a>
+          <a className="btn-secondary" href="/internal-risk-register">
+            <ShieldCheck size={18} /> Risk Register
+          </a>
+          <a className="btn-secondary" href="/internal-financial-model">
+            <FileText size={18} /> Financial Model
+          </a>
+        </div>
       </InternalOntologySection>
 
       <InternalOntologySection
@@ -2422,6 +2603,17 @@ function InternalControlPanelPage() {
               </a>
             </article>
           ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a className="btn-primary" href="/internal-execution-board">
+            Open Execution Board <ArrowRight size={18} />
+          </a>
+          <a className="btn-secondary" href="/internal-financial-model">
+            <FileText size={18} /> Open Financial Model
+          </a>
+          <a className="btn-secondary" href="/internal-risk-register">
+            <ShieldCheck size={18} /> Open Risk Register
+          </a>
         </div>
       </InternalOntologySection>
 
@@ -2869,6 +3061,245 @@ function InternalGovCompliancePage() {
               <p className="eyebrow text-[#f97316]">Agent Boundary</p>
               <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{agent}</h2>
               <p className="mt-3 leading-7 text-slate-600">{rule}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalRiskRegisterPage() {
+  const severityCounts = ['Critical', 'High', 'Medium'].map((severity) => [
+    severity,
+    String(internalRiskRegister.filter((risk) => risk.severity === severity).length),
+  ])
+
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Risk Register • 8190 Only"
+        title="Risk Register & Mitigation Control"
+        copy="A private register for the issues that can hurt the business: NDA leakage, partnership ambiguity, equipment delays, margin pressure, compliance overclaims, cash runway, weak proof, and operational handoff failures."
+        stats={[
+          [`${internalRiskRegister.length}`, 'tracked risks'],
+          [severityCounts[0][1], 'critical'],
+          [severityCounts[1][1], 'high'],
+          ['Review', 'weekly'],
+        ]}
+      />
+      <InternalOntologySection
+        eyebrow="Risk Operating Rule"
+        title="Every risk needs an owner, trigger, control, and next action."
+        copy="The goal is not anxiety. The goal is early detection and crisp mitigation before a risk becomes a business problem."
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            ['/internal-business-plan', 'Business Plan', 'Tie risks to plan gaps and milestones.'],
+            ['/internal-financial-model', 'Financials', 'Quantify cash, margin, and runway exposure.'],
+            ['/internal-execution-board', 'Execution', 'Turn mitigation into tasks with owners.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Related Control</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Register"
+        title="Current major risks."
+        copy="These are starter records. Later each should become a database object with probability, impact, due date, evidence, status, and review history."
+      >
+        <div className="grid gap-5">
+          {internalRiskRegister.map((risk) => (
+            <article key={risk.risk} className="card">
+              <div className="grid gap-6 lg:grid-cols-[0.2fr_0.18fr_0.27fr_0.22fr_0.13fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">{risk.category}</p>
+                  <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{risk.risk}</h2>
+                  <p className="mt-3 font-black text-slate-600">Owner: {risk.owner}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">Severity</p>
+                  <p className="mt-2 rounded border border-orange-200 bg-orange-50 px-3 py-2 text-xl font-black text-[#0b1f33]">{risk.severity}</p>
+                </div>
+                <p className="leading-7 text-slate-600">{risk.trigger}</p>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Controls</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {risk.controls.map((control) => (
+                      <li key={control} className="flex gap-2 leading-7 text-slate-700">
+                        <ShieldCheck className="mt-1 shrink-0 text-[#f97316]" size={16} />
+                        {control}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Next</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{risk.next}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalFinancialModelPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Financial Model • 8190 Only"
+        title="Plan-vs-Actual Financial Scoreboard"
+        copy="A private execution layer for revenue, volume, blended pricing, COGS, contribution margin, gross margin, fixed-cost coverage, cash runway, payback progress, and quote conversion."
+        stats={[
+          [`${internalFinancialScorecards.length}`, 'metric groups'],
+          [`${internalFinancialScorecards.flatMap((group) => group.metrics).length}`, 'metrics'],
+          ['Private', 'baseline targets'],
+          ['Monthly', 'review cadence'],
+        ]}
+      />
+      <InternalOntologySection
+        eyebrow="Confidential Finance Boundary"
+        title="Targets belong in protected records, not public bundles."
+        copy="The exact V2 financial baseline should live in a private worksheet or protected database later. The UI can describe metrics and formulas without exposing confidential plan numbers."
+      >
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            ['Plan', 'Private target by month'],
+            ['Actual', 'Accounting or manual entry'],
+            ['Variance', 'Actual minus plan'],
+            ['Evidence', 'Source file, bank, quote, order, or ledger'],
+          ].map(([label, copy]) => (
+            <article key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
+              <p className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">{label}</p>
+              <p className="mt-2 text-2xl font-black text-[#0b1f33]">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Scorecards"
+        title="Metrics that make the plan executable."
+        copy="These metrics should become monthly rows with owner notes, evidence, variance explanation, and next action."
+      >
+        <div className="grid gap-5">
+          {internalFinancialScorecards.map((group) => (
+            <article key={group.group} className="card">
+              <p className="eyebrow text-[#f97316]">Metric Group</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{group.group}</h2>
+              <div className="mt-6 overflow-hidden rounded border border-slate-200">
+                <table className="product-proof-table">
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th>Definition</th>
+                      <th>Source</th>
+                      <th>Decision</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {group.metrics.map(([metric, definition, source, decision]) => (
+                      <tr key={metric}>
+                        <th>{metric}</th>
+                        <td>{definition}</td>
+                        <td>{source}</td>
+                        <td>{decision}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Build Plan"
+        title="How to make the financial dashboard real."
+        copy="Start manual, then wire CRM, production, inventory, and accounting once the field model is stable."
+      >
+        <div className="grid gap-4">
+          {internalFinancialBuildSteps.map(([title, detail], index) => (
+            <article key={title} className="grid gap-4 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.12fr_0.28fr_0.6fr] md:items-center">
+              <p className="text-2xl font-black text-[#f97316]">{index + 1}</p>
+              <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalExecutionBoardPage() {
+  const taskCount = internalExecutionBoard.reduce((sum, lane) => sum + lane.tasks.length, 0)
+
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Execution Board • 8190 Only"
+        title="Plan Gaps Turned Into Owner Tasks"
+        copy="A private execution board for the work that makes the plan real: protect the deal, validate revenue, prepare operations, control finances, and build gov/compliance readiness."
+        stats={[
+          [`${internalExecutionBoard.length}`, 'lanes'],
+          [`${taskCount}`, 'starter tasks'],
+          ['Owner', 'required'],
+          ['Evidence', 'required later'],
+        ]}
+      />
+      <InternalOntologySection
+        eyebrow="Execution Rule"
+        title="If it is important, it needs an owner and evidence."
+        copy="This board should eventually become a live task system with due dates, blockers, status history, linked evidence, and plan impact."
+      >
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            ['/internal-risk-register', 'Risk Register', 'Mitigation tasks start here.'],
+            ['/internal-financial-model', 'Financials', 'Revenue and margin tasks start here.'],
+            ['/internal-gov-compliance', 'Gov / Compliance', 'Readiness tasks start here.'],
+            ['/internal-control-panel', 'Control Panel', 'Live queues will land here.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Related Board</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+      <InternalOntologySection
+        eyebrow="Task Lanes"
+        title="Current execution board scaffold."
+        copy="The first real implementation should add owner, due date, status, priority, risk link, evidence link, and last review date to each task."
+      >
+        <div className="grid gap-5">
+          {internalExecutionBoard.map((lane) => (
+            <article key={lane.lane} className="card">
+              <p className="eyebrow text-[#f97316]">Lane</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{lane.lane}</h2>
+              <div className="mt-6 grid gap-4">
+                {lane.tasks.map(([task, owner, status, evidence]) => (
+                  <div key={task} className="grid gap-3 rounded border border-slate-200 bg-slate-50 p-4 lg:grid-cols-[0.32fr_0.18fr_0.14fr_0.36fr] lg:items-center">
+                    <h3 className="text-lg font-black text-[#0b1f33]">{task}</h3>
+                    <p className="font-semibold text-slate-700">{owner}</p>
+                    <p className="rounded border border-slate-200 bg-white px-3 py-2 text-sm font-black text-slate-700">{status}</p>
+                    <p className="leading-7 text-slate-600">{evidence}</p>
+                  </div>
+                ))}
+              </div>
             </article>
           ))}
         </div>
