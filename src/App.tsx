@@ -930,6 +930,12 @@ const implementationMvpBacklog = [
   ['MVP 6', 'Agent layer: intake normalization, plan review summary, estimating assistant, sales follow-up drafts.'],
   ['MVP 7', 'Dealer/contractor portal with saved projects, quote history, uploads, approvals, and order status.'],
 ]
+const implementationArtifacts = [
+  ['internal/schema.sql', 'D1/SQLite database schema draft with tables, constraints, indexes, and lifecycle fields.'],
+  ['internal/workflows-and-events.md', 'State machines, event names, automation rules, and escalation gates.'],
+  ['internal/agent-contracts.md', 'AI agent roles, inputs, tools, outputs, and escalation contracts.'],
+  ['internal/mvp-build-plan.md', 'Practical build sequence from lead intake to contractor/dealer portal.'],
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1660,6 +1666,21 @@ function InternalImplementationPage() {
           </div>
         </div>
       </section>
+
+      <InternalOntologySection
+        eyebrow="Build Artifacts"
+        title="Generated internal files for implementation."
+        copy="These repo files are the next handoff point for database migrations, workflow tickets, and agent implementation."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {implementationArtifacts.map(([path, description]) => (
+            <article key={path} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <h2 className="font-mono text-lg font-black text-[#0b1f33]">{path}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{description}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
 
       <InternalOntologySection
         eyebrow="Database Schema"
