@@ -456,11 +456,11 @@ const guidePages = [
       ['Where It Fits', 'Ribbed exposed-fastener panels often fit warehouses, shops, agricultural buildings, equipment shelters, industrial buildings, commercial re-skins, and economical roof or wall scopes.'],
       ['What to Confirm', 'Confirm profile drawing, fastener path, roof or wall use, gauge, substrate, finish, trim, closures, penetrations, and maintenance expectations before ordering.'],
       ['Buyer Tradeoffs', 'Visible fasteners can support practical budgets and fast installation, but owners should understand maintenance, sealant, fastener, and inspection expectations.'],
-      ['Quote Connection', 'American Super Panel is the focused product path for exposed-fastener roofing and siding panel quotes manufactured by Americas Panel Fab.'],
+      ['Quote Connection', 'American Super Panel gives contractors a direct way to request exposed-fastener roofing and siding panel quotes from the product brand manufactured by Americas Panel Fab.'],
     ],
     takeaways: ['Exposed-fastener panels are practical and quote-friendly.', 'Fasteners and closures should be part of the package.', 'Use product-specific pages when ready to quote.'],
-    cta: 'View American Super Panel',
-    ctaHref: 'https://www.americansuperpanel.com/',
+    cta: 'View American Super Panel™',
+    ctaHref: 'https://www.americansuperpanel.com',
   },
   {
     slug: 'metal-wall-panels-guide',
@@ -724,7 +724,7 @@ const guideEnhancements: Record<string, {
       'Coil planning matters because material availability affects schedule, finish options, substitutions, and purchasing confidence. The same panel profile may be available in different gauges, substrates, and paint systems. A commercial buyer comparing quotes should not only ask for price. They should ask what coil, finish, gauge, profile, trim, and delivery assumptions were included. Otherwise two quotes may look comparable while describing different packages.',
       'Roll forming is the central production step, but it depends on everything upstream and downstream. Tooling must match the profile. Lengths must match the takeoff. Cutoff and bundling should match the field sequence when possible. Labels should make sense to the receiving crew. Trim and flashing should be coordinated with the panel package so crews are not forced to solve missing details on site.',
       'Documentation is where manufacturing credibility becomes visible to commercial buyers. Product data, finish information, substrate notes, quote assumptions, exclusions, trim schedules, color samples, and warranty-path conversations help project teams understand what is being supplied. This is especially important for commercial, industrial, education, multifamily, and public-facing projects where decisions may involve owners, contractors, architects, procurement teams, and installers.',
-      'Americas Panel Fab should use this page as the root of its authority system. Product-ready buyers can move to American Super Panel for exposed-fastener roofing and siding panels, but the Fab site should explain the wider manufacturing discipline: how materials move, how packages are organized, how buyers prepare better requests, and how factory thinking supports long-term growth across panel families, trim, accessories, partners, and future product lines.',
+      'Americas Panel Fab should use this page as the root of its manufacturing education library. Product-ready buyers can move to American Super Panel for exposed-fastener roofing and siding panels, while Americas Panel Fab explains the wider manufacturing discipline: how materials move, how packages are organized, how buyers prepare better requests, and how factory thinking supports long-term growth across panel families, trim, accessories, partners, and future product lines.',
     ],
     diagram: ['Project information and drawings', 'Profile, gauge, substrate, and finish review', 'Panel, trim, flashing, and accessory scope', 'Production run, bundling, labels, and documentation', 'Delivery planning and field-ready handoff'],
     comparison: [
@@ -738,7 +738,7 @@ const guideEnhancements: Record<string, {
     faq: [
       ['What makes metal panel manufacturing different from simple metal supply?', 'Manufacturing connects material, profile, finish, lengths, trim, documentation, packaging, and delivery into a project-ready package instead of only selling loose material.'],
       ['What should a contractor send before requesting a metal panel quote?', 'Send drawings, roof or wall scope, approximate square footage, profile preference, finish or color needs, trim conditions, project state, delivery needs, and schedule target.'],
-      ['Why does Americas Panel Fab publish manufacturing education if American Super Panel sells panels?', 'Americas Panel Fab provides the company and manufacturing context. American Super Panel is the product-focused path for exposed-fastener panel quotes.'],
+      ['Why does Americas Panel Fab publish manufacturing education if American Super Panel sells panels?', 'Americas Panel Fab provides the company and manufacturing context. American Super Panel gives contractors and buyers a direct product path for exposed-fastener panel quotes.'],
       ['Can manufacturing content replace project-specific engineering or code review?', 'No. Public education helps buyers prepare better questions. Project-specific code, engineering, wind, fire, and warranty requirements need qualified review and manufacturer documentation.'],
     ],
     fieldNote: 'The manufacturer that wins trust usually explains the process before the buyer has to ask. Content should make the buyer feel the company understands drawings, material, fabrication, documentation, and delivery as one system.',
@@ -808,7 +808,7 @@ const guideEnhancements: Record<string, {
   },
   'architectural-metal-fabrication-guide': {
     paragraphs: [
-      'Architectural metal fabrication is where a panel package becomes a finished building detail. Panels cover broad areas, but fabrication handles the edges, corners, openings, transitions, fascia, soffit, cap conditions, and custom closeout pieces that decide whether the finished work looks intentional. This is why fabrication belongs at the center of the Americas Panel Fab authority story.',
+      'Architectural metal fabrication is where a panel package becomes a finished building detail. Panels cover broad areas, but fabrication handles the edges, corners, openings, transitions, fascia, soffit, cap conditions, and custom closeout pieces that decide whether the finished work looks intentional. This is why fabrication belongs at the center of Americas Panel Fab manufacturing credibility.',
       'A buyer may begin with a roof or siding panel request, but the building rarely ends at the panel. Doors, windows, parapets, corners, roof edges, slope changes, penetrations, equipment curbs, base conditions, and material transitions all need attention. Each condition can require a formed part, a trim piece, a flashing approach, a closure, a fastener path, or a detail conversation.',
       'The strongest fabrication process begins with information. Drawings, elevations, sketches, photos, dimensions, existing-condition notes, finish schedules, and color preferences help a fabricator understand what the project actually needs. Without that information, a quote can still proceed, but the assumptions should be clear and the buyer should expect follow-up questions.',
       'Fabrication is also where visible quality shows up. A perfectly acceptable roof panel can still feel like a weak project if the fascia, corners, jambs, caps, or transitions look mismatched. Finish coordination matters because panel, trim, flashing, soffit, and accessory colors may be viewed together. If the trim finish is not reviewed early, the final building can feel patched together.',
@@ -1037,7 +1037,7 @@ const guideEnhancements: Record<string, {
     faq: [
       ['What should a commercial buyer send first?', 'Send drawings, building use, roof/wall scope, desired panel type, finish needs, trim requirements, project state, and schedule target.'],
       ['Should commercial buyers choose panel type before quoting?', 'A preference helps, but a manufacturer or product team may still review the project for profile, finish, trim, and documentation fit.'],
-      ['Why does Americas Panel Fab link to American Super Panel?', 'Americas Panel Fab provides company and manufacturing context. American Super Panel is the product-focused path for exposed-fastener roofing, siding, trim, and quote requests.'],
+      ['Why does Americas Panel Fab link to American Super Panel?', 'Americas Panel Fab provides company and manufacturing context. American Super Panel gives buyers a direct path for exposed-fastener roofing, siding, trim, and quote requests.'],
     ],
     fieldNote: 'Commercial metal roofing buyers usually need both education and action. Americas Panel Fab should answer the research question; American Super Panel should handle product-ready quote intent.',
     reviewer: 'Reviewed for commercial buyer education. Contract, code, warranty, fire, wind, and engineering requirements should be reviewed through project-specific documentation and qualified advisors.',
@@ -1289,7 +1289,7 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
     'super-panel': {
       canonicalPath: '/super-panel',
       description:
-        'American Super Panel is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.',
+        'American Super Panel™ is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.',
       title: 'American Super Panel Flagship Product | Americas Panel Fab',
     },
     about: {
@@ -1562,17 +1562,17 @@ function PlatformHome() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
         <div className="section relative">
           <div className="max-w-4xl">
-            <p className="eyebrow text-[#f97316]">Company • Factory • Manufacturing Platform</p>
+            <p className="eyebrow text-[#f97316]">Company • Factory • Manufacturing</p>
             <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
               Americas Panel Fab
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
               Americas Panel Fab is building a modern American metal panel manufacturing
-              manufacturing company for commercial, agricultural, residential, government, and industrial
+              company for commercial, agricultural, residential, government, and industrial
               customers.
             </p>
             <p className="mt-6 rounded border border-slate-200 bg-white p-4 text-base font-bold leading-7 text-[#0b1f33] shadow-sm">
-              American Super Panel is the flagship exposed-fastener roofing and siding panel
+              American Super Panel™ is the flagship exposed-fastener roofing and siding panel
               system manufactured by Americas Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -1580,7 +1580,7 @@ function PlatformHome() {
                 Explore Industry Guides <ArrowRight size={18} />
               </a>
               <a className="btn-secondary" href="#manufacturing">
-                View Platform Strategy
+                View Manufacturing Capabilities
               </a>
               <a className="btn-secondary" href="#contact">
                 Partner / Investor Inquiry
@@ -1594,7 +1594,7 @@ function PlatformHome() {
         <SectionIntro
           eyebrow="Platform Role"
           title="Manufacturing capability, product support, industry education, and commercial credibility."
-          copy="Americas Panel Fab is the company and manufacturer behind American Super Panel. The site also publishes practical industry content, supplier and installer resources, panel comparisons, and commercial manufacturing guidance."
+          copy="Americas Panel Fab is the company and manufacturer behind American Super Panel™. The company website also publishes practical industry content, supplier and installer resources, panel comparisons, and commercial manufacturing guidance."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {platformPillars.map(([title, Icon, copy]) => (
@@ -1613,7 +1613,7 @@ function PlatformHome() {
             <SectionIntro
               eyebrow="Dual-Brand Architecture"
               title="Keep the company brand broad and the product brand focused."
-              copy="American Super Panel focuses on contractor-ready roofing and siding panels. Americas Panel Fab carries the company, factory, commercial, partner, and manufacturing credibility behind the product brand."
+              copy="American Super Panel™ focuses on contractor-ready roofing and siding panels. Americas Panel Fab carries the company, factory, commercial, partner, and manufacturing credibility behind the product brand."
             />
             <p className="mt-6 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
               Disclosure: Americas Panel Fab publishes educational and industry content.
@@ -1623,7 +1623,7 @@ function PlatformHome() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              ['American Super Panel', 'Flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.'],
+              ['American Super Panel™', 'Flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab.'],
               ['Americas Panel Fab', 'Manufacturing company focused on fabrication, roll forming, product brands, partner relationships, and commercial readiness.'],
               ['Partner Referrals', 'Educational pages can reference affiliated or partner providers when the fit is clear and disclosed.'],
               ['Company Growth', 'The company structure can support additional product families, regional partners, documentation standards, and manufacturing workflow tools.'],
@@ -1664,7 +1664,7 @@ function PlatformHome() {
             <SectionIntro
               eyebrow="Partners"
               title="A manufacturing company that can support products, partners, and regional growth."
-              copy="American Super Panel stays product-focused while Americas Panel Fab carries the company story, manufacturing standards, partner relationships, and industry resources."
+              copy="American Super Panel™ stays product-focused while Americas Panel Fab carries the company story, manufacturing standards, partner relationships, and industry resources."
             />
             <div className="mt-8 grid gap-3">
               {platformStructure.map((item) => (
@@ -2074,7 +2074,7 @@ const authorityPages = {
     ],
     sections: [
       ['Manufacturing Foundation', 'Americas Panel Fab explains production thinking, material flow, documentation, quality conversations, and contractor support in clear public language.'],
-      ['Product Brand Relationship', 'American Super Panel is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab. The two names work together: one company, one focused product family.'],
+      ['Product Brand Relationship', 'American Super Panel™ is the flagship exposed-fastener roofing and siding panel system manufactured by Americas Panel Fab. The two names work together: one manufacturer, one focused product family.'],
       ['Growth Path', 'The company can support additional product lines, factory partners, dealer programs, trim and accessories, standing seam systems, and workflow tools over time.'],
     ],
   },
@@ -2145,7 +2145,7 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
             <SectionIntro
               eyebrow={page.eyebrow}
               title="Company-level credibility from the manufacturer."
-              copy="These pages explain how Americas Panel Fab supports panel programs, fabrication details, documentation, and product brands while American Super Panel remains the focused roofing and siding panel family."
+              copy="Learn how Americas Panel Fab supports panel programs, fabrication details, documentation, and product-brand growth while American Super Panel serves contractors and buyers looking for a clear roofing and siding panel system."
             />
             <div className="mt-8 grid gap-3">
               {page.points.map((point) => (
@@ -2172,13 +2172,13 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
       <section className="section bg-white">
         <div className="rounded border border-slate-200 bg-[#0b1f33] p-8 text-white">
           <p className="eyebrow text-orange-200">Flagship Product Relationship</p>
-          <h2 className="mt-3 text-3xl font-black">American Super Panel is manufactured by Americas Panel Fab.</h2>
+          <h2 className="mt-3 text-3xl font-black">American Super Panel™ is manufactured by Americas Panel Fab.</h2>
           <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-200">
             Contractors and dealers looking for exposed-fastener roofing and siding panels can use the American Super Panel product site. Partners, suppliers, and industry collaborators can use Americas Panel Fab for company-level conversations.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a className="btn-primary" href="https://www.americansuperpanel.com/">
-              View American Super Panel <ArrowRight size={18} />
+            <a className="btn-primary" href="https://www.americansuperpanel.com">
+              View American Super Panel™ <ArrowRight size={18} />
             </a>
             <a className="btn-secondary bg-white text-[#0b1f33]" href="#contact">
               Partner Inquiry
@@ -2200,9 +2200,9 @@ function GuidesPage() {
       />
       <section className="section bg-white">
         <SectionIntro
-          eyebrow="Topical Authority Map"
-          title="A growing metal panel knowledge base organized by buyer decision."
-          copy="Fab authority needs clusters, not random articles. These groups connect manufacturing education, product comparisons, materials, finishes, trim, submittals, and quote readiness."
+          eyebrow="Guide Paths"
+          title="Metal panel resources organized by real project decisions."
+          copy="Start with the question you are trying to answer: manufacturing process, panel profile selection, material and finish choices, trim details, or quote preparation."
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {topicalClusters.map((cluster) => (
@@ -2227,8 +2227,8 @@ function GuidesPage() {
       <section className="section bg-slate-50">
         <SectionIntro
           eyebrow="Guide Library"
-          title={`${guidePages.length} public guides and growing.`}
-          copy="Each guide answers a real buyer, contractor, supplier, or project-planning question and connects back into the broader Americas Panel Fab resource library."
+          title={`${guidePages.length} metal panel guides for buyers, contractors, and partners.`}
+          copy="Each guide answers a practical project-planning question and connects back into related Americas Panel Fab manufacturing guides and company resources."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {guidePages.map((guide) => (
@@ -3050,9 +3050,19 @@ function Contact() {
               <MapPin size={20} /> California, Arizona, Texas, and Florida industry coverage
             </p>
           </div>
-          <div className="mt-8 h-64 rounded border border-slate-200 bg-white p-4">
-            <div className="flex h-full items-center justify-center rounded bg-slate-100 text-center font-bold text-slate-500">
-              Americas Panel Fab Industry Map
+          <div className="mt-8 rounded border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="eyebrow text-[#f97316]">Coverage & Relationships</p>
+            <h3 className="mt-3 text-2xl font-black text-[#0b1f33]">Built for multi-state manufacturing conversations.</h3>
+            <p className="mt-3 leading-7 text-slate-600">
+              Americas Panel Fab supports company-level conversations for manufacturing partners, suppliers,
+              installers, dealers, and product-brand growth across priority expansion states.
+            </p>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {['California', 'Arizona', 'Texas', 'Florida'].map((state) => (
+                <a key={state} href={`/${state.toLowerCase()}-metal-panels`} className="rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33] hover:border-[#f97316] hover:text-[#f97316]">
+                  {state} metal panel resources
+                </a>
+              ))}
             </div>
           </div>
         </div>
