@@ -1,6 +1,6 @@
 # Americas Panel Fab Website
 
-Commercial website and lead-generation platform for Americas Panel Fab and the American Super Panel™ product line.
+Commercial website and lead generation system for Americas Panel Fab and the American Super Panel™ product line.
 
 ## Port Registry
 
