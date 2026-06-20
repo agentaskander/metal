@@ -36,6 +36,7 @@ const navItems = [
   ['Build Model', '/internal-implementation'],
   ['Control Panel', '/internal-control-panel'],
   ['Business Plan', '/internal-business-plan'],
+  ['Gov / Compliance', '/internal-gov-compliance'],
 ]
 
 const products = [
@@ -1203,6 +1204,113 @@ const internalBusinessPlanMilestones = [
   ['Phase 4', 'Production launch', 'Coil inventory, machine setup, run sheets, labels, bundles, loading workflow, QA signoff, delivery/pickup process.'],
   ['Phase 5', 'Scale channels', 'Dealer/contractor portal, service-area expansion, project gallery, APF authority content, partner/investor materials.'],
 ]
+const internalGovComplianceSources = [
+  ['SAM.gov Entity Registration', 'Entity registration or Unique Entity ID path for federal awards and entity records.', 'https://sam.gov/entity-registration'],
+  ['SAM.gov Entity Information', 'Federal entity registration, renewal, status, and APEX Accelerator assistance resources.', 'https://sam.gov/entity-information'],
+  ['Census NAICS Guidance', 'Official explanation that NAICS is the federal statistical classification system for business establishments.', 'https://www.census.gov/programs-surveys/economic-census/year/2022/guidance/understanding-naics.html'],
+  ['OSHA Machine Guarding', 'Official OSHA standards landing page for machine guarding hazards across industries.', 'https://www.osha.gov/machine-guarding/standards'],
+  ['ICC / IBC Metal Roof Panels', 'International Building Code roofing provisions include metal roof panel requirements that must be checked by edition/jurisdiction.', 'https://codes.iccsafe.org/'],
+]
+const internalGovReadinessTracks = [
+  {
+    track: 'Federal Vendor Foundation',
+    objective: 'Determine whether the business should only obtain a UEI, complete SAM.gov entity registration, or postpone federal registration until the contracting entity is final.',
+    tasks: ['Confirm legal contracting entity', 'Confirm bank/tax identity', 'Gather ownership and reps/certs data', 'Decide UEI-only vs full registration', 'Document renewal owner and annual review date'],
+    evidence: ['Entity name', 'EIN/W-9', 'UEI/SAM status', 'vendor packet', 'registration screenshots'],
+    gate: 'No public federal contractor language until registration status and eligibility are verified.',
+  },
+  {
+    track: 'NAICS / Product Classification',
+    objective: 'Create an internal code map for manufacturing, sheet metal products, roofing/siding panels, distribution, and installation-adjacent activities.',
+    tasks: ['Research candidate NAICS codes', 'Separate manufacturing from retail/distribution/service work', 'Review state and local vendor categories', 'Create PSC/product-service code shortlist', 'Confirm with accountant/advisor before bids'],
+    evidence: ['NAICS shortlist', 'reasoning notes', 'advisor review', 'vendor portal mappings'],
+    gate: 'Do not put NAICS codes on public pages until the entity, products, and registration strategy are reviewed.',
+  },
+  {
+    track: 'Bid / No-Bid Process',
+    objective: 'Prevent unqualified or risky public-sector bids by creating a repeatable decision workflow.',
+    tasks: ['Capture opportunity source', 'Check buyer type', 'Check scope fit', 'Check bond/insurance requirements', 'Check compliance terms', 'Estimate margin and cash timing', 'Assign bid owner'],
+    evidence: ['opportunity record', 'bid checklist', 'risk score', 'go/no-go decision', 'owner approval'],
+    gate: 'No bid submission without owner approval, margin review, and contract-document review.',
+  },
+  {
+    track: 'Commercial Documentation',
+    objective: 'Build the documentation stack that schools, municipalities, warehouses, developers, and contractors expect before large orders.',
+    tasks: ['Create product data sheets', 'Create finish/color submittals', 'Create warranty-language draft', 'Create exclusions/assumptions template', 'Create insurance/vendor packet', 'Create revision control'],
+    evidence: ['product packet', 'submittal template', 'revision date', 'approved claim library'],
+    gate: 'Do not issue product/performance documents without approved language and version tracking.',
+  },
+  {
+    track: 'Contract & Legal Review',
+    objective: 'Define which terms require legal or owner review before acceptance.',
+    tasks: ['Flag indemnity language', 'Flag liquidated damages', 'Flag pay-if-paid terms', 'Flag warranty obligations', 'Flag schedule penalties', 'Flag public-works compliance'],
+    evidence: ['contract review checklist', 'redline notes', 'approval log', 'signed contract repository'],
+    gate: 'No signature on unusual terms without review by the designated owner/advisor.',
+  },
+]
+const internalCodeComplianceDomains = [
+  {
+    domain: 'Building Code / Roof Assemblies',
+    scope: 'Metal roof panel requirements vary by code edition, jurisdiction, slope, substrate, fastening, underlayment, corrosion resistance, wind, fire, and manufacturer instructions.',
+    actions: ['Track code edition by project location', 'Capture roof slope and assembly type', 'Require approved installation instructions', 'Escalate wind/fire/structural claims', 'Store submittal package by quote/order'],
+    owner: 'Estimator + code reviewer',
+  },
+  {
+    domain: 'Fire / Wildfire / California Sensitivity',
+    scope: 'California and other jurisdictions may require additional roof covering, fire rating, WUI, underlayment, assembly, or local requirements.',
+    actions: ['Do not claim FireSafe performance without documentation', 'Collect jurisdiction requirements', 'Map product documentation to assembly', 'Escalate to qualified code professional'],
+    owner: 'Estimator + compliance reviewer',
+  },
+  {
+    domain: 'Wind / Coastal / Florida Sensitivity',
+    scope: 'Coastal and high-wind projects can require specific fastening, uplift, product approvals, engineering, and local acceptance.',
+    actions: ['Flag Florida/coastal project states', 'Capture design wind requirement if provided', 'Block unverified wind-resistance claims', 'Store product approval or engineer review when applicable'],
+    owner: 'Estimator + engineer/advisor',
+  },
+  {
+    domain: 'OSHA / Machine Safety',
+    scope: 'Roll forming, coil handling, shearing, folding, loading, forklifts, and maintenance introduce machine guarding, lockout/tagout, PPE, training, and incident-record obligations.',
+    actions: ['Create machine-specific safety SOPs', 'Document guarding review', 'Create LOTO checklist', 'Train operators', 'Track incidents and corrective actions'],
+    owner: 'Operations manager',
+  },
+  {
+    domain: 'Environmental / Waste / Materials',
+    scope: 'Coil storage, scrap metal, oils/lubricants, coatings, packaging, stormwater, and waste handling may create local/state requirements.',
+    actions: ['Identify local facility requirements', 'Track scrap metal process', 'Document hazardous materials if any', 'Assign waste vendor and records owner'],
+    owner: 'Operations + facility owner',
+  },
+  {
+    domain: 'Insurance / Risk Transfer',
+    scope: 'Large commercial buyers often need certificates of insurance, additional insured language, waiver/subrogation review, auto coverage, workers comp, product liability, and possibly bonding.',
+    actions: ['Create insurance packet', 'Track COI requests', 'Review additional insured requirements', 'Track bonding needs by opportunity', 'Store expiration dates'],
+    owner: 'Admin / finance',
+  },
+]
+const internalComplianceDataObjects = [
+  ['ComplianceRequirement', 'id, domain, jurisdiction, source_url, source_date, requirement_summary, applies_to, status, owner, review_date'],
+  ['GovRegistration', 'entity_id, UEI, SAM_status, registration_type, renewal_date, owner, evidence_file_id, notes'],
+  ['CodeReview', 'project_id, code_edition, jurisdiction, roof_slope, assembly_type, flagged_topics, reviewer, outcome, evidence_files'],
+  ['BidOpportunity', 'buyer, source, due_date, scope, NAICS/PSC candidates, bond_required, insurance_required, bid_status, risk_score'],
+  ['DocumentPacket', 'packet_type, product_family, version, approved_by, public_safe, effective_date, replacement_date'],
+  ['SafetyProgram', 'machine_id, hazard_type, guard_status, LOTO_status, training_status, inspection_date, corrective_action'],
+  ['ClaimApproval', 'claim_text, claim_type, source_evidence, reviewer, allowed_routes, status, expiration_date'],
+  ['ComplianceTask', 'owner, due_date, domain, task_type, status, blocker, evidence_required, linked_project_or_bid'],
+]
+const internalComplianceExecutionPlan = [
+  ['Week 1', 'Create compliance source library', 'Add official links, jurisdiction notes, code topics, OSHA topics, and owner assignments.'],
+  ['Week 2', 'Build gov readiness tracker', 'Track entity, UEI/SAM decision, NAICS shortlist, vendor packet, insurance, and bid/no-bid checklist.'],
+  ['Week 3', 'Build product document control', 'Version product data, finish sheets, warranty/exclusion language, submittal templates, and claim approvals.'],
+  ['Week 4', 'Build safety and production compliance', 'Machine guarding review, LOTO checklist, PPE/training records, forklift/loading SOP, incident/corrective action process.'],
+  ['Week 5', 'Connect to control panel', 'Create compliance tasks, bid approvals, code-review gates, and agent escalation events.'],
+  ['Week 6', 'Review with advisors', 'Run the plan by insurance, accountant, legal, code/engineering, and government-contracting support before public claims.'],
+]
+const internalComplianceAgentRules = [
+  ['Gov Opportunity Agent', 'May summarize bid opportunities and extract deadlines, but cannot recommend submission without bid/no-bid review.'],
+  ['Code Review Agent', 'May flag code topics and missing data, but cannot issue code compliance determinations.'],
+  ['Submittal Agent', 'May assemble approved documents, but cannot create new performance claims.'],
+  ['Safety Agent', 'May generate checklist reminders, but cannot certify OSHA compliance.'],
+  ['Claim Scanner Agent', 'Must block or escalate words like certified, approved, rated, compliant, engineered, fire-safe, wind-rated, government-ready unless evidence exists.'],
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1450,6 +1558,10 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'internal-business-plan') {
     return <InternalBusinessPlanPage />
+  }
+
+  if (path === 'internal-gov-compliance') {
+    return <InternalGovCompliancePage />
   }
 
   if (path === 'internal-data-model') {
@@ -2552,6 +2664,9 @@ function InternalBusinessPlanPage() {
             </article>
           ))}
         </div>
+        <a className="btn-primary mt-8" href="/internal-gov-compliance">
+          Open Gov / Compliance Ontology <ArrowRight size={18} />
+        </a>
       </InternalOntologySection>
 
       <InternalOntologySection
@@ -2581,6 +2696,179 @@ function InternalBusinessPlanPage() {
               <p className="text-2xl font-black text-[#f97316]">{phase}</p>
               <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
               <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalGovCompliancePage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Gov / Codes / Compliance • 8190 Only"
+        title="Government Readiness, Code Controls & Compliance Ontology"
+        copy="A private operating model for the upside lane: public-sector readiness, commercial documentation, building-code guardrails, OSHA/safety programs, claim approvals, and compliance execution tracking."
+        stats={[
+          [`${internalGovReadinessTracks.length}`, 'gov readiness tracks'],
+          [`${internalCodeComplianceDomains.length}`, 'compliance domains'],
+          [`${internalComplianceDataObjects.length}`, 'data objects'],
+          ['Verify', 'before public claims'],
+        ]}
+      />
+
+      <InternalOntologySection
+        eyebrow="Important Boundary"
+        title="This is an internal readiness system, not legal or code advice."
+        copy="Use this page to organize questions, evidence, owners, and review gates. Final determinations should come from qualified legal, insurance, accounting, code, engineering, safety, or government-contracting advisors."
+      >
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            ['/internal-business-plan', 'Business Plan', 'Connect readiness to revenue, margins, public-sector upside, and execution milestones.'],
+            ['/internal-control-panel', 'Control Panel', 'Turn readiness tasks into queues, approvals, events, and owner follow-up.'],
+            ['/internal-data-model', 'Data Model', 'Add compliance records, bid opportunities, document packets, and claim approvals.'],
+            ['/internal-agents', 'Agents', 'Scope agents so they flag and escalate instead of making unsupported claims.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Related Model</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Source Library"
+        title="Official sources to track before making claims."
+        copy="These are starting anchors, not a complete legal library. Each requirement should be reviewed by jurisdiction, code edition, project scope, and advisor."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalGovComplianceSources.map(([name, detail, href]) => (
+            <a key={name} href={href} target="_blank" rel="noreferrer" className="card group block">
+              <p className="eyebrow text-[#f97316]">Official / Reference Source</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{name}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{detail}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Review source <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Government Readiness"
+        title="Public-sector capability should be earned, tracked, and verified."
+        copy="The upside is real, but the system needs entity readiness, registration decisions, document control, risk scoring, and contract review before strong claims."
+      >
+        <div className="grid gap-5">
+          {internalGovReadinessTracks.map((track) => (
+            <article key={track.track} className="card">
+              <div className="grid gap-6 lg:grid-cols-[0.22fr_0.28fr_0.32fr_0.18fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Track</p>
+                  <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{track.track}</h2>
+                </div>
+                <p className="text-lg leading-8 text-slate-600">{track.objective}</p>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Tasks</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {track.tasks.map((task) => (
+                      <li key={task} className="flex gap-2 leading-7 text-slate-700">
+                        <CheckCircle2 className="mt-1 shrink-0 text-[#f97316]" size={16} />
+                        {task}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Evidence</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {track.evidence.map((item) => (
+                      <span key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">{item}</span>
+                    ))}
+                  </div>
+                  <p className="mt-4 rounded border border-orange-200 bg-orange-50 p-3 text-sm font-bold leading-6 text-slate-800">{track.gate}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Codes & Compliance Domains"
+        title="What the system must flag before quoting or publishing claims."
+        copy="The goal is not to make the website the code expert. The goal is to prevent unsupported claims and route risky projects to review."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalCodeComplianceDomains.map((domain) => (
+            <article key={domain.domain} className="card">
+              <p className="eyebrow text-[#f97316]">Domain</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{domain.domain}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{domain.scope}</p>
+              <p className="mt-4 font-black text-[#0b1f33]">Owner: {domain.owner}</p>
+              <ul className="mt-5 grid gap-3">
+                {domain.actions.map((action) => (
+                  <li key={action} className="flex gap-3 leading-7 text-slate-700">
+                    <ShieldCheck className="mt-1 shrink-0 text-[#f97316]" size={18} />
+                    {action}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Data Model Additions"
+        title="Records needed for a real compliance operating system."
+        copy="These objects should eventually become tables, forms, dashboards, events, permissions, and agent inputs."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalComplianceDataObjects.map(([object, fields]) => (
+            <article key={object} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <h2 className="font-mono text-lg font-black text-[#0b1f33]">{object}</h2>
+              <p className="mt-3 font-mono text-sm leading-7 text-slate-600">{fields}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Action Plan"
+        title="Six-week buildout for the compliance control layer."
+        copy="This turns the opportunity into execution: source library, trackers, document control, safety, control-panel queues, and advisor review."
+      >
+        <div className="grid gap-4">
+          {internalComplianceExecutionPlan.map(([phase, title, detail]) => (
+            <article key={phase} className="grid gap-4 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.12fr_0.25fr_0.63fr] md:items-center">
+              <p className="text-2xl font-black text-[#f97316]">{phase}</p>
+              <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Agent Rules"
+        title="Agents should help manage compliance, not certify it."
+        copy="This is the core safety rule: agents can summarize, flag, draft, organize, and escalate. They cannot approve legal, code, safety, or performance claims."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalComplianceAgentRules.map(([agent, rule]) => (
+            <article key={agent} className="card">
+              <p className="eyebrow text-[#f97316]">Agent Boundary</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{agent}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{rule}</p>
             </article>
           ))}
         </div>
