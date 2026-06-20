@@ -2972,8 +2972,12 @@ function Footer() {
           <strong className="text-xl font-black">American Super Panel</strong>
           <p className="mt-2 text-slate-300">Industrial Rib Roofing, Metal Siding, Trim & Accessories</p>
         </div>
-        <div className="text-sm font-semibold text-slate-300">
-          American Super Panel™ is a product brand of Americas Panel Fab. Americas Panel Fab may also work with affiliated suppliers, installers, and manufacturing partners.
+        <div className="max-w-xl text-sm font-semibold leading-6 text-slate-300 md:text-right">
+          American Super Panel™ systems are manufactured by{' '}
+          <a className="text-white underline decoration-orange-300 underline-offset-4 hover:text-orange-200" href="https://www.americaspanelfab.com">
+            Americas Panel Fab
+          </a>
+          . For factory, company, and partner information, visit the manufacturer site.
         </div>
       </div>
     </footer>
