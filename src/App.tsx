@@ -50,9 +50,13 @@ const managementNavItems = [
   ['Risk', '/internal-risk-register'],
   ['Financials', '/internal-financial-model'],
   ['Execution', '/internal-execution-board'],
+]
+
+const readinessNavItems = [
   ['Evidence', '/internal-evidence-library'],
   ['Advisors', '/internal-advisor-questions'],
   ['Manufacturing', '/internal-manufacturing-readiness'],
+  ['Delivery', '/internal-delivery-projects'],
 ]
 
 const products = [
@@ -1646,6 +1650,64 @@ const internalManufacturingReadiness = [
     evidence: ['loading checklist', 'delivery photos', 'signed release', 'cost log', 'customer pickup record'],
   },
 ]
+const internalDeliveryProjectTracks = [
+  {
+    phase: 'Opportunity Intake',
+    owner: 'Sales / owner',
+    objective: 'Decide whether a major project or deal is worth pursuing before spending estimating, legal, or production capacity.',
+    gates: ['buyer credibility', 'scope fit', 'state/service fit', 'timeline realism', 'margin potential', 'cash/payment risk'],
+    evidence: ['opportunity record', 'buyer notes', 'drawings', 'deadline', 'bid/no-bid decision'],
+  },
+  {
+    phase: 'Contract / Commercial Review',
+    owner: 'Owner / legal / finance',
+    objective: 'Protect the business before accepting terms that can create margin, cash, compliance, or delivery exposure.',
+    gates: ['payment terms', 'retainage', 'liquidated damages', 'schedule penalties', 'insurance/bonding', 'warranty/exclusions'],
+    evidence: ['contract review checklist', 'redlines', 'approval log', 'COI/bond notes', 'signed agreement'],
+  },
+  {
+    phase: 'Scope / Submittal Lock',
+    owner: 'Estimator',
+    objective: 'Lock product, finish, trim, quantities, assumptions, exclusions, alternates, and review requirements before procurement or production.',
+    gates: ['approved product packet', 'finish/color confirmed', 'trim schedule reviewed', 'engineering/code flags resolved', 'change-order path defined'],
+    evidence: ['approved quote', 'submittal packet', 'scope summary', 'assumptions/exclusions', 'customer approval'],
+  },
+  {
+    phase: 'Procurement / Inventory',
+    owner: 'Operations / finance',
+    objective: 'Reserve or purchase the right coil, accessories, packaging, and logistics resources without overexposing cash.',
+    gates: ['coil availability', 'supplier lead time', 'purchase approval', 'substitution approval', 'cash impact', 'delivery schedule'],
+    evidence: ['POs', 'coil lot records', 'supplier confirmation', 'inventory reservation', 'cash approval'],
+  },
+  {
+    phase: 'Production / QA',
+    owner: 'Production',
+    objective: 'Convert order data into run sheets, bundles, labels, QA records, and release-ready packages.',
+    gates: ['run sheet generated', 'machine assigned', 'operator assigned', 'QA passed', 'rework closed', 'bundle labels complete'],
+    evidence: ['run sheets', 'QA checklist', 'production photos', 'bundle labels', 'completion log'],
+  },
+  {
+    phase: 'Delivery / Pickup',
+    owner: 'Logistics / operations',
+    objective: 'Move finished packages to the customer/jobsite with proof, damage control, release records, and cost tracking.',
+    gates: ['truck/loading plan', 'pickup/delivery appointment', 'damage inspection', 'signed release', 'delivery cost recorded'],
+    evidence: ['loading photos', 'signed release', 'delivery ticket', 'damage notes', 'customer confirmation'],
+  },
+  {
+    phase: 'Closeout / Cash',
+    owner: 'Finance / sales',
+    objective: 'Close the project with final invoice, collections, margin review, lessons learned, and reusable proof assets.',
+    gates: ['invoice sent', 'payment tracked', 'retainage tracked', 'gross margin reviewed', 'photos approved', 'lessons captured'],
+    evidence: ['invoice', 'payment record', 'margin review', 'closeout notes', 'approved project proof'],
+  },
+]
+const internalDeliveryDealControls = [
+  ['Deal score', 'Size, margin potential, buyer quality, payment terms, capacity fit, compliance risk, delivery complexity, and strategic value.'],
+  ['Approval gates', 'Owner approval before bid submission, contract signature, unusual margin, inventory purchase, production release, and delivery commitment.'],
+  ['Change control', 'Any scope, finish, schedule, delivery, or quantity change needs owner, customer, and margin review before production.'],
+  ['Cash protection', 'Deposits, credit terms, retainage, receivables, inventory purchase timing, and delivery costs must be visible before acceptance.'],
+  ['Proof capture', 'Every major deal should generate internal evidence and public-safe proof assets once approved.'],
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1923,6 +1985,10 @@ function RoutedPage({ path }: { path: string }) {
     return <InternalManufacturingReadinessPage />
   }
 
+  if (path === 'internal-delivery-projects') {
+    return <InternalDeliveryProjectsPage />
+  }
+
   if (path === 'internal-data-model') {
     return <InternalDataModelPage />
   }
@@ -2029,6 +2095,14 @@ function Header() {
             <span className="nav-row-label">Management</span>
             {managementNavItems.map(([label, href]) => (
               <a key={href} href={href} className="nav-pill nav-pill-management">
+                {label}
+              </a>
+            ))}
+          </nav>
+          <nav className="nav-row nav-row-readiness" aria-label="Internal readiness navigation">
+            <span className="nav-row-label">Readiness</span>
+            {readinessNavItems.map(([label, href]) => (
+              <a key={href} href={href} className="nav-pill nav-pill-readiness">
                 {label}
               </a>
             ))}
@@ -3725,6 +3799,104 @@ function InternalManufacturingReadinessPage() {
                   </div>
                 </div>
               </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalDeliveryProjectsPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Delivery / Major Deals • 8190 Only"
+        title="Major Project Delivery & Deal Control"
+        copy="A private placeholder for managing large commercial, agricultural, warehouse, municipal, school, dealer, or strategic deals from opportunity through contract, production, delivery, closeout, cash, and proof capture."
+        stats={[
+          [`${internalDeliveryProjectTracks.length}`, 'delivery phases'],
+          [`${internalDeliveryDealControls.length}`, 'deal controls'],
+          ['Owner', 'approval gates'],
+          ['Cash', 'visibility required'],
+        ]}
+      />
+
+      <InternalOntologySection
+        eyebrow="Why This Exists"
+        title="Big deals need a delivery operating layer."
+        copy="A major order is not just a quote. It touches contract terms, cash, coil inventory, production capacity, QA, delivery, compliance, proof assets, and customer relationship risk."
+      >
+        <div className="grid gap-4 md:grid-cols-4">
+          {[
+            ['/internal-financial-model', 'Financials', 'Track cash, margin, retainage, and payback impact.'],
+            ['/internal-risk-register', 'Risk', 'Track contract, delivery, compliance, and capacity risk.'],
+            ['/internal-manufacturing-readiness', 'Manufacturing', 'Connect major deals to production and QA readiness.'],
+            ['/internal-evidence-library', 'Evidence', 'Capture proof, approvals, closeout notes, and public-safe photos.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Connected Control</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Delivery Phases"
+        title="Major project lifecycle."
+        copy="Each phase should eventually become records, owners, due dates, gates, evidence, status, margin impact, and escalation rules."
+      >
+        <div className="grid gap-5">
+          {internalDeliveryProjectTracks.map((phase) => (
+            <article key={phase.phase} className="card">
+              <div className="grid gap-6 lg:grid-cols-[0.2fr_0.28fr_0.3fr_0.22fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Phase</p>
+                  <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{phase.phase}</h2>
+                  <p className="mt-3 font-black text-slate-600">Owner: {phase.owner}</p>
+                </div>
+                <p className="text-lg leading-8 text-slate-600">{phase.objective}</p>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Gates</h3>
+                  <ul className="mt-3 grid gap-2">
+                    {phase.gates.map((gate) => (
+                      <li key={gate} className="flex gap-2 leading-7 text-slate-700">
+                        <ShieldCheck className="mt-1 shrink-0 text-[#f97316]" size={16} />
+                        {gate}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-[#0b1f33]">Evidence</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {phase.evidence.map((item) => (
+                      <span key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Deal Controls"
+        title="What every major deal needs before commitment."
+        copy="These controls prevent a big-looking deal from becoming a margin, cash, compliance, production, or reputation problem."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalDeliveryDealControls.map(([control, detail]) => (
+            <article key={control} className="card">
+              <p className="eyebrow text-[#f97316]">Control</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{control}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{detail}</p>
             </article>
           ))}
         </div>

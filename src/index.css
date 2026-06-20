@@ -353,6 +353,17 @@ select {
   color: #0b1f33;
 }
 
+.nav-pill-readiness {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #14532d;
+}
+
+.nav-pill-readiness:hover {
+  border-color: #86efac;
+  color: #166534;
+}
+
 @media (max-width: 900px) {
   .product-nav {
     justify-content: flex-start;
