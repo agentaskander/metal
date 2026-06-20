@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import {
   ArrowRight,
   Award,
@@ -23,14 +23,6 @@ import {
 } from 'lucide-react'
 
 type IconType = typeof Factory
-
-declare global {
-  interface Window {
-    turnstile?: {
-      reset: () => void
-    }
-  }
-}
 
 const navItems = [
   ['Products', '/products'],
@@ -561,6 +553,105 @@ const internalOntologyVisionPrinciples = [
   'Every competitor weakness should map to a workflow advantage: faster response, clearer docs, easier upload, better package coordination.',
   'Every internal claim must be classified: public-safe, needs verification, NDA/private, legal review, or future roadmap.',
 ]
+const internalOntologyRealityPlan = [
+  {
+    area: 'Brands',
+    href: '#entity-classes',
+    needToKnow: [
+      'Legal entity, domain ownership, trademark status, invoicing entity, and public disclosure wording.',
+      'Which promises are verified today versus future roadmap.',
+      'Which facts belong on APF, ASP, or 8190 only.',
+    ],
+    artifacts: ['Brand relationship memo', 'public-safe copy bank', 'domain and canonical map', 'claim approval checklist'],
+    next: 'Lock the public relationship: Americas Panel Fab manufactures American Super Panel, while 8190 keeps private strategy and expansion logic.',
+  },
+  {
+    area: 'Demand',
+    href: '#workflow-ontology',
+    needToKnow: [
+      'Buyer segments by job type, urgency, state, order size, repeat likelihood, and documentation needs.',
+      'What makes a lead quote-ready: drawings, dimensions, state, panel profile, finish, trim scope, timeline.',
+      'Which channels create revenue: organic product pages, APF guide referrals, dealers, phone calls, plan uploads.',
+    ],
+    artifacts: ['lead scoring model', 'quote intake rubric', 'buyer persona matrix', 'sales call script', 'lost reason taxonomy'],
+    next: 'Build a lead inbox that separates product-ready buyers from education-only visitors and routes each to the right next step.',
+  },
+  {
+    area: 'Operations',
+    href: '#business-operations',
+    needToKnow: [
+      'Quote stages, estimator responsibilities, production handoff, coil constraints, trim scope, delivery/pickup workflow.',
+      'What data must be captured once so it is never retyped across sales, estimating, production, and invoicing.',
+      'Where human approval is mandatory: pricing, lead time, substitutions, engineering/performance language, legal claims.',
+    ],
+    artifacts: ['SOP map', 'quote-to-order state machine', 'production run sheet', 'QA checklist', 'delivery release checklist'],
+    next: 'Convert the workflow sections into task queues, status transitions, and event triggers before writing portal features.',
+  },
+  {
+    area: 'Software',
+    href: '/internal-implementation',
+    needToKnow: [
+      'Core tables, ownership boundaries, permission roles, event names, queue design, file storage, analytics, and audit logs.',
+      'Which agent jobs are safe to automate and which require human review.',
+      'What MVP proves value fastest: lead inbox, upload review, quote pipeline, project tracker, then agentic takeoff support.',
+    ],
+    artifacts: ['schema migrations', 'API resource map', 'event taxonomy', 'agent contracts', 'RBAC matrix', 'MVP backlog'],
+    next: 'Use the implementation pages to turn ontology into database migrations, queues, dashboards, and agent run records.',
+  },
+  {
+    area: 'Implementation',
+    href: '/internal-data-model',
+    needToKnow: [
+      'Every UI control needs a data field, every status needs a state machine, and every automation needs an event.',
+      'Public pages need metadata/canonicals/schema; internal systems need permissions/audit/escalation.',
+      'Business truth must be verified before becoming customer-facing copy or contractual language.',
+    ],
+    artifacts: ['D1 schema', 'workflow specs', 'event payload specs', 'agent prompts/tools', 'test fixtures', 'deployment checklist'],
+    next: 'Build the first internal operating loop: lead -> file upload -> estimator task -> quote -> order-ready package.',
+  },
+]
+const internalOntologyAuthorityGaps = [
+  {
+    area: 'Codes, Standards & Compliance',
+    gap: 'The ontology needs a verified library for code concepts, fire/wind terminology, product data boundaries, and what cannot be claimed without engineering review.',
+    build: 'Create internal reference records for standards, code topics, warranty language, submittal disclaimers, and legal-review flags.',
+  },
+  {
+    area: 'Machine Economics',
+    gap: 'The model names equipment but does not yet encode throughput assumptions, changeover costs, maintenance, scrap, coil yield, labor, packaging, or margin logic.',
+    build: 'Add private machine profiles, cost drivers, production constraints, quote margin inputs, and operator/maintenance workflows.',
+  },
+  {
+    area: 'Supplier & Material Network',
+    gap: 'The ontology needs supplier classes, coil specs, finish systems, purchasing workflow, inventory risk, lead times, substitutions, and approved alternatives.',
+    build: 'Create supplier, coil lot, finish program, reorder point, reserve inventory, and substitution approval objects.',
+  },
+  {
+    area: 'Installer, Dealer & Contractor Network',
+    gap: 'Thought leadership needs a real channel model: dealer territories, contractor onboarding, installer qualification, referrals, repeat orders, and partner rules.',
+    build: 'Define partner profiles, onboarding steps, territory logic, pricing permissions, public listing approval, and referral tracking.',
+  },
+  {
+    area: 'Product Documentation',
+    gap: 'Authority requires deep product packets: profile drawings, coverage widths, trim details, color/gauge paths, installation notes, FAQs, and quote checklists.',
+    build: 'Create product data records, downloadable packets, revision history, asset ownership, and review dates for each panel family.',
+  },
+  {
+    area: 'Market Intelligence',
+    gap: 'The competitor section is useful but needs ongoing structured data: competitor product families, pricing signals, SEO pages, strengths, weaknesses, and response plays.',
+    build: 'Add competitor profiles, page audits, keyword snapshots, comparison rules, and quarterly strategy reviews.',
+  },
+  {
+    area: 'Agentic Workflow Safety',
+    gap: 'Agents need stricter knowledge boundaries, approval gates, confidence thresholds, source citations, and logs before they touch customer-facing output.',
+    build: 'Create agent policy records, tool permissions, escalation queues, evaluation sets, and prompt/version audit tables.',
+  },
+  {
+    area: 'Operational Proof',
+    gap: 'The public authority layer will not become truly dominant until real photos, real projects, real product packets, and repeatable fulfillment metrics replace placeholders.',
+    build: 'Track proof assets by source, replacement priority, release approval, route usage, and conversion impact.',
+  },
+]
 const implementationTables = [
   {
     table: 'organizations',
@@ -1012,8 +1103,8 @@ const industrialRibDownloads = [
     href: '/downloads/industrial-rib-flashing-trim.txt',
   },
   {
-    title: 'Industrial Rib Quote Checklist',
-    copy: 'The project facts estimating needs before issuing a commercial panel package quote.',
+    title: 'Industrial Rib Intake Requirements',
+    copy: 'The project facts the operating system must capture before estimating a commercial panel package.',
     href: '/downloads/industrial-rib-quote-checklist.txt',
   },
 ]
@@ -1045,15 +1136,6 @@ const machineImage =
 const warehouseImage =
   'https://images.unsplash.com/photo-1669003750747-3f139e115bfb?auto=format&fit=crop&w=1400&q=88'
 const projectImages = [panelImage, warehouseImage, facilityImage, weldingImage]
-const maxUploadBytes = 100 * 1024 * 1024
-const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'
-
-type SubmitState = {
-  kind: 'idle' | 'submitting' | 'success' | 'error'
-  message: string
-}
-
-const idleSubmitState: SubmitState = { kind: 'idle', message: '' }
 
 function App() {
   const path = window.location.pathname.replace(/^\/+/, '')
@@ -1388,16 +1470,19 @@ function InternalOntologyPage() {
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {[
-              ['Brands', 'Company, product family, domains, disclosures'],
-              ['Demand', 'Contractors, owners, dealers, procurement'],
-              ['Operations', 'Quote, upload, takeoff, production, delivery'],
-              ['Software', 'ERP, portals, calculators, agents, trackers'],
-              ['Implementation', 'Schemas, events, agents, rules, permissions'],
-            ].map(([label, copy]) => (
-              <div key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
+              ['#entity-classes', 'Brands', 'Company, product family, domains, disclosures'],
+              ['#workflow-ontology', 'Demand', 'Contractors, owners, dealers, procurement'],
+              ['#business-operations', 'Operations', 'Quote, upload, takeoff, production, delivery'],
+              ['/internal-implementation', 'Software', 'ERP, portals, calculators, agents, trackers'],
+              ['/internal-data-model', 'Implementation', 'Schemas, events, agents, rules, permissions'],
+            ].map(([href, label, copy]) => (
+              <a key={label} href={href} className="group rounded border border-slate-200 bg-slate-50 p-5 transition hover:border-orange-200 hover:bg-white hover:shadow-lg">
                 <p className="text-xl font-black text-[#0b1f33]">{label}</p>
                 <p className="mt-2 leading-7 text-slate-600">{copy}</p>
-              </div>
+                <span className="mt-4 inline-flex items-center text-sm font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                  Open build detail <ArrowRight className="ml-2" size={16} />
+                </span>
+              </a>
             ))}
           </div>
           <a className="btn-primary mt-8" href="/internal-implementation">
@@ -1407,6 +1492,76 @@ function InternalOntologyPage() {
       </section>
 
       <InternalOntologySection
+        id="reality-plan"
+        eyebrow="Reality Plan"
+        title="What must be known and built to deliver the vision."
+        copy="Each ontology bucket needs facts, artifacts, and a next build action. This is the bridge from strategy language to databases, SOPs, workflows, and agents."
+      >
+        <div className="grid gap-5">
+          {internalOntologyRealityPlan.map((plan) => (
+            <article key={plan.area} className="card">
+              <div className="grid gap-6 lg:grid-cols-[0.22fr_0.31fr_0.27fr_0.2fr]">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Build Area</p>
+                  <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{plan.area}</h2>
+                  <a href={plan.href} className="mt-5 inline-flex items-center font-black text-[#0b1f33] hover:text-[#f97316]">
+                    Open related model <ArrowRight className="ml-2" size={18} />
+                  </a>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-[#0b1f33]">Need to know</h3>
+                  <ul className="mt-4 grid gap-3">
+                    {plan.needToKnow.map((item) => (
+                      <li key={item} className="flex gap-3 leading-7 text-slate-700">
+                        <SearchCheck className="mt-1 shrink-0 text-[#f97316]" size={18} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-[#0b1f33]">Artifacts to create</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {plan.artifacts.map((artifact) => (
+                      <span key={artifact} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">
+                        {artifact}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-[#0b1f33]">Next action</h3>
+                  <p className="mt-4 rounded border border-orange-200 bg-orange-50 p-4 font-semibold leading-7 text-slate-800">{plan.next}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        id="authority-gaps"
+        eyebrow="Authority Gap Analysis"
+        title="No: this is not full industry authority yet."
+        copy="It is a strong internal skeleton. To become a true industry authority and database/agent foundation, these missing knowledge domains need structured records, source review, and operating workflows."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalOntologyAuthorityGaps.map((gap) => (
+            <article key={gap.area} className="card">
+              <p className="eyebrow text-[#f97316]">Missing Depth</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{gap.area}</h2>
+              <p className="mt-4 leading-7 text-slate-600">{gap.gap}</p>
+              <div className="mt-5 rounded border border-slate-200 bg-slate-50 p-4">
+                <p className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">Build This</p>
+                <p className="mt-2 font-semibold leading-7 text-slate-800">{gap.build}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        id="entity-classes"
         eyebrow="Entity Classes"
         title="Core entities by domain."
         copy="This is the noun layer: brands, buyers, products, manufacturing capabilities, lead objects, and future software modules."
@@ -1430,6 +1585,7 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        id="relationship-graph"
         eyebrow="Relationship Graph"
         title="Subject -> predicate -> object relationships."
         copy="These triples can later map to a real knowledge graph, CRM schema, analytics taxonomy, or operating database."
@@ -1457,6 +1613,7 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        id="workflow-ontology"
         eyebrow="Workflows"
         title="Process ontology from visitor to fulfilled order."
         copy="The verb layer: actions, transitions, and handoffs that become software workflows."
@@ -1482,6 +1639,7 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        id="machine-ontology"
         eyebrow="Machine Ontology"
         title="Machines, tooling, and machine-aware data."
         copy="A fuller industry view needs equipment, tooling, production constraints, and machine data that can later feed scheduling software."
@@ -1490,6 +1648,7 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        id="product-ontology"
         eyebrow="Product Ontology"
         title="Products, panel families, and fabricated package taxonomy."
         copy="This maps immediate revenue products and future expansion categories across roofing, siding, trim, accessories, and architectural systems."
@@ -1498,6 +1657,7 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        id="data-objects"
         eyebrow="Data Objects"
         title="ERP and agentic software object model."
         copy="These records can become tables, API resources, agent memory objects, CRM fields, or event payloads."
@@ -1513,6 +1673,7 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        id="business-operations"
         eyebrow="Business Operations"
         title="Sales, estimating, production, finance, and admin ontology."
         copy="The vision becomes investable when the business workflows are explicit enough to become software, SOPs, dashboards, and accountability."
@@ -1669,15 +1830,18 @@ function InternalImplementationPage() {
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {[
-              ['Database', `${implementationTables.length} core tables`],
-              ['Enums', `${implementationEnums.length} controlled vocabularies`],
-              ['Events', `${implementationEvents.length} automation triggers`],
-              ['Agents', `${implementationAgents.length} AI role contracts`],
-            ].map(([label, copy]) => (
-              <div key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
+              ['/internal-data-model', 'Database', `${implementationTables.length} core tables`],
+              ['/internal-data-model', 'Enums', `${implementationEnums.length} controlled vocabularies`],
+              ['/internal-events', 'Events', `${implementationEvents.length} automation triggers`],
+              ['/internal-agents', 'Agents', `${implementationAgents.length} AI role contracts`],
+            ].map(([href, label, copy]) => (
+              <a key={label} href={href} className="group rounded border border-slate-200 bg-slate-50 p-5 transition hover:border-orange-200 hover:bg-white hover:shadow-lg">
                 <p className="text-xl font-black text-[#0b1f33]">{label}</p>
                 <p className="mt-2 leading-7 text-slate-600">{copy}</p>
-              </div>
+                <span className="mt-4 inline-flex items-center text-sm font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                  Open build page <ArrowRight className="ml-2" size={16} />
+                </span>
+              </a>
             ))}
           </div>
         </div>
@@ -2310,15 +2474,17 @@ function InternalOntologySection({
   children,
   copy,
   eyebrow,
+  id,
   title,
 }: {
   children: ReactNode
   copy: string
   eyebrow: string
+  id?: string
   title: string
 }) {
   return (
-    <section className="section bg-slate-50 even:bg-white">
+    <section id={id} className="section bg-slate-50 even:bg-white">
       <SectionIntro eyebrow={eyebrow} title={title} copy={copy} />
       <div className="mt-10">{children}</div>
     </section>
@@ -2804,8 +2970,8 @@ function FinishSystem() {
             title="A finish system worthy of commercial specifications."
             copy="Compete beyond a generic product list with finish paths that support architectural intent, energy goals, brand standards, and multi-building programs."
           />
-          <a className="btn-secondary mt-8" href="#quote">
-            Request Color Support
+          <a className="btn-secondary mt-8" href="/internal-data-model">
+            Model Finish Data
           </a>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -2836,7 +3002,7 @@ function PanelSystemSelector() {
           <SectionIntro
             eyebrow="Panel System Selector"
             title="Turn project conditions into a recommended panel path."
-            copy="Help contractors, architects, and procurement teams narrow the right American Super Panel™ series before they request a quote."
+            copy="Use the selector as internal product-logic scaffolding: project type, region, exposure, and assembly scope should become fields, rules, recommendations, and estimator review tasks."
           />
           <div className="mt-8 overflow-hidden rounded border border-slate-200 bg-white">
             <img
@@ -2875,11 +3041,14 @@ function PanelSystemSelector() {
             ))}
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a className="btn-primary" href="#quote">
-              Request This System <ArrowRight size={18} />
+            <a className="btn-primary" href="/internal-workflows">
+              Define Intake Workflow <ArrowRight size={18} />
             </a>
-            <a className="btn-secondary" href="/downloads/quote-request-checklist.txt" download>
-              <Download size={18} /> Quote Checklist
+            <a className="btn-secondary" href="/internal-data-model">
+              <FileText size={18} /> Map Selector Fields
+            </a>
+            <a className="btn-secondary" href="/internal-events">
+              <SearchCheck size={18} /> Trigger Events
             </a>
           </div>
         </div>
@@ -2917,7 +3086,7 @@ function DownloadCenter() {
       <SectionIntro
         eyebrow="Download Center"
         title="Give estimating, design, and procurement teams the files they ask for first."
-        copy="These starter documents make the sales process easier before the first call and set clear expectations for quote requests, plan uploads, submittals, and finish selection."
+        copy="For 8190, this section is an internal resource model: define which product documents, intake checklists, submittal packets, and finish files the operating system must manage."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {downloadAssets.map((asset) => (
@@ -3062,8 +3231,8 @@ function Services() {
             title="Manufacturing support from takeoff to closeout."
             copy="Built for contractors and commercial buyers who need dependable production, clean details, and responsive project coordination."
           />
-          <a className="btn-secondary mt-8" href="#quote">
-            Start a Fabrication Request
+          <a className="btn-secondary mt-8" href="/internal-workflows">
+            Map Fabrication Workflow
           </a>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -3184,205 +3353,7 @@ function About() {
 }
 
 function Contact() {
-  void QuoteForm
-  void UploadForm
-
   return null
-}
-
-function QuoteForm() {
-  const [submitState, setSubmitState] = useState<SubmitState>(idleSubmitState)
-
-  async function handleQuoteSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    setSubmitState({ kind: 'submitting', message: 'Sending quote request…' })
-
-    const form = event.currentTarget
-    const result = await submitLeadForm('/api/quote', new FormData(form))
-
-    if (result.ok) {
-      form.reset()
-      setSubmitState({
-        kind: 'success',
-        message: 'Quote request received. Sales will review the project details and follow up.',
-      })
-      window.turnstile?.reset()
-      return
-    }
-
-    setSubmitState({ kind: 'error', message: result.message })
-    window.turnstile?.reset()
-  }
-
-  return (
-    <form id="quote" className="form-panel" action="/api/quote" method="post" onSubmit={handleQuoteSubmit}>
-      <h2 className="text-2xl font-black text-[#0b1f33]">Quick Quote Form</h2>
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
-          <label key={field}>
-            <span>{field}</span>
-            <input
-              name={field.toLowerCase().replaceAll(' ', '_')}
-              type={field === 'Email' ? 'email' : field === 'Phone' ? 'tel' : 'text'}
-              required
-            />
-          </label>
-        ))}
-        <label>
-          <span>Estimated Square Footage</span>
-          <input name="estimated_square_footage" type="number" min="0" />
-        </label>
-        <label>
-          <span>Panel Type</span>
-          <select name="panel_type" defaultValue="">
-            <option value="" disabled>
-              Select panel type
-            </option>
-            <option>American Super Panel Standing Seam</option>
-            <option>American Super Panel Exposed Fastener</option>
-            <option>Wall Panels</option>
-            <option>Trim & Flashing</option>
-          </select>
-        </label>
-        <label className="md:col-span-2">
-          <span>Desired Completion Date</span>
-          <input name="desired_completion_date" type="date" />
-        </label>
-      </div>
-      <TurnstileSlot />
-      <FormStatus state={submitState} />
-      <button className="btn-primary mt-5" type="submit" disabled={submitState.kind === 'submitting'}>
-        {submitState.kind === 'submitting' ? 'Sending…' : 'Submit Quote Request'}
-      </button>
-    </form>
-  )
-}
-
-function UploadForm() {
-  const [submitState, setSubmitState] = useState<SubmitState>(idleSubmitState)
-
-  async function handlePlanUpload(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    const form = event.currentTarget
-    const files = Array.from(form.querySelectorAll('input[type="file"]'))
-      .flatMap((input) => Array.from((input as HTMLInputElement).files ?? []))
-    const totalBytes = files.reduce((sum, file) => sum + file.size, 0)
-
-    if (totalBytes > maxUploadBytes) {
-      setSubmitState({ kind: 'error', message: 'Plan uploads must be 100MB or less.' })
-      return
-    }
-
-    if (files.length === 0) {
-      setSubmitState({ kind: 'error', message: 'Upload at least one plan, drawing, or structural document.' })
-      return
-    }
-
-    setSubmitState({ kind: 'submitting', message: 'Uploading plans…' })
-    const result = await submitLeadForm('/api/upload-plans', new FormData(form))
-
-    if (result.ok) {
-      form.reset()
-      setSubmitState({
-        kind: 'success',
-        message: 'Plans uploaded. Sales will review the documents and follow up.',
-      })
-      window.turnstile?.reset()
-      return
-    }
-
-    setSubmitState({ kind: 'error', message: result.message })
-    window.turnstile?.reset()
-  }
-
-  return (
-    <form
-      id="upload-plans"
-      className="form-panel"
-      action="/api/upload-plans"
-      method="post"
-      encType="multipart/form-data"
-      onSubmit={handlePlanUpload}
-    >
-      <h2 className="text-2xl font-black text-[#0b1f33]">Upload Plans</h2>
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
-          <label key={field}>
-            <span>{field}</span>
-            <input
-              name={field.toLowerCase().replaceAll(' ', '_')}
-              type={field === 'Email' ? 'email' : field === 'Phone' ? 'tel' : 'text'}
-              required={field !== 'Company'}
-            />
-          </label>
-        ))}
-        {[
-          ['Plans PDF', 'plans_pdf', '.pdf'],
-          ['Drawings', 'drawings', '.pdf,.dwg,.dxf,.png,.jpg'],
-          ['Structural Documents', 'structural_documents', '.pdf,.doc,.docx'],
-        ].map(([label, name, accept]) => (
-          <label key={name} className="md:col-span-2">
-            <span>{label}</span>
-            <input name={name} type="file" accept={accept} />
-          </label>
-        ))}
-      </div>
-      <p className="mt-4 text-sm font-semibold text-slate-500">Maximum combined upload: 100MB</p>
-      <TurnstileSlot />
-      <FormStatus state={submitState} />
-      <button className="btn-primary mt-5" type="submit" disabled={submitState.kind === 'submitting'}>
-        {submitState.kind === 'submitting' ? 'Uploading…' : 'Route to Sales Inbox'}
-      </button>
-    </form>
-  )
-}
-
-function TurnstileSlot() {
-  return (
-    <div
-      className="cf-turnstile mt-5 min-h-16 rounded border border-dashed border-slate-300 bg-slate-50"
-      data-sitekey={turnstileSiteKey}
-    />
-  )
-}
-
-function FormStatus({ state }: { state: SubmitState }) {
-  if (state.kind === 'idle') {
-    return null
-  }
-
-  return (
-    <p className={`form-status form-status-${state.kind}`} role="status">
-      {state.message}
-    </p>
-  )
-}
-
-async function submitLeadForm(url: string, formData: FormData) {
-  try {
-    const response = await fetch(url, {
-      body: formData,
-      method: 'POST',
-    })
-    const body = await response.json().catch(() => ({ message: '' }))
-
-    if (!response.ok) {
-      return {
-        ok: false,
-        message: typeof body.message === 'string' && body.message
-          ? body.message
-          : 'The request could not be sent. Please call or email sales directly.',
-      }
-    }
-
-    return { ok: true, message: '' }
-  } catch {
-    return {
-      ok: false,
-      message: 'Lead capture is not available from this local preview. Deploy to Cloudflare Pages or use Wrangler Pages dev to test API routes.',
-    }
-  }
 }
 
 function StateLanding({ state }: { state: (typeof states)[number] }) {
