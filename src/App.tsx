@@ -34,6 +34,7 @@ const navItems = [
   ['Internal', '/internal-strategy'],
   ['Ontology', '/internal-ontology'],
   ['Build Model', '/internal-implementation'],
+  ['Control Panel', '/internal-control-panel'],
 ]
 
 const products = [
@@ -1027,6 +1028,86 @@ const implementationArtifacts = [
   ['internal/agent-contracts.md', 'AI agent roles, inputs, tools, outputs, and escalation contracts.'],
   ['internal/mvp-build-plan.md', 'Practical build sequence from lead intake to contractor/dealer portal.'],
 ]
+const internalControlQueues = [
+  {
+    name: 'Lead Inbox',
+    status: 'Model ready',
+    count: '0 live',
+    owner: 'Sales / Intake Agent',
+    href: '/internal-workflows',
+    purpose: 'Central queue for quote intent, plan upload intent, phone/email leads, APF referrals, and dealer inquiries.',
+    buildNext: ['Connect form/API submissions', 'Add source route + UTM capture', 'Create assignment and lead scoring rules'],
+  },
+  {
+    name: 'Plan Review Queue',
+    status: 'Needs storage',
+    count: 'R2 next',
+    owner: 'Estimator / Plan Review Agent',
+    href: '/internal-agents',
+    purpose: 'Review uploaded drawings, extract project facts, create missing-info tasks, and prepare estimator-ready summaries.',
+    buildNext: ['Wire R2 file metadata', 'Add file.review task type', 'Create document parser safety gates'],
+  },
+  {
+    name: 'Quote Pipeline',
+    status: 'Schema drafted',
+    count: 'MVP 3',
+    owner: 'Estimator',
+    href: '/internal-data-model',
+    purpose: 'Move projects from needs-info to estimating, internal review, sent, accepted, rejected, expired, or order-ready.',
+    buildNext: ['Build quote table UI', 'Add assumptions/exclusions editor', 'Require human approval before send'],
+  },
+  {
+    name: 'Production Tracker',
+    status: 'Future loop',
+    count: 'MVP 5',
+    owner: 'Production Scheduler Agent',
+    href: '/internal-workflows',
+    purpose: 'Track order conversion, coil reservation, machine scheduling, run sheets, QA status, bundle readiness, pickup, and delivery.',
+    buildNext: ['Add machine profile records', 'Add coil lot reserve logic', 'Draft production run board'],
+  },
+  {
+    name: 'Content / SEO Queue',
+    status: 'Manual now',
+    count: 'APF + ASP',
+    owner: 'SEO Content Agent',
+    href: '/internal-agents',
+    purpose: 'Manage public-safe content drafts, metadata, canonical checks, route ownership, internal links, and duplicate-content risk.',
+    buildNext: ['Add content page records', 'Add public-copy scanner', 'Track publish/review dates'],
+  },
+  {
+    name: 'Photo Proof Tracker',
+    status: 'Needed',
+    count: 'High value',
+    owner: 'Marketing / Ops',
+    href: '/internal-ontology#authority-gaps',
+    purpose: 'Track real machine, coil, bundle, trim, delivery, employee, warehouse, and project photos that replace stock.',
+    buildNext: ['Create proof asset table', 'Map photos to routes', 'Add approval and replacement priority'],
+  },
+]
+const internalControlAgents = [
+  ['Intake Agent', 'Draft', 'Normalize lead records, detect missing facts, score quality, and recommend owner.', 'No external messages without review.'],
+  ['Plan Review Agent', 'Draft', 'Summarize drawings, extract scope clues, and create estimator questions.', 'No engineering, code, or performance claims.'],
+  ['Estimating Assistant', 'Draft', 'Prepare quote structure, assumptions, exclusions, and line item placeholders.', 'Human estimator approves all pricing.'],
+  ['Sales Follow-Up Agent', 'Draft', 'Prepare follow-up tasks and message drafts after quote or missing-info states.', 'Human approves customer-facing sends.'],
+  ['Production Scheduler Agent', 'Future', 'Recommend machine schedule, coil reservations, and run conflicts.', 'Manager approves schedule changes.'],
+  ['SEO Content Agent', 'Draft', 'Check public copy safety, metadata uniqueness, canonicals, and schema suggestions.', 'Escalate NDA/private or legal claims.'],
+]
+const internalControlApprovals = [
+  ['Pricing / margin output', 'Owner or estimator approval required before any customer-facing quote is sent.'],
+  ['Engineering or performance language', 'Escalate fire, wind, structural, warranty, or code statements for verified review.'],
+  ['Public copy publish', 'Check for private abbreviations, strategy language, NDA facts, fake offices, and unverified claims.'],
+  ['Supplier substitution', 'Require material/finish/profile review before recommending alternate suppliers or products.'],
+  ['Production schedule override', 'Require manager review when rush jobs, coil conflicts, downtime, or QA failures affect commitments.'],
+]
+const internalControlEvents = [
+  ['lead.created', 'New inquiry enters the operating system.'],
+  ['file.uploaded', 'Plan/drawing/document metadata is stored and review task is created.'],
+  ['quote.needs_info', 'Estimator or agent cannot proceed without missing project facts.'],
+  ['quote.sent', 'Approved quote leaves the internal review gate.'],
+  ['order.created', 'Accepted quote becomes order package.'],
+  ['production_run.scheduled', 'Machine, coil, profile, and order are assigned.'],
+  ['agent.escalated', 'Agent needs human review due confidence, claim, pricing, or ambiguity.'],
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -1266,6 +1347,10 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'internal-implementation') {
     return <InternalImplementationPage />
+  }
+
+  if (path === 'internal-control-panel') {
+    return <InternalControlPanelPage />
   }
 
   if (path === 'internal-data-model') {
@@ -2049,6 +2134,171 @@ function InternalImplementationPage() {
           {implementationMvpBacklog.map(([phase, detail]) => (
             <article key={phase} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.18fr_0.82fr] md:items-center">
               <h2 className="text-xl font-black text-[#0b1f33]">{phase}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalControlPanelPage() {
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Internal Control Panel • 8190 Only"
+        title="Operations Dashboard & Agent Management"
+        copy="The private command center for future lead intake, plan review, quoting, production, approvals, event logs, content operations, and AI agent control."
+        stats={[
+          [`${internalControlQueues.length}`, 'operating queues'],
+          [`${internalControlAgents.length}`, 'agent roles'],
+          [`${internalControlApprovals.length}`, 'approval gates'],
+          ['0', 'live records connected'],
+        ]}
+      />
+
+      <InternalOntologySection
+        eyebrow="Control Panel Role"
+        title="This is where the business gets operated."
+        copy="Ontology explains the business, the build model explains the system, and the control panel becomes the daily operating surface once real data is connected."
+      >
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            ['Today', 'Static scaffold for what the dashboard must become. Use it to keep queues, agents, approvals, and events visible while the data layer is built.'],
+            ['Next', 'Connect D1 tables, R2 uploads, Cloudflare Pages Functions, event records, task queues, and agent run records.'],
+            ['Later', 'Turn this into the ERP/CRM/agent-control interface for sales, estimating, production, content, and management.'],
+          ].map(([phase, copy]) => (
+            <article key={phase} className="card">
+              <p className="eyebrow text-[#f97316]">Mode</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{phase}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Operating Queues"
+        title="The first dashboard modules."
+        copy="Each queue maps to tables, workflows, events, tasks, and future agent behavior."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalControlQueues.map((queue) => (
+            <article key={queue.name} className="card">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="eyebrow text-[#f97316]">Queue</p>
+                  <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{queue.name}</h2>
+                </div>
+                <div className="text-right">
+                  <p className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">{queue.status}</p>
+                  <p className="mt-2 text-sm font-semibold text-slate-500">{queue.count}</p>
+                </div>
+              </div>
+              <p className="mt-4 leading-7 text-slate-600">{queue.purpose}</p>
+              <p className="mt-4 font-black text-[#0b1f33]">Owner: {queue.owner}</p>
+              <div className="mt-5 grid gap-3">
+                {queue.buildNext.map((item) => (
+                  <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-3 font-semibold leading-7 text-slate-700">
+                    <CheckCircle2 className="mt-1 shrink-0 text-[#f97316]" size={18} />
+                    {item}
+                  </p>
+                ))}
+              </div>
+              <a href={queue.href} className="mt-5 inline-flex items-center font-black text-[#0b1f33] hover:text-[#f97316]">
+                Open source model <ArrowRight className="ml-2" size={18} />
+              </a>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Agent Console"
+        title="Agent roles, current status, and safety boundary."
+        copy="Agents should be managed like scoped workers: named mission, visible status, clear outputs, and mandatory escalation rules."
+      >
+        <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-lg">
+          <table className="product-proof-table">
+            <thead>
+              <tr>
+                <th>Agent</th>
+                <th>Status</th>
+                <th>Job</th>
+                <th>Guardrail</th>
+              </tr>
+            </thead>
+            <tbody>
+              {internalControlAgents.map(([agent, status, job, guardrail]) => (
+                <tr key={agent}>
+                  <th>{agent}</th>
+                  <td>{status}</td>
+                  <td>{job}</td>
+                  <td>{guardrail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a className="btn-primary" href="/internal-agents">
+            Open Agent Contracts <ArrowRight size={18} />
+          </a>
+          <a className="btn-secondary" href="/internal-events">
+            <FileText size={18} /> Open Event Model
+          </a>
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Approval Queue"
+        title="Human review gates before automation can touch the outside world."
+        copy="The control panel must make approvals obvious. This is how the system protects pricing, private facts, legal claims, and customer commitments."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {internalControlApprovals.map(([approval, rule]) => (
+            <article key={approval} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <ShieldCheck className="text-[#f97316]" />
+              <h2 className="mt-4 text-2xl font-black text-[#0b1f33]">{approval}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{rule}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Event Stream"
+        title="What the live activity log should show first."
+        copy="Start with a readable event stream, then connect it to the events table, tasks, agent_runs, and notifications."
+      >
+        <div className="grid gap-3">
+          {internalControlEvents.map(([event, meaning]) => (
+            <article key={event} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.28fr_0.72fr] md:items-center">
+              <p className="font-mono text-sm font-black text-[#f97316]">{event}</p>
+              <p className="leading-7 text-slate-600">{meaning}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Build Sequence"
+        title="How the static control panel becomes real software."
+        copy="This is the shortest practical path from dashboard scaffold to functioning internal operating system."
+      >
+        <div className="grid gap-4">
+          {[
+            ['1', 'Connect D1 schema', 'Use internal/schema.sql as the migration draft, then create real tables for leads, files, projects, tasks, events, quotes, and agent runs.'],
+            ['2', 'Wire intake and uploads', 'Point quote/upload APIs at D1 and R2, preserving source route, UTM data, file metadata, and task creation.'],
+            ['3', 'Render live queues', 'Replace static queue counts with database queries for lead inbox, file review, quote pipeline, approvals, and events.'],
+            ['4', 'Add agent run records', 'Store each agent run with input payload, output payload, confidence, escalation reason, and linked trigger event.'],
+            ['5', 'Create approval actions', 'Add approve, reject, request changes, assign owner, and mark reviewed workflows before external sends.'],
+            ['6', 'Add role permissions', 'Limit pricing, margins, private strategy, supplier cost, and agent controls to the right internal roles.'],
+          ].map(([step, title, detail]) => (
+            <article key={step} className="grid gap-4 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.1fr_0.25fr_0.65fr] md:items-center">
+              <p className="text-3xl font-black text-[#f97316]">{step}</p>
+              <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
               <p className="leading-7 text-slate-600">{detail}</p>
             </article>
           ))}
