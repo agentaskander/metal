@@ -760,7 +760,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'about') {
     return (
       <>
-        <PageHero title="About American Super Panel" copy="A focused product and lead-generation brand for Industrial Rib roofing, siding, trim packages, dealer interest, and contractor sales." />
+        <PageHero title="About American Super Panel" copy="A focused metal panel product brand for Industrial Rib roofing, siding, trim packages, dealer interest, and contractor sales." />
         <About />
         <Contact />
       </>
@@ -1166,9 +1166,9 @@ function IndustrialRibPage() {
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
             <SectionIntro
-              eyebrow="California-First SEO"
-              title="California metal roofing panel quotes first. Texas next."
-              copy="American Super Panel is prioritizing California contractor, commercial, industrial, agricultural, shop, and owner-led panel quotes. Texas is the next expansion target; Arizona and Florida inquiries can be reviewed by project."
+              eyebrow="Service Availability"
+              title="California panel quotes first. Texas project interest welcome."
+              copy="American Super Panel is focused first on California contractors, owners, shops, warehouses, agricultural buildings, and commercial panel packages. Texas projects can be reviewed as the next market develops; Arizona and Florida inquiries are reviewed by project."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="/california-metal-panels">
@@ -1181,10 +1181,10 @@ function IndustrialRibPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              ['Best launch fit', 'California contractors, shops, warehouses, agricultural buildings, and commercial owners who need panel-and-trim quotes.'],
-              ['No fake office claims', 'Availability, delivery, sample path, and local project support are confirmed by sales before quoting.'],
-              ['Search intent covered', 'Industrial Rib, metal roofing panels, metal siding panels, exposed-fastener panels, and trim packages.'],
-              ['Next market signal', 'Texas demand can be collected now for warehouse, shop, agricultural, and contractor panel requests.'],
+              ['California quote support', 'Industrial Rib panels, metal siding, trim, flashing, and sample requests can be reviewed for California projects first.'],
+              ['Project review required', 'Availability, delivery, sample path, and local project support are confirmed by sales before quoting.'],
+              ['Panel package scope', 'Send roof panels, siding panels, exposed-fastener panel, trim, and flashing needs in one request.'],
+              ['Texas project review', 'Texas warehouse, shop, agricultural, and contractor panel requests can be submitted for review as availability develops.'],
             ].map(([title, copy]) => (
               <article key={title} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
                 <h2 className="text-lg font-black text-[#0b1f33]">{title}</h2>
