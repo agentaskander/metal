@@ -43,7 +43,7 @@ const navItems = [
   ['Commercial', '/commercial'],
   ['Agricultural', '/agricultural'],
   ['Finishes', '/finishes'],
-  ['Quality', '/quality'],
+  ['Panel Quality', '/quality'],
   ['Contact', '/contact'],
 ]
 
@@ -148,9 +148,10 @@ const aspQualityPrinciples = [
   ['Delivery confidence', 'Availability, samples, color paths, and delivery assumptions should be confirmed before promises are made.'],
 ]
 const aspQualityQuotes = [
+  ['Protection', 'A roof should be the thing you never have to worry about.'],
+  ['Precision', 'Built with precision. Delivered with reliability.'],
   ['Reliability', 'Reliability is remembered long after price is forgotten.'],
   ['Craftsmanship', 'Build it right.'],
-  ['Reputation', 'Quality creates reputation.'],
 ]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
@@ -976,8 +977,8 @@ function QualityPage() {
     <>
       <PageHero
         eyebrow="Quality"
-        title="Metal panel quality means peace of mind."
-        copy="Roofing panels, siding panels, trim, samples, communication, and delivery support should help the project move forward instead of creating avoidable problems."
+        title="Panel quality that helps the job go right."
+        copy="Roofing panels, siding panels, trim, samples, communication, and delivery support should help the project move forward with fewer avoidable problems."
       />
       <QualityChainCallout />
       <section className="section bg-slate-50">
