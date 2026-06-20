@@ -41,6 +41,7 @@ const navItems = [
   ['Super Panel', '/super-panel'],
   ['Internal', '/internal-strategy'],
   ['Ontology', '/internal-ontology'],
+  ['Build Model', '/internal-implementation'],
 ]
 
 const products = [
@@ -560,6 +561,375 @@ const internalOntologyVisionPrinciples = [
   'Every competitor weakness should map to a workflow advantage: faster response, clearer docs, easier upload, better package coordination.',
   'Every internal claim must be classified: public-safe, needs verification, NDA/private, legal review, or future roadmap.',
 ]
+const implementationTables = [
+  {
+    table: 'organizations',
+    purpose: 'Companies, contractors, dealers, suppliers, owners, partners, public agencies, and manufacturers.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['name', 'text', 'required'],
+      ['type', 'enum organization_type', 'required'],
+      ['website', 'text', 'optional'],
+      ['billing_email', 'text', 'optional'],
+      ['phone', 'text', 'optional'],
+      ['address_id', 'uuid -> addresses.id', 'optional'],
+      ['status', 'enum organization_status', 'required default active'],
+      ['owner_user_id', 'uuid -> users.id', 'optional'],
+      ['created_at / updated_at', 'timestamp', 'required'],
+    ],
+  },
+  {
+    table: 'contacts',
+    purpose: 'People associated with organizations, leads, projects, quotes, orders, and partner relationships.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['organization_id', 'uuid -> organizations.id', 'optional'],
+      ['first_name / last_name', 'text', 'required'],
+      ['email', 'text', 'optional indexed'],
+      ['phone', 'text', 'optional indexed'],
+      ['role', 'enum contact_role', 'optional'],
+      ['preferred_channel', 'enum contact_channel', 'optional'],
+      ['status', 'enum contact_status', 'required'],
+      ['created_at / updated_at', 'timestamp', 'required'],
+    ],
+  },
+  {
+    table: 'leads',
+    purpose: 'Inbound demand from ASP, APF referrals, calls, emails, plan uploads, dealer forms, and partner inquiries.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['source_domain', 'enum source_domain', 'required'],
+      ['source_route', 'text', 'required'],
+      ['utm_source / utm_campaign / utm_medium', 'text', 'optional'],
+      ['contact_id', 'uuid -> contacts.id', 'optional'],
+      ['organization_id', 'uuid -> organizations.id', 'optional'],
+      ['project_state', 'enum service_state', 'optional'],
+      ['project_type', 'enum project_type', 'optional'],
+      ['panel_intent', 'enum panel_profile', 'optional'],
+      ['estimated_sq_ft', 'integer', 'optional'],
+      ['status', 'enum lead_status', 'required indexed'],
+      ['score', 'integer', 'required default 0'],
+      ['assigned_user_id', 'uuid -> users.id', 'optional'],
+      ['created_at / updated_at', 'timestamp', 'required'],
+    ],
+  },
+  {
+    table: 'projects',
+    purpose: 'Real jobs being quoted, reviewed, produced, delivered, or tracked.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['lead_id', 'uuid -> leads.id', 'optional'],
+      ['organization_id', 'uuid -> organizations.id', 'optional'],
+      ['project_name', 'text', 'required'],
+      ['project_address_id', 'uuid -> addresses.id', 'optional'],
+      ['market', 'enum market_type', 'required'],
+      ['building_use', 'text', 'optional'],
+      ['roof_scope / wall_scope / trim_scope', 'text', 'optional'],
+      ['target_date', 'date', 'optional'],
+      ['status', 'enum project_status', 'required indexed'],
+      ['assigned_estimator_id', 'uuid -> users.id', 'optional'],
+      ['created_at / updated_at', 'timestamp', 'required'],
+    ],
+  },
+  {
+    table: 'uploaded_files',
+    purpose: 'Plans, drawings, structural docs, elevations, photos, sketches, product data, and partner materials.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['lead_id / project_id', 'uuid', 'one required'],
+      ['file_name', 'text', 'required'],
+      ['mime_type', 'text', 'required'],
+      ['size_bytes', 'integer', 'required max 104857600'],
+      ['storage_key', 'text', 'required'],
+      ['review_status', 'enum file_review_status', 'required'],
+      ['extracted_summary', 'text', 'optional agent output'],
+      ['uploaded_at / reviewed_at', 'timestamp', 'required / optional'],
+    ],
+  },
+  {
+    table: 'quotes',
+    purpose: 'Versioned commercial offer with assumptions, exclusions, line items, freight, taxes, terms, and acceptance status.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['project_id', 'uuid -> projects.id', 'required'],
+      ['version', 'integer', 'required'],
+      ['status', 'enum quote_status', 'required indexed'],
+      ['subtotal / tax / freight / total', 'decimal', 'optional until sent'],
+      ['valid_until', 'date', 'optional'],
+      ['assumptions / exclusions / alternates', 'text', 'optional'],
+      ['sent_at / accepted_at / expired_at', 'timestamp', 'optional'],
+      ['created_by_user_id', 'uuid -> users.id', 'required'],
+    ],
+  },
+  {
+    table: 'quote_line_items',
+    purpose: 'Panel, trim, accessory, freight, labor, and option details attached to a quote.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['quote_id', 'uuid -> quotes.id', 'required indexed'],
+      ['line_type', 'enum line_item_type', 'required'],
+      ['profile', 'enum panel_profile', 'optional'],
+      ['gauge / substrate / finish / color', 'enum or text', 'optional'],
+      ['length_inches / quantity / unit_price', 'decimal', 'optional'],
+      ['description', 'text', 'required'],
+      ['sort_order', 'integer', 'required'],
+    ],
+  },
+  {
+    table: 'orders',
+    purpose: 'Accepted quote turned into payable, schedulable, producible work.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['quote_id', 'uuid -> quotes.id', 'required unique'],
+      ['purchase_order', 'text', 'optional'],
+      ['payment_status', 'enum payment_status', 'required'],
+      ['production_status', 'enum production_status', 'required'],
+      ['delivery_status', 'enum delivery_status', 'required'],
+      ['scheduled_date / promised_date', 'date', 'optional'],
+      ['created_at / closed_at', 'timestamp', 'required / optional'],
+    ],
+  },
+  {
+    table: 'coil_lots',
+    purpose: 'Inventory units for substrate, gauge, color, finish, width, weight, reservation, and cost tracking.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['supplier_id', 'uuid -> organizations.id', 'optional'],
+      ['substrate', 'enum substrate_type', 'required'],
+      ['gauge', 'enum metal_gauge', 'required'],
+      ['finish', 'enum finish_type', 'required'],
+      ['color', 'text', 'required'],
+      ['width_inches / received_weight_lbs / remaining_weight_lbs', 'decimal', 'required'],
+      ['cost_per_lb', 'decimal', 'private'],
+      ['status', 'enum inventory_status', 'required'],
+    ],
+  },
+  {
+    table: 'machines',
+    purpose: 'Roll formers, folders, brakes, slitters, decoilers, forklifts, and production assets.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['name', 'text', 'required'],
+      ['machine_type', 'enum machine_type', 'required'],
+      ['supported_profiles', 'enum[] panel_profile', 'optional'],
+      ['status', 'enum machine_status', 'required'],
+      ['location', 'text', 'optional'],
+      ['maintenance_due_at', 'timestamp', 'optional'],
+      ['notes', 'text', 'private'],
+    ],
+  },
+  {
+    table: 'production_runs',
+    purpose: 'Scheduled and completed work on machines from coil to panel bundles or fabricated trim packages.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['order_id', 'uuid -> orders.id', 'required'],
+      ['machine_id', 'uuid -> machines.id', 'required'],
+      ['coil_lot_id', 'uuid -> coil_lots.id', 'optional'],
+      ['profile', 'enum panel_profile', 'optional'],
+      ['status', 'enum production_run_status', 'required'],
+      ['scheduled_start / completed_at', 'timestamp', 'optional'],
+      ['operator_user_id', 'uuid -> users.id', 'optional'],
+      ['qa_status', 'enum qa_status', 'required'],
+    ],
+  },
+  {
+    table: 'events',
+    purpose: 'Event log for automation, analytics, agent triggers, audit history, and timeline reconstruction.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['event_name', 'enum event_name', 'required indexed'],
+      ['entity_type / entity_id', 'text / uuid', 'required'],
+      ['actor_type / actor_id', 'enum / uuid', 'optional'],
+      ['payload', 'json', 'required'],
+      ['occurred_at', 'timestamp', 'required indexed'],
+    ],
+  },
+  {
+    table: 'agent_runs',
+    purpose: 'AI agent execution records with inputs, outputs, tools, confidence, escalation, and audit trail.',
+    fields: [
+      ['id', 'uuid', 'required primary key'],
+      ['agent_name', 'enum agent_name', 'required'],
+      ['trigger_event_id', 'uuid -> events.id', 'optional'],
+      ['input_payload / output_payload', 'json', 'required'],
+      ['status', 'enum agent_run_status', 'required'],
+      ['confidence_score', 'decimal', 'optional'],
+      ['escalation_reason', 'text', 'optional'],
+      ['started_at / completed_at', 'timestamp', 'required / optional'],
+    ],
+  },
+]
+const implementationEnums = [
+  ['source_domain', 'apf, asp, phone, email, referral, dealer, manual, import'],
+  ['organization_type', 'contractor, dealer, supplier, manufacturer, owner, architect, public_agency, investor, partner'],
+  ['project_type', 'commercial, industrial, agricultural, residential, warehouse, multifamily, municipal, education'],
+  ['panel_profile', 'pbr_panel, r_panel, ag_panel, tuff_rib, industrial_rib, standing_seam, wall_panel, trim_only, unknown'],
+  ['finish_type', 'smp, pvdf, matte, cool_roof, primer_ready, galvanized, galvalume, custom'],
+  ['metal_gauge', 'twenty_two, twenty_four, twenty_six, twenty_nine, unknown'],
+  ['lead_status', 'new, needs_info, qualified, disqualified, converted_to_project, dormant'],
+  ['project_status', 'intake, review, estimating, quoted, approved, ordered, scheduled, in_production, delivered, closed, lost'],
+  ['quote_status', 'draft, needs_info, estimating, internal_review, sent, accepted, rejected, expired, converted_to_order'],
+  ['payment_status', 'not_required, pending, deposit_paid, paid, overdue, credit_hold'],
+  ['machine_status', 'available, scheduled, running, down, maintenance, offline'],
+  ['production_run_status', 'draft, scheduled, setup, running, paused, completed, canceled'],
+  ['qa_status', 'not_started, passed, failed, rework_required, waived_by_manager'],
+  ['agent_run_status', 'queued, running, completed, failed, escalated, canceled'],
+]
+const implementationStateMachines = [
+  {
+    entity: 'Lead',
+    states: ['new', 'needs_info', 'qualified', 'disqualified', 'converted_to_project', 'dormant'],
+    transitions: [
+      'new -> needs_info when required contact/project data is missing',
+      'new -> qualified when contact, state, project type, and intent are usable',
+      'qualified -> converted_to_project when estimating review begins',
+      'needs_info -> qualified when missing facts are supplied',
+      'any open state -> disqualified for spam, unsupported scope, duplicate, or bad contact',
+      'qualified -> dormant when no response after follow-up sequence',
+    ],
+  },
+  {
+    entity: 'Quote',
+    states: ['draft', 'needs_info', 'estimating', 'internal_review', 'sent', 'accepted', 'rejected', 'expired', 'converted_to_order'],
+    transitions: [
+      'draft -> needs_info when drawings, panel type, or assumptions are incomplete',
+      'draft -> estimating when scope is sufficient',
+      'estimating -> internal_review when line items and assumptions are ready',
+      'internal_review -> sent when approved by estimator/sales owner',
+      'sent -> accepted when customer approves and payment/PO path is clear',
+      'sent -> rejected when customer declines',
+      'sent -> expired after valid_until date',
+      'accepted -> converted_to_order when order is created',
+    ],
+  },
+  {
+    entity: 'Order',
+    states: ['approved', 'payment_pending', 'scheduled', 'in_production', 'qa_review', 'ready_for_pickup', 'shipped', 'delivered', 'closed'],
+    transitions: [
+      'approved -> payment_pending if deposit/payment is required',
+      'approved -> scheduled when production can proceed',
+      'scheduled -> in_production when first run starts',
+      'in_production -> qa_review when production is complete',
+      'qa_review -> ready_for_pickup or shipped when QA passes',
+      'ready_for_pickup -> closed when customer pickup is confirmed',
+      'shipped -> delivered when delivery is confirmed',
+      'delivered -> closed after final admin review',
+    ],
+  },
+  {
+    entity: 'ProductionRun',
+    states: ['draft', 'scheduled', 'setup', 'running', 'paused', 'completed', 'canceled'],
+    transitions: [
+      'draft -> scheduled after machine, coil, profile, and order are assigned',
+      'scheduled -> setup when operator begins setup/changeover',
+      'setup -> running when first acceptable panel is produced',
+      'running -> paused for coil issue, machine issue, rush reprioritization, or operator stop',
+      'paused -> running when issue is resolved',
+      'running -> completed when quantities are done and QA is ready',
+      'draft or scheduled -> canceled when order changes before production',
+    ],
+  },
+]
+const implementationEvents = [
+  ['lead.created', 'Created when any inquiry, quote form, plan upload, call, email, or manual lead enters the system.'],
+  ['lead.qualified', 'Emitted when required facts satisfy qualification rules.'],
+  ['file.uploaded', 'Emitted when a plan/drawing/document is stored.'],
+  ['file.reviewed', 'Emitted when estimator or agent marks file review complete.'],
+  ['project.created', 'Emitted when a qualified lead becomes a project.'],
+  ['quote.needs_info', 'Emitted when quote cannot proceed without missing facts.'],
+  ['quote.sent', 'Emitted when customer-facing quote is delivered.'],
+  ['quote.accepted', 'Emitted when customer approves quote.'],
+  ['order.created', 'Emitted when accepted quote becomes order.'],
+  ['coil.reserved', 'Emitted when inventory is reserved for order/production run.'],
+  ['production_run.scheduled', 'Emitted when machine schedule is created.'],
+  ['production_run.completed', 'Emitted when run is finished.'],
+  ['qa.failed', 'Emitted when QA requires rework or management review.'],
+  ['delivery.scheduled', 'Emitted when pickup/delivery date is assigned.'],
+  ['content.published', 'Emitted when APF/ASP content goes live or changes canonical metadata.'],
+  ['agent.escalated', 'Emitted when an AI agent needs human review.'],
+]
+const implementationAutomationRules = [
+  ['Lead scoring', 'If uploaded_files_count > 0, add 30 points; if project_state in target states, add 10; if phone present, add 10; if spam keywords, subtract 100.'],
+  ['Lead assignment', 'Assign commercial/industrial leads to senior sales; agricultural to contractor sales; dealer inquiries to owner/partner queue.'],
+  ['Plan upload validation', 'Reject or split uploads above 100MB; require at least one supported file type; create file.review task.'],
+  ['Quote completeness', 'Quote cannot move to sent without project_state, panel_profile or unknown flag, estimated scope, assumptions, exclusions, and owner_user_id.'],
+  ['Order creation', 'Order cannot be created unless quote_status is accepted and payment/PO rule is satisfied.'],
+  ['Coil reservation', 'Reserve coil only when order is approved and coil lot has sufficient remaining weight/color/gauge/finish.'],
+  ['Production scheduling', 'Production run cannot schedule unless machine supports profile and coil/material is available.'],
+  ['QA gate', 'Delivery cannot be marked ready until required production runs and trim tasks pass QA or manager override.'],
+  ['Public copy safety', 'Public pages fail review if they contain APF/ASP abbreviations, funnel language, NDA/private claims, fake office claims, or unverified performance claims.'],
+  ['Agent escalation', 'Agents must escalate low-confidence takeoff, missing dimensions, engineering/performance claims, legal wording, pricing exceptions, and supplier-cost exposure.'],
+]
+const implementationAgents = [
+  {
+    name: 'Intake Agent',
+    mission: 'Convert inbound form/call/email context into clean Lead, Contact, Organization, and Project draft records.',
+    inputs: ['lead form payload', 'UTM/source route', 'uploaded file metadata', 'email/call notes'],
+    tools: ['CRM write', 'dedupe search', 'state/page classifier', 'lead scoring'],
+    outputs: ['normalized lead', 'missing info list', 'lead score', 'recommended owner'],
+    escalation: 'Escalate duplicate conflicts, suspicious spam, missing contact path, unsupported state, or ambiguous project type.',
+  },
+  {
+    name: 'Plan Review Agent',
+    mission: 'Summarize uploaded drawings and extract estimator-ready facts without making engineering claims.',
+    inputs: ['uploaded PDFs/images', 'project notes', 'panel intent'],
+    tools: ['document parser', 'OCR', 'vision extraction', 'checklist generator'],
+    outputs: ['scope summary', 'questions', 'possible roof/wall/trim areas', 'risk flags'],
+    escalation: 'Escalate unreadable plans, structural/performance requirements, conflicting dimensions, or legal/engineering claims.',
+  },
+  {
+    name: 'Estimating Assistant',
+    mission: 'Prepare quote draft structure, assumptions, exclusions, and line-item placeholders for estimator review.',
+    inputs: ['project', 'scope summary', 'panel profile', 'coil availability', 'pricing rules'],
+    tools: ['pricing table', 'inventory lookup', 'quote draft writer'],
+    outputs: ['draft quote', 'assumption list', 'missing data checklist', 'alternates'],
+    escalation: 'Escalate pricing exceptions, margin risk, unavailable coil, rush timing, or unusual profile/finish requests.',
+  },
+  {
+    name: 'Sales Follow-Up Agent',
+    mission: 'Manage customer follow-up timing and draft messages after quote, missing-info, or dormant lead states.',
+    inputs: ['lead status', 'quote status', 'last touch', 'customer role', 'project urgency'],
+    tools: ['email draft', 'task scheduler', 'CRM timeline'],
+    outputs: ['follow-up task', 'draft email', 'next contact date'],
+    escalation: 'Escalate high-value commercial projects, angry customer tone, legal language, or pricing negotiation.',
+  },
+  {
+    name: 'Production Scheduler Agent',
+    mission: 'Recommend machine schedule based on order priority, coil inventory, profile, length, changeover, and delivery window.',
+    inputs: ['orders', 'machines', 'coil lots', 'production runs', 'delivery promises'],
+    tools: ['schedule optimizer', 'inventory reservation', 'run sheet generator'],
+    outputs: ['proposed schedule', 'coil reservations', 'conflict warnings'],
+    escalation: 'Escalate overbooked machines, missing inventory, rush conflicts, QA failures, or downtime events.',
+  },
+  {
+    name: 'SEO Content Agent',
+    mission: 'Maintain APF/ASP content separation, metadata uniqueness, internal links, and public copy safety.',
+    inputs: ['content page draft', 'keyword map', 'public safety rules', 'competitor notes'],
+    tools: ['metadata checker', 'canonical checker', 'public-copy scanner'],
+    outputs: ['SEO checklist', 'risk flags', 'recommended edits', 'schema suggestion'],
+    escalation: 'Escalate NDA/private claims, legal claims, fake location claims, competitor overclaiming, or duplicate content risk.',
+  },
+]
+const implementationPermissions = [
+  ['public_visitor', 'Can submit forms and download public resources; cannot view internal data.'],
+  ['sales_user', 'Can view/edit leads, contacts, projects, quote notes, follow-up tasks, and customer timeline.'],
+  ['estimator', 'Can review plans, create quote drafts, edit line items, assumptions, exclusions, and estimator tasks.'],
+  ['production_user', 'Can view orders, run sheets, machine schedule, production runs, QA checklist, and bundle labels.'],
+  ['admin_finance', 'Can manage invoices, payment status, costs, margins, PO data, tax/resale docs, and credit holds.'],
+  ['content_manager', 'Can edit content pages, metadata, schema, public safety flags, and publish status.'],
+  ['owner_admin', 'Can access all records, private strategy, pricing, margins, partners, software roadmap, and audit logs.'],
+  ['ai_agent', 'Can read/write only scoped objects for its mission; all external messages and pricing outputs require human approval until trusted.'],
+]
+const implementationMvpBacklog = [
+  ['MVP 1', 'Lead, Contact, Organization, Project, UploadedFile, Event tables; quote/upload intake; source route and UTM capture.'],
+  ['MVP 2', 'Lead inbox with statuses, assignment, notes, tasks, follow-up dates, and plan review checklist.'],
+  ['MVP 3', 'Quote object, quote line items, assumptions/exclusions, versioning, PDF/email draft, approval gate.'],
+  ['MVP 4', 'Inventory foundation: coil lots, finishes/colors, profiles, gauges, substrate, supplier, remaining quantity.'],
+  ['MVP 5', 'Order conversion, production run draft, machine table, run sheet generation, QA checklist.'],
+  ['MVP 6', 'Agent layer: intake normalization, plan review summary, estimating assistant, sales follow-up drafts.'],
+  ['MVP 7', 'Dealer/contractor portal with saved projects, quote history, uploads, approvals, and order status.'],
+]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
   ['Silicone-modified polyester', '#94a3b8', 'Durable, economical finish option for broad project coverage.'],
@@ -806,6 +1176,10 @@ function RoutedPage({ path }: { path: string }) {
     return <InternalOntologyPage />
   }
 
+  if (path === 'internal-implementation') {
+    return <InternalImplementationPage />
+  }
+
   if (path === 'projects') {
     return (
       <>
@@ -996,6 +1370,7 @@ function InternalOntologyPage() {
               ['Demand', 'Contractors, owners, dealers, procurement'],
               ['Operations', 'Quote, upload, takeoff, production, delivery'],
               ['Software', 'ERP, portals, calculators, agents, trackers'],
+              ['Implementation', 'Schemas, events, agents, rules, permissions'],
             ].map(([label, copy]) => (
               <div key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
                 <p className="text-xl font-black text-[#0b1f33]">{label}</p>
@@ -1003,6 +1378,9 @@ function InternalOntologyPage() {
               </div>
             ))}
           </div>
+          <a className="btn-primary mt-8" href="/internal-implementation">
+            Open Implementation Model <ArrowRight size={18} />
+          </a>
         </div>
       </section>
 
@@ -1246,6 +1624,208 @@ function InternalOntologyPage() {
               <Award className="mt-1 shrink-0 text-[#f97316]" size={20} />
               {principle}
             </p>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalImplementationPage() {
+  return (
+    <>
+      <section className="section border-b border-slate-200 bg-white">
+        <div className="max-w-6xl">
+          <p className="eyebrow text-[#f97316]">Internal Implementation Ontology • 8190 Only</p>
+          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
+            Database, Workflow & Agent Build Model
+          </h1>
+          <p className="mt-6 max-w-5xl text-xl leading-8 text-slate-600">
+            This turns the industry ontology into buildable system architecture:
+            tables, fields, enums, state machines, events, automation rules, agent contracts,
+            permissions, and MVP delivery order.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-4">
+            {[
+              ['Database', `${implementationTables.length} core tables`],
+              ['Enums', `${implementationEnums.length} controlled vocabularies`],
+              ['Events', `${implementationEvents.length} automation triggers`],
+              ['Agents', `${implementationAgents.length} AI role contracts`],
+            ].map(([label, copy]) => (
+              <div key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xl font-black text-[#0b1f33]">{label}</p>
+                <p className="mt-2 leading-7 text-slate-600">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <InternalOntologySection
+        eyebrow="Database Schema"
+        title="Tables, purposes, fields, and relationship hints."
+        copy="This is enough to start a D1/Postgres/Supabase schema draft, but it still needs final field naming, migrations, constraints, and indexes."
+      >
+        <div className="grid gap-5">
+          {implementationTables.map((table) => (
+            <article key={table.table} className="card">
+              <p className="eyebrow text-[#f97316]">Table</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{table.table}</h2>
+              <p className="mt-3 text-lg leading-8 text-slate-600">{table.purpose}</p>
+              <div className="mt-6 overflow-hidden rounded border border-slate-200">
+                <table className="product-proof-table">
+                  <thead>
+                    <tr>
+                      <th>Field</th>
+                      <th>Type</th>
+                      <th>Rule</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.fields.map(([field, type, rule]) => (
+                      <tr key={`${table.table}-${field}`}>
+                        <th>{field}</th>
+                        <td>{type}</td>
+                        <td>{rule}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Controlled Vocabulary"
+        title="Enums that keep humans, forms, automations, and agents aligned."
+        copy="Enums prevent the same concept from becoming five spellings across forms, databases, dashboards, and agent prompts."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {implementationEnums.map(([name, values]) => (
+            <article key={name} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <h2 className="text-xl font-black text-[#0b1f33]">{name}</h2>
+              <p className="mt-3 font-mono text-sm leading-7 text-slate-600">{values}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="State Machines"
+        title="Allowed lifecycle states and transitions."
+        copy="Automation becomes safer when each object has known states and explicit transitions."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {implementationStateMachines.map((machine) => (
+            <article key={machine.entity} className="card">
+              <p className="eyebrow text-[#f97316]">State Machine</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{machine.entity}</h2>
+              <p className="mt-4 font-mono text-sm leading-7 text-slate-600">{machine.states.join(' -> ')}</p>
+              <ul className="mt-5 grid gap-3">
+                {machine.transitions.map((transition) => (
+                  <li key={transition} className="flex gap-3 leading-7 text-slate-700">
+                    <ArrowRight className="mt-1 shrink-0 text-[#f97316]" size={18} />
+                    <span>{transition}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Event Taxonomy"
+        title="Events that drive automations, timelines, and AI agents."
+        copy="Events are the nervous system of the future ERP. They trigger tasks, notifications, agent runs, status changes, and audit logs."
+      >
+        <div className="grid gap-3">
+          {implementationEvents.map(([event, meaning]) => (
+            <article key={event} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.28fr_0.72fr] md:items-center">
+              <p className="font-mono text-sm font-black text-[#f97316]">{event}</p>
+              <p className="leading-7 text-slate-600">{meaning}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Automation Rules"
+        title="Business rules that can become code, queues, validations, and alerts."
+        copy="These are intentionally specific enough to become tickets or tests."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {implementationAutomationRules.map(([rule, detail]) => (
+            <article key={rule} className="card">
+              <p className="eyebrow text-[#f97316]">Rule</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{rule}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="AI Agents"
+        title="Agent roles, inputs, tools, outputs, and escalation rules."
+        copy="Each agent is scoped like a worker with permissions, not a vague chatbot."
+      >
+        <div className="grid gap-5">
+          {implementationAgents.map((agent) => (
+            <article key={agent.name} className="card">
+              <p className="eyebrow text-[#f97316]">Agent Contract</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{agent.name}</h2>
+              <p className="mt-3 text-lg leading-8 text-slate-600">{agent.mission}</p>
+              <div className="mt-6 grid gap-4 lg:grid-cols-4">
+                {[
+                  ['Inputs', agent.inputs],
+                  ['Tools', agent.tools],
+                  ['Outputs', agent.outputs],
+                  ['Escalation', [agent.escalation]],
+                ].map(([label, items]) => (
+                  <div key={label as string} className="rounded border border-slate-200 bg-slate-50 p-5">
+                    <h3 className="text-lg font-black text-[#0b1f33]">{label as string}</h3>
+                    <ul className="mt-3 grid gap-2">
+                      {(items as string[]).map((item) => (
+                        <li key={item} className="leading-7 text-slate-700">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Permissions"
+        title="Roles and access boundaries."
+        copy="Permissions matter early because private pricing, margins, NDA facts, and agent actions must not leak."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {implementationPermissions.map(([role, access]) => (
+            <article key={role} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
+              <h2 className="font-mono text-lg font-black text-[#0b1f33]">{role}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{access}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="MVP Build Order"
+        title="Practical build sequence from lead capture to ERP."
+        copy="This prevents trying to build the whole operating system before the first reliable database and workflow loops exist."
+      >
+        <div className="grid gap-4">
+          {implementationMvpBacklog.map(([phase, detail]) => (
+            <article key={phase} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.18fr_0.82fr] md:items-center">
+              <h2 className="text-xl font-black text-[#0b1f33]">{phase}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
+            </article>
           ))}
         </div>
       </InternalOntologySection>
