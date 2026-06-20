@@ -36,6 +36,7 @@ const productNavItems = [
 const internalKnowledgeNavItems = [
   ['Internal', '/internal-strategy'],
   ['Ontology', '/internal-ontology'],
+  ['Quality', '/internal-quality'],
   ['Build Model', '/internal-implementation'],
   ['Data Model', '/internal-data-model'],
   ['Workflows', '/internal-workflows'],
@@ -199,6 +200,16 @@ const internalStrategyBlocks = [
 ]
 const internalOntologyDomains = [
   {
+    domain: 'Quality',
+    entities: [
+      ['Quality', 'Reliable creation of value through disciplined execution across product, process, service, relationship, information, economic, and cultural work.'],
+      ['Product Quality', 'Accuracy, durability, consistency, safety, and appearance in panels, trim, bundles, and finished packages.'],
+      ['Process Quality', 'Repeatable workflows, throughput control, waste reduction, error prevention, and documentation that protect execution.'],
+      ['Service Quality', 'Responsiveness, delivery reliability, communication, and resolution that make customers easier to serve.'],
+      ['Information Quality', 'Accurate, traceable, timely, and complete facts that allow humans, systems, and agents to make better decisions.'],
+    ],
+  },
+  {
     domain: 'Brand Architecture',
     entities: [
       ['America’s Panel Fab', 'Parent company, manufacturer, contracting entity, invoice entity, commercial/government credibility layer.'],
@@ -271,6 +282,10 @@ const internalOntologyDomains = [
 ]
 const internalOntologyRelations = [
   ['Americas Panel Fab', 'manufactures', 'American Super Panel'],
+  ['Quality', 'translates across lenses as', 'Craftsmanship -> Predictability -> Peace of Mind'],
+  ['Craftsmanship', 'creates', 'predictable execution'],
+  ['Predictable execution', 'creates', 'customer peace of mind'],
+  ['Quality evidence', 'attaches to', 'ontology nodes, workflows, QA checks, quote records, and proof assets'],
   ['AmericasPanelFab.com', 'educates and builds trust for', 'manufacturing, partners, guides, glossary, commercial credibility'],
   ['AmericanSuperPanel.com', 'converts', 'contractor and owner product intent into quote and plan-upload leads'],
   ['APF guide article', 'may refer buying intent to', 'ASP product page'],
@@ -370,6 +385,131 @@ const internalOntologyGovernance = [
   'Every public route should have unique title, description, H1, intro copy, self-canonical, and appropriate schema.',
   'Every stock image should map to a future real-photo replacement target.',
   'Real machine, steel coil, bundle, truck loading, trim fabrication, warehouse, employee, and project photos outrank decorative design work.',
+]
+type QualityLensKey = 'Internal' | 'APF' | 'ASP'
+
+const qualityChain = [
+  {
+    label: 'Craftsmanship',
+    lens: 'Internal',
+    copy: 'The worker-level standard: do the work so the next person receives something clean, complete, and trustworthy.',
+  },
+  {
+    label: 'Predictability',
+    lens: 'APF',
+    copy: 'The manufacturer-level standard: make outcomes repeatable, documented, traceable, and easier to manage.',
+  },
+  {
+    label: 'Peace of Mind',
+    lens: 'ASP',
+    copy: 'The customer-level result: the roof, panels, delivery, and support stop being a source of worry.',
+  },
+]
+
+const qualityOntologyNodes = [
+  {
+    name: 'Product Quality',
+    definition: 'Physical product value: panels, trim, finish, fit, bundle condition, and customer-visible workmanship.',
+    children: ['Accuracy', 'Durability', 'Consistency', 'Safety', 'Appearance'],
+    realityChecks: ['Profile matches order', 'lengths and counts are verified', 'finish and color are checked', 'bundle labels match project areas'],
+  },
+  {
+    name: 'Process Quality',
+    definition: 'Operational value: the same good result can happen repeatedly without relying on memory or heroics.',
+    children: ['Repeatability', 'Throughput', 'Waste Reduction', 'Error Prevention', 'Documentation'],
+    realityChecks: ['SOP exists', 'handoff is visible', 'exceptions are logged', 'QA gate happens before release'],
+  },
+  {
+    name: 'Service Quality',
+    definition: 'Customer experience value: people get clear answers, clean handoffs, and practical resolution.',
+    children: ['Responsiveness', 'Delivery Reliability', 'Communication', 'Resolution'],
+    realityChecks: ['Lead response is tracked', 'quote status is visible', 'delivery/pickup expectations are confirmed', 'issues get owner assignment'],
+  },
+  {
+    name: 'Relationship Quality',
+    definition: 'Trust value: partners, customers, suppliers, and internal teams know what was promised and what changed.',
+    children: ['Trust', 'Transparency', 'Accountability', 'Partnership'],
+    realityChecks: ['Assumptions are documented', 'changes are acknowledged', 'owners are named', 'commitments are not overstated'],
+  },
+  {
+    name: 'Information Quality',
+    definition: 'Data value: the right facts are captured once, traceable later, and usable by humans, dashboards, and agents.',
+    children: ['Accuracy', 'Traceability', 'Timeliness', 'Completeness'],
+    realityChecks: ['Required fields are known', 'source route is captured', 'files are attached to records', 'approval history is preserved'],
+  },
+  {
+    name: 'Economic Quality',
+    definition: 'Business value: quality protects productivity, margin, efficiency, cash flow, and long-term sustainability.',
+    children: ['Productivity', 'Margin', 'Efficiency', 'Sustainability'],
+    realityChecks: ['Scrap is measured', 'rework is visible', 'rush work has rules', 'margin impact is reviewed before release'],
+  },
+  {
+    name: 'Cultural Quality',
+    definition: 'Human operating value: people take ownership, improve the system, and care about the work after it leaves their hands.',
+    children: ['Craftsmanship', 'Ownership', 'Discipline', 'Learning', 'Improvement'],
+    realityChecks: ['Operators can flag defects', 'lessons become SOP updates', 'training gaps are logged', 'wins and mistakes are reviewed'],
+  },
+]
+
+const qualityLensMap: Record<QualityLensKey, {
+  equation: string
+  hero: string
+  careabouts: string[]
+  primaryNodes: string[]
+  operatingQuestion: string
+}> = {
+  Internal: {
+    equation: 'Quality = Craftsmanship',
+    hero: 'Quality is what remains after the work leaves your hands.',
+    careabouts: ['Pride', 'Mastery', 'Ownership', 'Improvement', 'Discipline'],
+    primaryNodes: ['Cultural Quality', 'Process Quality', 'Information Quality'],
+    operatingQuestion: 'Did we leave the next person a cleaner job, clearer facts, and fewer avoidable problems?',
+  },
+  APF: {
+    equation: 'Quality = Predictability',
+    hero: 'The best supplier is the one you never have to worry about.',
+    careabouts: ['Repeatability', 'Capacity', 'Traceability', 'Process control', 'Reliable execution'],
+    primaryNodes: ['Process Quality', 'Information Quality', 'Economic Quality', 'Relationship Quality'],
+    operatingQuestion: 'Can the company repeat the result, prove the path, and scale without losing control?',
+  },
+  ASP: {
+    equation: 'Quality = Peace of Mind',
+    hero: 'A roof should be the thing you never have to worry about.',
+    careabouts: ['Protection', 'Correct fit', 'Longevity', 'Delivery reliability', 'Responsive support'],
+    primaryNodes: ['Product Quality', 'Service Quality', 'Relationship Quality'],
+    operatingQuestion: 'Does the customer feel the panels, support, and order process are reliable enough to move forward?',
+  },
+}
+
+const qualityEvidenceQuotes = [
+  {
+    quote: 'Precision is respect for the next person in the process.',
+    tradition: 'German-inspired',
+    theme: 'precision',
+    ontologyNode: 'Process Quality / Information Quality',
+    audienceLens: ['Internal', 'APF'],
+  },
+  {
+    quote: 'Continuous improvement is better than delayed perfection.',
+    tradition: 'Japanese-inspired',
+    theme: 'improvement',
+    ontologyNode: 'Cultural Quality / Process Quality',
+    audienceLens: ['Internal', 'APF'],
+  },
+  {
+    quote: 'Build it right.',
+    tradition: 'American manufacturing',
+    theme: 'craftsmanship',
+    ontologyNode: 'Product Quality / Cultural Quality',
+    audienceLens: ['Internal', 'ASP'],
+  },
+  {
+    quote: 'Reliability is remembered long after price is forgotten.',
+    tradition: 'American manufacturing',
+    theme: 'trust',
+    ontologyNode: 'Relationship Quality / Service Quality',
+    audienceLens: ['APF', 'ASP'],
+  },
 ]
 const internalOntologyMachineSystems = [
   {
@@ -1945,6 +2085,10 @@ function RoutedPage({ path }: { path: string }) {
     return <InternalOntologyPage />
   }
 
+  if (path === 'internal-quality') {
+    return <InternalQualityPage />
+  }
+
   if (path === 'internal-implementation') {
     return <InternalImplementationPage />
   }
@@ -2051,7 +2195,7 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <header className="relative z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="top-contact-bar border-b border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold text-slate-700 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-between">
           <span>Internal master site • ontology • strategy • operations</span>
@@ -2137,6 +2281,9 @@ function InternalStrategyPage() {
               Open Full Ontology <ArrowRight size={18} />
             </a>
           </div>
+          <div className="mt-6">
+            <QualityChainCard />
+          </div>
         </div>
       </section>
 
@@ -2213,6 +2360,7 @@ function InternalOntologyPage() {
               ['#entity-classes', 'Brands', 'Company, product family, domains, disclosures'],
               ['#workflow-ontology', 'Demand', 'Contractors, owners, dealers, procurement'],
               ['#business-operations', 'Operations', 'Quote, upload, takeoff, production, delivery'],
+              ['/internal-quality', 'Quality', 'Craftsmanship, predictability, peace of mind'],
               ['/internal-implementation', 'Software', 'ERP, portals, calculators, agents, trackers'],
               ['/internal-data-model', 'Implementation', 'Schemas, events, agents, rules, permissions'],
             ].map(([href, label, copy]) => (
@@ -2225,9 +2373,12 @@ function InternalOntologyPage() {
               </a>
             ))}
           </div>
-          <a className="btn-primary mt-8" href="/internal-implementation">
-            Open Implementation Model <ArrowRight size={18} />
-          </a>
+          <div className="mt-8 grid gap-5 lg:grid-cols-[0.72fr_0.28fr] lg:items-start">
+            <QualityChainCard compact />
+            <a className="btn-primary" href="/internal-implementation">
+              Open Implementation Model <ArrowRight size={18} />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -2547,6 +2698,219 @@ function InternalOntologyPage() {
               <Award className="mt-1 shrink-0 text-[#f97316]" size={20} />
               {principle}
             </p>
+          ))}
+        </div>
+      </InternalOntologySection>
+    </>
+  )
+}
+
+function InternalQualityPage() {
+  const [activeLens, setActiveLens] = useState<QualityLensKey>('Internal')
+  const [query, setQuery] = useState('')
+  const activeLensData = qualityLensMap[activeLens]
+  const normalizedQuery = query.trim().toLowerCase()
+  const searchableNodes = qualityOntologyNodes.filter((node) => {
+    if (!normalizedQuery) return true
+    const haystack = [
+      node.name,
+      node.definition,
+      ...node.children,
+      ...node.realityChecks,
+    ].join(' ').toLowerCase()
+    return haystack.includes(normalizedQuery)
+  })
+  const searchableQuotes = qualityEvidenceQuotes.filter((item) => {
+    const lensMatch = item.audienceLens.includes(activeLens)
+    if (!normalizedQuery) return lensMatch
+    return lensMatch && [
+      item.quote,
+      item.tradition,
+      item.theme,
+      item.ontologyNode,
+      ...item.audienceLens,
+    ].join(' ').toLowerCase().includes(normalizedQuery)
+  })
+
+  return (
+    <>
+      <InternalPageHero
+        eyebrow="Quality Ontology • 8190 Only"
+        title="QUALITY: disciplined execution that creates reliable value."
+        copy="Quality is the reliable creation of value through disciplined execution. This page maps one shared quality domain through three lenses: internal craftsmanship, APF predictability, and ASP customer peace of mind."
+        stats={[
+          [`${qualityOntologyNodes.length}`, 'quality domains'],
+          ['3', 'audience lenses'],
+          [`${qualityEvidenceQuotes.length}`, 'evidence quotes'],
+          ['1', 'canonical chain'],
+        ]}
+      />
+
+      <InternalOntologySection
+        eyebrow="Canonical Quality Chain"
+        title="Craftsmanship becomes predictability, then peace of mind."
+        copy="This is the operating bridge from shop-floor behavior to company credibility to customer confidence. The ontology stays shared; the lens changes the message."
+      >
+        <QualityChainCard />
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Lens Selector"
+        title="One ontology, three ways to care about it."
+        copy="Use the selector to translate the same QUALITY domain into internal management language, APF manufacturer language, or ASP customer value language without creating duplicate trees."
+      >
+        <div className="grid gap-6 lg:grid-cols-[0.32fr_0.68fr]">
+          <div className="card">
+            <p className="eyebrow text-[#f97316]">Audience Lens</p>
+            <div className="mt-4 grid gap-2">
+              {(Object.keys(qualityLensMap) as QualityLensKey[]).map((lens) => (
+                <button
+                  key={lens}
+                  type="button"
+                  onClick={() => setActiveLens(lens)}
+                  className={`rounded border px-4 py-3 text-left font-black transition ${
+                    activeLens === lens
+                      ? 'border-orange-300 bg-orange-50 text-[#c2410c]'
+                      : 'border-slate-200 bg-slate-50 text-[#0b1f33] hover:border-orange-200 hover:bg-white'
+                  }`}
+                >
+                  {lens}
+                </button>
+              ))}
+            </div>
+            <label className="mt-6 block">
+              <span className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">Search quality nodes</span>
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Try traceability, delivery, margin..."
+                className="mt-2 w-full rounded border border-slate-300 bg-white px-4 py-3 font-semibold text-[#0b1f33] outline-none focus:border-orange-300 focus:ring-4 focus:ring-orange-100"
+              />
+            </label>
+          </div>
+
+          <article className="card">
+            <p className="eyebrow text-[#f97316]">{activeLens} Message Map</p>
+            <h2 className="mt-3 text-4xl font-black leading-tight text-[#0b1f33]">{activeLensData.equation}</h2>
+            <p className="mt-4 text-2xl font-black leading-tight text-slate-700">{activeLensData.hero}</p>
+            <p className="mt-5 rounded border border-slate-200 bg-slate-50 p-4 font-semibold leading-7 text-slate-700">
+              Operating question: {activeLensData.operatingQuestion}
+            </p>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              <div>
+                <h3 className="text-xl font-black text-[#0b1f33]">Careabouts</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {activeLensData.careabouts.map((item) => (
+                    <span key={item} className="rounded border border-orange-200 bg-orange-50 px-3 py-2 text-sm font-black text-[#c2410c]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-[#0b1f33]">Primary Nodes</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {activeLensData.primaryNodes.map((item) => (
+                    <a key={item} href={`#${item.toLowerCase().replaceAll(' ', '-')}`} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700 hover:border-orange-200 hover:text-[#f97316]">
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Quality Tree"
+        title="The first-class QUALITY domain."
+        copy="These nodes should eventually connect to database fields, QA checklists, SOPs, agent evaluations, quote readiness, production release, and customer follow-up."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {searchableNodes.map((node) => (
+            <article key={node.name} id={node.name.toLowerCase().replaceAll(' ', '-')} className="card scroll-mt-48">
+              <p className="eyebrow text-[#f97316]">Quality Node</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{node.name}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{node.definition}</p>
+              <div className="mt-5">
+                <h3 className="text-lg font-black text-[#0b1f33]">Subnodes</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {node.children.map((child) => (
+                    <span key={child} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">
+                      {child}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-5 rounded border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-black text-[#0b1f33]">Reality checks</h3>
+                <ul className="mt-3 grid gap-2">
+                  {node.realityChecks.map((check) => (
+                    <li key={check} className="flex gap-3 leading-7 text-slate-700">
+                      <CheckCircle2 className="mt-1 shrink-0 text-[#f97316]" size={18} />
+                      <span>{check}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+        {searchableNodes.length === 0 ? (
+          <p className="mt-5 rounded border border-orange-200 bg-orange-50 p-4 font-black text-[#0b1f33]">
+            No quality nodes matched that search. Try a subnode like traceability, responsiveness, ownership, or margin.
+          </p>
+        ) : null}
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Quote Evidence"
+        title="Inspiration as ontology metadata, not decoration."
+        copy="Each quote carries tradition, theme, ontology-node attachment, and audience lens. Later these can become training prompts, onboarding cards, QA reminders, or agent evaluation examples."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {searchableQuotes.map((item) => (
+            <article key={item.quote} className="card">
+              <p className="text-2xl font-black leading-tight text-[#0b1f33]">"{item.quote}"</p>
+              <div className="mt-5 grid gap-3">
+                {[
+                  ['Tradition', item.tradition],
+                  ['Theme', item.theme],
+                  ['Ontology Node', item.ontologyNode],
+                  ['Audience Lens', item.audienceLens.join(' / ')],
+                ].map(([label, value]) => (
+                  <p key={label} className="grid gap-1 rounded border border-slate-200 bg-slate-50 p-3 md:grid-cols-[0.28fr_0.72fr]">
+                    <span className="text-sm font-black uppercase tracking-[0.12em] text-slate-500">{label}</span>
+                    <span className="font-semibold text-slate-700">{value}</span>
+                  </p>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Implementation Hooks"
+        title="How QUALITY becomes software, workflows, and management."
+        copy="The ontology is useful only if it turns into records, approvals, checklists, events, and dashboards. These are the next build hooks."
+      >
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            ['/internal-data-model', 'Quality fields', 'Add QA status, defect type, rework reason, review owner, release gate, and evidence link fields.'],
+            ['/internal-workflows', 'Quality workflows', 'Attach quality gates to intake, estimating, production, delivery, and issue-resolution state machines.'],
+            ['/internal-events', 'Quality events', 'Emit quality.reviewed, defect.logged, rework.completed, bundle.released, and customer.issue.resolved events.'],
+            ['/internal-agents', 'Quality agents', 'Scope agents to flag missing facts, weak documentation, public-claim risk, and unresolved quality exceptions.'],
+          ].map(([href, title, copy]) => (
+            <a key={href} href={href} className="card group block">
+              <p className="eyebrow text-[#f97316]">Build Hook</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Open source model <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
           ))}
         </div>
       </InternalOntologySection>
@@ -4335,6 +4699,35 @@ function InternalOntologySection({
       <SectionIntro eyebrow={eyebrow} title={title} copy={copy} />
       <div className="mt-10">{children}</div>
     </section>
+  )
+}
+
+function QualityChainCard({ compact = false }: { compact?: boolean }) {
+  return (
+    <article className={`rounded border border-orange-200 bg-orange-50 p-5 text-[#0b1f33] ${compact ? '' : 'shadow-lg'}`}>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="eyebrow text-[#c2410c]">Quality Model</p>
+          <h2 className="mt-3 text-3xl font-black leading-tight">
+            Craftsmanship <span className="text-[#f97316]">-&gt;</span> Predictability <span className="text-[#f97316]">-&gt;</span> Peace of Mind
+          </h2>
+        </div>
+        <a className="btn-secondary bg-white" href="/internal-quality">
+          Explore Quality Ontology <ArrowRight size={18} />
+        </a>
+      </div>
+      {!compact ? (
+        <div className="mt-5 grid gap-3 md:grid-cols-3">
+          {qualityChain.map((step) => (
+            <div key={step.label} className="rounded border border-orange-200 bg-white p-4">
+              <p className="text-sm font-black uppercase tracking-[0.12em] text-[#c2410c]">{step.lens}</p>
+              <h3 className="mt-2 text-xl font-black">{step.label}</h3>
+              <p className="mt-2 leading-7 text-slate-700">{step.copy}</p>
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </article>
   )
 }
 
