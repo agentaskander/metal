@@ -10,7 +10,6 @@ import {
   Factory,
   FileCheck2,
   FileText,
-  FileUp,
   Flame,
   Gauge,
   HardHat,
@@ -174,20 +173,17 @@ const downloadAssets = [
   },
 ]
 const industrialRibSpecs = [
-  ['Product Family', 'American Super Panel™ Industrial Series'],
-  ['Panel Type', 'Exposed fastener roof and siding panel'],
-  ['Profile', 'Industrial Rib / 7.2-style profile'],
-  ['Rib Pitch', '7.2 in. nominal'],
-  ['Rib Height', '1.5 in. nominal'],
-  ['Gauge Path', '24 ga commercial path; 26 ga project-dependent'],
-  ['Substrate Path', 'G90 galvanized or Galvalume project path'],
-  ['Finish Path', 'SMP, PVDF, matte, cool-roof, and primer-ready options'],
+  ['Product Relationship', 'American Super Panel™ product family'],
+  ['Manufacturer', 'Americas Panel Fab'],
+  ['Product Category', 'Exposed-fastener roof and siding panels'],
+  ['Customer Fit', 'Contractors, dealers, commercial buyers, agricultural projects, and industrial facilities'],
+  ['Order Path', 'Product-specific quoting, colors, gauges, trim, and panel details are handled on AmericanSuperPanel.com'],
 ]
 const industrialRibProof = [
-  ['Equipment Plan', Factory, 'Two fixed roll-forming lines planned for repeatable panel production and package consistency.'],
-  ['Mobile Option', Gauge, 'Mobile fabrication can support long-run jobs and reduced shipping constraints when project conditions fit.'],
-  ['Package Scope', ClipboardList, 'Panels, trim, flashings, closures, fasteners, and job labels organized as one quote package.'],
-  ['Bid Support', FileCheck2, 'Submittal, finish, gauge, fastening, warranty, and project documentation reviewed before release.'],
+  ['Manufacturing Role', Factory, 'Americas Panel Fab provides the manufacturing context behind the American Super Panel product family.'],
+  ['Product Handoff', Gauge, 'Contractor-ready product information, colors, trim, and quote requests are handled through the product website.'],
+  ['Package Discipline', ClipboardList, 'Panel, trim, flashing, accessory, and documentation conversations stay organized before orders are released.'],
+  ['Commercial Review', FileCheck2, 'Project-specific requirements are confirmed through drawings, submittals, and buyer review before production.'],
 ] satisfies [string, IconType, string][]
 const industrialRibApplications = [
   'Warehouses and logistics buildings',
@@ -196,23 +192,6 @@ const industrialRibApplications = [
   'Commercial re-skins and expansions',
   'Municipal storage and service facilities',
   'Large-format siding and liner panels',
-]
-const industrialRibDownloads = [
-  {
-    title: 'Industrial Rib Product Data',
-    copy: 'A starter product data sheet for profile, gauge, finish, and project review conversations.',
-    href: '/downloads/industrial-rib-product-data.txt',
-  },
-  {
-    title: 'Industrial Rib Flashing & Trim',
-    copy: 'Starter trim schedule for ridge, rake, eave, corner, jamb, base, and transition details.',
-    href: '/downloads/industrial-rib-flashing-trim.txt',
-  },
-  {
-    title: 'Industrial Rib Quote Checklist',
-    copy: 'The project facts estimating needs before issuing a commercial panel package quote.',
-    href: '/downloads/industrial-rib-quote-checklist.txt',
-  },
 ]
 const selectorOptions = {
   assembly: ['Roof', 'Wall', 'Roof + Wall', 'Trim / Flashing'],
@@ -1991,19 +1970,16 @@ function IndustrialRibPage() {
               American Super Panel™ Industrial Rib
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              A 7.2-style exposed fastener roofing and siding panel path for warehouses,
-              industrial buildings, agricultural facilities, and large commercial wall packages.
-              Manufactured by Americas Panel Fab.
+              American Super Panel is the focused exposed-fastener roofing and siding panel
+              product family manufactured by Americas Panel Fab for contractor and commercial
+              panel demand.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="#contact">
-                Discuss Manufacturing Fit <ArrowRight size={18} />
+              <a className="btn-primary" href="https://www.americansuperpanel.com/american-super-panel-industrial-rib">
+                View Product Site <ArrowRight size={18} />
               </a>
-              <a className="btn-secondary" href="#upload-plans">
-                <FileUp size={18} /> Share Materials
-              </a>
-              <a className="btn-secondary" href="/downloads/industrial-rib-product-data.txt" download>
-                <Download size={18} /> Product Data
+              <a className="btn-secondary" href="/capabilities">
+                Manufacturing Capabilities
               </a>
             </div>
           </div>
@@ -2014,13 +1990,14 @@ function IndustrialRibPage() {
         <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div>
             <SectionIntro
-              eyebrow="Product Data"
-            title="A defined panel profile for commercial comparison and project planning."
-              copy="This page turns American Super Panel™ from a broad product family into a specific industrial rib system with a clear manufacturing and quoting path."
+              eyebrow="Product Relationship"
+            title="A focused product family supported by the manufacturing company behind it."
+              copy="Americas Panel Fab carries the company and manufacturing context. American Super Panel carries the product-specific sales path for exposed-fastener roofing and siding panels."
             />
             <p className="mt-6 rounded border border-orange-200 bg-orange-50 p-4 text-sm font-bold leading-6 text-slate-700">
-              Final gauge, substrate, finish, fastening, and engineering requirements must be confirmed
-              during project review before public specification or release to production.
+              Product-specific dimensions, finish paths, gauges, pricing, engineering review, and
+              order details should be confirmed through the American Super Panel product site and
+              project review process.
             </p>
           </div>
           <div className="overflow-hidden rounded border border-slate-200 bg-white shadow-xl">
@@ -2042,7 +2019,7 @@ function IndustrialRibPage() {
         <SectionIntro
           eyebrow="Manufacturing Support"
           title="A panel system is more than the shape of the rib."
-          copy="The differentiator is the operating discipline around the product: material planning, documentation, flashing packages, submittals, packaging, and regional fulfillment support."
+          copy="The differentiator is the operating discipline around the product: manufacturing context, documentation habits, project review, package planning, and clear handoff from product interest to order readiness."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {industrialRibProof.map(([title, Icon, copy]) => (
@@ -2066,7 +2043,7 @@ function IndustrialRibPage() {
             <SectionIntro
               eyebrow="Applications"
               title="Industrial rib panels for roof, siding, and large-format building envelopes."
-              copy="A focused product page helps contractors and procurement teams understand where this system fits before they send drawings."
+              copy="This manufacturer overview explains where the product family fits. Contractors who need colors, gauges, trim, quote forms, or panel-specific documents should use AmericanSuperPanel.com."
             />
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {industrialRibApplications.map((item) => (
@@ -2081,38 +2058,15 @@ function IndustrialRibPage() {
       </section>
 
       <section className="section bg-white">
-        <SectionIntro
-          eyebrow="Download Center"
-          title="Give estimators a product packet before the first phone call."
-          copy="These beta documents make the page feel like a real manufacturer resource center while the final engineering, machine specs, and finish program are confirmed."
-        />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {industrialRibDownloads.map((asset) => (
-            <a key={asset.href} className="download-card" href={asset.href} download>
-              <span className="flex h-11 w-11 items-center justify-center rounded bg-[#0b1f33] text-white">
-                <FileText size={22} />
-              </span>
-              <span className="mt-5 block text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">
-                Beta TXT Download
-              </span>
-              <strong className="mt-2 block text-xl font-black text-[#0b1f33]">{asset.title}</strong>
-              <span className="mt-3 block leading-7 text-slate-600">{asset.copy}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="section bg-[#0b1f33] text-white">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <SectionIntro
-            dark
-            eyebrow="Operating Workflow"
-            title="Upload drawings and turn the product page into a buying workflow."
-            copy="Estimating can review square footage, roof or wall scope, gauge path, finish intent, trims, accessories, delivery state, and schedule from one intake."
+            eyebrow="Product Handoff"
+            title="Keep public company credibility separate from product quoting."
+            copy="Americas Panel Fab should explain the manufacturer relationship. American Super Panel should handle product-specific quote requests, plan uploads, dealer conversations, color questions, and order details."
           />
           <div className="grid gap-4 sm:grid-cols-3">
-            {['Panel takeoff', 'Trim schedule', 'Submittal path'].map((item) => (
-              <p key={item} className="rounded border border-white/15 bg-white/10 p-5 text-lg font-black">
+            {['Manufacturer context', 'Product site handoff', 'Project review'].map((item) => (
+              <p key={item} className="rounded border border-slate-200 bg-slate-50 p-5 text-lg font-black text-[#0b1f33]">
                 {item}
               </p>
             ))}
