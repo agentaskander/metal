@@ -39,9 +39,10 @@ const navItems = [
   ['Home', '/'],
   ['Manufacturing', '/manufacturing'],
   ['Capabilities', '/capabilities'],
+  ['Guides', '/guides'],
+  ['Glossary', '/glossary'],
   ['Products', '/products'],
   ['Super Panel', '/super-panel'],
-  ['Partners', '/#investors-partners'],
 ]
 
 const products = [
@@ -238,7 +239,6 @@ const platformStructure = [
   'Factory partner network',
   'Industry marketplace and lead network',
 ]
-
 const facilityImage =
   'https://images.unsplash.com/photo-1764835994645-3faa2c40f708?auto=format&fit=crop&w=1400&q=88'
 const panelImage =
@@ -251,6 +251,129 @@ const machineImage =
   'https://images.unsplash.com/photo-1738162837330-9257f938463c?auto=format&fit=crop&w=1400&q=88'
 const warehouseImage =
   'https://images.unsplash.com/photo-1669003750747-3f139e115bfb?auto=format&fit=crop&w=1400&q=88'
+const guidePages = [
+  {
+    slug: 'standing-seam-vs-r-panel',
+    title: 'Standing Seam vs R-Panel: How to Choose a Metal Roof System',
+    description:
+      'Compare standing seam and R-Panel metal roofing by fastening style, project fit, budget, appearance, and contractor workflow.',
+    category: 'Comparison Guide',
+    hero: 'Standing seam and R-Panel serve different jobs. The right choice depends on budget, building type, appearance, slope, exposure, and installation priorities.',
+    image: warehouseImage,
+    imageAlt: 'Commercial warehouse metal panel project',
+    sections: [
+      ['Fastening Method', 'Standing seam systems hide the fasteners under seams or clips. R-Panel and similar ribbed panels use exposed fasteners through the panel face. That difference affects appearance, labor, detailing, and long-term maintenance planning.'],
+      ['Best Project Fit', 'Standing seam is often chosen for architectural, commercial, and owner-occupied buildings where a clean roof plane matters. R-Panel is common for warehouses, shops, agricultural buildings, and practical commercial roofs or walls.'],
+      ['Buying Path', 'If the project is product-ready and exposed-fastener panels make sense, American Super Panel can handle the contractor sales path. If the project needs broader manufacturing comparison or planning, Americas Panel Fab is the authority layer.'],
+    ],
+    takeaways: ['Standing seam is usually the cleaner architectural path.', 'R-Panel is often the practical contractor and warehouse path.', 'Trim, flashing, fasteners, finish, and substrate still matter as much as the profile.'],
+    cta: 'Compare product options',
+    ctaHref: 'https://www.americansuperpanel.com/products',
+  },
+  {
+    slug: 'pbr-panel-vs-r-panel',
+    title: 'PBR Panel vs R-Panel: What Contractors Should Know',
+    description:
+      'Learn how PBR panel and R-Panel naming, side-lap conditions, use cases, and quote conversations differ for metal roofing and siding projects.',
+    category: 'Panel Profiles',
+    hero: 'PBR Panel and R-Panel are often discussed together because both refer to practical ribbed exposed-fastener panel families used on roofs and walls.',
+    image: panelImage,
+    imageAlt: 'Ribbed metal roofing panel closeup',
+    sections: [
+      ['Naming Reality', 'Panel names vary by manufacturer and region. Contractors should confirm profile drawings, rib spacing, coverage width, side-lap detail, gauge path, substrate, finish, and fastener recommendations before ordering.'],
+      ['Common Uses', 'PBR and R-Panel style products fit warehouses, industrial buildings, shops, agricultural buildings, commercial re-skins, wall panels, and utility buildings.'],
+      ['Quote Details', 'A strong quote request includes panel use, roof or wall scope, desired lengths, trim conditions, finish, delivery state, and any drawings available for review.'],
+    ],
+    takeaways: ['Do not order from a name alone; confirm the profile.', 'Side-lap and trim details should be reviewed early.', 'ASP is the focused product funnel for exposed-fastener panel quotes.'],
+    cta: 'View PBR / R-Panel page',
+    ctaHref: 'https://www.americansuperpanel.com/pbr-panel',
+  },
+  {
+    slug: 'metal-roofing-gauges',
+    title: 'Metal Roofing Gauges: 24 Gauge vs 26 Gauge vs 29 Gauge',
+    description:
+      'A practical guide to metal roofing gauge language for commercial, agricultural, and contractor panel conversations.',
+    category: 'Buyer Education',
+    hero: 'Gauge is only one part of a metal panel decision. Profile, substrate, finish, fastening, span, building use, and local conditions also shape the right package.',
+    image: facilityImage,
+    imageAlt: 'Metal panel manufacturing production floor',
+    sections: [
+      ['What Gauge Means', 'Gauge describes sheet metal thickness, but the number works backward: lower gauge numbers are generally thicker. Buyers should avoid comparing gauge without also looking at profile and project use.'],
+      ['Commercial Context', 'Commercial and industrial projects may require thicker material, stronger profiles, or more specific documentation depending on the assembly and owner requirements.'],
+      ['Quote Context', 'Gauge should be reviewed with the actual drawings, roof or wall use, support spacing, trim scope, finish path, and project expectations.'],
+    ],
+    takeaways: ['Lower gauge usually means thicker metal.', 'Gauge alone does not define performance.', 'Use drawings and project conditions to guide the conversation.'],
+    cta: 'Upload plans for review',
+    ctaHref: 'https://www.americansuperpanel.com/upload-plans',
+  },
+  {
+    slug: 'metal-panel-finishes',
+    title: 'Metal Panel Finishes: SMP, PVDF, Matte, and Cool Roof Options',
+    description:
+      'Understand common metal panel finish paths for commercial roofs, wall panels, trim, flashing, heat exposure, and architectural color needs.',
+    category: 'Finishes',
+    hero: 'Finish selection affects color, reflectivity, weathering expectations, project appearance, and how roof, wall, trim, and flashing packages come together.',
+    image: fabricationImage,
+    imageAlt: 'Custom sheet metal fabrication',
+    sections: [
+      ['Finish Families', 'SMP and PVDF-style finish paths are common commercial conversations. The right choice depends on budget, exposure, owner standards, color needs, and project expectations.'],
+      ['Color Coordination', 'Panel, trim, flashing, fascia, soffit, and accessory colors should be reviewed together so the finished package looks intentional.'],
+      ['Documentation', 'Finish data, color samples, and warranty path discussions should happen before large orders or specification releases.'],
+    ],
+    takeaways: ['Do not choose finish only from a screen color.', 'Trim and panel finishes should be coordinated together.', 'Finish path belongs in the submittal conversation.'],
+    cta: 'View finish resources',
+    ctaHref: '/finishes',
+  },
+  {
+    slug: 'trim-and-flashing-guide',
+    title: 'Trim and Flashing Guide for Metal Roofing and Wall Panels',
+    description:
+      'Learn why trim, flashing, closures, fasteners, and transitions are critical to metal roofing and siding package planning.',
+    category: 'Fabrication Guide',
+    hero: 'Metal panels are only part of the package. Trim and flashing decide how roof edges, corners, openings, transitions, and closeout details actually work.',
+    image: weldingImage,
+    imageAlt: 'Trim and flashing fabrication',
+    sections: [
+      ['Common Trim Pieces', 'Ridge, rake, eave, corner, jamb, base, transition, and cap flashing details should be reviewed against the building conditions.'],
+      ['Project Coordination', 'Crews benefit when panels, trim, flashing, closures, fasteners, and labels are coordinated as one package instead of scattered across disconnected orders.'],
+      ['Manufacturing Authority', 'Fab owns the education around fabrication workflow, while ASP handles the focused product quote path for panel and trim packages.'],
+    ],
+    takeaways: ['Trim is not an afterthought.', 'Openings and transitions should be reviewed early.', 'Upload drawings before ordering complex packages.'],
+    cta: 'View trim and flashing products',
+    ctaHref: 'https://www.americansuperpanel.com/trim-and-flashing',
+  },
+  {
+    slug: 'commercial-metal-roofing-guide',
+    title: 'Commercial Metal Roofing Guide for Owners, Contractors, and Buyers',
+    description:
+      'A high-level commercial metal roofing guide covering panels, trim, finish, documentation, quote data, and manufacturing coordination.',
+    category: 'Commercial Guide',
+    hero: 'Commercial metal roofing decisions should combine product selection, documentation, project schedule, trim details, finish path, and contractor support.',
+    image: warehouseImage,
+    imageAlt: 'Commercial warehouse metal roof panels',
+    sections: [
+      ['Product Selection', 'Commercial projects may use standing seam, exposed-fastener ribbed panels, wall panels, trim, flashing, and accessories depending on appearance, budget, building type, and schedule.'],
+      ['Documentation', 'Submittal packages, finish data, drawings, installation details, and warranty path conversations matter because commercial buyers need confidence before releasing an order.'],
+      ['Lead Funnel Separation', 'APF explains the system and manufacturing context. ASP should receive the product-ready quote demand when the buyer needs metal roofing panels, siding panels, or trim.'],
+    ],
+    takeaways: ['Commercial buyers need more than a product list.', 'Clean quote inputs shorten the first sales conversation.', 'Separate education content from product-intent CTAs.'],
+    cta: 'Request product quote',
+    ctaHref: 'https://www.americansuperpanel.com/request-quote',
+  },
+]
+const glossaryTerms = [
+  ['Roll forming', 'A manufacturing process that shapes metal coil into consistent panel profiles through a series of forming stations.'],
+  ['Standing seam', 'A concealed-fastener metal roofing system with raised seams and a cleaner architectural appearance.'],
+  ['R-Panel', 'A practical ribbed exposed-fastener panel family used for roofing and siding on commercial, warehouse, shop, and agricultural buildings.'],
+  ['PBR Panel', 'A ribbed exposed-fastener panel term often used for roof and wall packages; profile details should be confirmed by manufacturer.'],
+  ['Gauge', 'A sheet metal thickness reference where lower numbers generally mean thicker metal.'],
+  ['PVDF', 'A premium finish path commonly discussed for long-life architectural metal panel projects.'],
+  ['SMP', 'A silicone-modified polyester finish path used across many economical and practical metal panel projects.'],
+  ['Trim', 'Formed pieces used at roof edges, corners, openings, transitions, and closeout details.'],
+  ['Flashing', 'Metal detailing used to direct water and protect transitions, edges, penetrations, and joints.'],
+  ['Submittal package', 'Project documentation that may include product data, finish information, fastener notes, drawings, and warranty-path materials.'],
+] satisfies [string, string][]
+
 const projectImages = [panelImage, warehouseImage, facilityImage, weldingImage]
 const maxUploadBytes = 100 * 1024 * 1024
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'
@@ -292,6 +415,19 @@ function apfServiceSchema(name: string, description: string, path: string) {
   }
 }
 
+function articleSchema(guide: (typeof guidePages)[number]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.title,
+    description: guide.description,
+    author: { '@type': 'Organization', name: 'Americas Panel Fab' },
+    publisher: { '@type': 'Organization', name: 'Americas Panel Fab' },
+    mainEntityOfPage: `${apfOrigin}/${guide.slug}`,
+    url: `${apfOrigin}/${guide.slug}`,
+  }
+}
+
 function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoConfig {
   if (statePage) {
     return {
@@ -305,6 +441,17 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
         url: `${apfOrigin}/${statePage.slug}`,
         description: statePage.copy,
       },
+    }
+  }
+
+  const guidePage = guidePages.find((guide) => guide.slug === path)
+
+  if (guidePage) {
+    return {
+      canonicalPath: `/${guidePage.slug}`,
+      description: guidePage.description,
+      title: `${guidePage.title} | Americas Panel Fab`,
+      schema: articleSchema(guidePage),
     }
   }
 
@@ -337,6 +484,36 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
         'Roll forming, custom fabrication, trim, flashing, product support, and partner-ready metal panel operations.',
         '/capabilities',
       ),
+    },
+    guides: {
+      canonicalPath: '/guides',
+      description:
+        'Metal panel manufacturing guides, comparison articles, buyer education, finish resources, trim guidance, and roll forming explainers from Americas Panel Fab.',
+      title: 'Metal Panel Manufacturing Guides | Americas Panel Fab',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Metal Panel Manufacturing Guides',
+        url: `${apfOrigin}/guides`,
+        description: 'Educational guides for metal panel manufacturing, roll forming, product comparison, finishes, and commercial roofing decisions.',
+      },
+    },
+    glossary: {
+      canonicalPath: '/glossary',
+      description:
+        'Glossary of metal panel manufacturing, roll forming, roofing panel, finish, trim, flashing, and submittal terms.',
+      title: 'Metal Panel Glossary | Americas Panel Fab',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'DefinedTermSet',
+        name: 'Metal Panel Glossary',
+        url: `${apfOrigin}/glossary`,
+        hasDefinedTerm: glossaryTerms.map(([name, description]) => ({
+          '@type': 'DefinedTerm',
+          name,
+          description,
+        })),
+      },
     },
     'roll-forming': {
       canonicalPath: '/roll-forming',
@@ -506,6 +683,20 @@ function RoutedPage({ path }: { path: string }) {
 
   if (path === 'custom-fabrication') {
     return <AuthorityPage page={authorityPages.customFabrication} />
+  }
+
+  if (path === 'guides') {
+    return <GuidesPage />
+  }
+
+  if (path === 'glossary') {
+    return <GlossaryPage />
+  }
+
+  const guidePage = guidePages.find((guide) => guide.slug === path)
+
+  if (guidePage) {
+    return <GuideArticle guide={guidePage} />
   }
 
   if (path === 'resources') {
@@ -1246,6 +1437,134 @@ function AuthorityPage({ page }: { page: (typeof authorityPages)[keyof typeof au
         </div>
       </section>
       <Contact />
+    </>
+  )
+}
+
+function GuidesPage() {
+  return (
+    <>
+      <PageHero
+        title="Metal Panel Manufacturing Guides"
+        copy="Educational guides for panel profiles, roll forming, finishes, trim, flashing, and commercial roofing decisions. APF owns the authority content; ASP receives product-ready quote demand."
+      />
+      <section className="section bg-slate-50">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {guidePages.map((guide) => (
+            <a key={guide.slug} href={`/${guide.slug}`} className="card group block">
+              <p className="eyebrow text-[#f97316]">{guide.category}</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{guide.title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{guide.description}</p>
+              <span className="mt-6 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Read guide <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+      <section className="section bg-white">
+        <div className="rounded border border-slate-200 bg-[#0b1f33] p-8 text-white">
+          <p className="eyebrow text-orange-200">SEO Separation</p>
+          <h2 className="mt-3 text-3xl font-black">Fab educates. Super converts.</h2>
+          <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-200">
+            Americas Panel Fab should rank for manufacturing, comparison, and education searches. American Super Panel should rank for product pages, quote requests, contractor orders, and plan uploads.
+          </p>
+        </div>
+      </section>
+    </>
+  )
+}
+
+function GuideArticle({ guide }: { guide: (typeof guidePages)[number] }) {
+  return (
+    <>
+      <PageHero title={guide.title} copy={guide.hero} />
+      <section className="section bg-white">
+        <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+          <div>
+            <img src={guide.image} alt={guide.imageAlt} className="h-[420px] w-full rounded object-cover shadow-xl" />
+            <div className="mt-6 rounded border border-slate-200 bg-slate-50 p-6">
+              <p className="eyebrow text-[#f97316]">Key Takeaways</p>
+              <ul className="mt-4 grid gap-3">
+                {guide.takeaways.map((takeaway) => (
+                  <li key={takeaway} className="flex gap-3 font-bold text-[#0b1f33]">
+                    <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+                    {takeaway}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <article className="grid gap-5">
+            {guide.sections.map(([title, copy]) => (
+              <section key={title} className="rounded border border-slate-200 bg-white p-6 shadow-lg">
+                <h2 className="text-2xl font-black text-[#0b1f33]">{title}</h2>
+                <p className="mt-3 text-lg leading-8 text-slate-600">{copy}</p>
+              </section>
+            ))}
+            <div className="rounded border border-slate-200 bg-[#0b1f33] p-6 text-white">
+              <p className="eyebrow text-orange-200">Next Step</p>
+              <h2 className="mt-3 text-2xl font-black">Use the right site for the next action.</h2>
+              <p className="mt-3 leading-8 text-slate-200">
+                Stay on Americas Panel Fab for manufacturing research and comparison. Move to American Super Panel when the buyer is ready to request panels, trim, flashing, or plan review.
+              </p>
+              <a className="btn-primary mt-6" href={guide.ctaHref}>
+                {guide.cta} <ArrowRight size={18} />
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+      <GuidesRelated currentSlug={guide.slug} />
+    </>
+  )
+}
+
+function GuidesRelated({ currentSlug }: { currentSlug: string }) {
+  return (
+    <section className="section bg-slate-50">
+      <SectionIntro
+        eyebrow="Related Guides"
+        title="Keep researching the manufacturing context."
+        copy="Internal guide links help search engines understand the APF authority cluster while keeping product-intent CTAs pointed at American Super Panel."
+      />
+      <div className="mt-10 grid gap-5 md:grid-cols-3">
+        {guidePages
+          .filter((guide) => guide.slug !== currentSlug)
+          .slice(0, 3)
+          .map((guide) => (
+            <a key={guide.slug} className="card group block" href={`/${guide.slug}`}>
+              <p className="eyebrow text-[#f97316]">{guide.category}</p>
+              <h3 className="mt-3 text-xl font-black text-[#0b1f33]">{guide.title}</h3>
+              <span className="mt-5 inline-flex items-center font-black text-[#0b1f33] group-hover:text-[#f97316]">
+                Read next <ArrowRight className="ml-2" size={18} />
+              </span>
+            </a>
+          ))}
+      </div>
+    </section>
+  )
+}
+
+function GlossaryPage() {
+  return (
+    <>
+      <PageHero
+        title="Metal Panel Glossary"
+        copy="Plain-English definitions for roll forming, metal roofing panels, finishes, trim, flashing, submittals, and manufacturing conversations."
+      />
+      <section className="section bg-slate-50">
+        <div className="grid gap-5 md:grid-cols-2">
+          {glossaryTerms.map(([term, definition]) => (
+            <article key={term} className="card">
+              <p className="eyebrow text-[#f97316]">Defined Term</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{term}</h2>
+              <p className="mt-3 text-lg leading-8 text-slate-600">{definition}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <GuidesRelated currentSlug="" />
     </>
   )
 }
