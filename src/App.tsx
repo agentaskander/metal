@@ -195,8 +195,8 @@ const downloadAssets = [
     type: 'TXT',
   },
   {
-    title: 'Color Chart & Sample Request',
-    copy: 'Named color paths, sample review notes, and finish coordination reminders for panel packages.',
+    title: 'Color Style & Sample Request',
+    copy: 'Color style paths, sample review notes, and project questions sales can use to recommend available finish options.',
     href: '/downloads/color-chart-sample-request.txt',
     type: 'TXT',
   },
@@ -1071,8 +1071,8 @@ function IndustrialRibPage() {
           <div>
             <SectionIntro
               eyebrow="Colors, Finishes & Samples"
-              title="Industrial Rib colors buyers can actually compare."
-              copy="Start with metallic, primer-ready, painted, matte, and cool-roof color paths, then request samples before larger orders or visible trim packages are released."
+              title="Tell us the color style you need. We will confirm what is available."
+              copy="Use these as requested color styles for Industrial Rib panels, trim, and flashing. Sales can review the project, finish family, substrate, gauge, and timing before recommending available samples."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
@@ -1088,7 +1088,7 @@ function IndustrialRibPage() {
                 <Download size={18} /> Finish Guide
               </a>
               <a className="btn-secondary" href="/downloads/color-chart-sample-request.txt" download>
-                <Download size={18} /> Color Chart
+                <Download size={18} /> Color Style Guide
               </a>
             </div>
           </div>
@@ -1105,10 +1105,11 @@ function IndustrialRibPage() {
           </div>
         </div>
         <div className="mt-8 rounded border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="font-black text-[#0b1f33]">Sample request note</p>
+          <p className="font-black text-[#0b1f33]">Availability-first sample request</p>
           <p className="mt-2 leading-7 text-slate-600">
-            Colors shown on screen are planning references. Request physical samples and confirm
-            current availability, substrate, gauge, coating system, and trim color before release.
+            Colors shown on screen are style references, not a promise of current stock.
+            Send the project use, state, profile, finish family, and preferred colors so sales can
+            recommend available samples and alternates before release.
           </p>
         </div>
       </section>
@@ -1619,9 +1620,9 @@ function FinishSystem() {
     <section id="finishes" className="section">
       <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
         <div>
-          <SectionIntro
-            eyebrow="Colors & Finishes"
-            title="Real color paths for panels, trim, and flashing."
+            <SectionIntro
+              eyebrow="Colors & Finishes"
+            title="Choose a color direction. Confirm the available finish path."
             copy="Coordinate panel color, trim color, substrate, sheen, and sample requests before ordering commercial, agricultural, industrial, or residential metal panel packages."
           />
           <div className="mt-8 flex flex-wrap gap-3">
@@ -1629,7 +1630,7 @@ function FinishSystem() {
               Request Samples <ArrowRight size={18} />
             </a>
             <a className="btn-secondary" href="/downloads/color-chart-sample-request.txt" download>
-              <Download size={18} /> Color Chart
+              <Download size={18} /> Color Style Guide
             </a>
           </div>
           <div className="mt-8 grid gap-3">
@@ -1668,7 +1669,7 @@ function FinishSystem() {
                   {name}
                 </td>
                 <td>{copy}</td>
-                <td>Current availability, substrate, gauge, sample, trim match, and warranty path.</td>
+                <td>Project use, current availability, substrate, gauge, sample, trim match, and warranty path.</td>
               </tr>
             ))}
           </tbody>
@@ -2190,12 +2191,26 @@ function QuoteForm() {
           </select>
         </label>
         <label>
-          <span>Color / Finish Interest</span>
-          <input name="color_finish_interest" type="text" placeholder="Galvalume, Rezibond-style, Charcoal, Polar White..." />
+          <span>Color Style Needed</span>
+          <input name="color_style_needed" type="text" placeholder="Metallic, white, charcoal, matte black, earth tone..." />
+        </label>
+        <label>
+          <span>Finish Priority</span>
+          <select name="finish_priority" defaultValue="">
+            <option value="" disabled>
+              Select finish priority
+            </option>
+            <option>Lowest practical cost</option>
+            <option>Cool roof / heat-aware</option>
+            <option>Matte / low-glare appearance</option>
+            <option>Premium commercial appearance</option>
+            <option>Primer-ready / industrial design</option>
+            <option>Match existing building</option>
+          </select>
         </label>
         <label className="md:col-span-2">
           <span>Notes</span>
-          <input name="notes" type="text" placeholder="Panel lengths, trim needs, sample colors, timing, delivery state, or plan notes" />
+          <input name="notes" type="text" placeholder="Panel lengths, trim needs, sample colors, alternates, timing, delivery state, or plan notes" />
         </label>
       </div>
       <TurnstileSlot />
