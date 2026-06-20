@@ -266,6 +266,25 @@ const industrialRibApplications = [
   'Municipal storage and service facilities',
   'Large-format siding and liner panels',
 ]
+const industrialRibBuyerChecklist = [
+  ['Project state', 'California is the primary launch market. Texas is next. Other states are reviewed by project.'],
+  ['Roof or wall scope', 'Tell sales whether the quote is roof panels, siding panels, trim, flashing, or a full package.'],
+  ['Approximate square footage', 'A rough roof or wall area helps sales triage the request before detailed takeoff review.'],
+  ['Panel lengths or plans', 'Upload drawings, sketches, elevations, measurements, or roof plans if available.'],
+  ['Color and finish direction', 'Use the finishes page to save a color style, sample request, or alternate finish path.'],
+  ['Trim and accessories', 'Ridge, rake, eave, corner, jamb, base, closures, fasteners, and transitions should be reviewed together.'],
+] as [string, string][]
+const industrialRibQuotePackages = [
+  ['Panels only', 'For buyers who already know the profile, approximate lengths, color direction, and square footage.'],
+  ['Panels + trim', 'For contractors who need coordinated ridge, rake, eave, corner, jamb, base, closure, and flashing review.'],
+  ['Plan review package', 'For commercial, warehouse, agricultural, or shop projects where drawings should be reviewed before quoting.'],
+] as [string, string][]
+const industrialRibScopeCards = [
+  ['Roofing panels', 'Industrial Rib can be reviewed for exposed-fastener roof scopes where coverage, cost control, trim coordination, and quote speed matter.'],
+  ['Siding panels', 'Use Industrial Rib for wall panels, large-format siding, liners, re-skins, and practical commercial or agricultural building envelopes.'],
+  ['Trim & flashing', 'Quote the panel system with finish-matched trim, closures, fasteners, and transition details so crews are not chasing parts later.'],
+  ['Samples & finishes', 'Select a color direction, finish family, and follow-up preference before sales confirms current samples and close alternates.'],
+] as [string, string][]
 const industrialRibDownloads = [
   {
     title: 'Industrial Rib Product Data',
@@ -1020,6 +1039,13 @@ function IndustrialRibPage() {
                 system built for fast quotes, custom lengths, reliable supply, and regional
                 manufacturing support. Manufactured by Americas Panel Fab.
               </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {['California-first quoting', 'Panels + trim packages', 'Plans accepted for review'].map((item) => (
+                  <p key={item} className="rounded border border-slate-200 bg-slate-50 p-4 text-sm font-black text-[#0b1f33]">
+                    {item}
+                  </p>
+                ))}
+              </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a className="btn-primary" href="#quote">
                   Request a Quote <ArrowRight size={18} />
@@ -1045,8 +1071,34 @@ function IndustrialRibPage() {
                 alt={siteImages.heroRollFormer.alt}
                 className="h-[420px] w-full rounded object-cover"
               />
+              <div className="grid gap-3 p-3 sm:grid-cols-3">
+                {['Roof panels', 'Siding panels', 'Trim & flashing'].map((item) => (
+                  <p key={item} className="rounded bg-white p-3 text-center text-sm font-black text-[#0b1f33]">
+                    {item}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <SectionIntro
+          eyebrow="Quote Path"
+          title="Choose the package you need before the first call."
+          copy="Industrial Rib quotes move faster when sales can see whether the buyer needs panels only, a panel-and-trim package, or a plan-review package."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {industrialRibQuotePackages.map(([title, copy]) => (
+            <article key={title} className="card">
+              <h2 className="text-2xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+              <a className="btn-secondary mt-5" href={title === 'Plan review package' ? '#upload-plans' : '#quote'}>
+                {title === 'Plan review package' ? 'Upload Plans' : 'Request Quote'} <ArrowRight size={18} />
+              </a>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -1094,6 +1146,55 @@ function IndustrialRibPage() {
 
       <CapabilityPhotoStrip />
 
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Roofing, Siding, Trim"
+          title="One Industrial Rib conversation can cover the whole metal package."
+          copy="Contractors do not just need a panel name. They need the roof or wall scope, trim conditions, accessories, color direction, and plan review path organized for quote."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {industrialRibScopeCards.map(([title, copy]) => (
+            <article key={title} className="rounded border border-slate-200 bg-slate-50 p-5">
+              <h2 className="text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <SectionIntro
+              eyebrow="California-First SEO"
+              title="California metal roofing panel quotes first. Texas next."
+              copy="American Super Panel is prioritizing California contractor, commercial, industrial, agricultural, shop, and owner-led panel quotes. Texas is the next expansion target; Arizona and Florida inquiries can be reviewed by project."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="btn-primary" href="/california-metal-panels">
+                California Metal Panels <ArrowRight size={18} />
+              </a>
+              <a className="btn-secondary" href="#quote">
+                Start Quote
+              </a>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ['Best launch fit', 'California contractors, shops, warehouses, agricultural buildings, and commercial owners who need panel-and-trim quotes.'],
+              ['No fake office claims', 'Availability, delivery, sample path, and local project support are confirmed by sales before quoting.'],
+              ['Search intent covered', 'Industrial Rib, metal roofing panels, metal siding panels, exposed-fastener panels, and trim packages.'],
+              ['Next market signal', 'Texas demand can be collected now for warehouse, shop, agricultural, and contractor panel requests.'],
+            ].map(([title, copy]) => (
+              <article key={title} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
+                <h2 className="text-lg font-black text-[#0b1f33]">{title}</h2>
+                <p className="mt-2 leading-7 text-slate-600">{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="samples" className="section bg-slate-50">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
@@ -1105,6 +1206,9 @@ function IndustrialRibPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
                 Request Samples <ArrowRight size={18} />
+              </a>
+              <a className="btn-secondary" href="/finishes#finishes">
+                Use Color Selector
               </a>
               <a className="btn-secondary" href="#quote">
                 Order Panels
@@ -1185,6 +1289,34 @@ function IndustrialRibPage() {
       </section>
 
       <AmericanMadeSection />
+
+      <section className="section bg-slate-50">
+        <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <div>
+            <SectionIntro
+              eyebrow="Quote-Ready Checklist"
+              title="Send enough detail for a serious Industrial Rib quote."
+              copy="You do not need a perfect submittal package to start. These are the practical details that help sales understand the panel path and next step."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="btn-primary" href="#quote">
+                Request Quote <ArrowRight size={18} />
+              </a>
+              <a className="btn-secondary" href="#upload-plans">
+                <FileUp size={18} /> Upload Plans
+              </a>
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {industrialRibBuyerChecklist.map(([title, copy]) => (
+              <article key={title} className="rounded border border-slate-200 bg-white p-5 shadow-sm">
+                <h2 className="text-lg font-black text-[#0b1f33]">{title}</h2>
+                <p className="mt-2 leading-7 text-slate-600">{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="section bg-white">
         <SectionIntro
