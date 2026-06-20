@@ -10,7 +10,6 @@ import {
   FileCheck2,
   FileText,
   FileUp,
-  Flame,
   Gauge,
   HardHat,
   Landmark,
@@ -100,22 +99,30 @@ const states = [
   {
     name: 'California',
     slug: 'california-metal-panels',
-    copy: 'Metal roofing panels, metal siding panels, trim, and flashing quote support for California contractors, builders, owners, and agricultural projects.',
+    copy: 'California-first quote support for metal roofing panels, siding panels, Industrial Rib, PBR / R-Panel, AG panels, trim, and flashing packages.',
+    status: 'Primary launch market',
+    note: 'Best current fit for contractor quotes, plan uploads, commercial projects, agricultural buildings, shops, and owner-led panel packages.',
   },
   {
     name: 'Arizona',
     slug: 'arizona-metal-panels',
-    copy: 'Ribbed metal roofing panels, siding panels, and trim packages for Arizona commercial, shop, warehouse, agricultural, and residential projects.',
+    copy: 'Arizona metal panel inquiries can be reviewed by project while regional availability is confirmed.',
+    status: 'Project-review availability',
+    note: 'Use this page for future high-sun finish questions and project review. Do not assume local stock, delivery, or office coverage until sales confirms.',
   },
   {
     name: 'Texas',
     slug: 'texas-metal-panels',
-    copy: 'Metal panel quote support for Texas contractors, warehouses, agricultural buildings, shops, equipment shelters, and commercial projects.',
+    copy: 'Texas is the next expansion target for warehouses, shops, agricultural buildings, equipment shelters, and contractor panel packages.',
+    status: 'Next expansion market',
+    note: 'Texas inquiries are useful for demand validation and larger project review. Sales should confirm availability, production path, and delivery before quoting.',
   },
   {
     name: 'Florida',
     slug: 'florida-metal-panels',
-    copy: 'Metal roofing panel, siding panel, trim, and flashing quote support for Florida contractors, commercial buildings, and agricultural projects.',
+    copy: 'Florida metal panel inquiries can be reviewed by project while coastal availability and requirements are confirmed.',
+    status: 'Project-review availability',
+    note: 'Coastal, wind, corrosion, code, and warranty questions require project-specific review before any quote or product recommendation.',
   },
 ]
 
@@ -137,10 +144,10 @@ const finishes = [
   ['Custom color match', '#f97316', 'Finish coordination for brand, campus, and architectural standards.'],
 ]
 const resources = [
-  ['Panel profiles', Ruler, 'Profile sheets for standing seam, exposed fastener, wall panels, trim, and accessories.'],
-  ['Warranty path', ShieldCheck, 'Weather-tightness and finish warranty coordination for qualifying assemblies.'],
-  ['Submittal packages', FileCheck2, 'Product data, finish selections, fastener notes, and project-specific details.'],
-  ['Takeoff support', FileText, 'Plan review support for panel counts, flashing scope, and production sequencing.'],
+  ['Panel profiles', Ruler, 'Profile sheets for Industrial Rib, PBR / R-Panel, AG panels, trim, and accessories.', '/american-super-panel-industrial-rib'],
+  ['Warranty path', ShieldCheck, 'Finish, substrate, fastening, and project documentation conversations for qualifying packages.', '/downloads/submittal-package-guide.txt'],
+  ['Submittal packages', FileCheck2, 'Product data, finish selections, fastener notes, and project-specific details.', '/downloads/submittal-package-guide.txt'],
+  ['Takeoff support', FileText, 'Plan review support for panel counts, flashing scope, and production sequencing.', '/downloads/plan-upload-instructions.txt'],
 ]
 const downloadAssets = [
   {
@@ -167,9 +174,21 @@ const downloadAssets = [
     href: '/downloads/finish-selection-guide.txt',
     type: 'TXT',
   },
+  {
+    title: 'Industrial Rib Product Data',
+    copy: 'Profile, rib height, finish path, applications, and project-review notes for Industrial Rib packages.',
+    href: '/downloads/industrial-rib-product-data.txt',
+    type: 'TXT',
+  },
+  {
+    title: 'Industrial Rib Quote Checklist',
+    copy: 'The project facts estimating needs before reviewing a commercial roofing or siding quote.',
+    href: '/downloads/industrial-rib-quote-checklist.txt',
+    type: 'TXT',
+  },
 ]
 const industrialRibSpecs = [
-  ['Product Family', 'American Super Panel™ Industrial Series'],
+  ['Product Package', 'American Super Panel™ Industrial Rib'],
   ['Panel Type', 'Exposed fastener metal roofing and siding panel'],
   ['Profile', 'Industrial Rib 7.2 profile'],
   ['Rib Distance / Pitch', '7.2 in. nominal'],
@@ -218,9 +237,9 @@ const industrialRibDownloads = [
 ]
 const selectorOptions = {
   assembly: ['Roof', 'Wall', 'Roof + Wall', 'Trim / Flashing'],
-  environment: ['Standard Commercial', 'Coastal / Wind', 'High Heat / Sun', 'Fire / Public Safety', 'Industrial Exposure'],
+  environment: ['Standard Commercial', 'High Sun / Heat', 'Coastal / Wind Review', 'Public / School Review', 'Industrial Exposure'],
   projectType: ['Commercial', 'Industrial', 'Agriculture', 'Residential', 'Warehouse', 'Contractor Bulk Order', 'Multifamily'],
-  state: ['California', 'Arizona', 'Texas', 'Florida'],
+  state: ['California', 'Texas', 'Arizona', 'Florida'],
 }
 const processSteps = [
   ['Upload plans', 'PDFs, drawings, and structural documents route to sales and estimating.'],
@@ -299,7 +318,7 @@ const faqItems = [
   ['Can I request custom lengths?', 'Yes. Send your project information, desired panel lengths, and drawings or measurements so sales can review the request.'],
   ['Can contractors order in bulk?', 'Yes. Contractors can request panel, trim, flashing, and accessory packages for commercial, agricultural, industrial, and residential projects.'],
   ['Can I upload plans for quoting?', 'Yes. Use the upload form to send plans, drawings, structural documents, photos, and project notes for review.'],
-  ['What states do you serve?', 'American Super Panel is building quote and support coverage around California, Arizona, Texas, and Florida. Do not assume a local office unless confirmed by sales.'],
+  ['What states do you serve?', 'California is the primary launch market. Texas is the next expansion target. Arizona and Florida inquiries can be reviewed by project, but local availability must be confirmed by sales.'],
   ['Can you provide trim and flashing?', 'Yes. Trim and flashing can be reviewed with panel orders so the package is easier for crews to install.'],
 ]
 const maxUploadBytes = 100 * 1024 * 1024
@@ -888,8 +907,8 @@ function SuperPanelPage() {
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {[
-            ['Wind Resistance', Wind, 'Panel options and attachment paths for demanding regional wind requirements.'],
-            ['Fire Resistance', Flame, 'Metal roof and wall assemblies that support resilient building-envelope planning.'],
+            ['Wind Review Path', Wind, 'Project-specific attachment, trim, and documentation questions for demanding regional conditions.'],
+            ['Code Review Support', FileCheck2, 'Submittal and project-documentation support where code, owner, or assembly review is required.'],
             ['Energy Efficiency', SunMedium, 'Cool-roof color paths, reflective surfaces, and ventilation-aware details.'],
             ['Long Service Life', ShieldCheck, 'Durable steel and aluminum package options with clean trim integration.'],
           ].map(([title, Icon, copy]) => (
@@ -1733,56 +1752,56 @@ function getPanelRecommendation({
   projectType: string
   state: string
 }) {
-  if (state === 'Florida' || environment === 'Coastal / Wind') {
-    return {
-      package: ['Standing seam roof path', 'Coastal trim review', 'Wind-aware fastening notes'],
-      reasons: ['Florida and coastal exposure fit', 'Designed for wind and corrosion conversations', 'Pairs with uploaded plans for review'],
-      series: 'American Super Panel™ Coastal Series',
-      summary: 'Recommended for wind-aware commercial roofing and wall panel packages where coastal detailing and fastening review matter early.',
-    }
-  }
-
-  if (state === 'Arizona' || environment === 'High Heat / Sun') {
-    return {
-      package: ['Cool roof finish path', 'Standing seam or wall panel package', 'Heat exposure finish notes'],
-      reasons: ['Arizona and high-sun conditions fit', 'Supports reflective finish decisions', 'Good for warehouses and commercial shells'],
-      series: 'American Super Panel™ Desert Series',
-      summary: 'Recommended for high-sun projects that need durable finishes, heat-aware color choices, and clean commercial panel packages.',
-    }
-  }
-
-  if (state === 'California' || environment === 'Fire / Public Safety') {
-    return {
-      package: ['Fire-aware assembly review', 'Submittal package path', 'Public project documentation'],
-      reasons: ['California project conditions fit', 'Strong for schools and commercial work', 'Supports bid and submittal coordination'],
-      series: 'American Super Panel™ FireSafe Series',
-      summary: 'Recommended for public, education, commercial, and resilience-focused projects that need careful documentation and assembly review.',
-    }
-  }
-
-  if (state === 'Texas' || projectType === 'Industrial' || projectType === 'Warehouse' || environment === 'Industrial Exposure') {
-    return {
-      package: ['Long-run panel package', 'Exposed fastener or standing seam path', 'Flashing and accessory bundle'],
-      reasons: ['Texas-scale and industrial conditions fit', 'Good for large roof and wall scopes', 'Built around production and fulfillment efficiency'],
-      series: 'American Super Panel™ Industrial Series',
-      summary: 'Recommended for warehouse, logistics, manufacturing, and large-format commercial packages where speed and scale matter.',
-    }
-  }
-
   if (assembly === 'Trim / Flashing') {
     return {
-      package: ['Custom flashing package', 'Finish-matched trim set', 'Job-labeled bundle'],
-      reasons: ['Best fit for detail-heavy scopes', 'Supports contractor closeout needs', 'Pairs with wall or roof panel orders'],
-      series: 'American Super Panel™ Commercial Series',
-      summary: 'Recommended for coordinated commercial trim, flashing, and accessory packages tied to roof or wall panel work.',
+      package: ['Trim schedule', 'Finish-matched flashing', 'Closures and accessories'],
+      reasons: ['Best fit for detail-heavy scopes', 'Supports contractor closeout needs', 'Pairs with roof or wall panel orders'],
+      series: 'Trim & Flashing Package',
+      summary: 'Recommended when the project needs ridge, rake, eave, corner, jamb, base, transition, cap, closure, and accessory review before ordering.',
+    }
+  }
+
+  if (projectType === 'Agriculture') {
+    return {
+      package: ['AG / Tuff Rib panel path', 'Barn/shop trim package', 'Finish and delivery review'],
+      reasons: ['Good for barns, shops, ranch buildings, and storage structures', 'Simple roof and siding package language', 'Pairs with photos, sketches, or basic drawings'],
+      series: 'AG / Tuff Rib Panel Package',
+      summary: 'Recommended for agricultural, ranch, shop, storage, and equipment shelter projects that need practical roof and wall coverage.',
+    }
+  }
+
+  if (projectType === 'Industrial' || projectType === 'Warehouse' || environment === 'Industrial Exposure' || state === 'Texas') {
+    return {
+      package: ['Industrial Rib panel path', 'PBR / R-Panel alternate', 'Trim and accessory bundle'],
+      reasons: ['Good for warehouses, shops, manufacturing, and logistics buildings', 'Supports larger roof and wall scopes', 'Texas inquiries can be reviewed as the next expansion market'],
+      series: 'Industrial Rib / PBR Panel Package',
+      summary: 'Recommended for industrial, warehouse, shop, and large-format commercial projects that need practical exposed-fastener roof or wall panels.',
+    }
+  }
+
+  if (environment === 'Coastal / Wind Review' || state === 'Florida') {
+    return {
+      package: ['Project-specific review', 'Fastener and trim questions', 'Finish/substrate documentation'],
+      reasons: ['Coastal and wind questions need project-specific review', 'Good fit for early drawings and requirements upload', 'Availability must be confirmed before quoting'],
+      series: 'Coastal Project Review',
+      summary: 'Recommended as a review path, not a product claim. Upload plans so sales can confirm availability, requirements, and documentation needs.',
+    }
+  }
+
+  if (environment === 'Public / School Review') {
+    return {
+      package: ['Commercial panel path', 'Submittal package', 'Finish and documentation review'],
+      reasons: ['Useful for schools, public-facing buildings, and commercial owners', 'Avoids unsupported fire or code claims', 'Keeps project-specific review in the right place'],
+      series: 'Commercial Project Review',
+      summary: 'Recommended when the buyer needs documentation, submittals, finish coordination, and careful project review before release.',
     }
   }
 
   return {
-    package: ['Standing seam or wall panel path', 'Finish selection support', 'Quote-ready takeoff review'],
-    reasons: ['Strong default commercial fit', 'Flexible for roof, wall, or combined scopes', 'Good for architects, contractors, and owners'],
-    series: 'American Super Panel™ Commercial Series',
-    summary: 'Recommended for most commercial, multifamily, education, and mixed-use projects that need a clean specification and quote path.',
+    package: ['Industrial Rib or PBR panel path', 'Finish selection support', 'Quote-ready takeoff review'],
+    reasons: ['Strong default for California contractor quotes', 'Flexible for roof, wall, or combined scopes', 'Good for commercial, shop, residential accessory, and multifamily support work'],
+    series: 'California Contractor Panel Package',
+    summary: 'Recommended for California-first quote review when the buyer needs roof panels, siding panels, trim, flashing, colors, and plan upload support.',
   }
 }
 
@@ -1795,12 +1814,15 @@ function BidResources() {
         copy="Get product data, finish guidance, takeoff support, and upload instructions organized for quote review, submittals, and ordering."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {resources.map(([title, Icon, copy]) => (
-          <article key={title as string} className="card">
+        {resources.map(([title, Icon, copy, href]) => (
+          <a key={title as string} className="card hover:border-[#f97316]" href={href as string} download={(href as string).startsWith('/downloads/') || undefined}>
             <Icon className="text-[#f97316]" />
             <h3 className="mt-5 text-xl font-black text-[#0b1f33]">{title as string}</h3>
             <p className="mt-3 leading-7 text-slate-600">{copy as string}</p>
-          </article>
+            <span className="mt-5 inline-flex items-center font-black text-[#0b1f33]">
+              Open resource <ArrowRight className="ml-2" size={18} />
+            </span>
+          </a>
         ))}
       </div>
       <div className="mt-8 grid gap-4 rounded bg-[#0b1f33] p-6 text-white md:grid-cols-3">
@@ -1891,14 +1913,15 @@ function ServiceAreas() {
     <section id="service-areas" className="section">
       <SectionIntro
         eyebrow="Service Areas"
-        title="Quote support for California, Arizona, Texas, and Florida."
-        copy="Regional service pages help contractors, owners, farms, ranches, and builders find metal roofing panels, siding panels, trim, and flashing support in their state."
+        title="California first. Texas next. Other states by project review."
+        copy="American Super Panel is focused on practical quote support where the service path is ready. California is the primary launch market, Texas is the next expansion target, and other states require sales confirmation."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {states.map((state) => (
           <a key={state.slug} href={`/${state.slug}`} className="card group block">
             <MapPin className="mb-5 text-[#f97316]" />
             <h3 className="text-2xl font-black text-[#0b1f33]">{state.name}</h3>
+            <p className="mt-2 text-xs font-black uppercase tracking-[0.14em] text-[#f97316]">{state.status}</p>
             <p className="mt-3 leading-7 text-slate-600">{state.copy}</p>
             <span className="mt-5 inline-flex font-black text-[#0b1f33] group-hover:text-[#f97316]">
               View regional page
@@ -2244,6 +2267,9 @@ function StateLanding({ state }: { state: (typeof states)[number] }) {
             {state.name} Metal Roofing Panels & Architectural Metal Panels
           </h1>
           <p className="mt-6 text-xl leading-8 text-slate-700">{state.copy}</p>
+          <p className="mt-4 rounded border border-orange-200 bg-orange-50 p-4 font-bold leading-7 text-slate-700">
+            {state.status}: {state.note}
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="btn-primary" href="#quote">
               Request Quote
