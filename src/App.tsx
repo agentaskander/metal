@@ -51,25 +51,32 @@ const products = [
     copy: 'Concealed-fastener panel systems for commercial, industrial, municipal, and education facilities.',
     points: ['Concealed fasteners', 'Long custom panel lengths', 'Commercial warranty path'],
     spec: 'Roofing • Architectural • Low-slope capable assemblies',
+    href: 'https://www.americansuperpanel.com/products',
+    action: 'View product options',
   },
   {
     name: 'American Super Panel™ Exposed Fastener',
     copy: 'Durable, economical panel packages for agricultural, warehouse, and industrial buildings.',
     points: ['Fast installation', 'Ribbed strength profile', 'Cost-efficient coverage'],
     spec: 'Warehouses • Ag • Industrial service buildings',
-    href: '/american-super-panel-industrial-rib',
+    href: 'https://www.americansuperpanel.com/american-super-panel-industrial-rib',
+    action: 'View Industrial Rib panels',
   },
   {
     name: 'Wall Panels',
     copy: 'Coordinated wall cladding systems for commercial shells, expansions, and re-skins.',
     points: ['Horizontal or vertical layouts', 'Color-matched trims', 'Clean transitions'],
     spec: 'Architectural walls • Soffits • Rainscreen support',
+    href: 'https://www.americansuperpanel.com/products',
+    action: 'View siding panels',
   },
   {
     name: 'Trim, Flashing & Accessories',
     copy: 'Complete fabricated packages that help crews close details cleanly and keep schedules moving.',
     points: ['Custom flashing', 'Closures and fasteners', 'Job-labeled bundles'],
     spec: 'Submittal-ready details • Crew-friendly packaging',
+    href: 'https://www.americansuperpanel.com/trim-and-flashing',
+    action: 'View trim and flashing',
   },
 ]
 
@@ -1824,8 +1831,8 @@ function SuperPanel() {
               ),
             )}
           </div>
-          <a className="btn-primary mt-8" href="/super-panel">
-            Explore Super Panel <ArrowRight size={18} />
+          <a className="btn-primary mt-8" href="https://www.americansuperpanel.com">
+            Explore American Super Panel™ <ArrowRight size={18} />
           </a>
         </div>
         <img
@@ -2029,6 +2036,15 @@ function IndustrialRibPage() {
               <p className="mt-3 leading-7 text-slate-600">{copy as string}</p>
             </article>
           ))}
+        </div>
+        <div className="mt-8 rounded border border-slate-200 bg-slate-50 p-6">
+          <p className="font-bold leading-7 text-slate-700">
+            For product-specific panel pages, contractor quote requests, colors, gauges, trim,
+            and plan review, continue to American Super Panel.
+          </p>
+          <a className="btn-primary mt-5" href="https://www.americansuperpanel.com/american-super-panel-industrial-rib">
+            View Industrial Rib on AmericanSuperPanel.com <ArrowRight size={18} />
+          </a>
         </div>
       </section>
 
@@ -2748,11 +2764,9 @@ function Products() {
                 </li>
               ))}
             </ul>
-            {'href' in product ? (
-              <a className="mt-6 inline-flex font-black text-[#0b1f33] hover:text-[#f97316]" href={product.href}>
-                View Industrial Rib product page <ArrowRight className="ml-2" size={18} />
-              </a>
-            ) : null}
+            <a className="mt-6 inline-flex font-black text-[#0b1f33] hover:text-[#f97316]" href={product.href}>
+              {product.action} <ArrowRight className="ml-2" size={18} />
+            </a>
           </article>
         ))}
       </div>
