@@ -333,9 +333,19 @@ select {
   flex: 0 0 auto;
 }
 
+.site-header-row {
+  flex-wrap: wrap;
+}
+
 .main-nav {
+  display: flex;
   flex: 1 1 auto;
   justify-content: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .header-actions {
@@ -365,7 +375,12 @@ select {
 
 @media (max-width: 900px) {
   .main-nav {
-    display: none;
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: flex-start;
+    gap: 1rem;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 0.8rem;
   }
 
   .header-secondary-action {
