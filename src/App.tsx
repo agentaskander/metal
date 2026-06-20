@@ -775,7 +775,7 @@ const guideEnhancements: Record<string, {
       'Length planning is one of the biggest advantages of manufacturing coordination. Panels can be produced in custom lengths within equipment, handling, shipping, and project constraints. That does not mean every length is automatically practical. The manufacturer, contractor, and buyer should consider handling, jobsite storage, transportation, roof access, crew sequencing, and whether long panels create special needs.',
       'Factory roll forming and mobile roll forming solve different problems. Factory production can support repeatability, packaging control, material staging, and coordination with trim or accessories. Mobile roll forming can be valuable for selected long-run jobs or logistics-sensitive projects when site conditions support it. The buyer should not treat mobile as a universal upgrade. It is a project-fit decision.',
       'Quality conversations around roll forming should stay practical and public-safe. Buyers can ask about profile verification, bundle labels, material traceability, cutoff accuracy, finish protection, packaging, and documented assumptions. They should avoid assuming performance claims that have not been reviewed. Public education can explain the workflow while project-specific requirements remain tied to qualified review and manufacturer documentation.',
-      'For Americas Panel Fab, roll-forming education should become a pillar because it ties together equipment investment, product family development, quote readiness, contractor support, and future manufacturing growth. The page should help a buyer understand why the company is not just reselling panels. It is building a manufacturing process around panel systems.',
+      'For Americas Panel Fab, roll-forming education matters because it ties together equipment investment, product family development, quote readiness, contractor support, and manufacturing growth. The process shows buyers that the company supports panel systems with manufacturing workflow, not simple resale language.',
     ],
     diagram: ['Coil selected by gauge, substrate, and finish', 'Decoiler feeds material into forming stations', 'Tooling shapes profile and side lap', 'Cutoff creates project lengths', 'Panels are bundled, labeled, and coordinated with trim'],
     comparison: [
@@ -1256,7 +1256,7 @@ function getSeoConfig(path: string, statePage?: (typeof states)[number]): SeoCon
     '': {
       canonicalPath: '/',
       description:
-        'Americas Panel Fab is building a modern metal panel manufacturing company for roll forming, panel fabrication, commercial supply, and partner growth.',
+        'Americas Panel Fab is a modern metal panel manufacturing company for roll forming, panel fabrication, commercial supply, and partner growth.',
       title: 'Americas Panel Fab | Metal Panel Manufacturing Company',
       schema: apfOrganizationSchema,
     },
@@ -1634,9 +1634,8 @@ function PlatformHome() {
               Americas Panel Fab
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              Americas Panel Fab is building a modern American metal panel manufacturing
-              company for commercial, agricultural, residential, government, and industrial
-              customers.
+              Americas Panel Fab manufactures and supports modern American metal panel systems
+              for commercial, agricultural, residential, government, and industrial customers.
             </p>
             <p className="mt-6 rounded border border-slate-200 bg-white p-4 text-base font-bold leading-7 text-[#0b1f33] shadow-sm">
               American Super Panel™ is the flagship exposed-fastener roofing and siding panel
