@@ -43,7 +43,7 @@ const navItems = [
   ['Commercial', '/commercial'],
   ['Agricultural', '/agricultural'],
   ['Finishes', '/finishes'],
-  ['Panel Quality', '/quality'],
+  ['Quality', '/quality'],
   ['Contact', '/contact'],
 ]
 
@@ -977,7 +977,7 @@ function QualityPage() {
     <>
       <PageHero
         eyebrow="Quality"
-        title="Panel quality that helps the job go right."
+        title="Built Right for the Work Ahead"
         copy="Roofing panels, siding panels, trim, samples, communication, and delivery support should help the project move forward with fewer avoidable problems."
       />
       <QualityChainCallout />
