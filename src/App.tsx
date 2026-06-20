@@ -9,20 +9,16 @@ import {
   Factory,
   FileCheck2,
   FileText,
-  FileUp,
   Flame,
   Gauge,
   HardHat,
   Landmark,
-  Mail,
   MapPin,
-  Phone,
   Ruler,
   SearchCheck,
   ShieldCheck,
   Sparkles,
   SunMedium,
-  UploadCloud,
   Wind,
 } from 'lucide-react'
 
@@ -45,7 +41,6 @@ const navItems = [
   ['Super Panel', '/super-panel'],
   ['Internal', '/internal-strategy'],
   ['Ontology', '/internal-ontology'],
-  ['Contact', '/contact'],
 ]
 
 const products = [
@@ -284,7 +279,7 @@ const internalOntologyWorkflows = [
     name: 'ASP Quote-to-Order Flow',
     steps: [
       'Visitor lands on ASP product/service/state page.',
-      'Visitor clicks Request Quote, Upload Plans, Call Sales, or Contact Sales.',
+      'Visitor triggers quote intake, plan intake, sales call, or sales message intent.',
       'Lead record captures project basics, source route, UTM, state, project type, and panel intent.',
       'Sales triage checks completeness, urgency, state, file availability, and product fit.',
       'Estimator reviews drawings, square footage, lengths, trim, finish, and delivery assumptions.',
@@ -359,6 +354,211 @@ const internalOntologyGovernance = [
   'Every public route should have unique title, description, H1, intro copy, self-canonical, and appropriate schema.',
   'Every stock image should map to a future real-photo replacement target.',
   'Real machine, steel coil, bundle, truck loading, trim fabrication, warehouse, employee, and project photos outrank decorative design work.',
+]
+const internalOntologyMachineSystems = [
+  {
+    category: 'Primary Roll Forming Equipment',
+    items: [
+      ['Fixed roll former', 'Stationary panel production line for repeatable profiles, factory-controlled lengths, bundled orders, and predictable commercial fulfillment.'],
+      ['Mobile roll former', 'Trailer or mobile unit that can produce long panels near the jobsite when transport length, staging, or lap reduction makes sense.'],
+      ['Standing seam machine', 'Concealed-fastener roof panel production equipment for architectural and commercial systems.'],
+      ['Exposed-fastener ribbed panel machine', 'Machine family for PBR, R-Panel, AG panel, Tuff Rib, Industrial Rib, and Western Rib-style demand.'],
+      ['Wall panel roll former', 'Equipment path for wall, liner, soffit, and architectural panel profiles.'],
+    ],
+  },
+  {
+    category: 'Fabrication & Trim Equipment',
+    items: [
+      ['CNC folder / long folder', 'Forms trim, flashing, edge metal, custom profiles, fascia, coping, caps, corners, and transitions.'],
+      ['Brake press', 'Bending equipment for shorter custom flashing, detail parts, and shop-fabricated metal components.'],
+      ['Shear / slitter', 'Cuts sheets or coil-derived blanks to width before forming or fabrication.'],
+      ['Decoiler / uncoiler', 'Feeds coil into roll forming or slitting workflows while controlling tension and material handling.'],
+      ['Forklift / coil handling', 'Material movement capability for coils, bundles, pallets, packaging, staging, and truck loading.'],
+    ],
+  },
+  {
+    category: 'Software-Aware Machine Data',
+    items: [
+      ['Machine profile', 'Machine id, supported profiles, tooling, min/max length, changeover constraints, throughput assumptions, maintenance status.'],
+      ['Run ticket', 'Project id, profile, coil lot, finish, color, lengths, quantities, operator, setup notes, QA checklist, completion status.'],
+      ['Downtime event', 'Cause, machine, operator note, duration, affected orders, maintenance action, reschedule impact.'],
+      ['Tooling library', 'Profile drawings, rib height, coverage width, overlap detail, compatible trim, fasteners, and substrate limits.'],
+    ],
+  },
+]
+const internalOntologyProductTaxonomy = [
+  {
+    family: 'Exposed-Fastener Roof & Wall Panels',
+    products: [
+      ['PBR / R-Panel', 'Commercial, industrial, warehouse, shop, agricultural, and utility buildings; high-intent immediate ASP SEO target.'],
+      ['AG / Tuff Rib', 'Barns, shops, sheds, storage buildings, equipment shelters, farms, ranches, and rural residential projects.'],
+      ['Industrial Rib / 7.2-style', 'Large commercial wall packages, industrial buildings, warehouses, logistics shells, and re-skins.'],
+      ['Western Rib / Rezibond-style positioning', 'Competitive reference category for immediate business capability and buyer familiarity.'],
+    ],
+  },
+  {
+    family: 'Concealed-Fastener & Architectural Systems',
+    products: [
+      ['Standing seam', 'Commercial, architectural, education, municipal, multifamily, and owner-occupied buildings.'],
+      ['Snap-lock standing seam', 'Architectural roof systems where clip/lock details and installation speed matter.'],
+      ['Mechanical seam standing seam', 'Higher-performance concealed-fastener path requiring more specialized installation and review.'],
+      ['Board-and-batten / accent panels', 'Future architectural and residential-adjacent design product path.'],
+    ],
+  },
+  {
+    family: 'Fabricated Accessories',
+    products: [
+      ['Ridge cap', 'Roof peak closure and trim component.'],
+      ['Rake trim', 'Gable edge component.'],
+      ['Eave trim', 'Lower roof edge component.'],
+      ['Jamb / corner / base trim', 'Wall panel package components for openings, outside corners, inside corners, and base conditions.'],
+      ['Transition flashing', 'Detail for roof-to-wall, slope changes, material changes, penetrations, and other field transitions.'],
+      ['Closures / fasteners / sealants', 'Accessory set that turns panels into a complete installable package.'],
+    ],
+  },
+]
+const internalOntologyBusinessOps = [
+  {
+    area: 'Sales Operations',
+    details: [
+      'Lead scoring by source domain, route intent, uploaded files, project state, market, square footage, and project type.',
+      'Response SLA targets by lead tier: emergency/rush, contractor repeat buyer, commercial project, agricultural project, exploratory inquiry.',
+      'Sales stages: new, needs info, estimating, quoted, follow-up, won, lost, dormant, dealer opportunity.',
+      'Call scripts should focus on project facts: profile, roof/wall scope, finish, timing, delivery state, drawings, trim, and decision maker.',
+    ],
+  },
+  {
+    area: 'Estimating Operations',
+    details: [
+      'Takeoff queue should separate complete plan sets from incomplete inquiry forms.',
+      'Estimator checklist: building use, profile, coverage width, lengths, gauge, substrate, finish, trims, accessories, delivery, exclusions.',
+      'Versioned quote assumptions are critical: square footage basis, waste factor, freight, tax, lead time caveat, finish availability, engineering exclusions.',
+      'Clarification workflow should ask for missing dimensions, elevations, roof slope, penetrations, trim details, color, and desired completion date.',
+    ],
+  },
+  {
+    area: 'Production Operations',
+    details: [
+      'Production schedule depends on coil availability, machine profile, tooling changeover, order priority, bundle sequence, and delivery window.',
+      'Run sheets should be generated from approved order data, not retyped from emails.',
+      'QA should record profile, length, count, finish, bundle label, trim package match, damage check, and release signoff.',
+      'Shop floor screens can show scheduled runs, coil lots, job labels, trim tasks, and pickup/loading status.',
+    ],
+  },
+  {
+    area: 'Finance / Admin',
+    details: [
+      'Quote-to-order conversion requires payment terms, PO, billing entity, tax/resale documentation, delivery fee, and credit status.',
+      'Invoice entity should be Americas Panel Fab unless a separate operating entity is legally defined.',
+      'Margin visibility requires coil cost, labor, machine time, trim fabrication, freight, packaging, rush fees, and waste tracking.',
+      'Separate public marketing claims from contractual promises; contracts and invoices need controlled language.',
+    ],
+  },
+]
+const internalOntologyMarketing = [
+  {
+    channel: 'ASP Revenue Marketing',
+    plays: [
+      'Product pages for PBR/R-Panel, AG/Tuff Rib, Industrial Rib, trim and flashing, colors/gauges, and accessories.',
+      'State pages for California, Arizona, Texas, Florida with no fake office claims.',
+      'Contractor-first conversion paths: quote intake, plan intake, sales call, sales message, panel order, dealer inquiry.',
+      'Landing pages by market: commercial, agricultural, warehouse, industrial, residential accessory buildings.',
+      'Conversion proof: real roll former, steel coils, bundles, trim fabrication, truck loading, project gallery, phone number, email, quote form.',
+    ],
+  },
+  {
+    channel: 'APF Authority Marketing',
+    plays: [
+      'Guides and glossary: roll forming, gauges, finishes, standing seam vs R-Panel, PBR vs R-Panel, trim/flashing, commercial metal roofing.',
+      'Manufacturer credibility pages: capabilities, manufacturing, custom fabrication, roll forming, company, partners.',
+      'Neutral comparison content that can recommend ASP when product intent appears.',
+      'Investor/partner credibility without leaking private investment, equipment output, margins, owner background, or projections.',
+    ],
+  },
+  {
+    channel: 'Local / Regional Growth',
+    plays: [
+      'State-level pages; later city/metro pages only when service proof and operations can support them.',
+      'Google Business Profile only when a legitimate location exists.',
+      'Project pages tied to state, market, building type, product type, and photo proof.',
+      'Dealer recruitment pages by region once territories, pricing, samples, and support model are defined.',
+    ],
+  },
+  {
+    channel: 'Trust Assets',
+    plays: [
+      'Photo shot list: machine running, panels exiting, coil inventory, trim fabrication, finished bundles, truck loading, warehouse interior, employees, commercial project, agricultural project.',
+      'Download center: product data, quote checklist, plan upload instructions, trim guide, finish guide, submittal packet guide.',
+      'FAQ schema, Article schema, Product schema, Organization schema, breadcrumbs, sitemaps, robots, canonical URLs.',
+    ],
+  },
+]
+const internalOntologyCompetitors = [
+  {
+    competitor: 'Majestic Metals Fab',
+    strengths: [
+      'Immediately communicates real manufacturer, real products, real facility, real projects, phone number, and request quote path.',
+      'Simple white industrial site feels credible even if generic.',
+      'Clear services/products/portfolio structure.',
+    ],
+    weaknesses: [
+      'Generic positioning; less differentiated product-brand memory.',
+      'Limited buyer workflow emphasis around upload plans, 24-hour quote intent, dealer paths, and multi-state expansion.',
+      'Less opportunity for authority content and software-enabled operational moat.',
+    ],
+    response: [
+      'APF/ASP must look bigger, clearer, more credible, easier to buy from, and more operationally real.',
+      'Use real facility/product/project proof as soon as available.',
+      'Do not beat them with darkness or animation; beat them with buying confidence and manufacturing clarity.',
+    ],
+  },
+  {
+    competitor: 'Western States Metal Roofing',
+    strengths: [
+      'Strong product pages, specific panel profiles, color/finish resources, installation support, and SEO footprint.',
+      'Clear product search intent around Western Rib, Rezibond, exposed-fastener panels, and metal siding.',
+      'Deep content library and product-oriented buyer education.',
+    ],
+    weaknesses: [
+      'Large catalog can feel less personal to local/regional contractors.',
+      'Opportunity for ASP to compete with faster quote workflow, plan uploads, local/regional manufacturing support, and dealer/contractor relationships.',
+    ],
+    response: [
+      'ASP product pages must become specific, data-rich, image-rich, and quote-ready.',
+      'APF guide pages should explain comparisons without copying competitor language or overclaiming equivalence.',
+      'Build product packets and resources that estimators can use before the first call.',
+    ],
+  },
+  {
+    competitor: 'Generic metal roofing suppliers',
+    strengths: [
+      'Existing distribution, price familiarity, stocked colors, contractor relationships.',
+    ],
+    weaknesses: [
+      'Often weak online workflows, poor plan upload experience, thin documentation, generic service positioning.',
+    ],
+    response: [
+      'Win on responsiveness, quoting workflow, documentation quality, product clarity, and trust signals.',
+      'Use software to make quoting, ordering, scheduling, and dealer support easier than the incumbents.',
+    ],
+  },
+]
+const internalOntologyExpansion = [
+  ['Phase 1: ASP revenue engine', 'Launch exposed-fastener panel sales, quote forms, upload plans, service areas, product pages, download center, and real-photo replacement.'],
+  ['Phase 2: APF authority engine', 'Publish guides, glossary, comparison content, capability pages, manufacturing education, partner pages, and credible company story.'],
+  ['Phase 3: Operations software', 'Lead inbox, quote pipeline, takeoff assistant, panel calculator, production scheduler, project tracker, and CRM/ERP foundation.'],
+  ['Phase 4: Dealer/contractor portals', 'Saved projects, pricing rules, quote history, samples, approvals, order status, repeat ordering, dealer territory management.'],
+  ['Phase 5: Manufacturing expansion', 'Standing seam division, trim/accessories division, wall panel programs, mobile roll forming, regional factory partners.'],
+  ['Phase 6: Marketplace/network', 'Supplier directory, installer directory, factory profiles, equipment reviews, dealer network, lead distribution, partner acquisitions.'],
+]
+const internalOntologyVisionPrinciples = [
+  'The website is not just a brochure; it is the first UI for the future operating system.',
+  'Every form field should map to a future CRM/ERP object.',
+  'Every guide should map to a keyword cluster and a buyer education need.',
+  'Every product page should map to a quote workflow and a manufacturing package.',
+  'Every photo should eventually become proof of real equipment, real inventory, real products, or real projects.',
+  'Every competitor weakness should map to a workflow advantage: faster response, clearer docs, easier upload, better package coordination.',
+  'Every internal claim must be classified: public-safe, needs verification, NDA/private, legal review, or future roadmap.',
 ]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
@@ -627,19 +827,13 @@ function RoutedPage({ path }: { path: string }) {
   }
 
   if (path === 'contact') {
-    return (
-      <>
-        <PageHero title="Contact" copy="Request pricing, upload plans, or start a commercial bid conversation with America’s Panel Fab." />
-        <Contact />
-      </>
-    )
+    return <InternalStrategyPage />
   }
 
   return (
     <>
       <PageHero title="America’s Panel Fab" copy="Commercial metal roofing and architectural panel fabrication." />
       <Hero />
-      <Contact />
     </>
   )
 }
@@ -651,14 +845,6 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
         <p className="eyebrow text-[#f97316]">America’s Panel Fab</p>
         <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33]">{title}</h1>
         <p className="mt-6 text-xl leading-8 text-slate-600">{copy}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a className="btn-primary" href="#quote">
-            Request Quote
-          </a>
-          <a className="btn-secondary" href="#upload-plans">
-            Upload Plans
-          </a>
-        </div>
       </div>
     </section>
   )
@@ -667,22 +853,15 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
 function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="top-contact-bar border-b border-slate-200 bg-[#0b1f33] px-5 py-2 text-sm font-bold text-white lg:px-8">
+      <div className="top-contact-bar border-b border-slate-200 bg-slate-50 px-5 py-2 text-sm font-bold text-slate-700 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-between">
-          <span>Commercial metal panels • roll forming • custom fabrication</span>
-          <span className="top-contact-links flex flex-wrap justify-center gap-x-5 gap-y-1">
-            <a className="inline-flex items-center gap-2 hover:text-orange-200" href="tel:+15550193762">
-              <Phone size={15} /> (555) 019-3762
-            </a>
-            <a className="inline-flex items-center gap-2 hover:text-orange-200" href="mailto:sales@americaspanelfab.com">
-              <Mail size={15} /> sales@americaspanelfab.com
-            </a>
-          </span>
+          <span>Internal master site • ontology • strategy • operations</span>
+          <span className="text-[#f97316]">8190 private planning cockpit</span>
         </div>
       </div>
       <div className="site-header-row mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
         <a href="/" className="brand-lockup flex items-center gap-3">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded bg-[#0b1f33] text-white">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-slate-200 bg-slate-50 text-[#0b1f33]">
             <Factory size={24} />
           </span>
           <span>
@@ -702,16 +881,13 @@ function Header() {
           ))}
         </nav>
         <div className="header-actions flex shrink-0 items-center gap-2">
-          <a className="btn-secondary header-secondary-action" href="/resources">
-            <Download size={18} />
-            Resources
+          <a className="btn-secondary header-secondary-action" href="/internal-strategy">
+            <FileText size={18} />
+            Strategy
           </a>
-          <a className="btn-secondary header-secondary-action" href="#upload-plans">
-            <UploadCloud size={18} />
-            Upload Plans
-          </a>
-          <a className="btn-primary" href="#quote">
-            Request Quote
+          <a className="btn-secondary header-secondary-action" href="/internal-ontology">
+            <SearchCheck size={18} />
+            Ontology
           </a>
         </div>
       </div>
@@ -722,13 +898,13 @@ function Header() {
 function InternalStrategyPage() {
   return (
     <>
-      <section className="section border-b border-slate-200 bg-[#0b1f33] text-white">
+      <section className="section border-b border-slate-200 bg-white">
         <div className="max-w-5xl">
-          <p className="eyebrow text-orange-200">Internal Master Site • Not Public Copy</p>
-          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal lg:text-6xl">
+          <p className="eyebrow text-[#f97316]">Internal Master Site • Not Public Copy</p>
+          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
             APF / ASP Brand, SEO & Funnel Strategy
           </h1>
-          <p className="mt-6 max-w-4xl text-xl leading-8 text-slate-200">
+          <p className="mt-6 max-w-4xl text-xl leading-8 text-slate-600">
             This private page preserves the working language that should not appear on
             AmericasPanelFab.com or AmericanSuperPanel.com. Use it for planning, audits,
             domain strategy, SEO separation, and investor/product architecture decisions.
@@ -803,13 +979,13 @@ function InternalStrategyPage() {
 function InternalOntologyPage() {
   return (
     <>
-      <section className="section border-b border-slate-200 bg-[#0b1f33] text-white">
+      <section className="section border-b border-slate-200 bg-white">
         <div className="max-w-6xl">
-          <p className="eyebrow text-orange-200">Internal Master Ontology • 8190 Only</p>
-          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal lg:text-6xl">
+          <p className="eyebrow text-[#f97316]">Internal Master Ontology • 8190 Only</p>
+          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
             Metal Panel Business Ontology
           </h1>
-          <p className="mt-6 max-w-5xl text-xl leading-8 text-slate-200">
+          <p className="mt-6 max-w-5xl text-xl leading-8 text-slate-600">
             A private knowledge model for the APF / ASP brand system, product taxonomy,
             lead capture, manufacturing workflows, SEO separation, partner network,
             and future ERP/agentic software. This is operating architecture, not public copy.
@@ -821,9 +997,9 @@ function InternalOntologyPage() {
               ['Operations', 'Quote, upload, takeoff, production, delivery'],
               ['Software', 'ERP, portals, calculators, agents, trackers'],
             ].map(([label, copy]) => (
-              <div key={label} className="rounded border border-white/15 bg-white/10 p-5">
-                <p className="text-xl font-black">{label}</p>
-                <p className="mt-2 leading-7 text-slate-200">{copy}</p>
+              <div key={label} className="rounded border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xl font-black text-[#0b1f33]">{label}</p>
+                <p className="mt-2 leading-7 text-slate-600">{copy}</p>
               </div>
             ))}
           </div>
@@ -893,7 +1069,7 @@ function InternalOntologyPage() {
               <ol className="mt-5 grid gap-3">
                 {workflow.steps.map((step, index) => (
                   <li key={step} className="flex gap-3 leading-7 text-slate-700">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-[#0b1f33] text-sm font-black text-white">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded border border-orange-200 bg-orange-50 text-sm font-black text-[#c2410c]">
                       {index + 1}
                     </span>
                     <span>{step}</span>
@@ -906,6 +1082,22 @@ function InternalOntologyPage() {
       </InternalOntologySection>
 
       <InternalOntologySection
+        eyebrow="Machine Ontology"
+        title="Machines, tooling, and machine-aware data."
+        copy="A fuller industry view needs equipment, tooling, production constraints, and machine data that can later feed scheduling software."
+      >
+        <OntologyGroupedCards groups={internalOntologyMachineSystems} titleKey="category" itemKey="items" />
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Product Ontology"
+        title="Products, panel families, and fabricated package taxonomy."
+        copy="This maps immediate revenue products and future expansion categories across roofing, siding, trim, accessories, and architectural systems."
+      >
+        <OntologyGroupedCards groups={internalOntologyProductTaxonomy} titleKey="family" itemKey="products" />
+      </InternalOntologySection>
+
+      <InternalOntologySection
         eyebrow="Data Objects"
         title="ERP and agentic software object model."
         copy="These records can become tables, API resources, agent memory objects, CRM fields, or event payloads."
@@ -915,6 +1107,98 @@ function InternalOntologyPage() {
             <article key={object} className="rounded border border-slate-200 bg-white p-5 shadow-lg">
               <h2 className="text-xl font-black text-[#0b1f33]">{object}</h2>
               <p className="mt-3 font-mono text-sm leading-7 text-slate-600">{fields}</p>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Business Operations"
+        title="Sales, estimating, production, finance, and admin ontology."
+        copy="The vision becomes investable when the business workflows are explicit enough to become software, SOPs, dashboards, and accountability."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalOntologyBusinessOps.map((group) => (
+            <article key={group.area} className="card">
+              <p className="eyebrow text-[#f97316]">Business Ops</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{group.area}</h2>
+              <ul className="mt-5 grid gap-3">
+                {group.details.map((detail) => (
+                  <li key={detail} className="flex gap-3 leading-7 text-slate-700">
+                    <CheckCircle2 className="mt-1 shrink-0 text-[#f97316]" size={19} />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Marketing Ontology"
+        title="Revenue marketing, authority marketing, regional growth, and trust assets."
+        copy="This separates ASP conversion marketing from APF authority marketing while still letting both brands reinforce the same business."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalOntologyMarketing.map((group) => (
+            <article key={group.channel} className="card">
+              <p className="eyebrow text-[#f97316]">Marketing Channel</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{group.channel}</h2>
+              <ul className="mt-5 grid gap-3">
+                {group.plays.map((play) => (
+                  <li key={play} className="flex gap-3 leading-7 text-slate-700">
+                    <SearchCheck className="mt-1 shrink-0 text-[#f97316]" size={19} />
+                    <span>{play}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Competitive Analysis"
+        title="Competitors, strengths, weaknesses, and response strategy."
+        copy="The goal is not to imitate competitors visually. The goal is to outperform their credibility, clarity, workflow, documentation, and buying experience."
+      >
+        <div className="grid gap-5">
+          {internalOntologyCompetitors.map((competitor) => (
+            <article key={competitor.competitor} className="card">
+              <p className="eyebrow text-[#f97316]">Competitor</p>
+              <h2 className="mt-3 text-3xl font-black text-[#0b1f33]">{competitor.competitor}</h2>
+              <div className="mt-6 grid gap-5 lg:grid-cols-3">
+                {[
+                  ['Strengths', competitor.strengths],
+                  ['Weaknesses', competitor.weaknesses],
+                  ['Response', competitor.response],
+                ].map(([label, items]) => (
+                  <div key={label as string} className="rounded border border-slate-200 bg-slate-50 p-5">
+                    <h3 className="text-xl font-black text-[#0b1f33]">{label as string}</h3>
+                    <ul className="mt-4 grid gap-3">
+                      {(items as string[]).map((item) => (
+                        <li key={item} className="leading-7 text-slate-700">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Expansion Roadmap"
+        title="How the whole industry vision expands over time."
+        copy="A staged model from immediate panel sales to manufacturer authority, operations software, portals, regional partners, and industry network."
+      >
+        <div className="grid gap-4">
+          {internalOntologyExpansion.map(([phase, detail]) => (
+            <article key={phase} className="grid gap-3 rounded border border-slate-200 bg-white p-5 shadow-lg md:grid-cols-[0.28fr_0.72fr] md:items-center">
+              <h2 className="text-xl font-black text-[#0b1f33]">{phase}</h2>
+              <p className="leading-7 text-slate-600">{detail}</p>
             </article>
           ))}
         </div>
@@ -950,7 +1234,56 @@ function InternalOntologyPage() {
           ))}
         </div>
       </InternalOntologySection>
+
+      <InternalOntologySection
+        eyebrow="Vision Principles"
+        title="The whole thesis in operating rules."
+        copy="These principles keep the vision coherent as it moves from website to sales system to manufacturing operating software."
+      >
+        <div className="grid gap-3">
+          {internalOntologyVisionPrinciples.map((principle) => (
+            <p key={principle} className="flex gap-3 rounded border border-slate-200 bg-white p-4 font-semibold leading-7 text-slate-700 shadow">
+              <Award className="mt-1 shrink-0 text-[#f97316]" size={20} />
+              {principle}
+            </p>
+          ))}
+        </div>
+      </InternalOntologySection>
     </>
+  )
+}
+
+function OntologyGroupedCards({
+  groups,
+  itemKey,
+  titleKey,
+}: {
+  groups: Array<Record<string, string | string[][]>>
+  itemKey: string
+  titleKey: string
+}) {
+  return (
+    <div className="grid gap-5 lg:grid-cols-2">
+      {groups.map((group) => {
+        const title = group[titleKey] as string
+        const items = group[itemKey] as string[][]
+
+        return (
+          <article key={title} className="card">
+            <p className="eyebrow text-[#f97316]">Ontology Group</p>
+            <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{title}</h2>
+            <div className="mt-5 grid gap-3">
+              {items.map(([name, definition]) => (
+                <div key={name} className="rounded border border-slate-200 bg-slate-50 p-4">
+                  <p className="font-black text-[#0b1f33]">{name}</p>
+                  <p className="mt-2 leading-7 text-slate-600">{definition}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        )
+      })}
+    </div>
   )
 }
 
@@ -995,11 +1328,11 @@ function Hero() {
             flashing packages, roll forming, and custom fabrication.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary text-base" href="#quote">
-              Request Quote <ArrowRight size={18} />
+            <a className="btn-primary text-base" href="/internal-ontology">
+              Open Ontology <ArrowRight size={18} />
             </a>
-            <a className="btn-secondary text-base" href="#upload-plans">
-              <FileUp size={18} /> Upload Plans
+            <a className="btn-secondary text-base" href="/internal-strategy">
+              <FileText size={18} /> Strategy
             </a>
             <a className="btn-secondary text-base" href="/resources">
               <Download size={18} /> View Resources
@@ -1191,8 +1524,8 @@ function SuperPanelPage() {
               applications.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="#quote">
-                Request Quote <ArrowRight size={18} />
+              <a className="btn-primary" href="/internal-ontology">
+                View Product Ontology <ArrowRight size={18} />
               </a>
               <a className="btn-secondary" href="#projects">
                 Project Gallery
@@ -1277,11 +1610,11 @@ function IndustrialRibPage() {
               Manufactured by America’s Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="#quote">
-                Request Quote <ArrowRight size={18} />
+              <a className="btn-primary" href="/internal-ontology">
+                View Product Ontology <ArrowRight size={18} />
               </a>
-              <a className="btn-secondary" href="#upload-plans">
-                <FileUp size={18} /> Upload Plans
+              <a className="btn-secondary" href="/internal-strategy">
+                <FileText size={18} /> Strategy Notes
               </a>
               <a className="btn-secondary" href="/downloads/industrial-rib-product-data.txt" download>
                 <Download size={18} /> Product Data
@@ -1832,39 +2165,10 @@ function About() {
 }
 
 function Contact() {
-  return (
-    <section id="contact" className="section bg-slate-50">
-      <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
-        <div>
-          <SectionIntro
-            eyebrow="Contact"
-            title="Request pricing, upload plans, or start a bid conversation."
-            copy="Send the project basics, drawings, and timeline so the sales team can prepare the right panel and fabrication path."
-          />
-          <div className="mt-8 grid gap-4">
-            <a className="contact-link" href="tel:+15550193762">
-              <Phone size={20} /> (555) 019-3762
-            </a>
-            <a className="contact-link" href="mailto:sales@americaspanelfab.com">
-              <Mail size={20} /> sales@americaspanelfab.com
-            </a>
-            <p className="contact-link">
-              <MapPin size={20} /> Multi-state service footprint
-            </p>
-          </div>
-          <div className="mt-8 h-64 rounded border border-slate-200 bg-white p-4">
-            <div className="flex h-full items-center justify-center rounded bg-slate-100 text-center font-bold text-slate-500">
-              America’s Panel Fab Service Footprint
-            </div>
-          </div>
-        </div>
-        <div className="grid gap-6">
-          <QuoteForm />
-          <UploadForm />
-        </div>
-      </div>
-    </section>
-  )
+  void QuoteForm
+  void UploadForm
+
+  return null
 }
 
 function QuoteForm() {
@@ -2072,14 +2376,6 @@ function StateLanding({ state }: { state: (typeof states)[number] }) {
             {state.name} Metal Roofing Panels & Architectural Metal Panels
           </h1>
           <p className="mt-6 text-xl leading-8 text-slate-700">{state.copy}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary" href="#quote">
-              Request Quote
-            </a>
-            <a className="btn-secondary" href="#upload-plans">
-              Upload Plans
-            </a>
-          </div>
         </div>
       </section>
       <ContractorOutcomes />
@@ -2119,14 +2415,16 @@ function SectionIntro({
 
 function Footer() {
   return (
-    <footer className="bg-[#0b1f33] px-5 py-10 text-white lg:px-8">
+    <footer className="border-t border-slate-200 bg-white px-5 py-10 text-slate-700 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <strong className="text-xl font-black">America’s Panel Fab</strong>
-          <p className="mt-2 text-slate-300">Precision Metal Panels, Roofing Systems & Custom Fabrication</p>
+          <strong className="text-xl font-black text-[#0b1f33]">America’s Panel Fab Internal Master</strong>
+          <p className="mt-2 text-slate-500">Private ontology, operations, strategy, and product architecture workspace.</p>
         </div>
-        <div className="text-sm font-semibold text-slate-300">
-          American Super Panel™ systems are manufactured by America’s Panel Fab.
+        <div className="flex flex-wrap gap-3 text-sm font-semibold text-slate-600">
+          <a className="hover:text-[#f97316]" href="/internal-strategy">Strategy</a>
+          <a className="hover:text-[#f97316]" href="/internal-ontology">Ontology</a>
+          <a className="hover:text-[#f97316]" href="/resources">Resources</a>
         </div>
       </div>
     </footer>
