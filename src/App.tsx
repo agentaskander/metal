@@ -43,6 +43,7 @@ const navItems = [
   ['Selector', '/selector'],
   ['Markets', '/markets'],
   ['Super Panel', '/super-panel'],
+  ['Internal', '/internal-strategy'],
   ['Contact', '/contact'],
 ]
 
@@ -137,6 +138,52 @@ const superPanelSeries = [
   ['Desert Series', 'Arizona-focused finish and heat-performance positioning for high-sun commercial buildings.'],
   ['Industrial Series', 'Texas-scale exposed fastener, wall panel, warehouse, and logistics facility packages.'],
   ['FireSafe Series', 'California-focused assembly positioning for resilient public, education, and commercial projects.'],
+]
+const internalStrategyBlocks = [
+  {
+    title: 'SEO Separation',
+    points: [
+      'APF owns authority content: manufacturing, comparison, education, roll forming, fabrication, guides, and glossary pages.',
+      'ASP owns product-intent pages: exposed-fastener panels, PBR / R-Panel, AG / Tuff Rib, trim, flashing, quote requests, plan uploads, and contractor orders.',
+      'Fab educates. Super converts. Keep that as an internal strategy rule, not public copy.',
+      'Avoid duplicate content by giving each domain unique H1s, metadata, intro copy, canonical URLs, and schema.',
+    ],
+  },
+  {
+    title: 'Domain Roles',
+    points: [
+      'AmericasPanelFab.com is the company/manufacturer authority site for credibility, partners, government/commercial research, investors, and future expansion.',
+      'AmericanSuperPanel.com is the immediate revenue site and focused product funnel for contractors, builders, dealers, agricultural jobs, commercial jobs, quote requests, and plan uploads.',
+      'Do not pretend independence. Public disclosure should say American Super Panel is a product brand manufactured by Americas Panel Fab.',
+      'Super should link back to Fab lightly in the footer; Fab can link strongly to Super when the reader is ready to buy panels.',
+    ],
+  },
+  {
+    title: 'Public Copy Guardrails',
+    points: [
+      'Do not publish APF/ASP abbreviations, funnel language, SEO separation language, platform-team language, product-ready quote demand language, or internal scoring.',
+      'Do not publish NDA-derived claims: machine count, machine output, staffing, warehouse size, startup investment, margins, break-even, projections, supplier pricing, or private owner background.',
+      'Public language should say manufacturer, product family, panel system, quote support, plan review, fabrication, documentation, partner resources, and commercial readiness.',
+      'Internal language can discuss cannibalization risk, funnel architecture, A/B testing, domain separation, acquisition strategy, ERP workflow software, and investor narrative.',
+    ],
+  },
+  {
+    title: 'SEO Max Roadmap',
+    points: [
+      'APF: build 1,000-1,500 word guides for standing seam vs R-Panel, PBR vs R-Panel, metal roofing gauges, metal panel finishes, trim and flashing, roll forming, and commercial metal roofing.',
+      'APF: add glossary clusters, FAQ schema, Article schema, breadcrumbs, crawlable sitemap, and internal links among guides.',
+      'ASP: deepen product pages with specs, color/gauge tables, installation notes, FAQs, quote workflows, service areas, and project photos.',
+      'Both: replace stock images with real machine, steel coil, trim fabrication, bundles, truck loading, warehouse, and project photos as soon as possible.',
+    ],
+  },
+  {
+    title: 'Current Quality Score',
+    points: [
+      'Public APF after cleanup: about 7.4 / 10.',
+      'Path to 8.5+: deeper pillar content, comparison tables, diagrams, author/reviewer credibility, real photos, FAQs, project examples, and stronger proof of manufacturing capability.',
+      'Do not chase beauty first. Beat competitors by looking bigger, clearer, more credible, easier to buy from, and more operationally real.',
+    ],
+  },
 ]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
@@ -376,6 +423,10 @@ function RoutedPage({ path }: { path: string }) {
     return <IndustrialRibPage />
   }
 
+  if (path === 'internal-strategy') {
+    return <InternalStrategyPage />
+  }
+
   if (path === 'projects') {
     return (
       <>
@@ -486,6 +537,84 @@ function Header() {
         </div>
       </div>
     </header>
+  )
+}
+
+function InternalStrategyPage() {
+  return (
+    <>
+      <section className="section border-b border-slate-200 bg-[#0b1f33] text-white">
+        <div className="max-w-5xl">
+          <p className="eyebrow text-orange-200">Internal Master Site • Not Public Copy</p>
+          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal lg:text-6xl">
+            APF / ASP Brand, SEO & Funnel Strategy
+          </h1>
+          <p className="mt-6 max-w-4xl text-xl leading-8 text-slate-200">
+            This private page preserves the working language that should not appear on
+            AmericasPanelFab.com or AmericanSuperPanel.com. Use it for planning, audits,
+            domain strategy, SEO separation, and investor/product architecture decisions.
+          </p>
+          <div className="mt-8 rounded border border-orange-200 bg-orange-50 p-5 text-[#0b1f33]">
+            <p className="font-black">Public-site rule:</p>
+            <p className="mt-2 leading-7">
+              Public pages should say Americas Panel Fab and American Super Panel, not APF/ASP.
+              Keep funnel, SEO separation, cannibalization, acquisition, NDA, and scoring language here.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-slate-50">
+        <div className="grid gap-5 lg:grid-cols-2">
+          {internalStrategyBlocks.map((block) => (
+            <article key={block.title} className="card">
+              <p className="eyebrow text-[#f97316]">Internal Strategy</p>
+              <h2 className="mt-3 text-2xl font-black text-[#0b1f33]">{block.title}</h2>
+              <ul className="mt-5 grid gap-3">
+                {block.points.map((point) => (
+                  <li key={point} className="flex gap-3 leading-7 text-slate-700">
+                    <CheckCircle2 className="mt-1 shrink-0 text-[#f97316]" size={19} />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section bg-white">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <SectionIntro
+              eyebrow="Internal Language Bank"
+              title="Terms that belong here, not on public pages."
+              copy="This list is intentionally direct. It helps future edits avoid leaking internal architecture into customer-facing SEO copy."
+            />
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              'APF / ASP',
+              'product funnel',
+              'lead funnel',
+              'SEO separation',
+              'Fab educates. Super converts.',
+              'authority layer',
+              'product-ready quote demand',
+              'cannibalization risk',
+              'investor narrative',
+              'acquisition platform',
+              'NDA safety',
+              'public score out of 10',
+            ].map((term) => (
+              <p key={term} className="rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
+                {term}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 
