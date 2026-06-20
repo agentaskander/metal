@@ -1,12 +1,11 @@
-America's Panel Fab
-American Super Panel(TM) Industrial Rib
-Beta Product Data Sheet
+AMERICAN SUPER PANEL
+INDUSTRIAL RIB PRODUCT DATA SHEET
 
 Product family:
-American Super Panel(TM) Industrial Series
+American Super Panel(TM) Industrial Rib
 
 Panel type:
-Exposed fastener roof and siding panel
+Exposed fastener metal roofing and siding panel
 
 Profile:
 Industrial Rib / 7.2-style profile
@@ -18,22 +17,20 @@ Nominal rib height:
 1.5 in.
 
 Gauge path:
-24 ga commercial path; 26 ga project-dependent
+Commercial gauge options reviewed by project.
 
 Substrate path:
-G90 galvanized or Galvalume project path
+Galvanized or Galvalume project path.
 
 Finish path:
-SMP, PVDF, matte, cool-roof, and primer-ready options
+SMP, PVDF, matte, cool-roof, metallic, and primer-ready options.
 
 Primary applications:
 Warehouses, industrial buildings, agricultural facilities, commercial re-skins,
-municipal service buildings, and large-format roof or wall packages.
+shops, storage buildings, equipment shelters, and large-format roof or wall packages.
 
 Manufacturer:
-America's Panel Fab
+Americas Panel Fab
 
-Important beta note:
-Final gauge, substrate, finish, fastening, code, warranty, and engineering
-requirements must be confirmed during project review before public specification
-or release to production.
+Important note:
+Final gauge, substrate, finish, fastening, code, warranty, and engineering requirements must be confirmed during project review.

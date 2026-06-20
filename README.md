@@ -1,6 +1,6 @@
-# America’s Panel Fab Website
+# American Super Panel Website
 
-Commercial website and lead-generation platform for America’s Panel Fab and the American Super Panel™ product line.
+Public sales website for American Super Panel™ metal roofing panels, metal siding panels, trim, flashing, and contractor quote requests.
 
 ## Port Registry
 
@@ -32,15 +32,12 @@ Use `dev:*` for Vite UI work. Use `pages:*` when testing Cloudflare Pages Functi
 - Framework: Vite
 - Build command: `npm run build`
 - Output directory: `dist`
-- Primary domain: `AmericasPanelFab.com`
-- Secondary product domain: `AmericanSuperPanel.com`
+- Primary domain for this worktree: `AmericanSuperPanel.com`
+- Corporate/manufacturer domain: `AmericasPanelFab.com`
 
 SPA route fallback rules live in `public/_redirects`.
 
-Configure this host redirect in Cloudflare Redirect Rules:
-
-- `AmericanSuperPanel.com/*` -> `https://AmericasPanelFab.com/super-panel`
-- Preserve query string: enabled
+Do not redirect `AmericanSuperPanel.com` to the Fab site. Keep it active as the product sales microsite, with relationship copy linking back to Americas Panel Fab where company credibility is needed.
 
 ## Lead Capture
 

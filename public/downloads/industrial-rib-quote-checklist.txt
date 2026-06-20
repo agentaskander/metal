@@ -1,15 +1,13 @@
-America's Panel Fab
-American Super Panel(TM) Industrial Rib
-Beta Quote Checklist
+AMERICAN SUPER PANEL
+INDUSTRIAL RIB QUOTE CHECKLIST
 
-Send the following for a faster quote review:
+Send the following for Industrial Rib quote review:
 
 Project basics:
 - Project name
-- Project address
-- State
+- Project state
 - Contractor or owner contact
-- Desired delivery or completion date
+- Desired delivery or completion timing if known
 
 Scope:
 - Roof, wall, or roof and wall
@@ -17,15 +15,14 @@ Scope:
 - Panel length requirements
 - Gauge preference, if known
 - Finish or color preference, if known
-- Exposed fastener or alternate system comparison request
+- Trim and flashing needs
 
 Documents:
 - Roof plans
 - Wall elevations
 - Structural drawings
-- Reflected details or sections
-- Existing building photos for re-skins
-- Bid documents and specification sections, if available
+- Photos for re-skins or existing buildings
+- Bid documents or specification sections, if available
 
 Package items:
 - Panels
@@ -36,7 +33,5 @@ Package items:
 - Accessories
 - Submittal support
 
-Important beta note:
-The Industrial Rib product page is a beta manufacturer proof page. Final
-production capability, machine configuration, engineering requirements, and
-warranty path must be confirmed before release to public specification.
+Important note:
+Final gauge, substrate, finish, fastening, engineering requirements, and warranty path must be confirmed during project review.

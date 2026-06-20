@@ -37,39 +37,41 @@ declare global {
 }
 
 const navItems = [
-  ['Industrial Rib', '/american-super-panel-industrial-rib'],
+  ['Roofing Panels', '/american-super-panel-industrial-rib'],
   ['Products', '/products'],
-  ['Services', '/services'],
+  ['Contractors', '/contractors'],
+  ['Commercial', '/commercial'],
+  ['Agricultural', '/agricultural'],
   ['Finishes', '/finishes'],
-  ['Markets', '/markets'],
   ['Contact', '/contact'],
 ]
 
 const products = [
   {
-    name: 'American Super Panel™ Standing Seam',
-    copy: 'Concealed-fastener panel systems for commercial, industrial, municipal, and education facilities.',
-    points: ['Concealed fasteners', 'Long custom panel lengths', 'Commercial warranty path'],
-    spec: 'Roofing • Architectural • Low-slope capable assemblies',
-  },
-  {
-    name: 'American Super Panel™ Exposed Fastener',
-    copy: 'Durable, economical panel packages for agricultural, warehouse, and industrial buildings.',
-    points: ['Fast installation', 'Ribbed strength profile', 'Cost-efficient coverage'],
-    spec: 'Warehouses • Ag • Industrial service buildings',
+    name: 'PBR / R-Panel',
+    copy: 'Ribbed metal roofing and siding panels for commercial, warehouse, shop, and agricultural buildings.',
+    points: ['Roofing and siding use', 'Bulk contractor orders', 'Trim and flashing support'],
+    spec: 'Commercial • Industrial • Agricultural',
     href: '/american-super-panel-industrial-rib',
   },
   {
-    name: 'Wall Panels',
-    copy: 'Coordinated wall cladding systems for commercial shells, expansions, and re-skins.',
-    points: ['Horizontal or vertical layouts', 'Color-matched trims', 'Clean transitions'],
-    spec: 'Architectural walls • Soffits • Rainscreen support',
+    name: 'AG / Tuff Rib Panel',
+    copy: 'Contractor-ready ribbed panels for barns, shops, storage buildings, equipment shelters, farms, and ranches.',
+    points: ['Agricultural projects', 'Roof and wall packages', 'Responsive quote support'],
+    spec: 'Barns • Shops • Storage • Ranches',
+    href: '/american-super-panel-industrial-rib',
   },
   {
-    name: 'Trim, Flashing & Accessories',
-    copy: 'Complete fabricated packages that help crews close details cleanly and keep schedules moving.',
-    points: ['Custom flashing', 'Closures and fasteners', 'Job-labeled bundles'],
-    spec: 'Submittal-ready details • Crew-friendly packaging',
+    name: 'Trim & Flashing',
+    copy: 'Matching trim and flashing packages for roof edges, walls, corners, openings, transitions, and project closeout.',
+    points: ['Ridge, rake, eave, and corners', 'Wall transitions', 'Job-labeled packages'],
+    spec: 'Roof trim • Wall trim • Flashing',
+  },
+  {
+    name: 'Accessories',
+    copy: 'Closures, fastener coordination, sealant paths, touch-up support, and panel package accessories.',
+    points: ['Closures and fasteners', 'Sealant coordination', 'Crew-ready support'],
+    spec: 'Accessories • Fasteners • Closures',
   },
 ]
 
@@ -84,52 +86,44 @@ const services = [
 ] satisfies [string, IconType, string][]
 
 const markets = [
-  ['Commercial', 'Retail centers, offices, and mixed-use buildings.'],
+  ['Commercial', 'Warehouses, retail buildings, offices, and multifamily work.'],
   ['Industrial', 'Manufacturing, logistics, and process facilities.'],
-  ['Government', 'Bid-ready supplier support for public work.'],
-  ['Education', 'Campus, district, and facility modernization projects.'],
+  ['Residential', 'Shops, garages, additions, accessory buildings, and rural residential projects.'],
   ['Warehouses', 'Large-format roofs, walls, and trim packages.'],
   ['Agriculture', 'Barns, equipment buildings, and production facilities.'],
-  ['Multifamily', 'Durable envelope systems for repeatable housing programs.'],
+  ['Contractors', 'Bulk panel orders, plan uploads, trim support, and fast communication.'],
 ]
 
 const states = [
   {
     name: 'California',
     slug: 'california-metal-panels',
-    copy: 'Commercial metal roofing panels, standing seam systems, wall panels, and custom fabrication for California contractors, owners, and public agencies.',
+    copy: 'Metal roofing panels, metal siding panels, trim, and flashing quote support for California contractors, builders, owners, and agricultural projects.',
   },
   {
     name: 'Arizona',
     slug: 'arizona-metal-panels',
-    copy: 'Heat-ready roofing and architectural panel packages for Arizona commercial, industrial, warehouse, and municipal projects.',
+    copy: 'Ribbed metal roofing panels, siding panels, and trim packages for Arizona commercial, shop, warehouse, agricultural, and residential projects.',
   },
   {
     name: 'Texas',
     slug: 'texas-metal-panels',
-    copy: 'Scalable standing seam, exposed fastener, wall panel, and flashing packages for Texas growth markets and contractor networks.',
+    copy: 'Metal panel quote support for Texas contractors, warehouses, agricultural buildings, shops, equipment shelters, and commercial projects.',
   },
   {
     name: 'Florida',
     slug: 'florida-metal-panels',
-    copy: 'Commercial-capable metal roofing and panel fabrication support for Florida wind, coastal, and public-sector requirements.',
+    copy: 'Metal roofing panel, siding panel, trim, and flashing quote support for Florida contractors, commercial buildings, and agricultural projects.',
   },
 ]
 
-const projectCategories = ['Commercial', 'Industrial', 'Municipal', 'Agricultural']
+const projectCategories = ['Commercial', 'Industrial', 'Agricultural', 'Residential']
 const contractorOutcomes = [
-  ['Faster Lead Times', 'Quote response target within 24 hours for complete plan sets.'],
-  ['Custom Fabrication', 'Panels, trims, flashings, edge metal, and accessories coordinated together.'],
-  ['Multi-State Service', 'California, Arizona, Texas, and Florida fulfillment support.'],
-  ['Commercial & Government Projects', 'Bid support, submittals, invoicing, and contract-ready documentation.'],
-  ['American Super Panel™ Systems', 'Flagship panel systems manufactured and sold under the American Super Panel brand.'],
-]
-const superPanelSeries = [
-  ['Commercial Series', 'Standing seam and wall panel systems for retail, office, education, and multifamily work.'],
-  ['Coastal Series', 'Florida-ready panel package positioning for wind, corrosion awareness, and coastal detailing.'],
-  ['Desert Series', 'Arizona-focused finish and heat-performance positioning for high-sun commercial buildings.'],
-  ['Industrial Series', 'Texas-scale exposed fastener, wall panel, warehouse, and logistics facility packages.'],
-  ['FireSafe Series', 'California-focused assembly positioning for resilient public, education, and commercial projects.'],
+  ['Request a Quote', 'Send panel type, project state, square footage, and timing so sales can respond with the right next step.'],
+  ['Upload Plans', 'Share drawings, roof plans, wall elevations, and notes for cleaner takeoff review.'],
+  ['Custom-Length Panels', 'Request panel lengths and trim scope for commercial, agricultural, industrial, or residential work.'],
+  ['Contractor Support', 'Get help organizing panel, trim, flashing, accessory, and project documentation needs.'],
+  ['Fast Communication', 'Phone, email, and upload paths are visible so contractors can reach sales quickly.'],
 ]
 const finishes = [
   ['PVDF / Kynar-style finishes', '#64748b', 'Premium long-life finish path for commercial roofs and walls.'],
@@ -148,7 +142,7 @@ const resources = [
 const downloadAssets = [
   {
     title: 'Quote Request Checklist',
-    copy: 'Everything estimating needs for a faster 24-hour quote response.',
+    copy: 'Everything sales needs to review panel type, project state, square footage, plans, and trim scope.',
     href: '/downloads/quote-request-checklist.txt',
     type: 'TXT',
   },
@@ -222,7 +216,7 @@ const industrialRibDownloads = [
 const selectorOptions = {
   assembly: ['Roof', 'Wall', 'Roof + Wall', 'Trim / Flashing'],
   environment: ['Standard Commercial', 'Coastal / Wind', 'High Heat / Sun', 'Fire / Public Safety', 'Industrial Exposure'],
-  projectType: ['Commercial', 'Industrial', 'Government', 'Education', 'Warehouse', 'Agriculture', 'Multifamily'],
+  projectType: ['Commercial', 'Industrial', 'Agriculture', 'Residential', 'Warehouse', 'Contractor Bulk Order', 'Multifamily'],
   state: ['California', 'Arizona', 'Texas', 'Florida'],
 }
 const processSteps = [
@@ -232,8 +226,6 @@ const processSteps = [
   ['Support install', 'Contractors get detail support, sequencing help, and follow-through through closeout.'],
 ]
 
-const heroImage =
-  'https://images.unsplash.com/photo-1776653244534-69d59028af6c?auto=format&fit=crop&w=1800&q=88'
 const facilityImage =
   'https://images.unsplash.com/photo-1764835994645-3faa2c40f708?auto=format&fit=crop&w=1400&q=88'
 const panelImage =
@@ -252,6 +244,25 @@ const industrialRibGallery = [
   ['Ribbed metal panel profile', panelImage],
   ['Factory fabrication', fabricationImage],
   ['Roll forming support', machineImage],
+]
+const trustBarItems = ['Commercial', 'Industrial', 'Agricultural', 'Residential', 'American Made']
+const contractorPageSections = [
+  ['Custom Lengths', 'Request panel lengths, colors, trim scope, and accessory needs for the project.'],
+  ['Project Support', 'Send drawings, roof plans, wall elevations, photos, and project notes for quote review.'],
+  ['Commercial Orders', 'Panel and trim packages for warehouses, shops, retail buildings, and industrial projects.'],
+  ['Agricultural Projects', 'Roofing and siding support for barns, equipment shelters, ranches, farms, and storage buildings.'],
+  ['Upload Plans', 'Use the upload form to send PDFs, drawings, structural documents, photos, and scope notes.'],
+  ['Request Quote', 'Give sales the project state, square footage, panel type, and contact details.'],
+]
+const commercialTargets = ['Warehouses', 'Industrial Buildings', 'Retail', 'Multifamily', 'Schools', 'Municipal']
+const agriculturalTargets = ['Barns', 'Shops', 'Storage Buildings', 'Equipment Shelters', 'Ranches', 'Farms']
+const faqItems = [
+  ['What panel types do you offer?', 'American Super Panel focuses on ribbed metal roofing and siding panels, including Industrial Rib, PBR / R-Panel, AG / Tuff Rib style panels, trim, flashing, and accessories.'],
+  ['Can I request custom lengths?', 'Yes. Send your project information, desired panel lengths, and drawings or measurements so sales can review the request.'],
+  ['Can contractors order in bulk?', 'Yes. Contractors can request panel, trim, flashing, and accessory packages for commercial, agricultural, industrial, and residential projects.'],
+  ['Can I upload plans for quoting?', 'Yes. Use the upload form to send plans, drawings, structural documents, photos, and project notes for review.'],
+  ['What states do you serve?', 'American Super Panel is building quote and support coverage around California, Arizona, Texas, and Florida. Do not assume a local office unless confirmed by sales.'],
+  ['Can you provide trim and flashing?', 'Yes. Trim and flashing can be reviewed with panel orders so the package is easier for crews to install.'],
 ]
 const maxUploadBytes = 100 * 1024 * 1024
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'
@@ -288,7 +299,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'products') {
     return (
       <>
-        <PageHero title="Products" copy="American Super Panel™ Industrial Rib systems, wall panels, trim, flashing, samples, and accessories for contractor sales." />
+        <PageHero title="Products" copy="Metal roofing panels, metal siding panels, trim, flashing, and accessories for contractor, commercial, agricultural, and residential projects." />
         <Products />
         <FinishSystem />
         <BidResources />
@@ -300,7 +311,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'services') {
     return (
       <>
-        <PageHero title="Services" copy="Roll forming, on-site roll forming, custom fabrication, flashing packages, panel curving, contractor support, and design assist." />
+        <PageHero title="Services" copy="Custom-length panels, trim and flashing packages, contractor support, plan uploads, and project communication." />
         <Services />
         <Process />
         <Contact />
@@ -317,6 +328,18 @@ function RoutedPage({ path }: { path: string }) {
         <Contact />
       </>
     )
+  }
+
+  if (path === 'contractors') {
+    return <ContractorsPage />
+  }
+
+  if (path === 'commercial') {
+    return <CommercialPage />
+  }
+
+  if (path === 'agricultural') {
+    return <AgriculturalPage />
   }
 
   if (path === 'resources') {
@@ -346,7 +369,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'markets') {
     return (
       <>
-        <PageHero title="Markets Served" copy="Commercial, industrial, government, education, warehouse, agriculture, and multifamily metal panel programs." />
+        <PageHero title="Markets Served" copy="Commercial, industrial, agricultural, residential, warehouse, and contractor metal panel projects." />
         <Markets />
         <ServiceAreas />
         <Contact />
@@ -365,7 +388,7 @@ function RoutedPage({ path }: { path: string }) {
   if (path === 'projects') {
     return (
       <>
-        <PageHero title="Projects" copy="A future-ready project gallery organized by commercial, industrial, municipal, and agricultural work." />
+        <PageHero title="Projects" copy="A project gallery organized by commercial, industrial, agricultural, and residential work." />
         <Projects />
         <Contact />
       </>
@@ -394,7 +417,7 @@ function RoutedPage({ path }: { path: string }) {
   return (
     <>
       <PageHero title="American Super Panel" copy="Industrial Rib metal roofing and siding panels." />
-      <Hero />
+      <IndustrialRibPage />
       <Contact />
     </>
   )
@@ -475,53 +498,6 @@ function Header() {
   )
 }
 
-function Hero() {
-  return (
-    <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-      <img
-        src={heroImage}
-        alt="Commercial building with metal roofing panels"
-        className="absolute right-0 top-0 h-full w-full object-cover opacity-22 lg:w-[58%] lg:opacity-100"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
-      <div className="relative mx-auto grid min-h-[690px] max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <div className="max-w-4xl">
-          <p className="mb-5 inline-flex rounded border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-bold uppercase tracking-[0.16em] text-[#f97316]">
-            Manufacturer • Fabricator • Government/Commercial Supplier
-          </p>
-          <h1 className="max-w-4xl text-4xl font-black leading-[1.04] tracking-normal text-[#0b1f33] sm:text-5xl lg:text-6xl">
-            Commercial Metal Roofing & Architectural Panel Fabrication
-          </h1>
-          <p className="mt-6 max-w-3xl text-xl leading-8 text-slate-700">
-            Serving California, Arizona, Texas & Florida with standing seam roofing, wall panels,
-            flashing packages, roll forming, and custom fabrication.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary text-base" href="#quote">
-              Request Quote <ArrowRight size={18} />
-            </a>
-            <a className="btn-secondary text-base" href="#upload-plans">
-              <FileUp size={18} /> Upload Plans
-            </a>
-            <a className="btn-secondary text-base" href="/resources">
-              <Download size={18} /> View Resources
-            </a>
-          </div>
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
-            {['Get a quote in 24 hours', 'Upload plans directly', 'Commercial bid support'].map((item) => (
-              <p key={item} className="flex items-center gap-3 rounded border border-slate-200 bg-white p-4 font-black text-[#0b1f33] shadow-sm">
-                <CheckCircle2 className="shrink-0 text-[#f97316]" size={20} />
-                {item}
-              </p>
-            ))}
-          </div>
-        </div>
-        <div className="hidden lg:block" />
-      </div>
-    </section>
-  )
-}
-
 function ContractorOutcomes() {
   return (
     <section className="section bg-white">
@@ -554,7 +530,7 @@ function SuperPanel() {
             copy="American Super Panel™ systems give commercial buyers a clear way to specify standing seam roofing, exposed fastener panels, wall panels, and coordinated flashing packages."
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {['Contractor-ready product family', 'Standing seam and exposed fastener options', 'Commercial, industrial, municipal, and education applications', 'Quote-ready packages for expansion markets'].map(
+            {['Contractor-ready product family', 'Exposed fastener roofing and siding options', 'Commercial, industrial, agricultural, and residential applications', 'Quote-ready panel and trim packages'].map(
               (item) => (
                 <p key={item} className="flex gap-3 rounded border border-slate-200 p-4 font-semibold">
                   <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
@@ -577,35 +553,6 @@ function SuperPanel() {
   )
 }
 
-function SuperPanelSeries() {
-  return (
-    <section className="section bg-slate-50">
-      <SectionIntro
-        eyebrow="American Super Panel™ Systems"
-        title="A focused product family for roofing, siding, and contractor sales."
-        copy="The product brand becomes easier to specify and remember by organizing panels around real regional and commercial buying needs."
-      />
-      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-        {superPanelSeries.map(([title, copy]) => (
-          <article key={title} className="card">
-            <LayersBadge />
-            <h3 className="mt-5 text-xl font-black text-[#0b1f33]">{title}</h3>
-            <p className="mt-3 leading-7 text-slate-600">{copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function LayersBadge() {
-  return (
-    <span className="inline-flex h-11 w-11 items-center justify-center rounded bg-[#0b1f33] text-white">
-      <Factory size={22} />
-    </span>
-  )
-}
-
 function SuperPanelPage() {
   return (
     <>
@@ -624,9 +571,7 @@ function SuperPanelPage() {
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
               American Super Panel™ is the flagship product family manufactured by Americas Panel Fab
-              for commercial roofing, siding, trim, dealer, and contractor sales
-              for commercial roofing, wall panel, industrial, municipal, and educational facility
-              applications.
+              for commercial roofing, siding, trim, dealer, and contractor sales.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
@@ -639,7 +584,6 @@ function SuperPanelPage() {
           </div>
         </div>
       </section>
-      <SuperPanelSeries />
       <section className="section bg-slate-50">
         <SectionIntro
           eyebrow="Benefits"
@@ -670,7 +614,7 @@ function SuperPanelPage() {
               copy="American Super Panel™ supports standing seam roof systems, exposed fastener packages, architectural wall panels, and coordinated flashing packages."
             />
             <div className="mt-8 grid gap-3">
-              {['Commercial facilities', 'Industrial buildings', 'Municipal and government work', 'Education and campus projects'].map(
+              {['Commercial facilities', 'Industrial buildings', 'Warehouse projects', 'Agricultural buildings'].map(
                 (item) => (
                   <p key={item} className="flex gap-3 font-semibold text-slate-700">
                     <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
@@ -705,40 +649,32 @@ function IndustrialRibPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/72" />
         <div className="section relative">
           <div className="max-w-4xl">
-            <p className="eyebrow text-[#f97316]">Exposed Fastener Roofing & Siding Panels</p>
+            <p className="eyebrow text-[#f97316]">American Super Panel™</p>
             <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33] lg:text-6xl">
-              American Super Panel™ Industrial Rib
+              Metal Roofing Panels Built for Contractors
             </h1>
             <p className="mt-6 text-xl leading-8 text-slate-700">
-              A 7.2 profile metal roofing and siding panel for warehouses, industrial
-              facilities, agricultural buildings, commercial wall panels, and large-format
-              exterior packages. Manufactured by Americas Panel Fab.
+              Custom-Length Metal Panels, Trim & Flashing for Commercial, Industrial,
+              Agricultural and Residential Projects.
+            </p>
+            <p className="mt-5 max-w-3xl text-base font-bold leading-7 text-slate-700">
+              American Super Panel is a contractor-ready metal roofing and siding panel
+              system built for fast quotes, custom lengths, reliable supply, and regional
+              manufacturing support. Manufactured by Americas Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
-                Get A Quote <ArrowRight size={18} />
+                Request a Quote <ArrowRight size={18} />
               </a>
               <a className="btn-secondary" href="#upload-plans">
                 <FileUp size={18} /> Upload Plans
               </a>
-              <a className="btn-secondary" href="#samples">
-                Request Samples
-              </a>
               <a className="btn-secondary" href="#contact">
-                Contact Sales
-              </a>
-              <a className="btn-secondary" href="#quote">
-                Order Panels
-              </a>
-              <a className="btn-secondary" href="#quote">
-                Become Dealer
-              </a>
-              <a className="btn-secondary" href="/downloads/industrial-rib-product-data.txt" download>
-                <Download size={18} /> Product Data
+                <Phone size={18} /> Call Sales
               </a>
             </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-4">
-              {['7.2 in. pitch', '1.5 in. rib height', '24 ga path', 'Roof + siding'].map((item) => (
+            <div className="mt-10 grid gap-3 sm:grid-cols-5">
+              {trustBarItems.map((item) => (
                 <p key={item} className="rounded border border-slate-200 bg-white p-4 text-center font-black text-[#0b1f33] shadow-sm">
                   {item}
                 </p>
@@ -753,8 +689,8 @@ function IndustrialRibPage() {
           <div>
             <SectionIntro
               eyebrow="Product Data"
-              title="A specific 7.2 industrial rib panel buyers can quote, specify, and compare."
-              copy="Contractors and procurement teams need exact product signals. This page puts the profile, finish path, trim package, downloads, quote workflow, and manufacturer identity up front."
+              title="Ribbed metal roofing and siding panels ready for quote review."
+              copy="Contractors need clear product signals. This page puts panel type, trim package, colors, upload workflow, and manufacturer identity up front."
             />
             <div className="mt-8 grid gap-4">
               {industrialRibProof.map(([title, Icon, copy]) => (
@@ -794,6 +730,12 @@ function IndustrialRibPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="btn-primary" href="#quote">
                 Request Samples <ArrowRight size={18} />
+              </a>
+              <a className="btn-secondary" href="#quote">
+                Order Panels
+              </a>
+              <a className="btn-secondary" href="#quote">
+                Become Dealer
               </a>
               <a className="btn-secondary" href="/downloads/finish-selection-guide.txt" download>
                 <Download size={18} /> Finish Guide
@@ -856,6 +798,8 @@ function IndustrialRibPage() {
         </div>
       </section>
 
+      <AmericanMadeSection />
+
       <section className="section bg-white">
         <SectionIntro
           eyebrow="Downloads & Install Support"
@@ -896,6 +840,140 @@ function IndustrialRibPage() {
         </div>
       </section>
 
+      <FAQSection />
+      <Contact />
+    </>
+  )
+}
+
+function AmericanMadeSection() {
+  return (
+    <section className="section bg-white">
+      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <SectionIntro
+            eyebrow="American Made"
+            title="Built Here. Delivered Faster."
+            copy="American Super Panel focuses on domestic production, contractor support, and responsive service for commercial, agricultural, industrial, and residential projects."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a className="btn-primary" href="#quote">
+              Request a Quote <ArrowRight size={18} />
+            </a>
+            <a className="btn-secondary" href="#upload-plans">
+              <FileUp size={18} /> Upload Plans
+            </a>
+          </div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {['Custom-Length Panels', 'Contractor Support', 'Commercial Roofing Panels', 'Agricultural Panels', 'Trim & Flashing', 'Fast Communication'].map((item) => (
+            <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
+              <CheckCircle2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+              {item}
+            </p>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function FAQSection() {
+  return (
+    <section className="section bg-slate-50">
+      <SectionIntro
+        eyebrow="FAQ"
+        title="Common questions before sending plans."
+        copy="A quick starting point for contractors, builders, owners, and agricultural customers."
+      />
+      <div className="mt-10 grid gap-4 md:grid-cols-2">
+        {faqItems.map(([question, answer]) => (
+          <article key={question} className="card">
+            <h2 className="text-xl font-black text-[#0b1f33]">{question}</h2>
+            <p className="mt-3 leading-7 text-slate-600">{answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function ContractorsPage() {
+  return (
+    <>
+      <PageHero
+        title="Built for Contractors"
+        copy="Custom-length metal panels, trim, flashing, project support, and upload workflows for crews that need clear answers."
+      />
+      <section className="section bg-white">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {contractorPageSections.map(([title, copy]) => (
+            <article key={title} className="card">
+              <HardHat className="text-[#f97316]" />
+              <h2 className="mt-5 text-xl font-black text-[#0b1f33]">{title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <Products />
+      <AmericanMadeSection />
+      <Contact />
+    </>
+  )
+}
+
+function CommercialPage() {
+  return (
+    <>
+      <PageHero
+        title="Commercial Metal Roofing Panels"
+        copy="Metal roofing panels, siding panels, trim, and flashing for warehouses, industrial buildings, retail, multifamily, schools, and municipal projects."
+      />
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Commercial Project Types"
+          title="Send drawings, square footage, project state, and trim scope."
+          copy="American Super Panel keeps commercial language practical: panel packages, trim support, quote review, and plan uploads."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {commercialTargets.map((item) => (
+            <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
+              <Building2 className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+              {item}
+            </p>
+          ))}
+        </div>
+      </section>
+      <Products />
+      <Contact />
+    </>
+  )
+}
+
+function AgriculturalPage() {
+  return (
+    <>
+      <PageHero
+        title="Agricultural Metal Roofing & Siding Panels"
+        copy="Ribbed panels, trim, flashing, and accessories for barns, shops, storage buildings, equipment shelters, ranches, and farms."
+      />
+      <section className="section bg-white">
+        <SectionIntro
+          eyebrow="Agricultural Projects"
+          title="Panels and trim for practical farm and ranch buildings."
+          copy="Send the project state, rough square footage, panel type, and drawings or photos so sales can review the package."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {agriculturalTargets.map((item) => (
+            <p key={item} className="flex gap-3 rounded border border-slate-200 bg-slate-50 p-4 font-black text-[#0b1f33]">
+              <Factory className="mt-0.5 shrink-0 text-[#f97316]" size={20} />
+              {item}
+            </p>
+          ))}
+        </div>
+      </section>
+      <Products />
       <Contact />
     </>
   )
@@ -1112,7 +1190,7 @@ function getPanelRecommendation({
   if (state === 'California' || environment === 'Fire / Public Safety') {
     return {
       package: ['Fire-aware assembly review', 'Submittal package path', 'Public project documentation'],
-      reasons: ['California and public-safety requirements fit', 'Strong for schools and municipal work', 'Supports bid and submittal coordination'],
+      reasons: ['California project conditions fit', 'Strong for schools and commercial work', 'Supports bid and submittal coordination'],
       series: 'American Super Panel™ FireSafe Series',
       summary: 'Recommended for public, education, commercial, and resilience-focused projects that need careful documentation and assembly review.',
     }
@@ -1228,8 +1306,8 @@ function Markets() {
     <section id="markets" className="section bg-white">
       <SectionIntro
         eyebrow="Markets Served"
-        title="Commercial strength across public and private work."
-        copy="The company is structured to support contractors, owners, purchasing departments, and government procurement teams."
+        title="Panels for contractors, owners, builders, and commercial buyers."
+        copy="American Super Panel supports practical panel, siding, trim, flashing, and accessory conversations for common building types."
       />
       <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {markets.map(([name, copy]) => (
@@ -1249,8 +1327,8 @@ function ServiceAreas() {
     <section id="service-areas" className="section">
       <SectionIntro
         eyebrow="Service Areas"
-        title="Built for California, Arizona, Texas, and Florida expansion."
-        copy="Regional service pages help contractors, owners, and public agencies quickly find metal roofing panels, wall panels, roll forming, and fabrication support in their state."
+        title="Quote support for California, Arizona, Texas, and Florida."
+        copy="Regional service pages help contractors, owners, farms, ranches, and builders find metal roofing panels, siding panels, trim, and flashing support in their state."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {states.map((state) => (
@@ -1274,7 +1352,7 @@ function Projects() {
       <SectionIntro
         eyebrow="Projects"
         title="Future-ready gallery for finished work."
-        copy="Representative categories for commercial, industrial, municipal, and agricultural metal panel work."
+        copy="Representative categories for commercial, industrial, agricultural, and residential metal panel work."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {projectCategories.map((category, index) => (
@@ -1390,7 +1468,7 @@ function QuoteForm() {
     <form id="quote" className="form-panel" action="/api/quote" method="post" onSubmit={handleQuoteSubmit}>
       <h2 className="text-2xl font-black text-[#0b1f33]">Quick Quote Form</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
+        {['Name', 'Company', 'Phone', 'Email', 'Project State'].map((field) => (
           <label key={field}>
             <span>{field}</span>
             <input
@@ -1405,20 +1483,35 @@ function QuoteForm() {
           <input name="estimated_square_footage" type="number" min="0" />
         </label>
         <label>
+          <span>Project Type</span>
+          <select name="project_type" defaultValue="">
+            <option value="" disabled>
+              Select project type
+            </option>
+            <option>Commercial</option>
+            <option>Industrial</option>
+            <option>Agricultural</option>
+            <option>Residential</option>
+            <option>Warehouse</option>
+            <option>Contractor Bulk Order</option>
+          </select>
+        </label>
+        <label>
           <span>Panel Type</span>
           <select name="panel_type" defaultValue="">
             <option value="" disabled>
               Select panel type
             </option>
-            <option>American Super Panel Standing Seam</option>
-            <option>American Super Panel Exposed Fastener</option>
-            <option>Wall Panels</option>
+            <option>PBR / R-Panel</option>
+            <option>AG / Tuff Rib Panel</option>
+            <option>Industrial Rib</option>
+            <option>Metal Siding Panels</option>
             <option>Trim & Flashing</option>
           </select>
         </label>
         <label className="md:col-span-2">
-          <span>Desired Completion Date</span>
-          <input name="desired_completion_date" type="date" />
+          <span>Notes</span>
+          <input name="notes" type="text" placeholder="Panel lengths, trim needs, timing, delivery state, or plan notes" />
         </label>
       </div>
       <TurnstileSlot />
@@ -1479,7 +1572,7 @@ function UploadForm() {
     >
       <h2 className="text-2xl font-black text-[#0b1f33]">Upload Plans</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {['Name', 'Company', 'Email', 'Phone', 'Project Address', 'State'].map((field) => (
+        {['Name', 'Company', 'Phone', 'Email', 'Project State'].map((field) => (
           <label key={field}>
             <span>{field}</span>
             <input
@@ -1489,16 +1582,36 @@ function UploadForm() {
             />
           </label>
         ))}
+        <label>
+          <span>Estimated Sq Ft</span>
+          <input name="estimated_square_footage" type="number" min="0" />
+        </label>
+        <label>
+          <span>Project Type</span>
+          <select name="project_type" defaultValue="">
+            <option value="" disabled>
+              Select project type
+            </option>
+            <option>Commercial</option>
+            <option>Industrial</option>
+            <option>Agricultural</option>
+            <option>Residential</option>
+            <option>Warehouse</option>
+            <option>Contractor Bulk Order</option>
+          </select>
+        </label>
         {[
-          ['Plans PDF', 'plans_pdf', '.pdf'],
-          ['Drawings', 'drawings', '.pdf,.dwg,.dxf,.png,.jpg'],
-          ['Structural Documents', 'structural_documents', '.pdf,.doc,.docx'],
+          ['File Upload Placeholder', 'plans_pdf', '.pdf,.dwg,.dxf,.png,.jpg,.doc,.docx'],
         ].map(([label, name, accept]) => (
           <label key={name} className="md:col-span-2">
             <span>{label}</span>
             <input name={name} type="file" accept={accept} />
           </label>
         ))}
+        <label className="md:col-span-2">
+          <span>Notes</span>
+          <input name="notes" type="text" placeholder="Tell sales what you are trying to build" />
+        </label>
       </div>
       <p className="mt-4 text-sm font-semibold text-slate-500">Maximum combined upload: 100MB</p>
       <TurnstileSlot />
@@ -1584,7 +1697,6 @@ function StateLanding({ state }: { state: (typeof states)[number] }) {
       <BidResources />
       <DownloadCenter />
       <SuperPanel />
-      <SuperPanelSeries />
       <Contact />
     </>
   )
