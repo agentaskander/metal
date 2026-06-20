@@ -40,6 +40,7 @@ const navItems = [
   ['Manufacturing', '/manufacturing'],
   ['Capabilities', '/capabilities'],
   ['Guides', '/guides'],
+  ['Resources', '/resources'],
   ['Glossary', '/glossary'],
   ['Products', '/products'],
   ['Super Panel', '/super-panel'],
@@ -1582,7 +1583,21 @@ function RoutedPage({ path }: { path: string }) {
   )
 }
 
-function PageHero({ title, copy }: { title: string; copy: string }) {
+function PageHero({
+  copy,
+  primaryHref = '/guides',
+  primaryLabel = 'Explore Guides',
+  secondaryHref = '#contact',
+  secondaryLabel = 'Partner Inquiry',
+  title,
+}: {
+  copy: string
+  primaryHref?: string
+  primaryLabel?: string
+  secondaryHref?: string
+  secondaryLabel?: string
+  title: string
+}) {
   return (
     <section className="section border-b border-slate-200 bg-white">
       <div className="max-w-4xl">
@@ -1590,11 +1605,11 @@ function PageHero({ title, copy }: { title: string; copy: string }) {
         <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal text-[#0b1f33]">{title}</h1>
         <p className="mt-6 text-xl leading-8 text-slate-600">{copy}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a className="btn-primary" href="/guides">
-            Explore Guides
+          <a className="btn-primary" href={primaryHref}>
+            {primaryLabel}
           </a>
-          <a className="btn-secondary" href="#contact">
-            Partner Inquiry
+          <a className="btn-secondary" href={secondaryHref}>
+            {secondaryLabel}
           </a>
         </div>
       </div>
@@ -1627,7 +1642,7 @@ function PlatformHome() {
               system manufactured by Americas Panel Fab.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="btn-primary" href="/resources">
+              <a className="btn-primary" href="/guides">
                 Explore Industry Guides <ArrowRight size={18} />
               </a>
               <a className="btn-secondary" href="#manufacturing">
@@ -1774,7 +1789,7 @@ function Header() {
         <div className="header-actions flex shrink-0 items-center gap-2">
           <a className="btn-secondary header-secondary-action" href="/resources">
             <Download size={18} />
-            Guides
+            Resources
           </a>
           <a className="btn-secondary header-secondary-action" href="/about">
             <Building2 size={18} />
@@ -2298,6 +2313,10 @@ function GuidesPage() {
       <PageHero
         title="Metal Panel Manufacturing Guides"
         copy="Educational guides for panel profiles, roll forming, finishes, trim, flashing, and commercial roofing decisions from the manufacturer behind American Super Panel."
+        primaryLabel="View Resources"
+        primaryHref="/resources"
+        secondaryLabel="Open Glossary"
+        secondaryHref="/glossary"
       />
       <section className="section bg-white">
         <SectionIntro
@@ -3471,7 +3490,7 @@ function StateLanding({ state }: { state: (typeof states)[number] }) {
           </h1>
           <p className="mt-6 text-xl leading-8 text-slate-700">{state.copy}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary" href="/resources">
+            <a className="btn-primary" href="/guides">
               Explore Regional Guides
             </a>
             <a className="btn-secondary" href="#contact">
